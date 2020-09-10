@@ -4,7 +4,6 @@ import typing
 from redbot.core import commands
 from discord.ext import commands
 
-@checks.is_owner()
 @commands.command()
 async def execute(self, ctx, sequential: typing.Optional[bool] = False, *, commands):
     """Execute multiple commands at once. Split them using |"""
