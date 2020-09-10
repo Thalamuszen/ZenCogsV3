@@ -1,11 +1,7 @@
 import discord
-import asyncio
 import typing
-import json
-import io
 
-from redbot.core import commands, checks, Config
-from redbot.core.utils import menus
+from redbot.core import commands
 
 @checks.is_owner()
 @commands.command()
