@@ -10,6 +10,9 @@ class Execute(commands.Cog):
     Combine multiple commands.
     """
     
+    def __init__(self, bot: Red):
+        self.bot = bot
+    
 @checks.is_owner()
 @commands.command()
 async def execute(self, ctx, sequential: typing.Optional[bool] = False, *, commands):
