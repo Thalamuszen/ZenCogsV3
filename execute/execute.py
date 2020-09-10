@@ -1,10 +1,5 @@
-import discord
-import asyncio
-import logging
-
-from typing import Optional
-
 from redbot.core import commands
+from typing import Optional
 
 @commands.command()
 async def execute(self, ctx, sequential: typing.Optional[bool] = False, *, commands):
