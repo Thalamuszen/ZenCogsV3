@@ -1,8 +1,13 @@
 import discord
+import asyncio
 import typing
+import json
+import io
 
-from redbot.core import commands
+from redbot.core import commands, checks, Config
+from redbot.core.utils import menus
 
+@checks.is_owner()
 @commands.command()
 async def execute(self, ctx, sequential: typing.Optional[bool] = False, *, commands):
     """Execute multiple commands at once. Split them using |"""
