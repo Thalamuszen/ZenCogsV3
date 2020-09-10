@@ -2,6 +2,7 @@ import discord
 import typing
 
 from redbot.core import commands
+from discord.ext import commands
 
 @checks.is_owner()
 @commands.command()
