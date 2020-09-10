@@ -1,5 +1,6 @@
 import discord
 from redbot.core import commands
+from typing import Optional
 
 @commands.command()
 async def execute(self, ctx, sequential: typing.Optional[bool] = False, *, commands):
