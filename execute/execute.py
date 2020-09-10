@@ -5,6 +5,8 @@ import tracemalloc
 
 from redbot.core import commands, checks
 
+from redbot.core.bot import Red
+
 class Execute(commands.Cog):
     """
     Combine multiple commands.
@@ -12,6 +14,9 @@ class Execute(commands.Cog):
     
     def __init__(self, bot: Red):
         self.bot = bot
+        
+    async def red_delete_data_for_user(self, **kwargs):
+        return
     
 @checks.is_owner()
 @commands.command()
