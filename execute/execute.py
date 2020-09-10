@@ -1,5 +1,6 @@
 import discord
 import typing
+import tracemalloc
 
 from redbot.core import commands
 from discord.ext import commands
