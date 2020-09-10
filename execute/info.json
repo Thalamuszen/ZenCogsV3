@@ -1,7 +1,7 @@
 {
   "author" : ["ThalamusZen"],
   "bot_version": [3,0,0],
-  "install_msg" : "Combine commands. Simple. Install Msg",
+  "install_msg" : "Combine commands. Simple. Type `!Execute` for help.",
   "short" : "Combine commands. Simple. Short",
   "description" : "Combine commands. Simple. Description",
   "tags" : ["combine", "multiple", "commands"],
