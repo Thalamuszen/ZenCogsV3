@@ -3,7 +3,7 @@ import asyncio
 import typing
 import tracemalloc
 
-from redbot.core import commands
+from redbot.core import commands, checks
 
 class Execute(commands.Cog):
     """
