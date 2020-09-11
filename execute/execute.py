@@ -12,9 +12,7 @@ RequestType = typing.Literal["discord_deleted_user", "owner", "user", "user_stri
 
 
 class Execute(commands.Cog):
-    """
-    Various developer utilities.
-    """
+    """Combine multiple commands."""
 
     def __init__(self, bot: Red) -> None:
         self.bot = bot
