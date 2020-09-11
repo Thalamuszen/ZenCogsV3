@@ -10,7 +10,6 @@ from redbot.core.config import Config
 
 RequestType = typing.Literal["discord_deleted_user", "owner", "user", "user_strict"]
 
-
 class Execute(commands.Cog):
     """Combine multiple commands."""
 
