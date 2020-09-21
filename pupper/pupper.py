@@ -3,6 +3,7 @@ import datetime
 import discord
 import logging
 import random
+from discord.utils import get
 from redbot.core import commands, checks, Config, bank
 from redbot.core.errors import BalanceTooHigh
 from redbot.core.utils.chat_formatting import box, humanize_list, pagify
@@ -242,7 +243,7 @@ class Pupper(commands.Cog):
                 await asyncio.sleep(random.randint(60, 480))
                 rando_channel_obj = self.bot.get_channel(rando_channel)
                 borf_msg = await rando_channel_obj.send(guild_data["hello_msg"])
-                pets = ":DoggoPat:757605516842238083"
+                pets = get(ctx.message.server.emojis, name=":DoggoPat:757605516842238083")
                 pets_action = {"veryfastpats": ":DoggoPat:757605516842238083"}
 
                 def check(r, u):
