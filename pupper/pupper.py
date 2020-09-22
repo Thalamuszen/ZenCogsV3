@@ -242,8 +242,8 @@ class Pupper(commands.Cog):
                 await asyncio.sleep(random.randint(60, 480))
                 rando_channel_obj = self.bot.get_channel(rando_channel)
                 borf_msg = await rando_channel_obj.send(guild_data["hello_msg"])
-                pets = discord.utils.get(bot.get_all_emojis(), name='757605516842238083')
-                pets_action = {"veryfastpats": discord.utils.get(bot.get_all_emojis(), name='757605516842238083')}
+                pets = "👋")
+                pets_action = {"veryfastpats": "👋"}
 
                 def check(r, u):
                     return r.message.id == borf_msg.id and any(e in str(r.emoji) for e in pets)
