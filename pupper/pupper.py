@@ -242,7 +242,7 @@ class Pupper(commands.Cog):
                 await asyncio.sleep(random.randint(60, 480))
                 rando_channel_obj = self.bot.get_channel(rando_channel)
                 borf_msg = await rando_channel_obj.send(guild_data["hello_msg"])
-                pets = "👋")
+                pets = "👋"
                 pets_action = {"veryfastpats": "👋"}
 
                 def check(r, u):
