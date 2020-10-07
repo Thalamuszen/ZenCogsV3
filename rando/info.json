@@ -1,0 +1,9 @@
+{
+  "author" : ["ThalamusZen"],
+  "bot_version": [3,0,0],
+  "install_msg" : "Random commands by TZ. Type `!help Rando` for help.",
+  "short" : "Random commands.",
+  "description" : "Random commands.",
+  "tags" : ["random", "fun", "commands"],
+  "hidden" : false
+}
