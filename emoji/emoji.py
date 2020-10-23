@@ -37,11 +37,9 @@ class Emoji(commands.Cog):
             async for before in message.channel.history(limit=5, before=message):
                 author = before.author
                 name = author.display_name
-                content = before.clean_content
                 if (
                     not author.bot
                     and not author == message.author
-                    and not PATTERN.fullmatch(content)
                 ):
                     emoji = "\N{CHEERING MEGAPHONE}"
                     msg = f"{name} said, **{emoji}   {content}**"
