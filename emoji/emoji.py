@@ -32,9 +32,6 @@ class Emoji(commands.Cog):
             return
         if message.author.bot:
             return
-        content = message.content.lower().split()
-        if len(content) != 1:
-            return
 
         if PATTERN.fullmatch(content[0]):
             async for before in message.channel.history(limit=5, before=message):
