@@ -1,0 +1,9 @@
+{
+    "name" : "Emoji",
+    "author" : ["Thalamus Zen"],
+    "short" : "Enlarges an Emoji sent by another user.",
+    "description" : "Enlarges an Emoji sent by another user.\n\nDependencies: None",
+    "install_msg" : "LES GO BIG",
+    "tags" : ["emoji", "enlarge"],
+    "end_user_data_statement": "This cog does not persistently store data or metadata about users."
+}
