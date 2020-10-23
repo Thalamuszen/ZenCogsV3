@@ -7,7 +7,7 @@ PATTERN = re.compile(r"w+h*[aou]+t+[?!]*", re.IGNORECASE)
 
 class Emoji(commands.Cog):
 
-    """Enlarges someone another users Emoji"""
+    """Enlarges Emoji"""
 
     default_global_settings = {"channels_ignored": [], "guilds_ignored": []}
 
@@ -23,23 +23,62 @@ class Emoji(commands.Cog):
     @commands.group(name="emojiignore", pass_context=True, no_pm=True)
     @checks.admin_or_permissions(manage_guild=True)
     async def emojiignore(self, ctx):
-        """Change Emoji cog ignore settings."""
+        """Change Emoji ignore settings."""
         pass
 
-    @commands.command()
-    async def emoji(self, message):
+    @emojiignore.command(name="server", pass_context=True, no_pm=True)
+    @checks.admin_or_permissions(manage_guild=True)
+    async def _emojiignore_server(self, ctx):
+        """Ignore/Unignore the current server"""
+
+        guild = ctx.message.guild
+        guilds = await self.conf.guilds_ignored()
+        if guild.id in guilds:
+            guilds.remove(guild.id)
+            await ctx.send("wot? Ok boss, I will no longer ignore this server.")
+        else:
+            guilds.append(guild.id)
+            await ctx.send("what? Fine, I will ignore this server.")
+        await self.conf.guilds_ignored.set(guilds)
+
+    @emojiignore.command(name="channel", pass_context=True, no_pm=True)
+    @checks.admin_or_permissions(manage_guild=True)
+    async def _emojiignore_channel(self, ctx):
+        """Ignore/Unignore the current channel"""
+
+        chan = ctx.message.channel
+        chans = await self.conf.channels_ignored()
+        if chan.id in chans:
+            chans.remove(chan.id)
+            await ctx.send("wut? Ok, I will no longer ignore this channel.")
+        else:
+            chans.append(chan.id)
+            await ctx.send("wat? Alright, I will ignore this channel.")
+        await self.conf.channels_ignored.set(chans)
+
+    @commands.Cog.listener()
+    async def on_message_without_command(self, message):
         if message.guild is None:
             return
         if message.author.bot:
+            return
+        content = message.content.lower().split()
+        if len(content) != 1:
+            return
+        if message.guild.id in await self.conf.guilds_ignored():
+            return
+        if message.channel.id in await self.conf.channels_ignored():
             return
 
         if PATTERN.fullmatch(content[0]):
             async for before in message.channel.history(limit=5, before=message):
                 author = before.author
                 name = author.display_name
+                content = before.clean_content
                 if (
                     not author.bot
                     and not author == message.author
+                    and not PATTERN.fullmatch(content)
                 ):
                     emoji = "\N{CHEERING MEGAPHONE}"
                     msg = f"{name} said, **{emoji}   {content}**"
