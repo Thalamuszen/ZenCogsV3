@@ -60,9 +60,9 @@ class RoleShop(commands.Cog):
     async def sa_price(self, ctx, *, role: str, price: int):
         """Sets the price of an already set role"""
         credits_name = await bank.get_currency_name(ctx.guild)
+        price = int
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
-        price = 
         if not valid_role:
             await ctx.send(f"Couldn't find a valid role called '{role}'")
         else:
@@ -72,6 +72,8 @@ class RoleShop(commands.Cog):
                     return
                 roles.price(valid_role.id)
                 await ctx.send(f"The '{valid_role}' role is no longer self-assignable")
+                
+                await bank.withdraw_credits(ctx.author, candy_price)
                 
     @roleshop.command(name="list")
     @checks.mod()
