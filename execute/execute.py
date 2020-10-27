@@ -24,7 +24,6 @@ class Execute(commands.Cog):
     async def red_delete_data_for_user(self, *, requester: RequestType, user_id: int) -> None:
         return
 
-    @checks.is_owner()
     @commands.command()
     async def execute(self, ctx, sequential: typing.Optional[bool] = False, *, commands):
         """Execute multiple commands at once. Split them using |."""
