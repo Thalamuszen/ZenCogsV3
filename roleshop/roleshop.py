@@ -54,7 +54,24 @@ class RoleShop(commands.Cog):
                     return
                 roles.remove(valid_role.id)
                 await ctx.send(f"The '{valid_role}' role is no longer self-assignable")
-
+                
+    @roleshop.command(name="price")
+    @checks.mod()
+    async def sa_price(self, ctx, *, role: str):
+        """Sets the price of an already set role"""
+        valid_role = discord.utils.find(
+            lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
+        price = 
+        if not valid_role:
+            await ctx.send(f"Couldn't find a valid role called '{role}'")
+        else:
+            async with self.config.guild(ctx.guild).VALID_ROLE_IDS() as roles:
+                if valid_role.id not in roles:
+                    await ctx.send(f"The '{valid_role}' as not been set. Run `!roleshop set` first")
+                    return
+                roles.price(valid_role.id)
+                await ctx.send(f"The '{valid_role}' role is no longer self-assignable")
+                
     @roleshop.command(name="list")
     @checks.mod()
     async def sa_list(self, ctx):
