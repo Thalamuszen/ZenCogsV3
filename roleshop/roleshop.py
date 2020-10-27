@@ -57,8 +57,9 @@ class RoleShop(commands.Cog):
                 
     @roleshop.command(name="price")
     @checks.mod()
-    async def sa_price(self, ctx, *, role: str):
+    async def sa_price(self, ctx, *, role: str, price: int):
         """Sets the price of an already set role"""
+        credits_name = await bank.get_currency_name(ctx.guild)
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
         price = 
