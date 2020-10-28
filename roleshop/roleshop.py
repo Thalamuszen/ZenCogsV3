@@ -26,41 +26,24 @@ class RoleShop(commands.Cog):
         """Flags a given role as self-assignable"""
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
+        role_price = [valid_role.id,price]
         if not valid_role:
             await ctx.send(f"Couldn't find a valid role called {role}")
         else:
             if ctx.author.top_role > valid_role:
                 async with self.config.guild(ctx.guild).VALID_ROLE_IDS() as roles:
-                    if valid_role.id in roles:
+                    if role_price in roles:
                         await ctx.send(f"The '{valid_role}' role is already self-assignable")
                         return
-                    role_price = [valid_role.id,price]
                     roles.append(role_price)
                     await ctx.send(f"The '{valid_role}' role is now self-assignable and will cost {price}")
             else:
                 await ctx.send(f"You do not have permissions to make that role self-assignable.")
 
-    @roleshop.command(name="buy")
-    async def sa_buy(self, ctx, price: int):
-        """Buy a role."""
-        user = ctx.author
-        bal = await bank.get_balance(user)
-        currency = await bank.get_currency_name(ctx.guild)
-        try:
-            await bank.withdraw_credits(user, price)
-        except ValueError:
-            return await ctx.send(f"Not enough {currency} ({price} required).") 
-        newbal = await bank.get_balance(user)
-        await ctx.send(
-            "{} has spent {}. Your balance is now {} {}".format(
-                price, user.display_name, newbal, currency
-            )
-        )
-
     @roleshop.command(name="unset")
     @checks.mod()
     async def sa_unset(self, ctx, *, role: str):
-        """Removes a role from the allowed self-assign list. Role must be a string, NOT a snowflake (e.g. @Role)"""
+        """Removes a role from the allowed self-assign list. Role must be a string, NOT a mention.(E.g. @Role)"""
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
         if not valid_role:
@@ -103,6 +86,23 @@ class RoleShop(commands.Cog):
                     await ctx.send(f"You now have the '{valid_role}' role!")
             else:
                 await ctx.send(f"The '{valid_role}' role isn't set up for self assignment. If you think it should, please pings Mods!")
+                
+    @roleshop.command(name="buy")
+    async def sa_buy(self, ctx, price: int):
+        """Buy a role."""
+        user = ctx.author
+        bal = await bank.get_balance(user)
+        currency = await bank.get_currency_name(ctx.guild)
+        try:
+            await bank.withdraw_credits(user, price)
+        except ValueError:
+            return await ctx.send(f"Not enough {currency} ({price} required).") 
+        newbal = await bank.get_balance(user)
+        await ctx.send(
+            "{} has spent {}. Your balance is now {} {}".format(
+                price, user.display_name, newbal, currency
+            )
+        )
 
     @roleshop.command(name="take")
     async def sa_take(self, ctx, *, role: str):
