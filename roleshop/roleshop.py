@@ -110,7 +110,8 @@ class RoleShop(commands.Cog):
         user = ctx.author
         bal = await bank.get_balance(user)
         currency = await bank.get_currency_name(ctx.guild)
-        await bank.withdraw_credits(user, price)
+        try:
+            await bank.withdraw_credits(user, price)
         except ValueError:
             return await ctx.send(f"Not enough {credits_name} ({price} required).")        
         await ctx.send(
