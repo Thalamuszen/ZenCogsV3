@@ -22,7 +22,7 @@ class RoleShop(commands.Cog):
 
     @roleshop.command(name="set")
     @checks.mod()
-    async def sa_set(self, ctx, *, role: str):
+    async def sa_set(self, ctx, *, role: str, price: int):
         """Flags a given role as self-assignable"""
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
@@ -34,8 +34,8 @@ class RoleShop(commands.Cog):
                     if valid_role.id in roles:
                         await ctx.send(f"The '{valid_role}' role is already self-assignable")
                         return
-                    roles.append(valid_role.id)
-                    await ctx.send(f"The '{valid_role}' role is now self-assignable")
+                    roles.append(valid_role.id, price)
+                    await ctx.send(f"The '{valid_role}' role is now self-assignable and will cost {price}")
             else:
                 await ctx.send(f"You do not have permissions to make that role self-assignable.")
 
