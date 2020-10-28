@@ -71,9 +71,7 @@ class RoleShop(commands.Cog):
                     await ctx.send(f"The '{valid_role}' as not been set. Run `!roleshop set` first")
                     return
                 roles.price(valid_role.id)
-                await ctx.send(f"The '{valid_role}' role is no longer self-assignable")
-                
-                await bank.withdraw_credits(ctx.author, candy_price)
+                await ctx.send(f"The '{valid_role}' role price is now {price} {credits_name}")
                 
     @roleshop.command(name="list")
     @checks.mod()
