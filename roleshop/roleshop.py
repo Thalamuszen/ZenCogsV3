@@ -53,7 +53,7 @@ class RoleShop(commands.Cog):
                 if valid_role.id not in roles:
                     await ctx.send(f"The '{valid_role}' role is not self-assignable")
                     return
-                roles.remove(valid_role.id)
+                roles.remove(role_price)
                 await ctx.send(f"The '{valid_role}' role is no longer self-assignable")
                 
     @roleshop.command(name="list")
