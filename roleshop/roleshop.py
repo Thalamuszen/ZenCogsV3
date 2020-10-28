@@ -116,7 +116,7 @@ class RoleShop(commands.Cog):
             return await ctx.send(f"Not enough {currency} ({price} required).") 
         newbal = await bank.get_balance(user)
         await ctx.send(
-            "You have spent {}. {}'s balance is now {} {}".format(
+            "{} has spent {}. Your balance is now {} {}".format(
                 price, user.display_name, newbal, currency
             )
         )
