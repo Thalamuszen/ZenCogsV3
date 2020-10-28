@@ -1,4 +1,4 @@
-from redbot.core import commands, Config, checks
+from redbot.core import bank, commands, Config, checks
 from redbot.core.bot import Red
 import discord
 
@@ -103,3 +103,18 @@ class RoleShop(commands.Cog):
                     await ctx.send(f"You no longer have the '{valid_role}' role!")
             else:
                 await ctx.send(f"The '{valid_role}' role isn't set up for self assignment.")
+
+    @roleshop.command(name="buy")
+    async def sa_buy(self, ctx, price: int):
+        """Buy a role."""
+        user = ctx.author
+        bal = await bank.get_balance(user)
+        currency = await bank.get_currency_name(ctx.guild)
+        await bank.withdraw_credits(user, price)
+        except ValueError:
+            return await ctx.send(f"Not enough {credits_name} ({price} required).")        
+        await ctx.send(
+            "You have spent {}. {}'s balance is now {} {}".format(
+                price, user.display_name, bal, currency
+            )
+        )
