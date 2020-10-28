@@ -12,7 +12,7 @@ class RoleShop(commands.Cog):
             self, identifier=901101100011101010110111001100001)
         default_guild = {
             "VALID_ROLE_IDS": [],
-            "Price": {}
+            "Price": 0,
         }
         self.config.register_guild(**default_guild)
 
