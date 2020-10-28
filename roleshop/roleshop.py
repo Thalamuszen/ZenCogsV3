@@ -11,6 +11,7 @@ class RoleShop(commands.Cog):
         self.config = Config.get_conf(
             self, identifier=901101100011101010110111001100001)
         default_guild = {
+            "Shops": {},
             "VALID_ROLE_IDS": [],
         }
         self.config.register_guild(**default_guild)
