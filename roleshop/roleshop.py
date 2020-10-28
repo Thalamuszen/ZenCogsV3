@@ -39,6 +39,23 @@ class RoleShop(commands.Cog):
             else:
                 await ctx.send(f"You do not have permissions to make that role self-assignable.")
 
+    @roleshop.command(name="buy")
+    async def sa_buy(self, ctx, price: int):
+        """Buy a role."""
+        user = ctx.author
+        bal = await bank.get_balance(user)
+        currency = await bank.get_currency_name(ctx.guild)
+        try:
+            await bank.withdraw_credits(user, price)
+        except ValueError:
+            return await ctx.send(f"Not enough {currency} ({price} required).") 
+        newbal = await bank.get_balance(user)
+        await ctx.send(
+            "{} has spent {}. Your balance is now {} {}".format(
+                price, user.display_name, newbal, currency
+            )
+        )
+
     @roleshop.command(name="unset")
     @checks.mod()
     async def sa_unset(self, ctx, *, role: str):
@@ -103,20 +120,3 @@ class RoleShop(commands.Cog):
                     await ctx.send(f"You no longer have the '{valid_role}' role!")
             else:
                 await ctx.send(f"The '{valid_role}' role isn't set up for self assignment.")
-
-    @roleshop.command(name="buy")
-    async def sa_buy(self, ctx, price: int):
-        """Buy a role."""
-        user = ctx.author
-        bal = await bank.get_balance(user)
-        currency = await bank.get_currency_name(ctx.guild)
-        try:
-            await bank.withdraw_credits(user, price)
-        except ValueError:
-            return await ctx.send(f"Not enough {currency} ({price} required).") 
-        newbal = await bank.get_balance(user)
-        await ctx.send(
-            "{} has spent {}. Your balance is now {} {}".format(
-                price, user.display_name, newbal, currency
-            )
-        )
