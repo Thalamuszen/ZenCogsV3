@@ -11,7 +11,8 @@ class RoleShop(commands.Cog):
         self.config = Config.get_conf(
             self, identifier=901101100011101010110111001100001)
         default_guild = {
-            "VALID_ROLE_IDS": []
+            "VALID_ROLE_IDS": [],
+            "Price": {}
         }
         self.config.register_guild(**default_guild)
 
@@ -26,16 +27,16 @@ class RoleShop(commands.Cog):
         """Flags a given role as self-assignable"""
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
-        role_price = [valid_role.id,price]
         if not valid_role:
             await ctx.send(f"Couldn't find a valid role called {role}")
         else:
             if ctx.author.top_role > valid_role:
                 async with self.config.guild(ctx.guild).VALID_ROLE_IDS() as roles:
-                    if role_price in roles:
+                    if valid_role in roles:
                         await ctx.send(f"The '{valid_role}' role is already self-assignable")
                         return
-                    roles.append(role_price)
+                    await self.config.guild(ctx.guild).Role.set(valid_role.id)
+                    await self.config.guild(ctx.guild).Price.set(price)
                     await ctx.send(f"The '{valid_role}' role is now self-assignable and will cost {price}")
             else:
                 await ctx.send(f"You do not have permissions to make that role self-assignable.")
@@ -72,6 +73,7 @@ class RoleShop(commands.Cog):
     @roleshop.command(name="give")
     async def sa_give(self, ctx, *, role: str):
         """Allows a user to have a role assigned to them by request. Role must be a string, NOT a snowflake (e.g. @Role)"""
+        price = await self.config.guild(ctx.guild).Price()
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
         if not valid_role:
