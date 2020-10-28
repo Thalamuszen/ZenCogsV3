@@ -34,7 +34,8 @@ class RoleShop(commands.Cog):
                     if valid_role.id in roles:
                         await ctx.send(f"The '{valid_role}' role is already self-assignable")
                         return
-                    roles.append(valid_role.id, price)
+                    role_price = [valid_role.id,price]
+                    roles.append(role_price)
                     await ctx.send(f"The '{valid_role}' role is now self-assignable and will cost {price}")
             else:
                 await ctx.send(f"You do not have permissions to make that role self-assignable.")
