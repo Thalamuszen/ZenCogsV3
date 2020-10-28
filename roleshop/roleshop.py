@@ -22,7 +22,7 @@ class RoleShop(commands.Cog):
 
     @roleshop.command(name="set")
     @checks.mod()
-    async def sa_set(self, ctx, *, role: str, price: int):
+    async def sa_set(self, ctx, *, role: str, *, price: int):
         """Flags a given role as self-assignable"""
         valid_role = discord.utils.find(
             lambda m: m.name.lower() == role.lower(), ctx.guild.roles)
