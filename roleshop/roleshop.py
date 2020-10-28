@@ -35,7 +35,6 @@ class RoleShop(commands.Cog):
                         await ctx.send(f"The '{valid_role}' role is already self-assignable")
                         return
                     await self.config.guild(ctx.guild).Role.set(valid_role.id)
-                    await self.config.guild(ctx.guild).Price.set(price)
                     await ctx.send(f"The '{valid_role}' role is now self-assignable and will cost {price}")
             else:
                 await ctx.send(f"You do not have permissions to make that role self-assignable.")
