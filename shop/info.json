@@ -1,0 +1,8 @@
+{
+    "author" : ["ThalamusZen"],
+    "install_msg" : "A simple shop cog. Type `!help Shop` or `!store` to get started.",
+    "name" : "Shop",
+    "short" : "A simple shop cog.",
+    "description" : "A simple shop cog.",
+    "tags" : ["shop", "store"],
+}
