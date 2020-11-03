@@ -725,7 +725,7 @@ class Shop(commands.Cog):
         if stuff == []:
             desc = "Nothing to see here."
         else:
-            predesc = "When using the `!buy` command, please be aware that items are **case sensitive**.\nRoles must be returned to the shop when you no longer want them and can be done so with the `!return` command.\nReturning roles will give you a 10% refund on what you originally paid.\n\n"
+            predesc = "When using the `!buy` command, please be aware that items are **case sensitive**.\nTo remove a role from yourself, they must be returned to the shop and can be done so with the `!return <role name>` command.\nReturning roles will give you a 10% refund on what you originally paid.\n\n"
             desc = predesc + ("\n".join(stuff))
         page_list = []
         for page in pagify(desc, delims=["\n"], page_length=1000):
