@@ -156,8 +156,17 @@ class Shop(commands.Cog):
                 quantity = pred_int.result
                 if quantity <= 0:
                     return await ctx.send("Uh oh, quantity has to be more than 0.")
+                await ctx.send(
+                    "What is the friendly name of the role?"
+                )
+                try:
+                    answer = await self.bot.wait_for("message", timeout=120, check=check)
+                except asyncio.TimeoutError:
+                    return await ctx.send("You took too long. Try again, please.")
+                safe_name = answer.content
+                safe_name = item_name.strip("@")
                 await self.config.guild(ctx.guild).roles.set_raw(
-                    role.name, value={"price": price, "quantity": quantity}
+                    role.name, value={"price": price, "quantity": quantity, "safe_name": safe_name}
                 )
                 await ctx.send(f"{role.name} added.")
         elif pred.result == 2:
@@ -720,7 +729,7 @@ class Shop(commands.Cog):
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
             price = int(role.get("price"))
             quantity = int(role.get("quantity"))
-            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
             stuff.append(role_text)
         if stuff == []:
             desc = "Nothing to see here."
