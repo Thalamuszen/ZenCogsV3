@@ -164,7 +164,7 @@ class Shop(commands.Cog):
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 safe_name = answer.content
-                safe_name = item_name.strip("@")
+                safe_name = safe_name.strip("@")
                 await self.config.guild(ctx.guild).roles.set_raw(
                     role.name, value={"price": price, "quantity": quantity, "safe_name": safe_name}
                 )
