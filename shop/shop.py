@@ -815,10 +815,10 @@ class Shop(commands.Cog):
         lst = []
         
         for r in role:
-            role_obj = get(ctx.guild.roles, name=r)
+            role_obj = get(ctx.guild.author, name=r)
             if not role_obj:
                 continue
-            role = await self.config.guild(ctx.guild).roles.get_raw(r)
+            role = await self.config.guild(ctx.author).inventory.get_raw(r)
             priceint = int(role.get("price"))
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
@@ -826,14 +826,14 @@ class Shop(commands.Cog):
             role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
             stuff.append(role_text)
         for g in game:
-            game = await self.config.guild(ctx.guild).games.get_raw(g)
+            game = await self.config.guild(ctx.author).inventory.get_raw(g)
             priceint = int(game.get("price"))
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(game_text)
         for x in xmas:
-            xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
+            xmas = await self.config.guild(ctx.author).inventory.get_raw(x)
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
