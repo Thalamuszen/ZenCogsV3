@@ -27,7 +27,7 @@ class Shop(commands.Cog):
             self, identifier=16548964843212315, force_registration=True
         )
         self.config.register_guild(
-            enabled=False, items={}, roles={}, games={}, ping=None
+            enabled=False, items={}, roles={}, games={}, xmas={}, ping=None
         )
         self.config.register_member(inventory={})
 
@@ -61,14 +61,14 @@ class Shop(commands.Cog):
         def check(m):
             return m.author == ctx.author and m.channel == ctx.channel
 
-        types = ["item", "role", "game"]
+        types = ["item", "role", "game", "xmas"]
         pred = MessagePredicate.lower_contained_in(types)
         pred_int = MessagePredicate.valid_int(ctx)
         pred_role = MessagePredicate.valid_role(ctx)
         pred_yn = MessagePredicate.yes_or_no(ctx)
 
         await ctx.send(
-            "Do you want to add an item, role or game?\nItem and role = returnable, game = non returnable."
+            "Do you want to add an item, role, game or xmas?\nItem and role = returnable, game = non returnable."
         )
         try:
             await self.bot.wait_for("message", timeout=30, check=pred)
@@ -219,6 +219,56 @@ class Shop(commands.Cog):
                     },
                 )
                 await ctx.send(f"{game_name} added.")
+        if pred.result == 3:
+            await ctx.send(
+                "What is the name of the xmas gift? Note that you cannot include `@` in the name."
+            )
+            try:
+                answer = await self.bot.wait_for("message", timeout=120, check=check)
+            except asyncio.TimeoutError:
+                return await ctx.send("You took too long. Try again, please.")
+            xmas_gift = answer.content
+            xmas_gift = xmas_gift.strip("@")
+            try:
+                is_already_xmas = await self.config.guild(ctx.guild).xmas.get_raw(
+                    xmas_gift
+                )
+                if is_already_xmas:
+                    return await ctx.send(
+                        "This xmas gift is already set. Please, remove it first."
+                    )
+            except KeyError:
+                await ctx.send("How much should this xmas gift cost?")
+                try:
+                    await self.bot.wait_for("message", timeout=120, check=pred_int)
+                except asyncio.TimeoutError:
+                    return await ctx.send("You took too long. Try again, please.")
+                price = pred_int.result
+                if price <= 0:
+                    return await ctx.send("Uh oh, price has to be more than 0.")
+                await ctx.send("What quantity of this xmas gift should be available?")
+                try:
+                    await self.bot.wait_for("message", timeout=120, check=pred_int)
+                except asyncio.TimeoutError:
+                    return await ctx.send("You took too long. Try again, please.")
+                quantity = pred_int.result
+                if quantity <= 0:
+                    return await ctx.send("Uh oh, quantity has to be more than 0.")
+                await ctx.send("Is the item redeemable?")
+                try:
+                    await self.bot.wait_for("message", timeout=120, check=pred_yn)
+                except asyncio.TimeoutError:
+                    return await ctx.send("You took too long. Try again, please.")
+                redeemable = pred_yn.result
+                await self.config.guild(ctx.guild).xmas.set_raw(
+                    xmas_gift,
+                    value={
+                        "price": price,
+                        "quantity": quantity,
+                        "redeemable": redeemable,
+                    },
+                )
+                await ctx.send(f"{xmas_gift} added.")
         else:
             await ctx.send("This answer is not supported. Try again, please.")
 
@@ -245,6 +295,12 @@ class Shop(commands.Cog):
                     if is_already_role:
                         await self.config.guild(ctx.guild).roles.clear_raw(item)
                         await ctx.send(f"{item} removed.")
+                    except KeyError:
+                        try:
+                            is_already_xmas = await self.config.guild(ctx.guild).xmas.get_raw(item)
+                            if is_already_xmas:
+                                await self.config.guild(ctx.guild).xmas.clear_raw(item)
+                                return await ctx.send(f"{item} removed.")
                 except KeyError:
                     await ctx.send("That item isn't buyable.")
 
@@ -255,6 +311,7 @@ class Shop(commands.Cog):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
 
         if item in items:
             info = await self.config.guild(ctx.guild).items.get_raw(item)
@@ -265,6 +322,9 @@ class Shop(commands.Cog):
         elif item in games:
             info = await self.config.guild(ctx.guild).games.get_raw(item)
             item_type = "game"
+        elif item in xmas:
+            info = await self.config.guild(ctx.guild).xmas.get_raw(item)
+            item_type = "xmas"            
         else:
             return await ctx.send("This item isn't buyable.")
         price = info.get("price")
@@ -285,6 +345,7 @@ class Shop(commands.Cog):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
 
         if item in items:
             await self.config.guild(ctx.guild).items.set_raw(item, "price", value=price)
@@ -295,6 +356,9 @@ class Shop(commands.Cog):
         elif item in games:
             await self.config.guild(ctx.guild).games.set_raw(item, "price", value=price)
             await ctx.send(f"{item}'s price changed to {price}.")
+        elif item in xmas:
+            await self.config.guild(ctx.guild).xmas.set_raw(item, "price", value=price)
+            await ctx.send(f"{item}'s price changed to {price}.")            
         else:
             await ctx.send("This item isn't in the store. Please, add it first.")
 
@@ -305,12 +369,13 @@ class Shop(commands.Cog):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
-
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
+        
         if item in roles:
             await self.config.guild(ctx.guild).roles.set_raw(item, "safe_name", value=command)
             await ctx.send(f"{item}'s command has changed to {command}.")
         else:
-            await ctx.send("This item isn't in the store. Please, add it first.")                                  
+            await ctx.send("This item isn't a role or this role doesn't exist in the store yet, please, add it first.")                                  
             
     @store.command(name="quantity")
     async def store_quantity(self, ctx: commands.Context, quantity: int, *, item: str):
@@ -321,6 +386,7 @@ class Shop(commands.Cog):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
 
         if item in items:
             await self.config.guild(ctx.guild).items.set_raw(
@@ -337,6 +403,11 @@ class Shop(commands.Cog):
                 item, "quantity", value=quantity
             )
             await ctx.send(f"{item}'s quantity changed to {quantity}.")
+        elif item in xmas:
+            await self.config.guild(ctx.guild).xmas.set_raw(
+                item, "quantity", value=quantity
+            )
+            await ctx.send(f"{item}'s quantity changed to {quantity}.")            
         else:
             await ctx.send("This item isn't in the store. Please, add it first.")
 
@@ -348,6 +419,7 @@ class Shop(commands.Cog):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()        
 
         item = item.strip("@")
         if item in items:
@@ -365,6 +437,11 @@ class Shop(commands.Cog):
                 item, "redeemable", value=redeemable
             )
             await ctx.send(f"{item}'s redeemability changed to {redeemable}.")
+        elif item in xmas:
+            await self.config.guild(ctx.guild).xmas.set_raw(
+                item, "redeemable", value=redeemable
+            )
+            await ctx.send(f"{item}'s redeemability changed to {redeemable}.")            
         else:
             await ctx.send("This item isn't in the store. Please, add it first.")
 
@@ -382,6 +459,8 @@ class Shop(commands.Cog):
             await self.config.guild(ctx.guild).roles.clear_raw(r)
         for g in await self.config.guild(ctx.guild).games.get_raw():
             await self.config.guild(ctx.guild).games.clear_raw(i)
+        for x in await self.config.guild(ctx.guild).xmas.get_raw():
+            await self.config.guild(ctx.guild).xmas.clear_raw(i)            
         await ctx.send("All items have been deleted from the store.")
 
     @store.command(name="ping")
@@ -450,7 +529,8 @@ class Shop(commands.Cog):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
-
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
+        
         if not item:
             page_list = await self._show_store(ctx)
             if len(page_list) > 1:
@@ -588,6 +668,53 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have bought {item}. You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                 )
+        elif item in xmas:
+            xmas_info = await self.config.guild(ctx.guild).xmas.get_raw(item)
+            price = int(item_info.get("price"))
+            pricenice = humanize_number(price) 
+            quantity = int(item_info.get("quantity"))
+            credits_name = await bank.get_currency_name(ctx.guild)
+            redeemable = item_info.get("redeemable")
+            if not redeemable:
+                redeemable = False
+            if quantity == 0:
+                return await ctx.send("Uh oh, this item is out of stock.")
+            if price <= balance:
+                pass
+            else:
+                return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
+            balance -= price
+            quantity -= 1
+            await bank.withdraw_credits(ctx.author, price)
+            await self.config.guild(ctx.guild).xmas.set_raw(
+                item, "quantity", value=quantity
+            )
+            if not redeemable:
+                await self.config.member(ctx.author).inventory.set_raw(
+                    item,
+                    value={
+                        "price": price,
+                        "is_role": False,
+                        "is_game": False,
+                        "redeemable": False,
+                        "redeemed": True,
+                    },
+                )
+                await ctx.send(f"You have bought {item}.")
+            else:
+                await self.config.member(ctx.author).inventory.set_raw(
+                    item,
+                    value={
+                        "price": price,
+                        "is_role": False,
+                        "is_game": False,
+                        "redeemable": True,
+                        "redeemed": False,
+                    },
+                )
+                await ctx.send(
+                    f"You have bought {item}. You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
+                )
         else:
             page_list = await self._show_store(ctx)
             if len(page_list) > 1:
@@ -616,6 +743,9 @@ class Shop(commands.Cog):
         is_game = info.get("is_game")
         if is_game:
             return await ctx.send("This item isn't returnable.")
+        is_xmas = info.get("is_xmas")
+        if is_xmas:
+            return await ctx.send("This Christmas Gift isn't returnable.")
         is_role = info.get("is_role")
         if is_role:
             role_obj = get(ctx.guild.roles, name=item)
@@ -726,8 +856,20 @@ class Shop(commands.Cog):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
         stuff = []
+        for r in roles:
+            role_obj = get(ctx.guild.roles, name=r)
+            if not role_obj:
+                continue
+            role = await self.config.guild(ctx.guild).roles.get_raw(r)
+            priceint = int(role.get("price"))
+            price = humanize_number(priceint)
+            quantity = int(role.get("quantity"))
+            safe_name = role.get("safe_name")
+            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
+            stuff.append(role_text)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
             priceint = int(item.get("price"))
@@ -742,17 +884,13 @@ class Shop(commands.Cog):
             quantity = int(game.get("quantity"))
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(game_text)
-        for r in roles:
-            role_obj = get(ctx.guild.roles, name=r)
-            if not role_obj:
-                continue
-            role = await self.config.guild(ctx.guild).roles.get_raw(r)
-            priceint = int(role.get("price"))
+        for x in xmas:
+            xmas = await self.config.guild(ctx.guild).xmas.get_raw(g)
+            priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
-            quantity = int(role.get("quantity"))
-            safe_name = role.get("safe_name")
-            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
-            stuff.append(role_text)
+            quantity = int(game.get("quantity"))
+            game_text = f"__Item:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+            stuff.append(xmas_text)
         if stuff == []:
             desc = "Nothing to see here."
         else:
