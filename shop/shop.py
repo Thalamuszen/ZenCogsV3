@@ -864,7 +864,7 @@ class Shop(commands.Cog):
             item, "quantity", value=author_quantity
         )
         await self.config.member(ctx.author).inventory.clear_raw(item)
-        giftee_quantity = 
+        giftee_quantity = quantity
         await self.config.member(user).inventory.set_raw(
             item,
                 value={
