@@ -808,42 +808,24 @@ class Shop(commands.Cog):
     async def invtest(self, ctx: commands.Context):
         """See all items you own."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
-        role = inventory.get("is_role")
-        game = inventory.get("is_game")
-        xmas = inventory.get("is_xmas")
         credits_name = await bank.get_currency_name(ctx.guild)        
         lst = []
         
-        for r in role:
-            role_obj = get(ctx.guild.author, name=r)
-            if not role_obj:
-                continue
-            role = await self.config.guild(ctx.author).inventory.get_raw(r)
-            priceint = int(role.get("price"))
-            price = humanize_number(priceint)
-            quantity = int(role.get("quantity"))
-            safe_name = role.get("safe_name")
-            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
-            stuff.append(role_text)
-        for g in game:
-            game = await self.config.guild(ctx.author).inventory.get_raw(g)
-            priceint = int(game.get("price"))
-            price = humanize_number(priceint)
-            quantity = int(game.get("quantity"))
-            game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(game_text)
-        for x in xmas:
-            xmas = await self.config.guild(ctx.author).inventory.get_raw(x)
-            priceint = int(xmas.get("price"))
-            price = humanize_number(priceint)
-            quantity = int(xmas.get("quantity"))
-            xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(xmas_text)
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)
+            priceint = int(info.get("price"))
+            price = humanize_number(priceint)            
+            quantity = int(info.get("quantity"))
+            text = f"__Role:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+            if not info.get("is_role"):
+                lst.append(text)
+            else:
+                lst.append(text)           
         if lst == []:
-            desc = "Nothing to see here."
+            desc = "Nothing to see here, go buy something at the `!shop`"
         else:
             predesc = "Inventory\n\n"
-            desc = predesc + ("\n".join(stuff))
+            desc = predesc + ("\n".join(lst))
         page_list = []
         for page in pagify(desc, delims=["\n"], page_length=1000):
             embed = discord.Embed(
