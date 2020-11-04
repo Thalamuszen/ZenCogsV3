@@ -843,9 +843,11 @@ class Shop(commands.Cog):
             return await ctx.send("Think you're smart huh?")
         if user == ctx.author:
             return await ctx.send("Maybe you should find some friends.")
+        if user == ctx.bot.user.id
+            return await ctx.send("No thank you, why don't you give it to Zen instead?")
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
         info = await self.config.member(ctx.author).inventory.get_raw(item)
-        if item in inventory:
+        if item in author_inv:
             pass
         else:
             return await ctx.send("You don't own this item.")
