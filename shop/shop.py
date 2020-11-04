@@ -819,7 +819,11 @@ class Shop(commands.Cog):
         if lst == []:
             desc = "Nothing to see here, go buy something at the"
         else:
-            desc = discord.Embed.from_dict(lst)
+            for i in inventory:
+                inv_text = f"__Xmas:__ **{i}**"
+                lst.append(inv_text)
+                
+            desc = lst
             embed = discord.Embed(
                 colour=await ctx.embed_colour(),
                 description=desc,
