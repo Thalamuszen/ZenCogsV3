@@ -6,7 +6,7 @@ from discord.utils import get
 from datetime import datetime
 
 from redbot.core import Config, checks, commands, bank
-from redbot.core.utils.chat_formatting import pagify, humanize_list
+from redbot.core.utils.chat_formatting import pagify, humanize_list, humanize_number
 from redbot.core.utils.predicates import MessagePredicate
 from redbot.core.utils.menus import menu, DEFAULT_CONTROLS
 
