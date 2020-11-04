@@ -888,8 +888,8 @@ class Shop(commands.Cog):
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
-            quantity = int(game.get("quantity"))
-            game_text = f"__Item:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+            quantity = int(xmas.get("quantity"))
+            xmas_text = f"__Item:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(xmas_text)
         if stuff == []:
             desc = "Nothing to see here."
