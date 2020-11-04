@@ -813,7 +813,7 @@ class Shop(commands.Cog):
                 inv_text = f"__Item:__ **{i}**"
                 lst.append(inv_text)
         if lst == []:
-            desc = "Nothing to see here, go buy something at the"
+            desc = "Nothing to see here, go buy something at the `!shop`"
         else:
             desc = ("\n".join(lst))
         embed = discord.Embed(
