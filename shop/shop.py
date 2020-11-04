@@ -670,11 +670,11 @@ class Shop(commands.Cog):
                 )
         elif item in xmas:
             xmas_info = await self.config.guild(ctx.guild).xmas.get_raw(item)
-            price = int(item_info.get("price"))
+            price = int(xmas_info.get("price"))
             pricenice = humanize_number(price) 
-            quantity = int(item_info.get("quantity"))
+            quantity = int(xmas_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)
-            redeemable = item_info.get("redeemable")
+            redeemable = xmas_info.get("redeemable")
             if not redeemable:
                 redeemable = False
             if quantity == 0:
