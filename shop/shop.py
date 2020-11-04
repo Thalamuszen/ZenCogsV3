@@ -820,7 +820,8 @@ class Shop(commands.Cog):
             if not info.get("is_role"):
                 lst.append(text)
             else:
-                lst.append(text)           
+                role_obj = get(ctx.guild.roles, name=i)
+                lst.append(role_obj.mention)         
         if lst == []:
             desc = "Nothing to see here, go buy something at the `!shop`"
         else:
