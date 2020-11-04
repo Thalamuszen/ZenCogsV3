@@ -805,12 +805,12 @@ class Shop(commands.Cog):
         
     @commands.command()
     @commands.guild_only()
-    async def invtest2(self, ctx: commands.Context):
+    async def invtest(self, ctx: commands.Context):
         """See all items you own."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         lst = []
         for i in inventory:
-                inv_text = f"__Xmas:__ **{i}**"
+                inv_text = f"__Item:__ **{i}**"
                 lst.append(inv_text)
         if lst == []:
             desc = "Nothing to see here, go buy something at the"
@@ -826,44 +826,6 @@ class Shop(commands.Cog):
         )            
         embed.set_footer(text="Inventory™")
         await ctx.send(embed=embed) 
-
-    @commands.command()
-    @commands.guild_only()
-    async def invtest(self, ctx: commands.Context):
-        """See all items you own."""
-        inventory = await self.config.member(ctx.author).inventory.get_raw()
-        credits_name = await bank.get_currency_name(ctx.guild)        
-        lst = []
-        
-        for i in inventory:
-            info = await self.config.member(ctx.author).inventory.get_raw(i)
-            priceint = int(info.get("price"))
-            price = humanize_number(priceint)            
-            quantity = info.get("quantity")
-            text = f"__Role:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            if not info.get("is_role"):
-                lst.append(text)
-            else:
-                role_obj = get(ctx.guild.roles, name=i)
-                lst.append(role_obj.mention)         
-        if lst == []:
-            desc = "Nothing to see here, go buy something at the `!shop`"
-        else:
-            predesc = "Inventory\n\n"
-            desc = predesc + ("\n".join(lst))
-        page_list = []
-        for page in pagify(desc, delims=["\n"], page_length=1000):
-            embed = discord.Embed(
-                colour=await ctx.embed_colour(),
-                description=page,
-                timestamp=datetime.now(),
-            )
-            embed.set_author(
-                name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
-            )
-            embed.set_footer(text="Inventory™")
-            page_list.append(embed)
-        return page_list     
 
     @commands.command()
     @commands.guild_only()
