@@ -810,29 +810,21 @@ class Shop(commands.Cog):
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         lst = []
         for i in inventory:
-            info = await self.config.member(ctx.author).inventory.get_raw(i)
-            if not info.get("is_role"):
-                lst.append(i)
-            else:
-                role_obj = get(ctx.guild.roles, name=i)
-                lst.append(role_obj.mention)
+                inv_text = f"__Xmas:__ **{i}**"
+                lst.append(inv_text)
         if lst == []:
             desc = "Nothing to see here, go buy something at the"
         else:
-            for i in inventory:
-                inv_text = f"__Xmas:__ **{i}**"
-                lst.append(inv_text)
-                
             desc = lst
-            embed = discord.Embed(
-                colour=await ctx.embed_colour(),
-                description=desc,
-                timestamp=datetime.now(),
-            )
-            embed.set_author(
-                name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
-            )            
-            embed.set_footer(text="Inventory™")
+        embed = discord.Embed(
+            colour=await ctx.embed_colour(),
+            description=desc,
+            timestamp=datetime.now(),
+        )
+        embed.set_author(
+            name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
+        )            
+        embed.set_footer(text="Inventory™")
         await ctx.send(embed=embed)  
 
     @commands.command()
