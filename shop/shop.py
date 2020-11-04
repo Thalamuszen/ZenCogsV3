@@ -295,12 +295,12 @@ class Shop(commands.Cog):
                     if is_already_role:
                         await self.config.guild(ctx.guild).roles.clear_raw(item)
                         await ctx.send(f"{item} removed.")
-                    except KeyError:
-                        try:
-                            is_already_xmas = await self.config.guild(ctx.guild).xmas.get_raw(item)
-                            if is_already_xmas:
-                                await self.config.guild(ctx.guild).xmas.clear_raw(item)
-                                return await ctx.send(f"{item} removed.")
+                except KeyError:
+                    try:
+                        is_already_xmas = await self.config.guild(ctx.guild).xmas.get_raw(item)
+                        if is_already_xmas:
+                            await self.config.guild(ctx.guild).xmas.clear_raw(item)
+                            return await ctx.send(f"{item} removed.")
                 except KeyError:
                     await ctx.send("That item isn't buyable.")
 
