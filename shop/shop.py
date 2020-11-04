@@ -301,8 +301,8 @@ class Shop(commands.Cog):
                         if is_already_xmas:
                             await self.config.guild(ctx.guild).xmas.clear_raw(item)
                             return await ctx.send(f"{item} removed.")
-                except KeyError:
-                    await ctx.send("That item isn't buyable.")
+                    except KeyError:
+                        await ctx.send("That item isn't buyable.")
 
     @store.command(name="show")
     async def store_show(self, ctx: commands.Context, *, item: str):
