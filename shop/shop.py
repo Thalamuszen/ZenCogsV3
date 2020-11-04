@@ -814,7 +814,7 @@ class Shop(commands.Cog):
         credits_name = await bank.get_currency_name(ctx.guild)        
         lst = []
         
-        if is_role:
+        for r in is_role:
             role_obj = get(ctx.guild.roles, name=r)
             if not role_obj:
                 continue
@@ -825,14 +825,14 @@ class Shop(commands.Cog):
             safe_name = role.get("safe_name")
             role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
             stuff.append(role_text)
-        if is_game:
+        for g in is_game:
             game = await self.config.guild(ctx.guild).games.get_raw(g)
             priceint = int(game.get("price"))
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(game_text)
-        if is_xmas:
+        for x in is_xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
