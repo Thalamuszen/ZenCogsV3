@@ -805,6 +805,61 @@ class Shop(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    async def invtest(self, ctx: commands.Context):
+        """See all items you own."""
+        inventory = await self.config.member(ctx.author).inventory.get_raw()
+        is_role = info.get("is_role")
+        is_game = info.get("is_game")
+        is_xmas = info.get("is_xmas")
+        credits_name = await bank.get_currency_name(ctx.guild)        
+        lst = []
+        
+        if is_role:
+            role_obj = get(ctx.guild.roles, name=r)
+            if not role_obj:
+                continue
+            role = await self.config.guild(ctx.guild).roles.get_raw(r)
+            priceint = int(role.get("price"))
+            price = humanize_number(priceint)
+            quantity = int(role.get("quantity"))
+            safe_name = role.get("safe_name")
+            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
+            stuff.append(role_text)
+        if is_game:
+            game = await self.config.guild(ctx.guild).games.get_raw(g)
+            priceint = int(game.get("price"))
+            price = humanize_number(priceint)
+            quantity = int(game.get("quantity"))
+            game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+            stuff.append(game_text)
+        if is_xmas
+            xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
+            priceint = int(xmas.get("price"))
+            price = humanize_number(priceint)
+            quantity = int(xmas.get("quantity"))
+            xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+            stuff.append(xmas_text)
+        if lst == []:
+            desc = "Nothing to see here."
+        else:
+            predesc = "Inventory\n\n"
+            desc = predesc + ("\n".join(stuff))
+        page_list = []
+        for page in pagify(desc, delims=["\n"], page_length=1000):
+            embed = discord.Embed(
+                colour=await ctx.embed_colour(),
+                description=page,
+                timestamp=datetime.now(),
+            )
+            embed.set_author(
+                name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
+            )
+            embed.set_footer(text="Inventory™")
+            page_list.append(embed)
+        return page_list     
+
+    @commands.command()
+    @commands.guild_only()
     async def removeinventory(self, ctx: commands.Context, *, item: str):
         """Remove an item from your inventory."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
