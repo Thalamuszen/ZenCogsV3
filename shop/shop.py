@@ -855,10 +855,22 @@ class Shop(commands.Cog):
             return await ctx.send(f"You don't have that many `{item}` to give.")
         author_quantity = int(item.get("quantity"))
         author_quantity -= quantity
-        await self.config.guild(ctx.guild).roles.set_raw(
+        await self.config.member(ctx.author).inventory.set_raw(
             item, "quantity", value=author_quantity
         )
         await self.config.member(ctx.author).inventory.clear_raw(item)
+        giftee_quantity = 
+        await self.config.member(user).inventory.set_raw(
+            item,
+                value={
+                    "price": price,
+                    "is_role": False,
+                    "is_game": False,
+                    "is_xmas": True,
+                    "redeemable": False,
+                    "redeemed": True,
+                },
+            )        
         await ctx.send(
             f"You have sent {quantity} {item}(s) to {user}."
         )        
