@@ -509,7 +509,7 @@ class Shop(commands.Cog):
         """Display the shop."""
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
-            return await ctx.send("Uh oh, store is disabled.")
+            return await ctx.send("Uh oh, the shop is closed. Come back later!")
         page_list = await self._show_store(ctx)
         if len(page_list) > 1:
             await menu(ctx, page_list, DEFAULT_CONTROLS)
@@ -522,7 +522,7 @@ class Shop(commands.Cog):
         """Buy an item from the shop."""
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
-            return await ctx.send("Uh oh, store is disabled.")
+            return await ctx.send("Uh oh, the shop is closed. Come back later!")
         balance = int(
             await bank.get_balance(ctx.author)
         )
@@ -739,7 +739,7 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         credits_name = await bank.get_currency_name(ctx.guild)
         if not enabled:
-            return await ctx.send("Uh oh, store is disabled.")
+            return await ctx.send("Uh oh, the shop is closed. Come back later!")
         balance = int(
             await bank.get_balance(ctx.author)
         )
@@ -842,7 +842,7 @@ class Shop(commands.Cog):
         """
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
-            return await ctx.send("Uh oh, the shop is closed.")        
+            return await ctx.send("Uh oh, the shop is closed. Come back later!")        
         if quantity < 1:
             return await ctx.send("Think you're smart huh?")
         if user == ctx.author:
