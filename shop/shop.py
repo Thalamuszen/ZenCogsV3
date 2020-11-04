@@ -465,6 +465,7 @@ class Shop(commands.Cog):
             if role_obj:
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
                 price = int(role.get("price"))
+                pricenice = humanize_number(price) 
                 quantity = int(role.get("quantity"))
                 credits_name = await bank.get_currency_name(ctx.guild)
                 if quantity == 0:
@@ -472,7 +473,7 @@ class Shop(commands.Cog):
                 if price <= balance:
                     pass
                 else:
-                    return await ctx.send(f"You don't have enough {credits_name}! This item costs {price}")
+                    return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
                 await ctx.author.add_roles(role_obj)
                 balance -= price
                 quantity -= 1
@@ -490,12 +491,13 @@ class Shop(commands.Cog):
                 await self.config.guild(ctx.guild).roles.set_raw(
                     item, "quantity", value=quantity
                 )
-                await ctx.send(f"You have bought {item}.")
+                await ctx.send(f"You have bought {item} for {pricenice} {credits_name}.")
             else:
                 await ctx.send("Uh oh, can't find the role.")
         elif item in items:
             item_info = await self.config.guild(ctx.guild).items.get_raw(item)
             price = int(item_info.get("price"))
+            pricenice = humanize_number(price) 
             quantity = int(item_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)
             redeemable = item_info.get("redeemable")
@@ -506,7 +508,7 @@ class Shop(commands.Cog):
             if price <= balance:
                 pass
             else:
-                return await ctx.send(f"You don't have enough {credits_name}! This item costs {price}")
+                return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
             balance -= price
             quantity -= 1
             await bank.withdraw_credits(ctx.author, price)
@@ -542,6 +544,7 @@ class Shop(commands.Cog):
         elif item in games:
             game_info = await self.config.guild(ctx.guild).games.get_raw(item)
             price = int(game_info.get("price"))
+            pricenice = humanize_number(price) 
             quantity = int(game_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)            
             redeemable = game_info.get("redeemable")
@@ -552,7 +555,7 @@ class Shop(commands.Cog):
             if price <= balance:
                 pass
             else:
-                return await ctx.send(f"You don't have enough {credits_name}! This item costs {price}")
+                return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
             balance -= price
             quantity -= 1
             await bank.withdraw_credits(ctx.author, price)
@@ -570,7 +573,7 @@ class Shop(commands.Cog):
                         "redeemed": True,
                     },
                 )
-                await ctx.send(f"You have bought {item}.")
+                await ctx.send(f"You have bought {item} for {pricenice} {credits_name}.")
             else:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item,
