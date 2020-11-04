@@ -815,7 +815,7 @@ class Shop(commands.Cog):
             info = await self.config.member(ctx.author).inventory.get_raw(i)
             priceint = int(info.get("price"))
             price = humanize_number(priceint)            
-            quantity = int(info.get("quantity"))
+            quantity = info.get("quantity")
             text = f"__Role:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             if not info.get("is_role"):
                 lst.append(text)
