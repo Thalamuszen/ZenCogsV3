@@ -818,14 +818,14 @@ class Shop(commands.Cog):
             desc = lst
         embed = discord.Embed(
             colour=await ctx.embed_colour(),
-            description=desc,
+            description=str(desc),
             timestamp=datetime.now(),
         )
         embed.set_author(
             name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
         )            
         embed.set_footer(text="Inventory™")
-        await ctx.send(embed=embed)  
+        await ctx.send(embed=embed) 
 
     @commands.command()
     @commands.guild_only()
