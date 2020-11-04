@@ -819,9 +819,10 @@ class Shop(commands.Cog):
         if lst == []:
             desc = "Nothing to see here, go buy something at the"
         else:
+            desc = humanize_list(lst)
             embed = discord.Embed(
                 colour=await ctx.embed_colour(),
-                description=**lst,
+                description=lst,
                 timestamp=datetime.now(),
             )
             embed.set_author(
