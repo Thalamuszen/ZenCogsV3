@@ -626,10 +626,11 @@ class Shop(commands.Cog):
                 await ctx.author.remove_roles(role_obj)                
         redeemed = info.get("redeemed")
         price = int(info.get("price"))
-        return_price = int(round(price * 0.1))
-        balance += return_price
+        return_priceint = int(round(price * 0.1))
+        return_price = humanize_number(return_priceint)
+        balance += return_priceint
         await self.config.member(ctx.author).inventory.clear_raw(item)
-        await bank.deposit_credits(ctx.author, return_price)
+        await bank.deposit_credits(ctx.author, return_priceint)
         await ctx.send(
             f"You have returned {item} and got {return_price} {credits_name} back."
         )
@@ -726,13 +727,15 @@ class Shop(commands.Cog):
         stuff = []
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
-            price = int(item.get("price"))
+            priceint = int(item.get("price"))
+            price = humanize_number(priceint)
             quantity = int(item.get("quantity"))
             item_text = f"__Item:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(item_text)
         for g in games:
             game = await self.config.guild(ctx.guild).games.get_raw(g)
-            price = int(game.get("price"))
+            priceint = int(game.get("price"))
+            price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(game_text)
