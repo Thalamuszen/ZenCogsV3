@@ -731,7 +731,7 @@ class Shop(commands.Cog):
     @commands.command(name="return")
     @commands.guild_only()
     async def store_return(self, ctx: commands.Context, *, item: str):
-        """Return an item, you will only get 50% of the price."""
+        """Return an item, you will only get 10% of the price."""
         enabled = await self.config.guild(ctx.guild).enabled()
         credits_name = await bank.get_currency_name(ctx.guild)
         if not enabled:
