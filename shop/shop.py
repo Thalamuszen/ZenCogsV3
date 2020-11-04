@@ -704,6 +704,8 @@ class Shop(commands.Cog):
                         "is_xmas": True,
                         "redeemable": False,
                         "redeemed": True,
+                        "giftable": True,
+                        "gifted": False,
                     },
                 )
                 await ctx.send(f"You have bought a {item} for {pricenice} {credits_name}.")
@@ -717,6 +719,8 @@ class Shop(commands.Cog):
                         "is_xmas": True,
                         "redeemable": True,
                         "redeemed": False,
+                        "giftable": True,
+                        "gifted": False,                        
                     },
                 )
                 await ctx.send(
