@@ -808,9 +808,9 @@ class Shop(commands.Cog):
     async def invtest(self, ctx: commands.Context):
         """See all items you own."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
-        is_role = info.get("is_role")
-        is_game = info.get("is_game")
-        is_xmas = info.get("is_xmas")
+        is_role = inventory.get("is_role")
+        is_game = inventory.get("is_game")
+        is_xmas = inventory.get("is_xmas")
         credits_name = await bank.get_currency_name(ctx.guild)        
         lst = []
         
