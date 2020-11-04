@@ -822,7 +822,7 @@ class Shop(commands.Cog):
             desc = humanize_list(lst)
             embed = discord.Embed(
                 colour=await ctx.embed_colour(),
-                description=lst,
+                description=desc,
                 timestamp=datetime.now(),
             )
             embed.set_author(
