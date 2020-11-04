@@ -821,7 +821,7 @@ class Shop(commands.Cog):
         else:
             embed = discord.Embed(
                 colour=await ctx.embed_colour(),
-                description=lst,
+                description=**lst,
                 timestamp=datetime.now(),
             )
             embed.set_author(
