@@ -826,6 +826,40 @@ class Shop(commands.Cog):
         )            
         embed.set_footer(text="Inventory™")
         await ctx.send(embed=embed) 
+        
+    @commands.command()
+    @commands.guild_only()
+    async def gift(self, ctx, user: discord.Member, quantity: int, *, item):
+        """Gift another user a Christmas Present!
+        
+        Examples
+        --------
+        `!gift @ThalamusZen 2 Small gift`
+        """
+        enabled = await self.config.guild(ctx.guild).enabled()
+        if not enabled:
+            return await ctx.send("Uh oh, the shop is closed.")        
+        if quantity < 1:
+            return await ctx.send("Think you're smart huh?")
+        if user == ctx.author:
+            return await ctx.send("Maybe you should find some friends.")
+        author_inv = await self.config.member(ctx.author).inventory.get_raw()
+        info = await self.config.member(ctx.author).inventory.get_raw(item)
+        if item in inventory:
+            pass
+        else:
+            return await ctx.send("You don't own this item.")
+        if info[item]["quantity"] < quantity:
+            return await ctx.send(f"You don't have that many `{item}` to give.")
+        author_quantity = int(item.get("quantity"))
+        author_quantity -= quantity
+        await self.config.guild(ctx.guild).roles.set_raw(
+            item, "quantity", value=author_quantity
+        )
+        await self.config.member(ctx.author).inventory.clear_raw(item)
+        await ctx.send(
+            f"You have sent {quantity} {item}(s) to {user}."
+        )        
 
     @commands.command()
     @commands.guild_only()
