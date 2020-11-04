@@ -874,6 +874,8 @@ class Shop(commands.Cog):
                     "is_xmas": True,
                     "redeemable": False,
                     "redeemed": True,
+                    "giftable": False,
+                    "gifted": True,      
                 },
             )        
         await ctx.send(
