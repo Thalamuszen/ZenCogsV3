@@ -851,11 +851,12 @@ class Shop(commands.Cog):
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
         info = await self.config.member(ctx.author).inventory.get_raw(item)
+        item_quantity = int(item.get("quantity"))
         if item in author_inv:
             pass
         else:
             return await ctx.send("You don't own this item.")
-        if info[item]["quantity"] < quantity:
+        if item_quantity < quantity:
             return await ctx.send(f"You don't have that many `{item}` to give.")
         author_quantity = int(item.get("quantity"))
         author_quantity -= quantity
