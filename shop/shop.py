@@ -700,7 +700,7 @@ class Shop(commands.Cog):
                         "redeemed": True,
                     },
                 )
-                await ctx.send(f"You have bought {item}.")
+                await ctx.send(f"You have bought a {item} for {pricenice} {credits_name}.")
             else:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item,
