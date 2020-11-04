@@ -885,7 +885,7 @@ class Shop(commands.Cog):
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(game_text)
         for x in xmas:
-            xmas = await self.config.guild(ctx.guild).xmas.get_raw(g)
+            xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
