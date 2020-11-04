@@ -741,7 +741,8 @@ class Shop(commands.Cog):
             if not role_obj:
                 continue
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
-            price = int(role.get("price"))
+            priceint = int(role.get("price"))
+            price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
             safe_name = role.get("safe_name")
             role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
