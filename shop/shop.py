@@ -266,6 +266,8 @@ class Shop(commands.Cog):
                         "price": price,
                         "quantity": quantity,
                         "redeemable": redeemable,
+                        "giftable": True,
+                        "gifted": False,                        
                     },
                 )
                 await ctx.send(f"{xmas_gift} added.")
