@@ -776,7 +776,7 @@ class Shop(commands.Cog):
         
         is_item = info.get("is_item")
         if is_item:
-            if quantity > inv_quantity
+            if quantity > inv_quantity:
                 return await ctx.send("You don't have that many {item}(s).")
             items = await self.config.guild(ctx.guild).items.get_raw(item)
             quantityinstock = int(items.get("quantity"))
