@@ -764,7 +764,7 @@ class Shop(commands.Cog):
         else:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
-        inv_quantity = info.get(quantity)
+        inv_quantity = info.get("quantity")
         
         is_game = info.get("is_game")
         if is_game:
@@ -776,10 +776,10 @@ class Shop(commands.Cog):
         if is_role:
             role_obj = get(ctx.guild.roles, name=item)
             if role_obj:
+                if quantity > 1:
+                    return await ctx.send("You only have one of these to give back!")                   
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
                 quantityinstock = int(role.get("quantity"))
-                if quantity > inv_quantity:
-                    return await ctx.send("You don't have that many in your inventory.")
                 quantityinstock += 1
                 await self.config.guild(ctx.guild).roles.set_raw(
                     item, "quantity", value=quantityinstock
