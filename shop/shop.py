@@ -582,7 +582,8 @@ class Shop(commands.Cog):
         elif item in items:
             item_info = await self.config.guild(ctx.guild).items.get_raw(item)
             price = int(item_info.get("price"))
-            pricenice = humanize_number(price) 
+            totalcost = price * quantity
+            totalcostnice = humanize_number(totalcost)
             quantityinstock = int(item_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)
             redeemable = item_info.get("redeemable")
@@ -590,13 +591,13 @@ class Shop(commands.Cog):
                 redeemable = False
             if quantityinstock == 0:
                 return await ctx.send("Uh oh, this item is out of stock.")
-            if price <= balance:
+            if totalcost <= balance:
                 pass
             else:
-                return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
+                return await ctx.send(f"You don't have enough {credits_name}! You need {totalcostnice} {credits_name} to buy {quantity} {item}(s)")
             balance -= price * quantity
             quantityinstock -= quantity
-            await bank.withdraw_credits(ctx.author, price)
+            await bank.withdraw_credits(ctx.author, totalcost)
             await self.config.guild(ctx.guild).items.set_raw(
                 item, "quantity", value=quantityinstock
             )
@@ -613,7 +614,7 @@ class Shop(commands.Cog):
                         "redeemed": True,
                     },
                 )
-                await ctx.send(f"You have bought {quantity} {item}(s).")
+                await ctx.send(f"You have bought {quantity} {item}(s) for {totalcostnice} {credits_name}.")
             else:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item,
@@ -641,6 +642,8 @@ class Shop(commands.Cog):
                 redeemable = False
             if quantityinstock == 0:
                 return await ctx.send("Uh oh, this item is out of stock.")
+            if quantity > 1:
+                return await ctx.send("You can only buy one game.")
             if price <= balance:
                 pass
             else:
