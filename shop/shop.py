@@ -598,7 +598,7 @@ class Shop(commands.Cog):
             quantityinstock -= quantity
             await bank.withdraw_credits(ctx.author, price)
             await self.config.guild(ctx.guild).items.set_raw(
-                item, "quantity", value=quantity
+                item, "quantity", value=quantityinstock
             )
             if not redeemable:
                 await self.config.member(ctx.author).inventory.set_raw(
