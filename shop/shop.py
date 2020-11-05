@@ -684,7 +684,7 @@ class Shop(commands.Cog):
         elif item in xmas:
             xmas_info = await self.config.guild(ctx.guild).xmas.get_raw(item)
             price = int(xmas_info.get("price"))
-            totalcost -= price * quantity
+            totalcost = price * quantity
             totalcostnice = humanize_number(totalcost)
             quantityinstock = int(xmas_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)
