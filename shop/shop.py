@@ -634,28 +634,29 @@ class Shop(commands.Cog):
             game_info = await self.config.guild(ctx.guild).games.get_raw(item)
             price = int(game_info.get("price"))
             pricenice = humanize_number(price) 
-            quantity = int(game_info.get("quantity"))
+            quantityinstock = int(game_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)            
             redeemable = game_info.get("redeemable")
             if not redeemable:
                 redeemable = False
-            if quantity == 0:
+            if quantityinstock == 0:
                 return await ctx.send("Uh oh, this item is out of stock.")
             if price <= balance:
                 pass
             else:
                 return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
             balance -= price
-            quantity -= 1
+            quantityinstock -= quantity
             await bank.withdraw_credits(ctx.author, price)
             await self.config.guild(ctx.guild).games.set_raw(
-                item, "quantity", value=quantity
+                item, "quantity", value=quantityinstock
             )
             if not redeemable:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item,
                     value={
                         "price": price,
+                        "quantity": quantity,                         
                         "is_role": False,
                         "is_game": True,
                         "is_xmas": False,
@@ -669,6 +670,7 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
+                        "quantity": quantity,                         
                         "is_role": False,
                         "is_game": True,
                         "is_xmas": False,
@@ -683,28 +685,29 @@ class Shop(commands.Cog):
             xmas_info = await self.config.guild(ctx.guild).xmas.get_raw(item)
             price = int(xmas_info.get("price"))
             pricenice = humanize_number(price) 
-            quantity = int(xmas_info.get("quantity"))
+            quantityinstock = int(xmas_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)
             redeemable = xmas_info.get("redeemable")
             if not redeemable:
                 redeemable = False
-            if quantity == 0:
+            if quantityinstock == 0:
                 return await ctx.send("Uh oh, this item is out of stock.")
             if price <= balance:
                 pass
             else:
                 return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
             balance -= price
-            quantity -= 1
+            quantityinstock -= quantity
             await bank.withdraw_credits(ctx.author, price)
             await self.config.guild(ctx.guild).xmas.set_raw(
-                item, "quantity", value=quantity
+                item, "quantity", value=quantityinstock
             )
             if not redeemable:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item,
                     value={
                         "price": price,
+                        "quantity": quantity,                         
                         "is_role": False,
                         "is_game": False,
                         "is_xmas": True,
@@ -720,6 +723,7 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
+                        "quantity": quantity,                         
                         "is_role": False,
                         "is_game": False,
                         "is_xmas": True,
