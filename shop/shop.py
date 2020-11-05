@@ -540,9 +540,9 @@ class Shop(commands.Cog):
             return await ctx.send(embed=page_list[0])
         item = item.strip("@")
         inventory = await self.config.member(ctx.author).inventory.get_raw()
-        if item in inventory:
-            return await ctx.send("You already own this item.")
         if item in roles:
+            if item in inventory:
+                return await ctx.send("You already own this item.")
             role_obj = get(ctx.guild.roles, name=item)
             if role_obj:
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
