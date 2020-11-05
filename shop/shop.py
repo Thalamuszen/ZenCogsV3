@@ -785,7 +785,7 @@ class Shop(commands.Cog):
                 item, "quantity", value=quantityinstock
             )
             inv_quantity -= quantity
-            if inv_quanity == 0
+            if inv_quanity == 0:
                 pass
             else:
                 await self.config.member(ctx.author).inventory.set_raw(
