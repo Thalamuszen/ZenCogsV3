@@ -764,7 +764,7 @@ class Shop(commands.Cog):
         else:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
-        inv_quantity = int(info.get("quantity"))
+        inv_quantity = info.get("quantity")
         
         is_game = info.get("is_game")
         if is_game:
