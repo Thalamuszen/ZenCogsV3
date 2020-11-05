@@ -795,38 +795,10 @@ class Shop(commands.Cog):
         await ctx.send(
             f"You have returned {item} and got {return_price} {credits_name} back."
         )
-
-    @commands.command()
-    @commands.guild_only()
-    async def inventory(self, ctx: commands.Context):
-        """See all items you own."""
-        inventory = await self.config.member(ctx.author).inventory.get_raw()
-
-        lst = []
-        for i in inventory:
-            info = await self.config.member(ctx.author).inventory.get_raw(i)
-            if not info.get("is_role"):
-                lst.append(i)
-            else:
-                role_obj = get(ctx.guild.roles, name=i)
-                lst.append(role_obj.mention)
-        if lst == []:
-            desc = "Nothing to see here."
-        else:
-            desc = humanize_list(lst)
-        embed = discord.Embed(
-            description=desc, colour=await ctx.embed_colour(), timestamp=datetime.now()
-        )
-        embed.set_author(
-            name=f"{ctx.author.display_name}'s inventory",
-            icon_url=ctx.author.avatar_url,
-        )
-
-        await ctx.send(embed=embed)
         
     @commands.command()
     @commands.guild_only()
-    async def invtest(self, ctx: commands.Context):
+    async def inventory(self, ctx: commands.Context):
         """See all items you own."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         lst = []
