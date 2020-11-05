@@ -792,14 +792,15 @@ class Shop(commands.Cog):
                     item, "quantity", value=inv_quantity
                 )
                 price = int(info.get("price"))
-                return_priceint = int(round(price * 0.1))
+                return_priceint = int(round(price * 0.1)) * quantity
                 return_price = humanize_number(return_priceint)
                 balance += return_priceint    
                 await bank.deposit_credits(ctx.author, return_priceint)                
                 await ctx.send(
                     f"You have returned {item} and got {return_price} {credits_name} back."
                 )
-                
+                pass
+            
         is_game = info.get("is_game")
         if is_game:
             return await ctx.send("Games are not returnable.")
