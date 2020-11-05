@@ -820,9 +820,10 @@ class Shop(commands.Cog):
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         lst = []
         for i in inventory:
-                quantity = item.get("quantity")
-                inv_text = f"__Item:__ **{i}** | Quantity: {quantity}"
-                lst.append(inv_text)
+            info = await self.config.member(ctx.author).inventory.get_raw(i)
+            quantity = info.get("quantity")
+            inv_text = f"__Item:__ **{i}** | Quantity: {quantity}"
+            lst.append(inv_text)
         if lst == []:
             desc = "Nothing to see here, go buy something at the `!shop`"
         else:
