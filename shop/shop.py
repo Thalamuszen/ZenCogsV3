@@ -520,7 +520,7 @@ class Shop(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def buy(self, ctx: commands.Context, *, item: str = ""):
+    async def buy(self, ctx: commands.Context, quantity: int, *, item: str = ""):      
         """Buy an item from the shop."""
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
@@ -542,7 +542,9 @@ class Shop(commands.Cog):
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         if item in roles:
             if item in inventory:
-                return await ctx.send("You already own this item.")
+                return await ctx.send("You already own this role.")
+            if quantity > 1:
+                return await ctx.send("You can only buy one role.")
             role_obj = get(ctx.guild.roles, name=item)
             if role_obj:
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
