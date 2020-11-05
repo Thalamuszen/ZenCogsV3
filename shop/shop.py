@@ -786,7 +786,16 @@ class Shop(commands.Cog):
             )
             inv_quantity -= quantity
             if inv_quantity == 0:
-                pass
+                redeemed = info.get("redeemed")
+                price = int(info.get("price"))
+                return_priceint = int(round(price * 0.1)) * quantity
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint      
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+                await bank.deposit_credits(ctx.author, return_priceint)
+                await ctx.send(
+                    f"You have returned {item} and got {return_price} {credits_name} back."
+                )                
             else:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item, "quantity", value=inv_quantity
@@ -799,8 +808,7 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have returned {item} and got {return_price} {credits_name} back."
                 )
-                pass
-            
+                  
         is_game = info.get("is_game")
         if is_game:
             return await ctx.send("Games are not returnable.")
@@ -820,16 +828,16 @@ class Shop(commands.Cog):
                     item, "quantity", value=quantityinstock
                 )
                 await ctx.author.remove_roles(role_obj)                
-        redeemed = info.get("redeemed")
-        price = int(info.get("price"))
-        return_priceint = int(round(price * 0.1)) * quantity
-        return_price = humanize_number(return_priceint)
-        balance += return_priceint      
-        await self.config.member(ctx.author).inventory.clear_raw(item)
-        await bank.deposit_credits(ctx.author, return_priceint)
-        await ctx.send(
-            f"You have returned {item} and got {return_price} {credits_name} back."
-        )
+                redeemed = info.get("redeemed")
+                price = int(info.get("price"))
+                return_priceint = int(round(price * 0.1)) * quantity
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint      
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+                await bank.deposit_credits(ctx.author, return_priceint)
+                await ctx.send(
+                    f"You have returned {item} and got {return_price} {credits_name} back."
+                )
         
     @commands.command()
     @commands.guild_only()
