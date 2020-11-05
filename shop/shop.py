@@ -566,7 +566,8 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
-                        "quantity": quantity,                        
+                        "quantity": quantity,  
+                        "is_item": False,
                         "is_role": True,
                         "is_game": False,
                         "is_xmas": False,
@@ -608,6 +609,7 @@ class Shop(commands.Cog):
                     value={
                         "price": price,
                         "quantity": quantity,
+                        "is_item": True,                        
                         "is_role": False,
                         "is_game": False,
                         "is_xmas": False,
@@ -621,7 +623,8 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
-                        "quantity": quantity,                        
+                        "quantity": quantity,
+                        "is_item": True,                        
                         "is_role": False,
                         "is_game": False,
                         "is_xmas": False,
@@ -660,7 +663,8 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
-                        "quantity": quantity,                         
+                        "quantity": quantity, 
+                        "is_item": False,                        
                         "is_role": False,
                         "is_game": True,
                         "is_xmas": False,
@@ -675,6 +679,7 @@ class Shop(commands.Cog):
                     value={
                         "price": price,
                         "quantity": quantity,                         
+                        "is_item": False,                        
                         "is_role": False,
                         "is_game": True,
                         "is_xmas": False,
@@ -712,7 +717,8 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
-                        "quantity": quantity,                         
+                        "quantity": quantity,      
+                        "is_item": False,                        
                         "is_role": False,
                         "is_game": False,
                         "is_xmas": True,
@@ -728,7 +734,8 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
-                        "quantity": quantity,                         
+                        "quantity": quantity,      
+                        "is_item": False,                        
                         "is_role": False,
                         "is_game": False,
                         "is_xmas": True,
@@ -767,6 +774,10 @@ class Shop(commands.Cog):
         info = await self.config.member(ctx.author).inventory.get_raw(item)
         inv_quantity = info.get("quantity")
         
+        is_item = info.get("is_item")
+        if is_item
+            if quantity > inv_quantity
+                return await ctx.send("You don't have that many {item}(s).")   
         is_game = info.get("is_game")
         if is_game:
             return await ctx.send("Games are not returnable.")
@@ -790,7 +801,7 @@ class Shop(commands.Cog):
         price = int(info.get("price"))
         return_priceint = int(round(price * 0.1))
         return_price = humanize_number(return_priceint)
-        balance += return_priceint
+        balance += return_priceint      
         await self.config.member(ctx.author).inventory.clear_raw(item)
         await bank.deposit_credits(ctx.author, return_priceint)
         await ctx.send(
