@@ -771,7 +771,7 @@ class Shop(commands.Cog):
             return await ctx.send("Games are not returnable.")
         is_xmas = info.get("is_xmas")
         if is_xmas:
-            return await ctx.send("This Christmas Gift isn't returnable.")
+            return await ctx.send("Christmas Gift's are not returnable.")
         is_role = info.get("is_role")
         if is_role:
             role_obj = get(ctx.guild.roles, name=item)
