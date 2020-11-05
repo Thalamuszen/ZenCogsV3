@@ -544,7 +544,7 @@ class Shop(commands.Cog):
             if item in inventory:
                 return await ctx.send("You already own this role.")
             if quantity > 1:
-                return await ctx.send("You can only buy one role.")
+                return await ctx.send("You can only buy one of each role.")
             role_obj = get(ctx.guild.roles, name=item)
             if role_obj:
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
