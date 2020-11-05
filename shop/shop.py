@@ -566,6 +566,7 @@ class Shop(commands.Cog):
                     item,
                     value={
                         "price": price,
+                        "quantity": quantity,                        
                         "is_role": True,
                         "is_game": False,
                         "is_xmas": False,
@@ -574,7 +575,7 @@ class Shop(commands.Cog):
                     },
                 )
                 await self.config.guild(ctx.guild).roles.set_raw(
-                    item, "quantity", value=quantity
+                    item, "quantity", value=quantityinstock
                 )
                 await ctx.send(f"You have bought {quantity} {item}(s) for {pricenice} {credits_name}.")
             else:
