@@ -68,7 +68,7 @@ class Shop(commands.Cog):
         pred_yn = MessagePredicate.yes_or_no(ctx)
 
         await ctx.send(
-            "Do you want to add an item, role, game or xmas?\nItem and role = returnable, game = non returnable."
+            "Do you want to add an item, role, game or xmas?\nItem and role = returnable, game and xmas = non returnable."
         )
         try:
             await self.bot.wait_for("message", timeout=30, check=pred)
