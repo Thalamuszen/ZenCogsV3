@@ -780,7 +780,7 @@ class Shop(commands.Cog):
                 return await ctx.send(f"You don't have that many {item}(s).")
             items = await self.config.guild(ctx.guild).items.get_raw(item)
             quantityinstock = int(items.get("quantity"))
-            quantityinstock -= quantity 
+            quantityinstock += quantity 
             await self.config.guild(ctx.guild).items.set_raw(
                 item, "quantity", value=quantityinstock
             )
