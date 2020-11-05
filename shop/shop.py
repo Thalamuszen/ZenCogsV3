@@ -818,9 +818,9 @@ class Shop(commands.Cog):
     async def invtest(self, ctx: commands.Context):
         """See all items you own."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
-        quantity = inventory.get("quantity")
         lst = []
         for i in inventory:
+                quantity = i.get("quantity")
                 inv_text = f"__Item:__ **{i}** | Quantity: {quantity}"
                 lst.append(inv_text)
         if lst == []:
