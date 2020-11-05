@@ -576,7 +576,7 @@ class Shop(commands.Cog):
                 await self.config.guild(ctx.guild).roles.set_raw(
                     item, "quantity", value=quantity
                 )
-                await ctx.send(f"You have bought {item} for {pricenice} {credits_name}.")
+                await ctx.send(f"You have bought {quantity} {item}(s) for {pricenice} {credits_name}.")
             else:
                 await ctx.send("Uh oh, can't find the role.")
         elif item in items:
@@ -663,7 +663,7 @@ class Shop(commands.Cog):
                         "redeemed": True,
                     },
                 )
-                await ctx.send(f"You have bought {item} for {pricenice} {credits_name}.")
+                await ctx.send(f"You have bought {quantity} {item}(s) for {pricenice} {credits_name}.")
             else:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item,
@@ -677,7 +677,7 @@ class Shop(commands.Cog):
                     },
                 )
                 await ctx.send(
-                    f"You have bought {item}. You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
+                    f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                 )
         elif item in xmas:
             xmas_info = await self.config.guild(ctx.guild).xmas.get_raw(item)
@@ -714,7 +714,7 @@ class Shop(commands.Cog):
                         "gifted": False,
                     },
                 )
-                await ctx.send(f"You have bought a {item} for {pricenice} {credits_name}.")
+                await ctx.send(f"You have bought {quantity} {item}(s) for {pricenice} {credits_name}.")
             else:
                 await self.config.member(ctx.author).inventory.set_raw(
                     item,
@@ -730,7 +730,7 @@ class Shop(commands.Cog):
                     },
                 )
                 await ctx.send(
-                    f"You have bought {item}. You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
+                    f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                 )
         else:
             page_list = await self._show_store(ctx)
