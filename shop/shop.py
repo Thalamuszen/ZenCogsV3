@@ -594,7 +594,7 @@ class Shop(commands.Cog):
                 pass
             else:
                 return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
-            balance -= price
+            balance -= price * quantity
             quantityinstock -= quantity
             await bank.withdraw_credits(ctx.author, price)
             await self.config.guild(ctx.guild).items.set_raw(
@@ -696,7 +696,7 @@ class Shop(commands.Cog):
                 pass
             else:
                 return await ctx.send(f"You don't have enough {credits_name}! This item costs {pricenice} {credits_name}")
-            balance -= price
+            balance -= price * quantity
             quantityinstock -= quantity
             await bank.withdraw_credits(ctx.author, price)
             await self.config.guild(ctx.guild).xmas.set_raw(
