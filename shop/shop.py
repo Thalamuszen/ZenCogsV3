@@ -778,8 +778,8 @@ class Shop(commands.Cog):
             if role_obj:
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
                 quantityinstock = int(role.get("quantity"))
-                    if quantity > inv_quantity:
-                        return await ctx.send("You don't have that many in your inventory.")
+                if quantity > inv_quantity:
+                    return await ctx.send("You don't have that many in your inventory.")
                 quantityinstock += 1
                 await self.config.guild(ctx.guild).roles.set_raw(
                     item, "quantity", value=quantityinstock
