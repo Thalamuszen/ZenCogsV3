@@ -820,7 +820,7 @@ class Shop(commands.Cog):
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         lst = []
         for i in inventory:
-                quantity = i.get("quantity")
+                quantity = inventory.get("quantity")
                 inv_text = f"__Item:__ **{i}** | Quantity: {quantity}"
                 lst.append(inv_text)
         if lst == []:
