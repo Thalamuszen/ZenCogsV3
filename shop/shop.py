@@ -748,8 +748,8 @@ class Shop(commands.Cog):
 
     @commands.command(name="return")
     @commands.guild_only()
-    async def store_return(self, ctx: commands.Context, *, item: str):
-        """Return an item, you will only get 10% of the price."""
+    async def store_return(self, ctx: commands.Context, quantity: int, *, item: str = ""):          
+        """Return an item, you will only receive 10% of the price you paid."""
         enabled = await self.config.guild(ctx.guild).enabled()
         credits_name = await bank.get_currency_name(ctx.guild)
         if not enabled:
@@ -764,10 +764,11 @@ class Shop(commands.Cog):
         else:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
-
+        inv_quantity = info.get("quantity")
+        
         is_game = info.get("is_game")
         if is_game:
-            return await ctx.send("This item isn't returnable.")
+            return await ctx.send("Games are not returnable.")
         is_xmas = info.get("is_xmas")
         if is_xmas:
             return await ctx.send("This Christmas Gift isn't returnable.")
@@ -776,10 +777,12 @@ class Shop(commands.Cog):
             role_obj = get(ctx.guild.roles, name=item)
             if role_obj:
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
-                quantity = int(role.get("quantity"))
-                quantity += 1
+                quantityinstock = int(role.get("quantity"))
+                    if quantity > inv_quantity:
+                        return await ctx.send("You don't have that many in your inventory.")
+                quantityinstock += 1
                 await self.config.guild(ctx.guild).roles.set_raw(
-                    item, "quantity", value=quantity
+                    item, "quantity", value=quantityinstock
                 )
                 await ctx.author.remove_roles(role_obj)                
         redeemed = info.get("redeemed")
