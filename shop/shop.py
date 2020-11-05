@@ -818,9 +818,10 @@ class Shop(commands.Cog):
     async def invtest(self, ctx: commands.Context):
         """See all items you own."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
+        quantity = int(inventory.get("quantity"))
         lst = []
         for i in inventory:
-                inv_text = f"__Item:__ **{i}**"
+                inv_text = f"__Item:__ **{i}** | Quantity: {quantity}"
                 lst.append(inv_text)
         if lst == []:
             desc = "Nothing to see here, go buy something at the `!shop`"
