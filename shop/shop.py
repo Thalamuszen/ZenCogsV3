@@ -444,9 +444,9 @@ class Shop(commands.Cog):
         for r in await self.config.guild(ctx.guild).roles.get_raw():
             await self.config.guild(ctx.guild).roles.clear_raw(r)
         for g in await self.config.guild(ctx.guild).games.get_raw():
-            await self.config.guild(ctx.guild).games.clear_raw(i)
+            await self.config.guild(ctx.guild).games.clear_raw(g)
         for x in await self.config.guild(ctx.guild).xmas.get_raw():
-            await self.config.guild(ctx.guild).xmas.clear_raw(i)            
+            await self.config.guild(ctx.guild).xmas.clear_raw(x)            
         await ctx.send("All items have been deleted from the store.")
 
     @store.command(name="ping")
