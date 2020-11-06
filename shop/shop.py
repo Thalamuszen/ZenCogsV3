@@ -1034,7 +1034,7 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
             role_name = role.get("role_name")
-            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {role_name}"
+            role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {role_name}"
             stuff.append(role_text)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
