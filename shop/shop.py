@@ -571,11 +571,14 @@ class Shop(commands.Cog):
             else:
                 await ctx.send("Uh oh, can't find the role.")
         elif item in items:
+            author_inv = await self.config.member(ctx.author).inventory.get_raw()
+            info = await self.config.member(ctx.author).inventory.get_raw(item)            
             item_info = await self.config.guild(ctx.guild).items.get_raw(item)
             price = int(item_info.get("price"))
             totalcost = price * quantity
             totalcostnice = humanize_number(totalcost)
             quantityinstock = int(item_info.get("quantity"))
+            author_quantity = int(info.get("quantity"))            
             credits_name = await bank.get_currency_name(ctx.guild)
             redeemable = item_info.get("redeemable")
             if not redeemable:
@@ -594,42 +597,48 @@ class Shop(commands.Cog):
             await self.config.guild(ctx.guild).items.set_raw(
                 item, "quantity", value=quantityinstock
             )
-            if not redeemable:
-                await self.config.member(ctx.author).inventory.set_raw(
-                    item,
-                    value={
-                        "price": price,
-                        "quantity": quantity,
-                        "is_item": True,                        
-                        "is_role": False,
-                        "is_game": False,
-                        "is_xmas": False,
-                        "redeemable": False,
-                        "redeemed": True,
-                        "giftable": False,
-                        "gifted": False,                         
-                    },
-                )
-                await ctx.send(f"You have bought {quantity} {item}(s) for {totalcostnice} {credits_name}.")
+            if author_quantity == 0:
+                if not redeemable:
+                    await self.config.member(ctx.author).inventory.set_raw(
+                        item,
+                        value={
+                            "price": price,
+                            "quantity": quantity,
+                            "is_item": True,                        
+                            "is_role": False,
+                            "is_game": False,
+                            "is_xmas": False,
+                            "redeemable": False,
+                            "redeemed": True,
+                            "giftable": False,
+                            "gifted": False,                         
+                        },
+                    )
+                    await ctx.send(f"You have bought {quantity} {item}(s) for {totalcostnice} {credits_name}.")
+                else:
+                    await self.config.member(ctx.author).inventory.set_raw(
+                        item,
+                        value={
+                            "price": price,
+                            "quantity": quantity,
+                            "is_item": True,                        
+                            "is_role": False,
+                            "is_game": False,
+                            "is_xmas": False,
+                            "redeemable": True,
+                            "redeemed": False,
+                            "giftable": False,
+                            "gifted": False,                         
+                        },
+                    )
+                    await ctx.send(
+                      f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
+                 )
             else:
+                author_quantity += quantity
                 await self.config.member(ctx.author).inventory.set_raw(
-                    item,
-                    value={
-                        "price": price,
-                        "quantity": quantity,
-                        "is_item": True,                        
-                        "is_role": False,
-                        "is_game": False,
-                        "is_xmas": False,
-                        "redeemable": True,
-                        "redeemed": False,
-                        "giftable": False,
-                        "gifted": False,                         
-                    },
-                )
-                await ctx.send(
-                    f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
-                )
+                    item, "quantity", value=author_quantity
+                )                
         elif item in games:
             game_info = await self.config.guild(ctx.guild).games.get_raw(item)
             price = int(game_info.get("price"))
