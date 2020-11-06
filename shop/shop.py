@@ -362,22 +362,7 @@ class Shop(commands.Cog):
             await self.config.guild(ctx.guild).xmas.set_raw(item, "price", value=price)
             await ctx.send(f"{item}'s price changed to {price}.")            
         else:
-            await ctx.send("This item isn't in the store. Please, add it first.")
-
-    @store.command(name="command")
-    async def store_command(self, ctx: commands.Context, command: str, *, item: str):
-        """Change the command of an existing buyable role, only."""
-        item = item.strip("@")
-        items = await self.config.guild(ctx.guild).items.get_raw()
-        roles = await self.config.guild(ctx.guild).roles.get_raw()
-        games = await self.config.guild(ctx.guild).games.get_raw()
-        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
-        
-        if item in roles:
-            await self.config.guild(ctx.guild).roles.set_raw(item, "safe_name", value=command)
-            await ctx.send(f"{item}'s command has changed to {command}.")
-        else:
-            await ctx.send("This item isn't a role or this role doesn't exist in the store yet, please, add it first.")                                  
+            await ctx.send("This item isn't in the store. Please, add it first.")                               
             
     @store.command(name="quantity")
     async def store_quantity(self, ctx: commands.Context, quantity: int, *, item: str):
