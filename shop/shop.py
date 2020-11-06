@@ -1024,7 +1024,7 @@ class Shop(commands.Cog):
     async def _show_store(self, ctx):
         items = await self.config.guild(ctx.guild).items.get_raw()
         rolez = await self.config.guild(ctx.guild).roles.get_raw()
-        roles = await self.config.guild(ctx.guild).roles.get_raw(rolez, 'safe_name')
+        roles = await self.config.guild(ctx.guild).roles.get_raw(rolez, 'role_name')
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
@@ -1037,8 +1037,8 @@ class Shop(commands.Cog):
             priceint = int(role.get("price"))
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
-            safe_name = role.get("safe_name")
-            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {safe_name}"
+            role_name = role.get("role_name")
+            role_text = f"__Role:__ **{role_obj}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {role_name}"
             stuff.append(role_text)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
