@@ -912,8 +912,10 @@ class Shop(commands.Cog):
                 item, "quantity", value=author_quantity
             )
         giftee_inv = await self.config.member(user).inventory.get_raw()
-        item_user = item
-        item_user.append(user)        
+        iu = []
+        iu.append(item)
+        iu.append(user)
+        item_user = ''.join(iu)
         info = await self.config.member(user).inventory.get_raw(item_user)
         if item_user in giftee_inv:
             giftee_quantity = info.get("quantity")
