@@ -842,36 +842,10 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have returned {item} and got {return_price} {credits_name} back."
                 )
-        
-    @commands.command()
-    @commands.guild_only()
-    async def inventory(self, ctx: commands.Context):
-        """See all items you own."""
-        inventory = await self.config.member(ctx.author).inventory.get_raw()
-        lst = []
-        for i in inventory:
-            info = await self.config.member(ctx.author).inventory.get_raw(i)
-            quantity = info.get("quantity")
-            inv_text = f"__Item:__ **{i}** | Quantity: {quantity}"
-            lst.append(inv_text)
-        if lst == []:
-            desc = "Nothing to see here, go buy something at the `!shop`"
-        else:
-            desc = ("\n".join(lst))
-        embed = discord.Embed(
-            colour=await ctx.embed_colour(),
-            description=str(desc),
-            timestamp=datetime.now(),
-        )
-        embed.set_author(
-            name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
-        )            
-        embed.set_footer(text="Inventory™")
-        await ctx.send(embed=embed) 
 
     @commands.command()
     @commands.guild_only()
-    async def invtest(self, ctx: commands.Context):
+    async def inventory(self, ctx: commands.Context):
         """See all items you own."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         lst = []
