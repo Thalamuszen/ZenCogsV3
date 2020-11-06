@@ -560,6 +560,8 @@ class Shop(commands.Cog):
                         "is_xmas": False,
                         "redeemable": False,
                         "redeemed": True,
+                        "giftable": False,
+                        "gifted": False,                         
                     },
                 )
                 await self.config.guild(ctx.guild).roles.set_raw(
@@ -602,6 +604,8 @@ class Shop(commands.Cog):
                         "is_xmas": False,
                         "redeemable": False,
                         "redeemed": True,
+                        "giftable": False,
+                        "gifted": False,                         
                     },
                 )
                 await ctx.send(f"You have bought {quantity} {item}(s) for {totalcostnice} {credits_name}.")
@@ -617,6 +621,8 @@ class Shop(commands.Cog):
                         "is_xmas": False,
                         "redeemable": True,
                         "redeemed": False,
+                        "giftable": False,
+                        "gifted": False,                         
                     },
                 )
                 await ctx.send(
@@ -657,6 +663,8 @@ class Shop(commands.Cog):
                         "is_xmas": False,
                         "redeemable": False,
                         "redeemed": True,
+                        "giftable": False,
+                        "gifted": False,                        
                     },
                 )
                 await ctx.send(f"You have bought {quantity} {item}(s) for {pricenice} {credits_name}.")
@@ -672,6 +680,8 @@ class Shop(commands.Cog):
                         "is_xmas": False,
                         "redeemable": True,
                         "redeemed": False,
+                        "giftable": False,
+                        "gifted": False,                        
                     },
                 )
                 await ctx.send(
@@ -901,6 +911,12 @@ class Shop(commands.Cog):
         else:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
+        giftable = info.get("giftable")
+        if not giftable:
+            return await ctx.send("This are not able to gift this item.")
+        gifted = info.get("gifted")
+        if gifted:
+            return await ctx.send("You cannot gift an item that was gifted to you... rude.")
         author_quantity = int(info.get("quantity"))
         author_price = int(info.get("price"))
         if author_quantity < quantity:
