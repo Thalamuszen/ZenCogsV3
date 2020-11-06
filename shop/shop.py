@@ -879,7 +879,7 @@ class Shop(commands.Cog):
         
     @commands.command()
     @commands.guild_only()
-    async def gift(self, ctx, user: discord.Member, quantity: int, *, item):
+    async def gift(self, ctx, user: discord.Member, quantity: int, *, item: str = ""):
         """Gift another user a Christmas Present!
         
         Examples
@@ -896,12 +896,12 @@ class Shop(commands.Cog):
         if user == ctx.bot.user:
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
-        info = await self.config.member(ctx.author).inventory.get_raw(item)
-        author_quantity = int(info.get("quantity"))
         if item in author_inv:
             pass
         else:
             return await ctx.send("You don't own this item.")
+        info = await self.config.member(ctx.author).inventory.get_raw(item)
+        author_quantity = int(info.get("quantity"))        
         if author_quantity < quantity:
             return await ctx.send(f"You don't have that many {item} to give.")
         author_quantity -= quantity
