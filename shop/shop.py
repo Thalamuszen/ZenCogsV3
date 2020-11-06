@@ -877,22 +877,22 @@ class Shop(commands.Cog):
             if is_role:
                 quantity = info.get("quantity")
                 role_text = f"__Role:__ **{i}** | Quantity: {quantity}"
-            lst.append(role_text)
+                lst.append(role_text)
             is_xmas = info.get("is_xmas")
             if is_xmas:
                 quantity = info.get("quantity")
                 xmas_text = f"__Xmas:__ **{i}** | Quantity: {quantity}"
-            lst.append(xmas_text)
+                lst.append(xmas_text)
             is_item = info.get("is_item")
             if is_item:
                 quantity = info.get("quantity")
                 item_text = f"__Item:__ **{i}** | Quantity: {quantity}"
-            lst.append(item_text)
+                lst.append(item_text)
             is_game = info.get("is_game") 
             if is_game:           
                 quantity = info.get("quantity")
                 game_text = f"__Game:__ **{i}** | Quantity: {quantity}"
-            lst.append(game_text)                
+                lst.append(game_text)                
         if lst == []:
             desc = "Nothing to see here, go buy something at the `!shop`"
         else:
