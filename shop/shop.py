@@ -878,16 +878,22 @@ class Shop(commands.Cog):
                 quantity = info.get("quantity")
                 role_text = f"__Role:__ **{i}** | Quantity: {quantity}"
                 lst.append(role_text)
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)                
             is_xmas = info.get("is_xmas")
             if is_xmas:
                 quantity = info.get("quantity")
                 xmas_text = f"__Xmas:__ **{i}** | Quantity: {quantity}"
                 lst.append(xmas_text)
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)                
             is_item = info.get("is_item")
             if is_item:
                 quantity = info.get("quantity")
                 item_text = f"__Item:__ **{i}** | Quantity: {quantity}"
                 lst.append(item_text)
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)                
             is_game = info.get("is_game") 
             if is_game:           
                 quantity = info.get("quantity")
