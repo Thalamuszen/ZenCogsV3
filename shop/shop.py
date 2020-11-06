@@ -914,17 +914,17 @@ class Shop(commands.Cog):
         giftee_inv = await self.config.member(user).inventory.get_raw()
         iu = []
         iu.append(item)
-        iu.append(str(user))
+        iu.append(str(user.name))
         item_user = ''.join(iu)
-        info = await self.config.member(user).inventory.get_raw(item_user)
+        info = await self.config.member(user.id).inventory.get_raw(item_user)
         if item_user in giftee_inv:
             giftee_quantity = info.get("quantity")
             giftee_quantity += quantity
-            await self.config.member(user).inventory.set_raw(
+            await self.config.member(user.id).inventory.set_raw(
                 item_user, "quantity", value=giftee_quantity
             )
         else:
-            await self.config.member(user).inventory.set_raw(
+            await self.config.member(user.id).inventory.set_raw(
                 item_user,
                     value={
                         "price": price,
