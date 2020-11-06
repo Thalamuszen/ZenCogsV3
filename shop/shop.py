@@ -166,7 +166,7 @@ class Shop(commands.Cog):
                 safe_name = answer.content
                 safe_name = safe_name.strip("@")
                 await self.config.guild(ctx.guild).roles.set_raw(
-                    role.name, value={"price": price, "quantity": quantity, "safe_name": safe_name}
+                    safe_name, value={"price": price, "quantity": quantity, "role_name": role.name}
                 )
                 await ctx.send(f"{role.name} added.")
         elif pred.result == 2:
