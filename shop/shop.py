@@ -879,7 +879,7 @@ class Shop(commands.Cog):
         
     @commands.command()
     @commands.guild_only()
-    async def gift(self, ctx, user: discord.Member, quantity: int, *, item: str = ""):
+    async def gift(self, ctx: commands.Context, user: discord.Member, quantity: int, *, item: str = ""):
         """Gift another user a Christmas Present!
         
         Examples
@@ -916,8 +916,8 @@ class Shop(commands.Cog):
         iu.append(item)
         iu.append(str(user.name))
         item_user = ''.join(iu)
-        info = await self.config.member(user).inventory.get_raw(item_user)
         if item_user in giftee_inv:
+            info = await self.config.member(user).inventory.get_raw(item_user)
             giftee_quantity = info.get("quantity")
             giftee_quantity += quantity
             await self.config.member(user).inventory.set_raw(
