@@ -601,8 +601,7 @@ class Shop(commands.Cog):
                     await ctx.send(f"You have bought {quantity} {item}(s) for {totalcostnice} {credits_name}.")
                 else:
                     author_quantity += quantity
-                    await self.config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)            
-                    )
+                    await self.config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)                                
                     await ctx.send(
                         f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                     )
