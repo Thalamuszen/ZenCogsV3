@@ -901,7 +901,8 @@ class Shop(commands.Cog):
         else:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
-        author_quantity = int(info.get("quantity"))        
+        author_quantity = int(info.get("quantity"))
+        author_price = int(info.get("price"))
         if author_quantity < quantity:
             return await ctx.send(f"You don't have that many {item} to give.")
         author_quantity -= quantity
@@ -927,7 +928,7 @@ class Shop(commands.Cog):
             await self.config.member(user).inventory.set_raw(
                 item_user,
                     value={
-                        "price": price,
+                        "price": author_price,
                         "quantity": quantity,
                         "is_item": False,                         
                         "is_role": False,
