@@ -582,6 +582,8 @@ class Shop(commands.Cog):
                 redeemable = False
             if quantityinstock == 0:
                 return await ctx.send("Uh oh, this item is out of stock.")
+            if quantityinstock < quantity:
+                return await ctx.send("Uh oh, there isn't enough in stock!")
             if totalcost <= balance:
                 pass
             else:
@@ -641,6 +643,8 @@ class Shop(commands.Cog):
                 return await ctx.send("Uh oh, this item is out of stock.")
             if quantity > 1:
                 return await ctx.send("You can only buy one game.")
+            if quantityinstock < quantity:
+                return await ctx.send("Uh oh, there isn't enough in stock!")            
             if price <= balance:
                 pass
             else:
@@ -699,6 +703,8 @@ class Shop(commands.Cog):
                 redeemable = False
             if quantityinstock == 0:
                 return await ctx.send("Uh oh, this item is out of stock.")
+            if quantityinstock < quantity:
+                return await ctx.send("Uh oh, there isn't enough in stock!")            
             if totalcost <= balance:
                 pass
             else:
