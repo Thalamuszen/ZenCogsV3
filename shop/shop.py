@@ -943,7 +943,7 @@ class Shop(commands.Cog):
                     },
                 )
         await ctx.send(
-            f"You have gifted {quantity} {item}(s) to {user}."
+            f"You have gifted {quantity} {item}(s) to {user.name}."
         )        
 
     @commands.command()
