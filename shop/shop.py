@@ -750,7 +750,7 @@ class Shop(commands.Cog):
                 balance -= price * quantity
                 quantityinstock -= quantity
                 await bank.withdraw_credits(ctx.author, totalcost)
-                await self.config.guild(ctx.guild).items.set_raw(
+                await self.config.guild(ctx.guild).xmas.set_raw(
                     item, "quantity", value=quantityinstock
                 )
                 if not redeemable:
