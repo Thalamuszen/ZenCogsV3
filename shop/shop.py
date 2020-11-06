@@ -1023,16 +1023,12 @@ class Shop(commands.Cog):
 
     async def _show_store(self, ctx):
         items = await self.config.guild(ctx.guild).items.get_raw()
-        rolez = await self.config.guild(ctx.guild).roles.get_raw()
-        roles = rolez.get("role_name")
+        roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
         stuff = []
         for r in roles:
-            role_obj = get(ctx.guild.roles, name=r)
-            if not role_obj:
-                continue
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
             priceint = int(role.get("price"))
             price = humanize_number(priceint)
