@@ -1023,7 +1023,8 @@ class Shop(commands.Cog):
 
     async def _show_store(self, ctx):
         items = await self.config.guild(ctx.guild).items.get_raw()
-        roles = await self.config.guild(ctx.guild).roles.get_raw()
+        rolez = await self.config.guild(ctx.guild).roles.get_raw()
+        roles = await self.config.guild(ctx.guild).roles.get_raw(rolez, 'safe_name')
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
