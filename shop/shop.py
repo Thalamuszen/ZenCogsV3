@@ -545,7 +545,9 @@ class Shop(commands.Cog):
                 return await ctx.send("You already own this role.")
             if quantity > 1:
                 return await ctx.send("You can only buy one of each role.")
-            role_obj = get(ctx.guild.roles, name=item)
+            info = await self.config.guild(ctx.guild).roles.get_raw(item)
+            role_name = info.get("role_name")
+            role_obj = get(ctx.guild.roles, name=role_name)
             if role_obj:
                 role = await self.config.guild(ctx.guild).roles.get_raw(item)
                 price = int(role.get("price"))
@@ -1034,7 +1036,7 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
             role_name = role.get("role_name")
-            role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Command:__ {role_name}"
+            role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
             stuff.append(role_text)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
