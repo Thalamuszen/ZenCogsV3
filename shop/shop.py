@@ -895,7 +895,7 @@ class Shop(commands.Cog):
             return await ctx.send("Maybe you should find some friends.")
         if user == ctx.bot.user:
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
-#        author_inv = await self.config.member(ctx.author).inventory.get_raw()
+        author_inv = await self.config.member(ctx.author).inventory.get_raw()
         info = await self.config.member(ctx.author).inventory.get_raw(item)
         author_quantity = int(info.get("quantity"))
         if item in author_inv:
@@ -911,12 +911,17 @@ class Shop(commands.Cog):
             await self.config.member(ctx.author).inventory.set_raw(
                 item, "quantity", value=author_quantity
             )
-#        giftee_inv = await self.config.member(user).inventory.get_raw()
-        info = await self.config.member(user).inventory.get_raw(item)
+        giftee_inv = await self.config.member(user).inventory.get_raw()
         item_user = item
         item_user.append(user)        
         info = await self.config.member(user).inventory.get_raw(item_user)
-        if item_user == []:
+        if item_user in giftee_inv:
+            giftee_quantity = info.get("quantity")
+            giftee_quantity += quantity
+            await self.config.member(user).inventory.set_raw(
+                item_user, "quantity", value=giftee_quantity
+            )
+        else:
             await self.config.member(user).inventory.set_raw(
                 item_user,
                     value={
@@ -932,12 +937,6 @@ class Shop(commands.Cog):
                         "gifted": True,      
                     },
                 )
-        else:
-            giftee_quantity = info.get("quantity")
-            giftee_quantity += quantity
-            await self.config.member(user).inventory.set_raw(
-                item, "quantity", value=giftee_quantity
-            )
         await ctx.send(
             f"You have gifted {quantity} {item}(s) to {user}."
         )        
