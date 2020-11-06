@@ -915,7 +915,7 @@ class Shop(commands.Cog):
         iu = []
         iu.append(item)
         iu.append(user)
-        item_user = ''.join(iu)
+        item_user = ''.join(str(iu) for member in ctx.message.server.members)
         info = await self.config.member(user).inventory.get_raw(item_user)
         if item_user in giftee_inv:
             giftee_quantity = info.get("quantity")
