@@ -895,37 +895,51 @@ class Shop(commands.Cog):
             return await ctx.send("Maybe you should find some friends.")
         if user == ctx.bot.user:
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
-        author_inv = await self.config.member(ctx.author).inventory.get_raw()
+#        author_inv = await self.config.member(ctx.author).inventory.get_raw()
         info = await self.config.member(ctx.author).inventory.get_raw(item)
-        item_quantity = int(info.get("quantity"))
+        author_quantity = int(info.get("quantity"))
         if item in author_inv:
             pass
         else:
             return await ctx.send("You don't own this item.")
-        if item_quantity < quantity:
-            return await ctx.send(f"You don't have that many `{item}` to give.")
-        author_quantity = int(item.get("quantity"))
+        if author_quantity < quantity:
+            return await ctx.send(f"You don't have that many {item} to give.")
         author_quantity -= quantity
-        await self.config.member(ctx.author).inventory.set_raw(
-            item, "quantity", value=author_quantity
-        )
-        await self.config.member(ctx.author).inventory.clear_raw(item)
-        giftee_quantity = quantity
-        await self.config.member(user).inventory.set_raw(
-            item,
-                value={
-                    "price": price,
-                    "is_role": False,
-                    "is_game": False,
-                    "is_xmas": True,
-                    "redeemable": False,
-                    "redeemed": True,
-                    "giftable": False,
-                    "gifted": True,      
-                },
-            )        
+        if author_quantity == 0:
+            await self.config.member(ctx.author).inventory.clear_raw(item)
+        else:            
+            await self.config.member(ctx.author).inventory.set_raw(
+                item, "quantity", value=author_quantity
+            )
+#        giftee_inv = await self.config.member(user).inventory.get_raw()
+        info = await self.config.member(user).inventory.get_raw(item)
+        item_user = item
+        item_user.append(user)        
+        info = await self.config.member(user).inventory.get_raw(item_user)
+        if item_user == []:
+            await self.config.member(user).inventory.set_raw(
+                item_user,
+                    value={
+                        "price": price,
+                        "quantity": quantity,
+                        "is_item": False,                         
+                        "is_role": False,
+                        "is_game": False,
+                        "is_xmas": True,
+                        "redeemable": False,
+                        "redeemed": True,
+                        "giftable": False,
+                        "gifted": True,      
+                    },
+                )
+        else:
+            giftee_quantity = info.get("quantity")
+            giftee_quantity += quantity
+            await self.config.member(user).inventory.set_raw(
+                item, "quantity", value=giftee_quantity
+            )
         await ctx.send(
-            f"You have sent {quantity} {item}(s) to {user}."
+            f"You have gifted {quantity} {item}(s) to {user}."
         )        
 
     @commands.command()
