@@ -588,7 +588,7 @@ class Shop(commands.Cog):
                 return await ctx.send(f"You don't have enough {credits_name}! You need {totalcostnice} {credits_name} to buy {quantity} {item}(s)")
             try:
                 info = await self.config.member(ctx.author).inventory.get_raw(item)
-                author_quantity = int(info.get("quantity"))
+                author_quantity = int(info.get("quantity"))                
                 balance -= price * quantity
                 quantityinstock -= quantity
                 await bank.withdraw_credits(ctx.author, totalcost)
@@ -596,10 +596,12 @@ class Shop(commands.Cog):
                     item, "quantity", value=quantityinstock
                 )       
                 if not redeemable:
-#                    NEED STUFF HERE                    
+                    author_quantity += quantity
+                    await self.config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)               
                     await ctx.send(f"You have bought {quantity} {item}(s) for {totalcostnice} {credits_name}.")
                 else:
-#                    NEED STUFF HERE
+                    author_quantity += quantity
+                    await self.config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)            
                     )
                     await ctx.send(
                         f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
