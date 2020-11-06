@@ -913,7 +913,7 @@ class Shop(commands.Cog):
                 item, "quantity", value=author_quantity
             )
         giftee_inv = await self.config.member(user).inventory.get_raw()
-        from = str(" from ")
+        from = " from "
         iu = []
         iu.append(item)
         iu.append(from)
