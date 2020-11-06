@@ -746,7 +746,7 @@ class Shop(commands.Cog):
                     await ctx.send(
                         f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                     )
-            except KeyError
+            except KeyError:
                 balance -= price * quantity
                 quantityinstock -= quantity
                 await bank.withdraw_credits(ctx.author, totalcost)
