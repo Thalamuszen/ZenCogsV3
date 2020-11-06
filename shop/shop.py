@@ -819,7 +819,9 @@ class Shop(commands.Cog):
             return await ctx.send("Christmas Gift's are not returnable.")
         is_role = info.get("is_role")
         if is_role:
-            role_obj = get(ctx.guild.roles, name=item)
+            info = await self.config.guild(ctx.guild).roles.get_raw(item)
+            role_name = info.get("role_name")
+            role_obj = get(ctx.guild.roles, name=role_name)
             if role_obj:
                 if quantity > 1:
                     return await ctx.send("You only have one of these to give back!")                   
