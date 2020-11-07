@@ -124,7 +124,7 @@ class Shop(commands.Cog):
                 )
                 await ctx.send(f"{item_name} added.")
         elif pred.result == 1:
-            await ctx.send("What is the role?")
+            await ctx.send("What is the role? (Must be a role that exists on the server)")
             try:
                 await self.bot.wait_for("message", timeout=30, check=pred_role)
             except asyncio.TimeoutError:
