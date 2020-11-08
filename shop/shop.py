@@ -1047,7 +1047,7 @@ class Shop(commands.Cog):
             await self.config.member(ctx.author).inventory.set_raw(
                 item, "quantity", value=author_quantity
             )
-        await ctx.send(f{ 
+        await ctx.send("Wibble wobble") 
 
 
         placing_messages = [
