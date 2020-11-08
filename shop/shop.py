@@ -1067,7 +1067,7 @@ class Shop(commands.Cog):
             f"{message.author.mention} You received: Deodorant",
         ]
         mg_messages = [
-        	f"{message.author.mention} You received: Overwatch 2",
+            f"{message.author.mention} You received: Overwatch 2",
             f"{message.author.mention} You received: A £10 Steam gift card",
         ]
         if small:
