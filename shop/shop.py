@@ -1051,7 +1051,6 @@ class Shop(commands.Cog):
             await self.config.member(ctx.author).inventory.set_raw(
                 item, "quantity", value=author_quantity
             )
-        await ctx.send("Wibble wobble") 
 #	NEED TO EXTRACT GIFTER FROM GIFT COMMAND AND APPLY IT TO SOMEWHERE BELOW
         placing_messages = [
             "*You excitedly place the gift upon your lap and smile...*",
@@ -1076,10 +1075,10 @@ class Shop(commands.Cog):
         size = info.get("size")
         if size == 'small':
             await asyncio.sleep(2)
-            await message.channel.send(content=random.choice(sg_messages))
+            await ctx.send(content=random.choice(sg_messages))
         if size == 'medium':
             await asyncio.sleep(2)
-            await message.channel.send(content=random.choice(mg_messages))             
+            await ctx.send(content=random.choice(mg_messages))		
 
     @commands.command()
     @commands.guild_only()
