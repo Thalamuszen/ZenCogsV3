@@ -1071,11 +1071,11 @@ class Shop(commands.Cog):
             f"{message.author.mention} You received: A £10 Steam gift card",
         ]
         if smallgift:
-		await asyncio.sleep(2)
-		await message.channel.send(content=random.choice(sg_messages))
+            await asyncio.sleep(2)
+            await message.channel.send(content=random.choice(sg_messages))
 	else mediumgift:
-		await asyncio.sleep(2)
-		await message.channel.send(content=random.choice(mg_messages))             
+            await asyncio.sleep(2)
+            await message.channel.send(content=random.choice(mg_messages))             
 
     @commands.command()
     @commands.guild_only()
