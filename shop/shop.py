@@ -245,6 +245,13 @@ class Shop(commands.Cog):
                 price = pred_int.result
                 if price <= 0:
                     return await ctx.send("Uh oh, price has to be more than 0.")
+                await ctx.send("What is the size of the gift? small medium or large")
+                try:
+                    answer = await self.bot.wait_for("message", timeout=120, check=check)
+                except asyncio.TimeoutError:
+                    return await ctx.send("You took too long. Try again, please.")
+            	size = answer.content
+		size = safe_name.strip("@")
                 await ctx.send("What quantity of this xmas gift should be available?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -266,7 +273,8 @@ class Shop(commands.Cog):
                         "quantity": quantity,
                         "redeemable": redeemable,
                         "giftable": True,
-                        "gifted": False,                        
+                        "gifted": False,
+			"size": size,			    
                     },
                 )
                 await ctx.send(f"{xmas_gift} added.")
