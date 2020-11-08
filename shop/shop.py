@@ -1022,7 +1022,7 @@ class Shop(commands.Cog):
         
     @commands.command()
     @commands.guild_only()
-    async def open(self, ctx: commands.Context, *, item: str = ""):
+    async def open(self, ctx: commands.Context, *, item: str):
         """Open a Christmas Present given to you by another user!
         
         Examples
@@ -1077,7 +1077,6 @@ class Shop(commands.Cog):
         size = info.get("size")
         if size == 'small':
             await asyncio.sleep(2)
-            await ctx.send("hehe")
             await ctx.send(content=random.choice(sg_messages))
         if size == 'medium':
             await asyncio.sleep(2)
