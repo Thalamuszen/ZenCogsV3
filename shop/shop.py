@@ -967,7 +967,7 @@ class Shop(commands.Cog):
         else:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
-        size = xmas_info.get("size")	
+        size = info.get("size")	
         giftable = info.get("giftable")
         if not giftable:
             return await ctx.send("This are not able to gift this item.")
