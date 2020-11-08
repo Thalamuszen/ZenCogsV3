@@ -1075,6 +1075,7 @@ class Shop(commands.Cog):
         size = info.get("size")
         if size == 'small':
             await asyncio.sleep(2)
+            await ctx.send("hehe")
             await ctx.send(content=random.choice(sg_messages))
         if size == 'medium':
             await asyncio.sleep(2)
