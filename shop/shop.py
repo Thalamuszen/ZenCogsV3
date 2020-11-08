@@ -1056,7 +1056,7 @@ class Shop(commands.Cog):
             "*You excitedly place the gift upon your lap and smile...*",
             "*You slide out the present from beneath the Christmas tree...*",
         ]
-        bot_talking = await message.channel.send(random.choice(placing_messages))
+        bot_talking = await ctx.send(random.choice(placing_messages))
         await asyncio.sleep(random.randint(5, 8))
         opening_messages = [
             "*You are quick to rip the red and white wrapping paper from the present...*",
