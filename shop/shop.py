@@ -1067,7 +1067,7 @@ class Shop(commands.Cog):
         await bot_talking.edit(content=random.choice(opening_messages))
         await asyncio.sleep(random.randint(5, 8))
         sg_messages = [
-            f"{ctx.author.mention} You received: Socks",
+            f"{ctx.author.mention} You received: A pair of socks",
             f"{ctx.author.mention} You received: Deodorant",
         ]
         mg_messages = [
