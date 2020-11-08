@@ -977,7 +977,7 @@ class Shop(commands.Cog):
         author_quantity = int(info.get("quantity"))
         author_price = int(info.get("price"))
         if author_quantity < quantity:
-            return await ctx.send(f"You don't have that many {item} to give.")
+            return await ctx.send(f"You don't have that many {item}(s) to give.")
         author_quantity -= quantity
         if author_quantity == 0:
             await self.config.member(ctx.author).inventory.clear_raw(item)
