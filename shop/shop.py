@@ -1070,10 +1070,10 @@ class Shop(commands.Cog):
         	f"{message.author.mention} You received: Overwatch 2",
             f"{message.author.mention} You received: A £10 Steam gift card",
         ]
-        if smallgift:
+        if small:
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(sg_messages))
-        else mediumgift:
+        if medium:
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(mg_messages))             
 
