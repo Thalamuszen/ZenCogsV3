@@ -956,8 +956,8 @@ class Shop(commands.Cog):
             return await ctx.send("Uh oh, the shop is closed. Come back later!")        
         if quantity < 1:
             return await ctx.send("Think you're smart huh?")
-        if user == ctx.author:
-            return await ctx.send("Maybe you should find some friends.")
+#        if user == ctx.author:
+#            return await ctx.send("Maybe you should find some friends.")
         if user == ctx.bot.user:
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
@@ -1073,10 +1073,10 @@ class Shop(commands.Cog):
             f"{message.author.mention} You received: A £10 Steam gift card",
         ]
         size = info.get("size")
-        if size == small:
+        if size == 'small':
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(sg_messages))
-        if size == medium:
+        if size == 'medium':
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(mg_messages))             
 
