@@ -1,5 +1,6 @@
 import asyncio
 import discord
+import random
 
 from typing import Union
 from discord.utils import get
