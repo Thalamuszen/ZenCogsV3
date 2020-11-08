@@ -1066,12 +1066,12 @@ class Shop(commands.Cog):
         await bot_talking.edit(content=random.choice(opening_messages))
         await asyncio.sleep(random.randint(5, 8))
         sg_messages = [
-            f"{message.author.mention} You received: Socks",
-            f"{message.author.mention} You received: Deodorant",
+            f"{ctx.author.mention} You received: Socks",
+            f"{ctx.author.mention} You received: Deodorant",
         ]
         mg_messages = [
-            f"{message.author.mention} You received: Overwatch 2",
-            f"{message.author.mention} You received: A £10 Steam gift card",
+            f"{ctx.author.mention} You received: Overwatch 2",
+            f"{ctx.author.mention} You received: A £10 Steam gift card",
         ]
         size = info.get("size")
         if size == 'small':
