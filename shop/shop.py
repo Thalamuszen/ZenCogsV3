@@ -251,7 +251,7 @@ class Shop(commands.Cog):
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 size = answer.content
-                size = safe_name.strip("@")		
+                size = size.strip("@")		
                 await ctx.send("What quantity of this xmas gift should be available?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
