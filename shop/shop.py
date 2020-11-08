@@ -724,6 +724,7 @@ class Shop(commands.Cog):
             totalcostnice = humanize_number(totalcost)
             quantityinstock = int(xmas_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)
+            size = xmas_info.get("size")
             redeemable = xmas_info.get("redeemable")
             if not redeemable:
                 redeemable = False
@@ -775,6 +776,7 @@ class Shop(commands.Cog):
                             "redeemed": True,
                             "giftable": True,
                             "gifted": False,
+                            "size": size,
                         },
                     )
                     await ctx.send(f"You have bought {quantity} {item}(s) for {totalcostnice} {credits_name}.")
@@ -791,7 +793,8 @@ class Shop(commands.Cog):
                             "redeemable": True,
                             "redeemed": False,
                             "giftable": True,
-                            "gifted": False,                        
+                            "gifted": False,
+                            "size": size,				
                         },
                     )
                     await ctx.send(
