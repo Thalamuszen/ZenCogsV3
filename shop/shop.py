@@ -1004,7 +1004,70 @@ class Shop(commands.Cog):
                 )
         await ctx.send(
             f"You have gifted {quantity} {item}(s) to {user.name}."
-        )        
+        )      
+        
+    @commands.command()
+    @commands.guild_only()
+    async def open(self, ctx: commands.Context, *, item: str = ""):
+        """Open a Christmas Present given to you by another user!
+        
+        Examples
+        --------
+        `!open Small gift from Thalamus Zen`
+        """
+        enabled = await self.config.guild(ctx.guild).enabled()
+        if not enabled:
+            return await ctx.send("Uh oh, the shop module is disabled. Come back later!")
+#        LOOK INTO THE ENABLED FEATURE ABOVE SOULD I TOGGLE OR USE THE DATE       
+        author_inv = await self.config.member(ctx.author).inventory.get_raw()
+        if item in author_inv:
+            pass
+        else:
+            return await ctx.send("You don't own this item.")
+        info = await self.config.member(ctx.author).inventory.get_raw(item)        
+        giftable = info.get("giftable")
+        if giftable:
+            return await ctx.send("Consider gifting this present to someone using the `!gift` command")        
+        gifted = info.get("gifted")
+        if not gifted:
+            return await ctx.send("You cannot open a present that hasn't been gifted to you.") 
+        author_quantity = int(info.get("quantity"))        
+        author_quantity -= 1   
+        if author_quantity == 0:
+            await self.config.member(ctx.author).inventory.clear_raw(item)
+        else:            
+            await self.config.member(ctx.author).inventory.set_raw(
+                item, "quantity", value=author_quantity
+            )
+        await ctx.send(f{ 
+
+
+        placing_messages = [
+            "*You excitedly place the gift upon your lap and smile...*",
+            "*You slide out the present from beneath the Christmas tree...*",
+        ]
+        bot_talking = await message.channel.send(random.choice(placing_messages))
+        await asyncio.sleep(random.randint(5, 8))
+        opening_messages = [
+            "*You are quick to rip the red and white wrapping paper from the present...*",
+            "*You delicately tear the wrapping paper from around the present...*",
+        ]
+        await bot_talking.edit(content=random.choice(opening_messages))
+        await asyncio.sleep(random.randint(5, 8))
+        sg_messages = [
+            f"{message.author.mention} You received: Socks",
+            f"{message.author.mention} You received: Deodorant",
+        ]
+        mg_messages = [
+        	f"{message.author.mention} You received: Overwatch 2",
+            f"{message.author.mention} You received: A £10 Steam gift card",
+        ]
+        if smallgift:
+        		await asyncio.sleep(2)
+        	    await message.channel.send(content=random.choice(sg_messages))
+		else mediumgift:
+				await asyncio.sleep(2)
+				await message.channel.send(content=random.choice(mg_messages))             
 
     @commands.command()
     @commands.guild_only()
