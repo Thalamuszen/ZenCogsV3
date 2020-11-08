@@ -970,7 +970,7 @@ class Shop(commands.Cog):
         size = info.get("size")	
         giftable = info.get("giftable")
         if not giftable:
-            return await ctx.send("This are not able to gift this item.")
+            return await ctx.send("You are not able to gift this item.")
         gifted = info.get("gifted")
         if gifted:
             return await ctx.send("You cannot gift an item that was gifted to you... rude.")
