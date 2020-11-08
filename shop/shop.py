@@ -1072,7 +1072,7 @@ class Shop(commands.Cog):
             f"{message.author.mention} You received: Overwatch 2",
             f"{message.author.mention} You received: A £10 Steam gift card",
         ]
-	size = info.get("size")
+        size = info.get("size")
         if size == small:
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(sg_messages))
