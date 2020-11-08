@@ -1026,7 +1026,7 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop module is disabled. Come back later!")
-#        LOOK INTO THE ENABLED FEATURE ABOVE SOULD I TOGGLE OR USE THE DATE       
+#       LOOK INTO THE ENABLED FEATURE ABOVE SOULD I TOGGLE OR USE THE DATE       
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
         if item in author_inv:
             pass
@@ -1038,7 +1038,7 @@ class Shop(commands.Cog):
             return await ctx.send("Consider gifting this present to someone using the `!gift` command")        
         gifted = info.get("gifted")
         if not gifted:
-            return await ctx.send("You cannot open a present that hasn't been gifted to you.") 
+            return await ctx.send("You cannot open a present that hasn't been gifted to you.") 	
         author_quantity = int(info.get("quantity"))        
         author_quantity -= 1   
         if author_quantity == 0:
@@ -1048,8 +1048,7 @@ class Shop(commands.Cog):
                 item, "quantity", value=author_quantity
             )
         await ctx.send("Wibble wobble") 
-
-
+#	NEED TO EXTRACT GIFTER FROM GIFT COMMAND AND APPLY IT TO SOMEWHERE BELOW
         placing_messages = [
             "*You excitedly place the gift upon your lap and smile...*",
             "*You slide out the present from beneath the Christmas tree...*",
@@ -1070,10 +1069,11 @@ class Shop(commands.Cog):
             f"{message.author.mention} You received: Overwatch 2",
             f"{message.author.mention} You received: A £10 Steam gift card",
         ]
-        if small:
+	size = info.get("size")
+        if size == small:
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(sg_messages))
-        if medium:
+        if size == medium:
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(mg_messages))             
 
