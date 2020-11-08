@@ -1073,7 +1073,7 @@ class Shop(commands.Cog):
         if smallgift:
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(sg_messages))
-	else mediumgift:
+        else mediumgift:
             await asyncio.sleep(2)
             await message.channel.send(content=random.choice(mg_messages))             
 
