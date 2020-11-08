@@ -1068,7 +1068,11 @@ class Shop(commands.Cog):
         await asyncio.sleep(random.randint(5, 8))
         sg_messages = [
             f"{ctx.author.mention} You received: A pair of socks",
-            f"{ctx.author.mention} You received: Deodorant",
+            f"{ctx.author.mention} You received: Deodorant", 
+            f"{ctx.author.mention} You received: :blue_heart:",
+            f"{ctx.author.mention} You received: :blue_heart:",
+            f"{ctx.author.mention} You received: :blue_heart:",		
+            f"{ctx.author.mention} You received: :blue_heart:",		
         ]
         mg_messages = [
             f"{ctx.author.mention} You received: Overwatch 2",
