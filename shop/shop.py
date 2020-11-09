@@ -1241,16 +1241,13 @@ class Shop(commands.Cog):
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
-            table = [(x, price, quantity)]
+            table = [(x, price, quantity)]	
             xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(table)
         if stuff == []:
             embed.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Quantity")
-            table = [(xmas, secondthing, thirdthing)]
-            embed.description="`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{}".format(
-                box(
-                    tabulate(stuff, headers=headers, lang="md")
-		)
+            output = box(tabulate(stuff, headers=headers, numalign="left"), lang="md")		
+            embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"                
         await menu(ctx, pages=stuff, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
