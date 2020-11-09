@@ -1257,24 +1257,27 @@ class Shop(commands.Cog):
             headers = ("Type", "Item", "Price", "Qty", "Looks like")
             output = box(tabulate(role_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
             embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
+            embeds.append(embed)	
         if item_embed == []:
             embed.description="Nothing to see here."
         else:
             headers = ("Type", "Item", "Price", "Qty", "Looks like")
             output = box(tabulate(item_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
-            embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"	
+            embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
+            embeds.append(embed)
         if game_embed == []:
             embed.description="Nothing to see here."
         else:
             headers = ("Type", "Item", "Price", "Qty", "Looks like")
             output = box(tabulate(game_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
             embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
+            embeds.append(embed)
         if xmas_embed == []:
             embed.description="Nothing to see here."
         else:
             headers = ("Type", "Item", "Price", "Qty", "Looks like")
             output = box(tabulate(xmas_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
             embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"	
-        embeds.append(embed)
+            embeds.append(embed)
 #        await ctx.send(embed=embed)
         await menu(ctx, pages=embeds, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
