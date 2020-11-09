@@ -1207,6 +1207,7 @@ class Shop(commands.Cog):
         credits_name = await bank.get_currency_name(ctx.guild)
         embeds = []
         embed_r = discord.Embed(
+           title="__**Role Shop**__",
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
@@ -1215,6 +1216,7 @@ class Shop(commands.Cog):
         )
         embed_r.set_footer(text="Shoppy™")
         embed_i = discord.Embed(
+           title="__**Item Shop**__",		
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
@@ -1223,6 +1225,7 @@ class Shop(commands.Cog):
         )
         embed_i.set_footer(text="Shoppy™")
         embed_g = discord.Embed(
+           title="__**Game Shop**__",		
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
@@ -1231,6 +1234,7 @@ class Shop(commands.Cog):
         )
         embed_g.set_footer(text="Shoppy™")
         embed_x = discord.Embed(
+           title="__**Christmas Shop**__",		
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
@@ -1249,7 +1253,6 @@ class Shop(commands.Cog):
             quantity = int(role.get("quantity"))
             role_name = role.get("role_name")
             table = ["Role", r, price, quantity, role_name]
-            role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
             role_embed.append(table)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
@@ -1257,7 +1260,6 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(item.get("quantity"))
             table = ["Item", i, price, quantity]		
-            item_text = f"__Item:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             item_embed.append(table)
         for g in games:
             game = await self.config.guild(ctx.guild).games.get_raw(g)
@@ -1265,7 +1267,6 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
             table = ["Game", g, price, quantity]		
-            game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             game_embed.append(table)
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
@@ -1273,34 +1274,33 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
             table = ["Xmas", x, price, quantity]	
-            xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             xmas_embed.append(table)
         if role_embed == []:
             embed_r.description="Nothing to see here."
         else:
-            headers = ("Type", "Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(role_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            headers = ("Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(role_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_r.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
             embeds.append(embed_r)	
         if item_embed == []:
             embed_i.description="Nothing to see here."
         else:
-            headers = ("Type", "Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(item_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            headers = ("Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(item_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_i.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
             embeds.append(embed_i)
         if game_embed == []:
             embed_g.description="Nothing to see here."
         else:
-            headers = ("Type", "Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(game_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            headers = ("Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(game_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_g.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
             embeds.append(embed_g)
         if xmas_embed == []:
             embed_x.description="Nothing to see here."
         else:
-            headers = ("Type", "Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(xmas_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            headers = ("Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(xmas_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_x.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"	
             embeds.append(embed_x)
 #        await ctx.send(embed=embed)
