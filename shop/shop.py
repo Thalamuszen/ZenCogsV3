@@ -1148,7 +1148,6 @@ class Shop(commands.Cog):
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
-        embed = discord.Embed()
         stuff = []
         for r in roles:
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
@@ -1176,10 +1175,7 @@ class Shop(commands.Cog):
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
-            quantity = int(xmas.get("quantity"))
-            embed.add_field(name="Xmas", value="{x}", inline=True)
-            embed.add_field(name="\u200b", value="{price} {credits_name}", inline=True)
-            embed.add_field(name="\u200b", value="{quantity}", inline=True)		
+            quantity = int(xmas.get("quantity"))	
             xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(xmas_text)
         if stuff == []:
