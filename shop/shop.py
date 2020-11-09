@@ -1252,28 +1252,28 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
             role_name = role.get("role_name")
-            table = ["Role", r, price, quantity, role_name]
+            table = [r, price, quantity, role_name]
             role_embed.append(table)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
             priceint = int(item.get("price"))
             price = humanize_number(priceint)
             quantity = int(item.get("quantity"))
-            table = ["Item", i, price, quantity]		
+            table = [i, price, quantity]		
             item_embed.append(table)
         for g in games:
             game = await self.config.guild(ctx.guild).games.get_raw(g)
             priceint = int(game.get("price"))
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
-            table = ["Game", g, price, quantity]		
+            table = [g, price, quantity]		
             game_embed.append(table)
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
-            table = ["Xmas", x, price, quantity]	
+            table = [x, price, quantity]	
             xmas_embed.append(table)
         if role_embed == []:
             embed_r.description="Nothing to see here."
