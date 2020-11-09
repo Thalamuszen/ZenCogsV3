@@ -524,10 +524,8 @@ class Shop(commands.Cog):
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         
         if not item:
-            page_list = await self._show_store(ctx)
-            if len(page_list) > 1:
-                return await menu(ctx, page_list, DEFAULT_CONTROLS)
-            return await ctx.send(embed=page_list[0])
+            await self._show_store(ctx)
+
         item = item.strip("@")
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         if item in roles:
