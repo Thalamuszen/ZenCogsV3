@@ -1248,7 +1248,7 @@ class Shop(commands.Cog):
         if stuff == []:
             embed.description="Nothing to see here."
         else:
-            embed.description="Hewwo uwu"
+            embed.description="`Syntax !buy <quantity> <item_name>`\n\nWhen using the `!buy` command, please be aware that items are **case sensitive**.\nTo remove a role from yourself, it must be returned to the shop and can be done so with the `!return <role name>` command.\nReturning roles will give you a 10% refund on what you originally paid.\n\n"
 #            predesc = "`Syntax !buy <quantity> <item_name>`\n\nWhen using the `!buy` command, please be aware that items are **case sensitive**.\nTo remove a role from yourself, it must be returned to the shop and can be done so with the `!return <role name>` command.\nReturning roles will give you a 10% refund on what you originally paid.\n\n"
 #            desc = predesc + ("\n".join(stuff))
         await menu(ctx, pages=stuff, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
