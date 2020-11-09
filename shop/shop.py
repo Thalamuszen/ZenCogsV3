@@ -1211,8 +1211,9 @@ class Shop(commands.Cog):
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
+        embed_r.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
         embed_r.set_author(
-           name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
+           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
         )
         embed_r.set_footer(text="Shoppy™")
         embed_i = discord.Embed(
@@ -1220,8 +1221,9 @@ class Shop(commands.Cog):
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
+        embed_i.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
         embed_i.set_author(
-           name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
+           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
         )
         embed_i.set_footer(text="Shoppy™")
         embed_g = discord.Embed(
@@ -1229,8 +1231,9 @@ class Shop(commands.Cog):
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
+        embed_g.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
         embed_g.set_author(
-           name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
+           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
         )
         embed_g.set_footer(text="Shoppy™")
         embed_x = discord.Embed(
@@ -1238,8 +1241,9 @@ class Shop(commands.Cog):
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
+        embed_x.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
         embed_x.set_author(
-           name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
+           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
         )
         embed_x.set_footer(text="Shoppy™")	
         role_embed = []
