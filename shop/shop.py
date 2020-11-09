@@ -6,6 +6,7 @@ from typing import Union
 from discord.utils import get
 from datetime import datetime
 from tabulate import tabulate
+from operator import itemgetter
 
 from redbot.core import Config, checks, commands, bank
 from redbot.core.utils.chat_formatting import pagify, humanize_list, humanize_number, box
@@ -1274,12 +1275,12 @@ class Shop(commands.Cog):
             game_embed.append(table)
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
-            priceint = str(xmas.get("price"))
+            priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
             table = [x, priceint, quantity]
             xmas_embed.append(table)
-            sorted_xmas = sorted(table, key=lambda x: x[1])
+            sorted_xmas = sorted(table, key=itemgetter(1))
         if role_embed == []:
             embed_r.description="Nothing to see here."
         else:
