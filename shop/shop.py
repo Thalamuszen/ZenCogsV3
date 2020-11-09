@@ -1280,7 +1280,7 @@ class Shop(commands.Cog):
             quantity = int(xmas.get("quantity"))
             table = [x, priceint, quantity]
             xmas_embed.append(table)
-            sorted_xmas = sorted(table, key=itemgetter(1))
+            sorted_xmas = sorted(xmas_embed, key=itemgetter(1))
         if role_embed == []:
             embed_r.description="Nothing to see here."
         else:
