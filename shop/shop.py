@@ -1257,7 +1257,7 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
             role_name = role.get("role_name")
-            table = [r, price, quantity, role_name]
+            table = [r, priceint, quantity, role_name]
             role_embed.append(table)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
