@@ -504,11 +504,12 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop is closed. Come back later!")
-        page_list = await self._show_store(ctx)
-        if len(page_list) > 1:
-            await menu(ctx, page_list, DEFAULT_CONTROLS)
-        else:
-            await ctx.send(embed=page_list[0])
+        await self._show_store(ctx)
+#        page_list = await self._show_store(ctx)
+#        if len(page_list) > 1:
+#            await menu(ctx, page_list, DEFAULT_CONTROLS)
+#        else:
+#            await ctx.send(embed=page_list[0])
 
     @commands.command()
     @commands.guild_only()
