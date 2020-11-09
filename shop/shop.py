@@ -1030,7 +1030,7 @@ class Shop(commands.Cog):
         if item in author_inv:
             pass
         else:
-            return await ctx.send("You don't own this item.")
+            return await self.inventory(ctx)
         info = await self.config.member(ctx.author).inventory.get_raw(item)        
         giftable = info.get("giftable")
         if giftable:
