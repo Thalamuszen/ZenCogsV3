@@ -1239,9 +1239,9 @@ class Shop(commands.Cog):
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))			
-            embed.add_field(name="Xmas", value="{x}", inline=True)
-            embed.add_field(name="\u200b", value="{price} {credits_name}", inline=True)
-            embed.add_field(name="\u200b", value="{quantity}", inline=True)
+            embed.add_field(name="Xmas", value=f"{x}", inline=True)
+            embed.add_field(name="\u200b", value=f"{price} {credits_name}", inline=True)
+            embed.add_field(name="\u200b", value=f"{quantity}", inline=True)
             text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(embed)
         if stuff == []:
