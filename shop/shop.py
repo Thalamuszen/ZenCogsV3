@@ -1214,7 +1214,10 @@ class Shop(commands.Cog):
            name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
         )
         embed.set_footer(text="Shoppy™")	
-        stuff = []
+        role_embed = []
+        item_embed = []
+        game_embed = []
+        xmas_embed = []
         for r in roles:
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
             priceint = int(role.get("price"))
@@ -1223,7 +1226,7 @@ class Shop(commands.Cog):
             role_name = role.get("role_name")
             table = ["Role", r, price, quantity, role_name]
             role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
-            stuff.append(table)
+            role_embed.append(table)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
             priceint = int(item.get("price"))
@@ -1231,7 +1234,7 @@ class Shop(commands.Cog):
             quantity = int(item.get("quantity"))
             table = ["Item", i, price, quantity]		
             item_text = f"__Item:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(table)
+            item_embed.append(table)
         for g in games:
             game = await self.config.guild(ctx.guild).games.get_raw(g)
             priceint = int(game.get("price"))
@@ -1239,7 +1242,7 @@ class Shop(commands.Cog):
             quantity = int(game.get("quantity"))
             table = ["Game", g, price, quantity]		
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(table)
+            game_embed.append(table)
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
@@ -1247,13 +1250,31 @@ class Shop(commands.Cog):
             quantity = int(xmas.get("quantity"))
             table = ["Xmas", x, price, quantity]	
             xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(table)
-        if stuff == []:
+            xmas_embed.append(table)
+        if role_embed == []:
             embed.description="Nothing to see here."
         else:
             headers = ("Type", "Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(stuff, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            output = box(tabulate(role_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
             embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
+        if item_embed == []:
+            embed.description="Nothing to see here."
+        else:
+            headers = ("Type", "Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(item_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"	
+        if game_embed == []:
+            embed.description="Nothing to see here."
+        else:
+            headers = ("Type", "Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(game_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
+        if xmas_embed == []:
+            embed.description="Nothing to see here."
+        else:
+            headers = ("Type", "Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(xmas_embed, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+            embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"	
         embeds.append(embed)
 #        await ctx.send(embed=embed)
         await menu(ctx, pages=embeds, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
