@@ -1213,7 +1213,7 @@ class Shop(commands.Cog):
         )
         embed_r.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
         embed_r.set_author(
-           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
+           name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
         embed_r.set_footer(text="Shoppy™")
         embed_i = discord.Embed(
@@ -1223,7 +1223,7 @@ class Shop(commands.Cog):
         )
         embed_i.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
         embed_i.set_author(
-           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
+           name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
         embed_i.set_footer(text="Shoppy™")
         embed_g = discord.Embed(
@@ -1233,7 +1233,7 @@ class Shop(commands.Cog):
         )
         embed_g.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
         embed_g.set_author(
-           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
+           name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
         embed_g.set_footer(text="Shoppy™")
         embed_x = discord.Embed(
@@ -1243,7 +1243,7 @@ class Shop(commands.Cog):
         )
         embed_x.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
         embed_x.set_author(
-           name=f"Silvermoon Bazaar", icon_url=ctx.bot.icon_url,
+           name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
         embed_x.set_footer(text="Shoppy™")	
         role_embed = []
