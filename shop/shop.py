@@ -1228,6 +1228,7 @@ class Shop(commands.Cog):
             priceint = int(item.get("price"))
             price = humanize_number(priceint)
             quantity = int(item.get("quantity"))
+            table = ["Item", i, price, quantity]		
             item_text = f"__Item:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(table)
         for g in games:
@@ -1235,6 +1236,7 @@ class Shop(commands.Cog):
             priceint = int(game.get("price"))
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
+            table = ["Game", g, price, quantity]		
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(table)
         for x in xmas:
