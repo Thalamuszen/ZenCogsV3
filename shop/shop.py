@@ -1220,7 +1220,7 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
             role_name = role.get("role_name")
-            table = [r, price, quantity, role_name]
+            table = ["Role", r, price, quantity, role_name]
             role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
             stuff.append(table)
         for i in items:
@@ -1242,14 +1242,14 @@ class Shop(commands.Cog):
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
-            table = [x, price, quantity]	
+            table = ["Xmas", x, price, quantity]	
             xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(table)
         if stuff == []:
             embed.description="Nothing to see here."
         else:
-            headers = ("Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(stuff, headers=headers, colalign=("left", "right", "right", "left",)), lang="md")		
+            headers = ("Type", "Item", "Price", "Qty", "Looks like")
+            output = box(tabulate(stuff, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
             embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
         await ctx.send(embed=embed)
 #        await menu(ctx, pages=embed, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
