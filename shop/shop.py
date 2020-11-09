@@ -798,10 +798,7 @@ class Shop(commands.Cog):
                         f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                     )
         else:
-            page_list = await self._show_store(ctx)
-            if len(page_list) > 1:
-                return await menu(ctx, page_list, DEFAULT_CONTROLS)
-            return await ctx.send(embed=page_list[0])
+            await self._show_store(ctx)
 
     @commands.command(name="return")
     @commands.guild_only()
