@@ -1259,6 +1259,7 @@ class Shop(commands.Cog):
             role_name = role.get("role_name")
             table = [r, priceint, quantity, role_name]
             role_embed.append(table)
+            sorted_role = sorted(role_embed, key=temgetter(1), reverse=True)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
             priceint = int(item.get("price"))
@@ -1285,7 +1286,7 @@ class Shop(commands.Cog):
             embed_r.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(role_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
+            output = box(tabulate(sorted_role, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_r.description=f"Welcome to Elune's Role shop, here you will find roles that will XYZ\n\nAfter purchasing your role, it will automatically be applied to you!\nIf you wish to have a role removed, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_r)	
         if item_embed == []:
