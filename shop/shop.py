@@ -504,12 +504,12 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop is closed. Come back later!")
-        await self._show_store(ctx)
-#        page_list = await self._show_store(ctx)
-#        if len(page_list) > 1:
-#            await menu(ctx, page_list, DEFAULT_CONTROLS)
-#        else:
-#            await ctx.send(embed=page_list[0])
+#       await self._show_store(ctx)
+        page_list = await self._show_store(ctx)
+        if len(page_list) > 1:
+            await menu(ctx, page_list, DEFAULT_CONTROLS)
+        else:
+            await ctx.send(embed=page_list[0])
 
     @commands.command()
     @commands.guild_only()
@@ -1143,78 +1143,12 @@ class Shop(commands.Cog):
                 item, "redeemed", value=True
             )
 
-#    async def _show_store(self, ctx):
-#        items = await self.config.guild(ctx.guild).items.get_raw()
-#        roles = await self.config.guild(ctx.guild).roles.get_raw()
-#        games = await self.config.guild(ctx.guild).games.get_raw()
-#        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
-#        credits_name = await bank.get_currency_name(ctx.guild)
-#        stuff = []
-#        for r in roles:
-#            role = await self.config.guild(ctx.guild).roles.get_raw(r)
-#            priceint = int(role.get("price"))
-#            price = humanize_number(priceint)
-#            quantity = int(role.get("quantity"))
-#            role_name = role.get("role_name")
-#            role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
-#            stuff.append(role_text)
-#        for i in items:
-#            item = await self.config.guild(ctx.guild).items.get_raw(i)
-#            priceint = int(item.get("price"))
-#            price = humanize_number(priceint)
-#            quantity = int(item.get("quantity"))
-#            item_text = f"__Item:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-#            stuff.append(item_text)
-#        for g in games:
-#            game = await self.config.guild(ctx.guild).games.get_raw(g)
-#            priceint = int(game.get("price"))
-#            price = humanize_number(priceint)
-#            quantity = int(game.get("quantity"))
-#            game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-#            stuff.append(game_text)
-#        for x in xmas:
-#            xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
-#            priceint = int(xmas.get("price"))
-#            price = humanize_number(priceint)
-#            quantity = int(xmas.get("quantity"))	
-#            xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-#            stuff.append(xmas_text)
-#        if stuff == []:
-#            desc = "Nothing to see here."
-#        else:
-#            predesc = "`Syntax !buy <quantity> <item_name>`\n\nWhen using the `!buy` command, please be aware that items are **case sensitive**.\nTo remove a role from yourself, it must be returned to the shop and can be done so with the `!return <role name>` command.\nReturning roles will give you a 10% refund on what you originally paid.\n\n"
-#            desc = predesc + ("\n".join(stuff))
-#        page_list = []
-#        for page in pagify(desc, delims=["\n"], page_length=1000):
-#            embed = discord.Embed(
-#                colour=await ctx.embed_colour(),
-#                description=page,
-#                timestamp=datetime.now(),
-#            )
-#            embed.set_author(
-#                name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
-#            )
-#            embed.set_footer(text="Shoppy™")
-#            page_list.append(embed)
-#        return page_list
-
     async def _show_store(self, ctx):
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
-        embed = discord.Embed(
-           colour=await ctx.embed_colour(),
-           timestamp=datetime.now(),
-        )
-        embed.set_author(
-           name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
-        )
-        embed.add_field(name="Item", value="-------------", inline=True)
-        embed.add_field(name="Price", value="-------------", inline=True)
-        embed.add_field(name="Quantity", value="-------------", inline=True)	
-        embed.set_footer(text="Shoppy™")	
         stuff = []
         for r in roles:
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
@@ -1237,21 +1171,87 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(game_embed)
+            stuff.append(game_text)
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
-            quantity = int(xmas.get("quantity"))			
-            embed.add_field(name="Xmas", value=f"{x}", inline=True)
-            embed.add_field(name="\u200b", value=f"{price} {credits_name}", inline=True)
-            embed.add_field(name="\u200b", value=f"{quantity}", inline=True)
-            text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(embed)
+            quantity = int(xmas.get("quantity"))	
+            xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+            stuff.append(xmas_text)
         if stuff == []:
-            embed.description="Nothing to see here."
+            desc = "Nothing to see here."
         else:
-            embed.description="`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n"
+            predesc = "`Syntax !buy <quantity> <item_name>`\n\nWhen using the `!buy` command, please be aware that items are **case sensitive**.\nTo remove a role from yourself, it must be returned to the shop and can be done so with the `!return <role name>` command.\nReturning roles will give you a 10% refund on what you originally paid.\n\n"
+            desc = predesc + ("\n".join(stuff))
+        page_list = []
+        for page in pagify(desc, delims=["\n"], page_length=1000):
+            embed = discord.Embed(
+                colour=await ctx.embed_colour(),
+                description=page,
+                timestamp=datetime.now(),
+            )
+            embed.set_author(
+                name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
+            )
+            embed.set_footer(text="Shoppy™")
+            page_list.append(embed)
+        return page_list
+
+#    async def _show_store(self, ctx):
+#        items = await self.config.guild(ctx.guild).items.get_raw()
+#        roles = await self.config.guild(ctx.guild).roles.get_raw()
+#        games = await self.config.guild(ctx.guild).games.get_raw()
+#        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
+#        credits_name = await bank.get_currency_name(ctx.guild)
+#        embed = discord.Embed(
+#           colour=await ctx.embed_colour(),
+#           timestamp=datetime.now(),
+#        )
+#        embed.set_author(
+#           name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
+#        )
+#        embed.add_field(name="Item", value="-------------", inline=True)
+#        embed.add_field(name="Price", value="-------------", inline=True)
+#        embed.add_field(name="Quantity", value="-------------", inline=True)	
+#        embed.set_footer(text="Shoppy™")	
+#        stuff = []
+#        for r in roles:
+#            role = await self.config.guild(ctx.guild).roles.get_raw(r)
+#            priceint = int(role.get("price"))
+#            price = humanize_number(priceint)
+#            quantity = int(role.get("quantity"))
+#            role_name = role.get("role_name")
+#            role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
+#            stuff.append(role_text)
+#        for i in items:
+#            item = await self.config.guild(ctx.guild).items.get_raw(i)
+#            priceint = int(item.get("price"))
+#            price = humanize_number(priceint)
+#            quantity = int(item.get("quantity"))
+#            item_text = f"__Item:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+#            stuff.append(item_text)
+#        for g in games:
+#            game = await self.config.guild(ctx.guild).games.get_raw(g)
+#            priceint = int(game.get("price"))
+#            price = humanize_number(priceint)
+#            quantity = int(game.get("quantity"))
+#            game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+#            stuff.append(game_embed)
+#        for x in xmas:
+#            xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
+#            priceint = int(xmas.get("price"))
+#            price = humanize_number(priceint)
+#            quantity = int(xmas.get("quantity"))			
+#            embed.add_field(name="Xmas", value=f"{x}", inline=True)
+#            embed.add_field(name="\u200b", value=f"{price} {credits_name}", inline=True)
+#            embed.add_field(name="\u200b", value=f"{quantity}", inline=True)
+#            text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
+#            stuff.append(embed)
+#        if stuff == []:
+#            embed.description="Nothing to see here."
+#        else:
+#            embed.description="`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n"
 #            predesc = "`Syntax !buy <quantity> <item_name>`\n\nWhen using the `!buy` command, please be aware that items are **case sensitive**.\nTo remove a role from yourself, it must be returned to the shop and can be done so with the `!return <role name>` command.\nReturning roles will give you a 10% refund on what you originally paid.\n\n"
 #            desc = predesc + ("\n".join(stuff))
-        await menu(ctx, pages=stuff, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
+#        await menu(ctx, pages=stuff, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
