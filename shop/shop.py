@@ -1252,4 +1252,3 @@ class Shop(commands.Cog):
             embeds.append(embed_x)
 #        await ctx.send(embed=embed)
         await menu(ctx, pages=embeds, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
-        await ctx.send(sorted_xmas)
