@@ -1205,6 +1205,7 @@ class Shop(commands.Cog):
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
+        embeds = []
         embed = discord.Embed(
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
