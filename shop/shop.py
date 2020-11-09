@@ -1250,4 +1250,4 @@ class Shop(commands.Cog):
             headers = ("Item", "Price", "Quantity")
             output = box(tabulate(stuff, headers=headers, numalign="left"), lang="md")		
             embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"                
-        await menu(ctx, pages=stuff, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
+        await menu(ctx, pages=embed, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
