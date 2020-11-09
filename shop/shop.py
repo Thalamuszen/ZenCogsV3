@@ -1211,6 +1211,9 @@ class Shop(commands.Cog):
         embed.set_author(
            name=f"{ctx.guild.name}'s shop", icon_url=ctx.guild.icon_url,
         )
+        embed.add_field(name="Item", value="-------------", inline=True)
+        embed.add_field(name="Price", value="-------------", inline=True)
+        embed.add_field(name="Quantity", value="-------------", inline=True)	
         embed.set_footer(text="Shoppy™")	
         stuff = []
         for r in roles:
