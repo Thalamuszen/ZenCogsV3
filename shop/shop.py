@@ -1222,21 +1222,21 @@ class Shop(commands.Cog):
             role_name = role.get("role_name")
             table = [r, price, quantity, role_name]
             role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
-            stuff.append(role_text)
+            stuff.append(table)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
             priceint = int(item.get("price"))
             price = humanize_number(priceint)
             quantity = int(item.get("quantity"))
             item_text = f"__Item:__ **{i}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(item_text)
+            stuff.append(table)
         for g in games:
             game = await self.config.guild(ctx.guild).games.get_raw(g)
             priceint = int(game.get("price"))
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
             game_text = f"__Item:__ **{g}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
-            stuff.append(game_embed)
+            stuff.append(table)
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
