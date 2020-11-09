@@ -1219,9 +1219,9 @@ class Shop(commands.Cog):
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
-            table = [x, priceint, quantity]
+            table = [🎁, x, priceint, quantity]
             xmas_embed.append(table)
-            sorted_xmas = sorted(xmas_embed, key=itemgetter(1), reverse=True)
+            sorted_xmas = sorted(xmas_embed, key=itemgetter(2), reverse=True)
         if role_embed == []:
             embed_r.description="Nothing to see here."
         else:
@@ -1246,7 +1246,7 @@ class Shop(commands.Cog):
         if sorted_xmas == []:
             embed_x.description="Nothing to see here."
         else:
-            headers = ("Item", "Price", "Qty", "Looks like")
+            headers = (,"Item", "Price", "Qty", "Looks like")
             output = box(tabulate(sorted_xmas, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send your friends during the festive period!\n\nAfter your purchase, use the `!gift` command to gift the time to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"	
             embeds.append(embed_x)
