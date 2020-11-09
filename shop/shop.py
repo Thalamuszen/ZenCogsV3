@@ -1278,8 +1278,8 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
             table = [x, priceint, quantity]
-            sorted(table, key=lambda x: x:[1])
             xmas_embed.append(table)
+            sorted_xmas = sorted(table, key=lambda x: x:[1])
         if role_embed == []:
             embed_r.description="Nothing to see here."
         else:
@@ -1301,7 +1301,7 @@ class Shop(commands.Cog):
             output = box(tabulate(game_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_g.description=f"Welcome to Elune's Game shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_g)
-        if xmas_embed == []:
+        if sorted_xmas == []:
             embed_x.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
