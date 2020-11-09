@@ -1220,6 +1220,7 @@ class Shop(commands.Cog):
             price = humanize_number(priceint)
             quantity = int(role.get("quantity"))
             role_name = role.get("role_name")
+            table = [r, price, quantity, role_name]
             role_text = f"__Role:__ **{r}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity} | __Looks like:__ {role_name}"
             stuff.append(role_text)
         for i in items:
@@ -1247,8 +1248,8 @@ class Shop(commands.Cog):
         if stuff == []:
             embed.description="Nothing to see here."
         else:
-            headers = ("Item", "Price", "Quantity")
-            output = box(tabulate(stuff, headers=headers, numalign="left", showindex="always"), lang="asciidoc")		
+            headers = ("Item", "Price", "Quantity", "Looks like")
+            output = box(tabulate(stuff, headers=headers, numalign="left"), lang="asciidoc")		
             embed.description=f"`Syntax !buy <quantity> <item_name>`\n\nWhen using `!buy` items are **case sensitive**.\n\n{output}"
         await ctx.send(embed=embed)
 #        await menu(ctx, pages=embed, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
