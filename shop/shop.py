@@ -1274,7 +1274,7 @@ class Shop(commands.Cog):
             game_embed.append(table)
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
-            priceint = xmas.get("price")
+            priceint = str(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
             table = [x, priceint, quantity]
