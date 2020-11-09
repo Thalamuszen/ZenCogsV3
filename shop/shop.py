@@ -1259,7 +1259,7 @@ class Shop(commands.Cog):
             role_name = role.get("role_name")
             table = [r, priceint, quantity, role_name]
             role_embed.append(table)
-            sorted_role = sorted(role_embed, key=temgetter(1), reverse=True)
+            sorted_role = sorted(role_embed, key=itemgetter(1), reverse=True)
         for i in items:
             item = await self.config.guild(ctx.guild).items.get_raw(i)
             priceint = int(item.get("price"))
