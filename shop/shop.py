@@ -1305,7 +1305,7 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
             output = box(tabulate(xmas_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"	
+            embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send your friends during the festive period!\n\nAfter your purchase, use the `!gift` command to gift the time to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"	
             embeds.append(embed_x)
 #        await ctx.send(embed=embed)
         await menu(ctx, pages=embeds, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
