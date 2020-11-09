@@ -1148,7 +1148,7 @@ class Shop(commands.Cog):
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
-        embed = []
+        embed = discord.Embed()
         stuff = []
         for r in roles:
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
