@@ -1284,7 +1284,7 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
             output = box(tabulate(role_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_r.description=f"Welcome to Elune's Role shop, here you will find roles that will XYZ\nAfter purchasing your role, it will automatically be applied to you!\nIf you wish to have a role removed, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
+            embed_r.description=f"Welcome to Elune's Role shop, here you will find roles that will XYZ\n\nAfter purchasing your role, it will automatically be applied to you!\nIf you wish to have a role removed, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_r)	
         if item_embed == []:
             embed_i.description="Nothing to see here."
