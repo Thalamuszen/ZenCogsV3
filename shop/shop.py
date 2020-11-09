@@ -1241,7 +1241,7 @@ class Shop(commands.Cog):
             priceint = int(xmas.get("price"))
             price = humanize_number(priceint)
             quantity = int(xmas.get("quantity"))
-            table = [(x, price, quantity)]	
+            table = [x, price, quantity]	
             xmas_text = f"__Xmas:__ **{x}** | __Price:__ {price} {credits_name} | __Quantity:__ {quantity}"
             stuff.append(table)
         if stuff == []:
