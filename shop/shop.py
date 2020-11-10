@@ -1226,14 +1226,14 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
             output = box(tabulate(sorted_role, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_r.description=f"Welcome to Elune's Role shop, here you will find roles that will XYZ\n\nAfter purchasing your role, it will automatically be applied to you!\nIf you wish to have a role removed, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
+            embed_r.description=f"Welcome to Elune's Role shop!\n\nAfter purchasing your role, it will automatically be applied to you.\nIf you wish remove a role from yourself, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_r)	
         if item_embed == []:
             embed_i.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty")
             output = box(tabulate(sorted_item, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_i.description=f"Welcome to Elune's Item shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"
+            embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nTo see more info on an item, use the `!info` command.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_i)
         if game_embed == []:
             embed_g.description="Nothing to see here."
