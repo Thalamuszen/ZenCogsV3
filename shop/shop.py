@@ -1279,7 +1279,7 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty")
             output = box(tabulate(sorted_item, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nTo see more info on an item, use the `!info` command.\n\n`!buy <quantity> <item_name>`\n{output}"
+            embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nTo see more info on an item, use the `!show` command.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_i)
         if game_embed == []:
             embed_g.description="Nothing to see here."
