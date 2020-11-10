@@ -123,7 +123,7 @@ class Shop(commands.Cog):
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 description = answer.content
-                description = size.strip("@")				
+                description = answer.strip("@")				
                 await self.config.guild(ctx.guild).items.set_raw(
                     item_name,
                     value={
