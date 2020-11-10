@@ -117,12 +117,20 @@ class Shop(commands.Cog):
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 redeemable = pred_yn.result
+                await ctx.send("Give the item a description")
+                try:
+                    answer = await self.bot.wait_for("message", timeout=120, check=check)
+                except asyncio.TimeoutError:
+                    return await ctx.send("You took too long. Try again, please.")
+                description = answer.content
+                description = size.strip("@")				
                 await self.config.guild(ctx.guild).items.set_raw(
                     item_name,
                     value={
                         "price": price,
                         "quantity": quantity,
                         "redeemable": redeemable,
+			"description": description,			    
                     },
                 )
                 await ctx.send(f"{item_name} added.")
@@ -342,10 +350,11 @@ class Shop(commands.Cog):
         price = info.get("price")
         quantity = info.get("quantity")
         redeemable = info.get("redeemable")
+	description = info.get("description")
         if not redeemable:
             redeemable = False
         await ctx.send(
-            f"**__{item}:__**\n*Type:* {item_type}\n*Price:* {price}\n*Quantity:* {quantity}\n*Redeemable:* {redeemable}"
+            f"**__{item}:__**\n*Type:* {item_type}\n*Price:* {price}\n*Quantity:* {quantity}\n*Redeemable:* {redeemable}\n*Description:* {description}"
         )
 
     @store.command(name="price")
@@ -578,6 +587,7 @@ class Shop(commands.Cog):
             price = int(item_info.get("price"))
             totalcost = price * quantity
             totalcostnice = humanize_number(totalcost)
+            description = item_info.get("description")
             quantityinstock = int(item_info.get("quantity"))
             credits_name = await bank.get_currency_name(ctx.guild)
             redeemable = item_info.get("redeemable")
@@ -629,6 +639,7 @@ class Shop(commands.Cog):
                             "is_xmas": False,
                             "redeemable": False,
                             "redeemed": True,
+                            "description": description,				
                             "giftable": False,
                             "gifted": False,                         
                         },
@@ -646,6 +657,7 @@ class Shop(commands.Cog):
                             "is_xmas": False,
                             "redeemable": True,
                             "redeemed": False,
+                            "description": description,				
                             "giftable": False,
                             "gifted": False,                         
                         },
@@ -1079,7 +1091,41 @@ class Shop(commands.Cog):
             await ctx.send(content=random.choice(sg_messages))
         if size == 'medium':
             await asyncio.sleep(2)
-            await ctx.send(content=random.choice(mg_messages))		
+            await ctx.send(content=random.choice(mg_messages))
+
+    @commands.command()
+    @commands.guild_only()
+    async def show(self, ctx: commands.Context, *, item: str):
+        """Show more information about an item in the shop."""
+        item = item.strip("@")
+        items = await self.config.guild(ctx.guild).items.get_raw()
+        roles = await self.config.guild(ctx.guild).roles.get_raw()
+        games = await self.config.guild(ctx.guild).games.get_raw()
+        xmas = await self.config.guild(ctx.guild).xmas.get_raw()
+
+        if item in items:
+            info = await self.config.guild(ctx.guild).items.get_raw(item)
+            item_type = "item"
+        elif item in roles:
+            info = await self.config.guild(ctx.guild).roles.get_raw(item)
+            item_type = "role"
+        elif item in games:
+            info = await self.config.guild(ctx.guild).games.get_raw(item)
+            item_type = "game"
+        elif item in xmas:
+            info = await self.config.guild(ctx.guild).xmas.get_raw(item)
+            item_type = "xmas"            
+        else:
+            return await ctx.send("This item isn't buyable.")
+        price = info.get("price")
+        quantity = info.get("quantity")
+        redeemable = info.get("redeemable")
+	description = info.get("description")
+        if not redeemable:
+            redeemable = False
+        await ctx.send(
+            f"**__{item}:__**\n*Type:* {item_type}\n*Price:* {price}\n*Quantity:* {quantity}\n*Redeemable:* {redeemable}\n*Description:* {description}"
+        )
 
     @commands.command()
     @commands.guild_only()
