@@ -1202,15 +1202,17 @@ class Shop(commands.Cog):
             priceint = int(item.get("price"))
             price = humanize_number(priceint)
             quantity = int(item.get("quantity"))
-            table = [i, price, quantity]		
+            table = [i, priceint, quantity]		
             item_embed.append(table)
+            sorted_item = sorted(item_embed, key=itemgetter(1), reverse=True)		
         for g in games:
             game = await self.config.guild(ctx.guild).games.get_raw(g)
             priceint = int(game.get("price"))
             price = humanize_number(priceint)
             quantity = int(game.get("quantity"))
-            table = [g, price, quantity]		
+            table = [g, priceint, quantity]		
             game_embed.append(table)
+            sorted_game = sorted(game_embed, key=itemgetter(1), reverse=True)		
         for x in xmas:
             xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
             priceint = int(xmas.get("price"))
@@ -1229,21 +1231,21 @@ class Shop(commands.Cog):
         if item_embed == []:
             embed_i.description="Nothing to see here."
         else:
-            headers = ("Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(item_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
+            headers = ("Item", "Price", "Qty")
+            output = box(tabulate(sorted_item, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_i.description=f"Welcome to Elune's Item shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_i)
         if game_embed == []:
             embed_g.description="Nothing to see here."
         else:
-            headers = ("Item", "Price", "Qty", "Looks like")
-            output = box(tabulate(game_embed, headers=headers, colalign=("left", "right", "right",)), lang="md")		
+            headers = ("Item", "Price", "Qty")
+            output = box(tabulate(sorted_game, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_g.description=f"Welcome to Elune's Game shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_g)
         if sorted_xmas == []:
             embed_x.description="Nothing to see here."
         else:
-            headers = ("", "Item", "Price", "Qty", "Looks like")
+            headers = ("", "Item", "Price", "Qty")
             output = box(tabulate(sorted_xmas, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
             embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send your friends during the festive period!\n\nAfter your purchase, use the `!gift` command to gift the time to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"	
             embeds.append(embed_x)
