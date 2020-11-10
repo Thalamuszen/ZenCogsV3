@@ -1120,7 +1120,7 @@ class Shop(commands.Cog):
         price = info.get("price")
         quantity = info.get("quantity")
         redeemable = info.get("redeemable")
-	description = info.get("description")
+        description = info.get("description")
         if not redeemable:
             redeemable = False
         await ctx.send(
