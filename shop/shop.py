@@ -830,8 +830,10 @@ class Shop(commands.Cog):
         else:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
+        redeemed = info.get("redeemed")
+        if redeemed:
+            return await ctx.send("You cannot return an item you have redeemed.")
         inv_quantity = info.get("quantity")
-        
         is_item = info.get("is_item")
         if is_item:
             if quantity > inv_quantity:
@@ -1156,12 +1158,12 @@ class Shop(commands.Cog):
             return await ctx.send("You have already redeemed this item.")
         ping_id = await self.config.guild(ctx.guild).ping()
         if not ping_id:
-            return await ctx.send("Uh oh, your Admins haven't set this yet.")
+            return await ctx.send("Uh oh, if you see this, let Zen know.")
         ping = get(ctx.guild.members, id=ping_id)
         if not ping:
             ping = get(ctx.guild.roles, id=ping_id)
             if not ping:
-                return await ctx.send("Uh oh, your Admins haven't set this yet.")
+                return await ctx.send("Uh oh, if you see this, let Zen know.")
             if not ping.mentionable:
                 await ping.edit(mentionable=True)
                 await ctx.send(
@@ -1172,16 +1174,26 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"{ping.mention}, {ctx.author.mention} would like to redeem {item}."
                 )
-            await self.config.member(ctx.author).inventory.set_raw(
-                item, "redeemed", value=True
-            )
+            author_quantity = int(info.get("quantity"))
+            author_quantity -= 1
+            if author_quantity == 0:
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+            else:
+                await self.config.member(ctx.author).inventory.set_raw(
+                    item, "quantity", value=author_quantity
+                )
         else:
             await ctx.send(
                 f"{ping.mention}, {ctx.author.mention} would like to redeem {item}."
             )
-            await self.config.member(ctx.author).inventory.set_raw(
-                item, "redeemed", value=True
-            )
+            author_quantity = int(info.get("quantity"))
+            author_quantity -= 1
+            if author_quantity == 0:
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+            else:
+                await self.config.member(ctx.author).inventory.set_raw(
+                    item, "quantity", value=author_quantity
+                )
 
     async def _show_store(self, ctx):
         items = await self.config.guild(ctx.guild).items.get_raw()
