@@ -1172,12 +1172,12 @@ class Shop(commands.Cog):
             if not ping.mentionable:
                 await ping.edit(mentionable=True)
                 await ctx.send(
-                    f"{ping.mention}, {ctx.author.mention} would like to redeem {item}."
+                    f"{ping.mention}, {ctx.author.mention} would like to redeem their {item}."
                 )
                 await ping.edit(mentionable=False)
             else:
                 await ctx.send(
-                    f"{ping.mention}, {ctx.author.mention} would like to redeem {item}."
+                    f"{ping.mention}, {ctx.author.mention} would like to redeem their {item}."
                 )
             author_quantity = int(info.get("quantity"))
             author_quantity -= 1
@@ -1189,7 +1189,7 @@ class Shop(commands.Cog):
                 )
         else:
             await ctx.send(
-                f"{ping.mention}, {ctx.author.mention} would like to redeem {item}."
+                f"{ping.mention}, {ctx.author.mention} would like to redeem their {item}."
             )
             author_quantity = int(info.get("quantity"))
             author_quantity -= 1
