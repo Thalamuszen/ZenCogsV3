@@ -927,6 +927,7 @@ class Shop(commands.Cog):
             info = await self.config.member(ctx.author).inventory.get_raw(i)                
             is_item = info.get("is_item")
             if is_item:
+                quantity = info.get("quantity")
                 cat = "Item"
                 table = [cat, i, quantity]
                 lst.append(table)
