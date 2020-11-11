@@ -990,9 +990,8 @@ class Shop(commands.Cog):
         if lst == []:
             desc = "Nothing to see here, go buy something at the `!shop`"
         else:
-            full_list = ("\n".join(lst))
             headers = ("", "Item", "Qty") 
-            output = box(tabulate(full_list, headers=headers), lang="md")
+            output = box(tabulate(lst, headers=headers), lang="md")
         embed = discord.Embed(
             colour=await ctx.embed_colour(),
             description=f"{output}",
