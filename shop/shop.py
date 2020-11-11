@@ -351,10 +351,11 @@ class Shop(commands.Cog):
         quantity = info.get("quantity")
         redeemable = info.get("redeemable")
         description = info.get("description")
+        size = info.get("size")
         if not redeemable:
             redeemable = False
         await ctx.send(
-            f"**__{item}:__**\n*Type:* {item_type}\n*Price:* {price}\n*Quantity:* {quantity}\n*Redeemable:* {redeemable}\n*Description:* {description}"
+            f"**__{item}:__**\n**Type:** {item_type}\n**Price:** {price}\n**Quantity:** {quantity}\n**Redeemable:** {redeemable}\n**Description:** {description}\n**Xmas gift size:** {size}"
         )
 
     @store.command(name="price")
