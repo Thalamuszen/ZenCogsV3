@@ -418,6 +418,31 @@ class Shop(commands.Cog):
         else:
             await ctx.send("This item isn't in the store. Please, add it first.")
 
+    @store.command(name="description")
+    async def store_description(self, ctx: commands.Context, *, item: str):
+        """Change the description of an existing buyable item."""
+        def check(m):
+            return m.author == ctx.author and m.channel == ctx.channel
+        if quantity <= 0:
+            return await ctx.send("Uh oh, quantity has to be more than 0.")
+        item = item.strip("@")
+        items = await self.config.guild(ctx.guild).items.get_raw()
+        if item in items:
+            await ctx.send(
+                "What would you like to change the description to?"
+            )
+            try:
+                answer = await self.bot.wait_for("message", timeout=120, check=check)
+            except asyncio.TimeoutError:
+                return await ctx.send("You took too long. Try again, please.")
+            description = answer.content
+            await self.config.guild(ctx.guild).items.set_raw(
+                item, "description", value=description
+            )
+            await ctx.send(f"{item}'s description has been changed.")       
+        else:
+            await ctx.send("This item isn't in the store. Please, add it first.")
+
     @store.command(name="redeemable")
     async def store_redeemable(
         self, ctx: commands.Context, redeemable: bool, *, item: str
