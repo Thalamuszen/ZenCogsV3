@@ -1170,7 +1170,7 @@ class Shop(commands.Cog):
         embed.set_footer(text="Information™")
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=["reminv"])
+    @commands.command(aliases=["reminv", "drop"])
     @commands.guild_only()
     async def removeinventory(self, ctx: commands.Context, quantity: int, *, item: str):
         """Remove an item from your inventory."""
@@ -1190,7 +1190,7 @@ class Shop(commands.Cog):
             await self.config.member(ctx.author).inventory.set_raw(
                 item, "quantity", value=inv_quantity
 	    )
-        await ctx.send(f"{quantity} of {item}(s) have been removed from your inventory.")
+        await ctx.send(f"You've dropped {quantity} {item}(s) from your inventory.")
 
     @commands.command()
     @commands.guild_only()
