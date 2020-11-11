@@ -1252,7 +1252,7 @@ class Shop(commands.Cog):
         embed_r.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_r.set_footer(text="Shoppy™")
+        embed_r.set_footer(text="Shoppy™ - Use the arrows below to change shops")
         embed_i = discord.Embed(
            title="__**Item Shop**__",		
            colour=await ctx.embed_colour(),
@@ -1262,7 +1262,7 @@ class Shop(commands.Cog):
         embed_i.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_i.set_footer(text="Shoppy™")
+        embed_i.set_footer(text="Shoppy™ - Use the arrows below to change shops")
         embed_g = discord.Embed(
            title="__**Game Shop**__",		
            colour=await ctx.embed_colour(),
@@ -1272,7 +1272,7 @@ class Shop(commands.Cog):
         embed_g.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_g.set_footer(text="Shoppy™")
+        embed_g.set_footer(text="Shoppy™ - Use the arrows below to change shops")
         embed_x = discord.Embed(
            title="__**Christmas Shop**__",		
            colour=await ctx.embed_colour(),
@@ -1282,7 +1282,7 @@ class Shop(commands.Cog):
         embed_x.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_x.set_footer(text="Shoppy™")	
+        embed_x.set_footer(text="Shoppy™ - Use the arrows below to change shops")	
         role_embed = []
         item_embed = []
         game_embed = []
