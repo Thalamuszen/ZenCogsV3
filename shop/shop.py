@@ -1256,6 +1256,10 @@ class Shop(commands.Cog):
         item_embed = []
         game_embed = []
         xmas_embed = []
+        sorted_role = []
+        sorted_item = []
+        sorted_game = []
+        sorted_xmas = []
         for r in roles:
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
             priceint = int(role.get("price"))
@@ -1289,21 +1293,21 @@ class Shop(commands.Cog):
             table = ["\ud83c\udf81", x, priceint, quantity]
             xmas_embed.append(table)
             sorted_xmas = sorted(xmas_embed, key=itemgetter(2), reverse=True)
-        if role_embed == []:
+        if sorted_role == []:
             embed_r.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
             output = box(tabulate(sorted_role, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_r.description=f"Welcome to Elune's Role shop!\n\nAfter purchasing your role, it will automatically be applied to you.\nIf you wish remove a role from yourself, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
             embeds.append(embed_r)	
-        if item_embed == []:
+        if sorted_item == []:
             embed_i.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty")
             output = box(tabulate(sorted_item, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nTo see more info on an item, use the `!show` command.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
             embeds.append(embed_i)
-        if game_embed == []:
+        if sorted_game == []:
             embed_g.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty")
