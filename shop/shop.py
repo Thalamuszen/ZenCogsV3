@@ -949,6 +949,60 @@ class Shop(commands.Cog):
         )            
         embed.set_footer(text="Inventory™")
         await ctx.send(embed=embed) 
+
+    @commands.command()
+    @commands.guild_only()
+    async def invtest(self, ctx: commands.Context):
+        """See all items you own."""
+        inventory = await self.config.member(ctx.author).inventory.get_raw()
+        lst = []
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)
+            is_role = info.get("is_role")
+            if is_role:
+                quantity = info.get("quantity")
+                cat = "Role"
+                table = [cat, i, quantity]
+                lst.append(table)
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)                
+            is_xmas = info.get("is_xmas")
+            if is_xmas:
+                quantity = info.get("quantity")
+                cat = "Xmas"
+                table = [cat, i, quantity]
+                lst.append(table)
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)                
+            is_item = info.get("is_item")
+            if is_item:
+                cat = "Item"
+                table = [cat, i, quantity]
+                lst.append(table)
+        for i in inventory:
+            info = await self.config.member(ctx.author).inventory.get_raw(i)                
+            is_game = info.get("is_game") 
+            if is_game:           
+                quantity = info.get("quantity")
+                cat = "Game"
+                table = [cat, i, quantity]
+                lst.append(table)              
+        if lst == []:
+            desc = "Nothing to see here, go buy something at the `!shop`"
+        else:
+            full_list = ("\n".join(lst))
+            headers = ("", "Item", "Qty") 
+            output = box(tabulate(full_list, headers=headers), lang="md")
+        embed = discord.Embed(
+            colour=await ctx.embed_colour(),
+            description=f"{output}",
+            timestamp=datetime.now(),
+        )
+        embed.set_author(
+            name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
+        )            
+        embed.set_footer(text="Inventory™")
+        await ctx.send(embed=embed) 
         
     @commands.command()
     @commands.guild_only()
