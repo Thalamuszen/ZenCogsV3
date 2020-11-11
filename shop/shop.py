@@ -423,8 +423,6 @@ class Shop(commands.Cog):
         """Change the description of an existing buyable item."""
         def check(m):
             return m.author == ctx.author and m.channel == ctx.channel
-        if quantity <= 0:
-            return await ctx.send("Uh oh, quantity has to be more than 0.")
         item = item.strip("@")
         items = await self.config.guild(ctx.guild).items.get_raw()
         if item in items:
