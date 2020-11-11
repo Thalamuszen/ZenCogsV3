@@ -1172,13 +1172,25 @@ class Shop(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def removeinventory(self, ctx: commands.Context, *, item: str):
+    async def removeinventory(self, ctx: commands.Context, quantity: int, *, item: str):
         """Remove an item from your inventory."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
+        info = await self.config.member(ctx.author).inventory.get_raw(item)
+        inv_quantity = int(info.get("quantity"))
+        if quantity <= 0:
+            return await ctx.send("Uh oh, quantity has to be more than 0.")
         if item not in inventory:
             return await ctx.send("You don't own this item.")
-        await self.config.member(ctx.author).inventory.clear_raw(item)
-        await ctx.send(f"{item} removed.")
+        if quantity > inv_quantity:
+            return await ctx.send("You don't have that many {item}(s).")
+        inv_quantity -= quantity
+        if inv_quantity == 0:
+            await self.config.member(ctx.author).inventory.clear_raw(item)
+        else:
+            await self.config.member(ctx.author).inventory.set_raw(
+                item, "quantity", value=inv_quantity
+	    )
+        await ctx.send(f"{inv_quantity} of {item}(s) have been removed from your inventory.")
 
     @commands.command()
     @commands.guild_only()
