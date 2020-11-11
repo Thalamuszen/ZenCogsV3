@@ -1112,16 +1112,16 @@ class Shop(commands.Cog):
 
         if item in items:
             info = await self.config.guild(ctx.guild).items.get_raw(item)
-            item_type = "item"
+            item_type = "Item"
         elif item in roles:
             info = await self.config.guild(ctx.guild).roles.get_raw(item)
-            item_type = "role"
+            item_type = "Role"
         elif item in games:
             info = await self.config.guild(ctx.guild).games.get_raw(item)
-            item_type = "game"
+            item_type = "Game"
         elif item in xmas:
             info = await self.config.guild(ctx.guild).xmas.get_raw(item)
-            item_type = "xmas"            
+            item_type = "Xmas"            
         else:
             return await ctx.send("This item isn't buyable.")
         price = info.get("price")
@@ -1130,9 +1130,14 @@ class Shop(commands.Cog):
         description = info.get("description")
         if not redeemable:
             redeemable = False
-        await ctx.send(
-            f"**__{item}:__**\n*Type:* {item_type}\n*Price:* {price}\n*Quantity:* {quantity}\n*Redeemable:* {redeemable}\n*Description:* {description}"
-        )
+        embed = discord.Embed(
+            title="{item}"
+            colour=await ctx.embed_colour(),
+            description=f"**Type:** {item_type}\n**Price:** {price}\n**Description:** {description}",
+            timestamp=datetime.now(),
+	)
+        embed.set_footer(text="Information™")
+        await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
