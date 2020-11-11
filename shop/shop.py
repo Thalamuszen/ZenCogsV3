@@ -1051,9 +1051,9 @@ class Shop(commands.Cog):
         xmas_date = datetime(2020, 12, 24)
         over_xmas = datetime(2021, 1, 1)
         if date < xmas_date:
-            await ctx.send("This command cannot be run until after the 24th of December 2020")
+            return await ctx.send("This command cannot be run until after the 24th of December 2020")
         if date > over_xmas:
-            await ctx.send("Christmas is over, see you again next year!")        
+            return await ctx.send("Christmas is over, see you again next year!")        
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
         if item in author_inv:
             pass
