@@ -1131,7 +1131,7 @@ class Shop(commands.Cog):
         if not redeemable:
             redeemable = False
         embed = discord.Embed(
-            title="{item}"
+            title="{item}",
             colour=await ctx.embed_colour(),
             description=f"**Type:** {item_type}\n**Price:** {price}\n**Description:** {description}",
             timestamp=datetime.now(),
