@@ -1046,7 +1046,14 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop module is disabled. Come back later!")
-#       LOOK INTO THE ENABLED FEATURE ABOVE SOULD I TOGGLE OR USE THE DATE       
+#       LOOK INTO THE ENABLED FEATURE ABOVE SOULD I TOGGLE OR USE THE DATE
+        date = datetime.now()
+        xmas_date = datetime.datetime(2020, 12, 24)
+        over_xmas = datetime.datetime(2021, 1, 1)
+        if date < xmas_date
+            await ctx.send("This command cannot be run until after the 24th of December 2020")
+        if date > over_xmas
+            await ctx.send("Christmas is over, see you again next year!")        
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
         if item in author_inv:
             pass
