@@ -940,7 +940,7 @@ class Shop(commands.Cog):
                 table = [cat, i, quantity]
                 lst.append(table)              
         if lst == []:
-            desc = "Nothing to see here, go buy something at the `!shop`"
+            output = "Nothing to see here, go buy something at the `!shop`"
         else:
             headers = ("Type", "Item", "Qty") 
             output = box(tabulate(lst, headers=headers), lang="md")
