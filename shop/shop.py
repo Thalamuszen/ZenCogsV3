@@ -1048,8 +1048,8 @@ class Shop(commands.Cog):
             return await ctx.send("Uh oh, the shop module is disabled. Come back later!")
 #       LOOK INTO THE ENABLED FEATURE ABOVE SOULD I TOGGLE OR USE THE DATE
         date = datetime.now()
-        xmas_date = datetime.datetime(2020, 12, 24)
-        over_xmas = datetime.datetime(2021, 1, 1)
+        xmas_date = datetime(2020, 12, 24)
+        over_xmas = datetime(2021, 1, 1)
         if date < xmas_date:
             await ctx.send("This command cannot be run until after the 24th of December 2020")
         if date > over_xmas:
