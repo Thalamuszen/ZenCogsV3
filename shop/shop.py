@@ -256,7 +256,7 @@ class Shop(commands.Cog):
                 price = pred_int.result
                 if price <= 0:
                     return await ctx.send("Uh oh, price has to be more than 0.")
-                await ctx.send("What is the size of the gift? small medium or large")
+                await ctx.send("What is the gift category? Lowercase only. (card/sf/cp/ch/lp)")
                 try:
                     answer = await self.bot.wait_for("message", timeout=120, check=check)
                 except asyncio.TimeoutError:
