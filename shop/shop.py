@@ -1190,7 +1190,7 @@ class Shop(commands.Cog):
             await self.config.member(ctx.author).inventory.set_raw(
                 item, "quantity", value=inv_quantity
 	    )
-        await ctx.send(f"{inv_quantity} of {item}(s) have been removed from your inventory.")
+        await ctx.send(f"{quantity} of {item}(s) have been removed from your inventory.")
 
     @commands.command()
     @commands.guild_only()
