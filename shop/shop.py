@@ -571,7 +571,7 @@ class Shop(commands.Cog):
                         "is_game": False,
                         "is_xmas": False,
                         "redeemable": False,
-                        "redeemed": True,
+                        "redeemed": False,
                         "giftable": False,
                         "gifted": False,                         
                     },
