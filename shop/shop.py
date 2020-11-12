@@ -1024,10 +1024,12 @@ class Shop(commands.Cog):
             )
         giftee_inv = await self.config.member(user).inventory.get_raw()
         from_text = " from "
+        authorname = (str(ctx.author.name))
+        author_name = authorname.lower()
         iu = []
         iu.append(item)
         iu.append(from_text)
-        iu.append(str(ctx.author.name))
+        iu.append(author_name)
         item_user = ''.join(iu)
         if item_user in giftee_inv:
             info = await self.config.member(user).inventory.get_raw(item_user)
