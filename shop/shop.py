@@ -1371,7 +1371,7 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty")
             output = box(tabulate(sorted_item, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nTo see more info on an item, use the `!show` command.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
+            embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nItems can be returned using the `!return` command, as long as they haven't been redeemed.\nTo see more info on an item, use the `!show` command.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
             embeds.append(embed_i)
         if sorted_game == []:
             embed_g.description="Nothing to see here."
@@ -1385,6 +1385,19 @@ class Shop(commands.Cog):
         else:
             headers = ("", "Item", "Price", "Qty")
             output = box(tabulate(sorted_xmas, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
-            embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send to your friends for the festive period!\n\nAfter your purchase, use the `!gift` command to gift the item to a friend.\nAfter the **24th of December** the `!open` command will become available. Keep an eye on the Elune Updates channel for more information.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"	
+            embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send to your friends for the festive period!\n\nAfter your purchase, use the `!gift` command to gift the item to a friend.\nAfter the **24th of December** the `!open` command will become available. Keep an eye on the Elune Updates channel for more information.\nChristmas items **cannot** be refunded using the `!return` command\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"	
             embeds.append(embed_x)
+        if embeds == []:
+            embed_closed = discord.Embed(
+               title="__**All shops are closed**__",
+               colour=await ctx.embed_colour(),
+               timestamp=datetime.now(),
+            )
+            embed_closed.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
+            embed_closed.set_author(
+               name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
+            )
+            embed_closed.description="Come back soon!"	
+            embed_closed.set_footer(text="Shoppy™")
+            embeds.append(embed_closed)
         await menu(ctx, pages=embeds, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=120)
