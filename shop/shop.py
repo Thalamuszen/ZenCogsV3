@@ -555,9 +555,6 @@ class Shop(commands.Cog):
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
-        
-        if not item:
-            await self._show_store(ctx)
 
         item = item.strip("@")
         inventory = await self.config.member(ctx.author).inventory.get_raw()
