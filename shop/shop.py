@@ -1100,7 +1100,7 @@ class Shop(commands.Cog):
                 item, "quantity", value=author_quantity
             )
         gifter_id = info.get("gifter")
-        gifter = get(ctx.guild.members, id=ping_id)
+        gifter = get(ctx.guild.members, id=gifter_id)
         await ctx.send(f"{ctx.author.mention} is opening your gift, {gifter.mention}")
         placing_messages = [
             "*You excitedly place the gift upon your lap and smile...*",
