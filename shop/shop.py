@@ -1037,6 +1037,7 @@ class Shop(commands.Cog):
                 item_user, "quantity", value=giftee_quantity
             )
         else:
+            gifter = ctx.author.id
             await self.config.member(user).inventory.set_raw(
                 item_user,
                     value={
@@ -1051,6 +1052,7 @@ class Shop(commands.Cog):
                         "giftable": False,
                         "gifted": True,
 			"size": size,
+                        "gifter": gifter,
                     },
                 )
         await ctx.send(
@@ -1069,7 +1071,6 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop module is disabled. Come back later!")
-#       LOOK INTO THE ENABLED FEATURE ABOVE SOULD I TOGGLE OR USE THE DATE
         date = datetime.now()
         xmas_date = datetime(2020, 12, 24)
         over_xmas = datetime(2021, 1, 1)
@@ -1098,7 +1099,9 @@ class Shop(commands.Cog):
             await self.config.member(ctx.author).inventory.set_raw(
                 item, "quantity", value=author_quantity
             )
-#	NEED TO EXTRACT GIFTER FROM GIFT COMMAND AND APPLY IT TO SOMEWHERE BELOW
+        gifter_id = info.get("gifter")
+        gifter = get(ctx.guild.members, id=ping_id)
+        await ctx.send(f"{ctx.author.mention} is opening your gift, {gifter.mention}")
         placing_messages = [
             "*You excitedly place the gift upon your lap and smile...*",
             "*You slide out the present from beneath the Christmas tree...*",
@@ -1111,7 +1114,7 @@ class Shop(commands.Cog):
         ]
         await bot_talking.edit(content=random.choice(opening_messages))
         await asyncio.sleep(random.randint(5, 8))
-        sg_messages = [
+        card_messages = [
             f"{ctx.author.mention} You received: A pair of socks",
             f"{ctx.author.mention} You received: Deodorant", 
             f"{ctx.author.mention} You received: :blue_heart:",
@@ -1119,17 +1122,38 @@ class Shop(commands.Cog):
             f"{ctx.author.mention} You received: :blue_heart:",		
             f"{ctx.author.mention} You received: :blue_heart:",		
         ]
-        mg_messages = [
+        sf_messages = [
+            f"{ctx.author.mention} You received: Overwatch 2",
+            f"{ctx.author.mention} You received: A £10 Steam gift card",
+        ]
+        cp_messages = [
+            f"{ctx.author.mention} You received: Overwatch 2",
+            f"{ctx.author.mention} You received: A £10 Steam gift card",
+        ]
+        ch_messages = [
+            f"{ctx.author.mention} You received: Overwatch 2",
+            f"{ctx.author.mention} You received: A £10 Steam gift card",
+        ]
+        lp_messages = [
             f"{ctx.author.mention} You received: Overwatch 2",
             f"{ctx.author.mention} You received: A £10 Steam gift card",
         ]
         size = info.get("size")
-        if size == 'small':
+        if size == 'card':
             await asyncio.sleep(2)
-            await ctx.send(content=random.choice(sg_messages))
-        if size == 'medium':
+            await ctx.send(content=random.choice(card_messages))
+        if size == 'sf':
             await asyncio.sleep(2)
-            await ctx.send(content=random.choice(mg_messages))
+            await ctx.send(content=random.choice(sf_messages))
+        if size == 'cp':
+            await asyncio.sleep(2)
+            await ctx.send(content=random.choice(cp_messages))
+        if size == 'ch':
+            await asyncio.sleep(2)
+            await ctx.send(content=random.choice(ch_messages))
+        if size == 'lp':
+            await asyncio.sleep(2)
+            await ctx.send(content=random.choice(lp_messages))
 
     @commands.command()
     @commands.guild_only()
