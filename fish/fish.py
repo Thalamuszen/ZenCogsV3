@@ -156,7 +156,7 @@ class Fish(commands.Cog):
             uncommon = await self.config.uncommon()
             mn = len(uncommon)
             u = randint(0, mn)
-            fish = uncommon[r]
+            fish = uncommon[u]
             await ctx.send(":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(fish)
@@ -187,7 +187,7 @@ class Fish(commands.Cog):
             common = await self.config.common()
             mn = len(common)
             c = randint(0, mn)
-            fish = common[r]
+            fish = common[c]
             await ctx.send(":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(fish)
@@ -218,7 +218,7 @@ class Fish(commands.Cog):
             trash = await self.config.trash()
             mn = len(trash)
             t = randint(0, mn)
-            fish = trash[r]
+            fish = trash[t]
             await ctx.send(":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:              
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(fish)
