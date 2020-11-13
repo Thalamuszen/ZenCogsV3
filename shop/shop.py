@@ -970,6 +970,7 @@ class Shop(commands.Cog):
             description=f"{output}",
             timestamp=datetime.now(),
         )
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/752524729470025788/776788124755034112/backpack.png")
         embed.set_author(
             name=f"{ctx.author.display_name}'s inventory", icon_url=ctx.author.avatar_url,
         )            
