@@ -29,29 +29,29 @@ class Fish(commands.Cog):
 
         default_global = {
             "trash": [
-                "wrench": "\ud83d\udd27",
-                "battery": "\ud83d\udd0b",
-                "shopping_cart": "\ud83d\uded2",
+                "\ud83d\udd27",
+                "\ud83d\udd0b",
+                "\ud83d\uded2",
             ],
             "uncommon": [
-                "tropical_fish": "\ud83d\udc20",
-                "blowfish": "\ud83d\udc21", 
+                "\ud83d\udc20",
+                "\ud83d\udc21", 
             ],
             "common": [
-                "fish": "\ud83d\udc1f",
-                "crab": "\ud83e\udd80",
-                "shrimp": "\ud83e\udd90",
+                "\ud83d\udc1f",
+                "\ud83e\udd80",
+                "\ud83e\udd90",
             ],
             "rarefish": [
-                "turtle": "\ud83d\udc22",
-                "whale": "\ud83d\udc33",
-                "whale2": "\ud83d\udc0b",
-                "crocodile": "\ud83d\udc0a",
-                "penguin": "\ud83d\udc27",
-                "octopus": "\ud83d\udc19",
-                "shark": "\ud83e\udd88",
-                "squid": "\ud83e\udd91",
-                "dolphin": "\ud83d\udc2c",
+                "\ud83d\udc22",
+                "\ud83d\udc33",
+                "\ud83d\udc0b",
+                "\ud83d\udc0a",
+                "\ud83d\udc27",
+                "\ud83d\udc19",
+                "\ud83e\udd88",
+                "\ud83e\udd91",
+                "\ud83d\udc2c",
             ],
         }
 
