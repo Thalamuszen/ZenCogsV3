@@ -153,7 +153,7 @@ class Fish(commands.Cog):
                         "gifted": False,                         
                     },
                 )            
-        elif rarechange < chance <= uncommonchance:
+        elif rarechance < chance <= uncommonchance:
             uncommon = await self.config.uncommon()
             mn = len(uncommon)
             u = randint(0, mn - 1)
