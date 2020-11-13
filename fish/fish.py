@@ -317,6 +317,9 @@ class Fish(commands.Cog):
         if not enabled:
             return await ctx.send("Uh oh, the fishing shop is closed. Come back later!")
         group_item = group.lower()
+        inventory = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw()
+        if group not in inventory:
+            return await ctx.send("Nope, nah, that's not a thing you have to sell.")
         fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(group_item)
         try:
             is_fish = fish_info.get("is_fish")
