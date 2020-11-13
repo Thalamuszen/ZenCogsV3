@@ -11,9 +11,27 @@ from redbot.core.utils.chat_formatting import box, humanize_list, pagify
 
 from redbot.core.bot import Red
 
-
 log = logging.getLogger("red.zen.fish")
 
+NAMES = {
+    "\ud83d\udd27": "Wrench",
+    "\ud83d\udd0b": "Battery",
+    "\ud83d\uded2": "Shopping Cart",
+    "\ud83d\udc20": "Tropical Fish",
+    "\ud83d\udc21": "Blow Fish",
+    "\ud83d\udc1f": "Fish",
+    "\ud83e\udd80": "Crab",
+    "\ud83e\udd90": "Shrimp",
+    "\ud83d\udc22": "Turtle",
+    "\ud83d\udc33": "Whale",
+    "\ud83d\udc0b": "Whale2?????",
+    "\ud83d\udc0a": "Crocodile",
+    "\ud83d\udc27": "Penguin",
+    "\ud83d\udc19": "Octopus",
+    "\ud83e\udd88": "Shark",      
+    "\ud83e\udd91": "Squid",  
+    "\ud83d\udc2c": "Dolphin",
+}
 
 class Fish(commands.Cog):
     async def red_delete_data_for_user(self, **kwargs):
@@ -73,7 +91,7 @@ class Fish(commands.Cog):
         self.config.register_global(**default_global)
         self.config.register_guild(**default_guild)
         self.config.register_user(**default_user)
-
+        
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
     @commands.guild_only()
@@ -130,16 +148,18 @@ class Fish(commands.Cog):
             fish = rarefish[r]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
-                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(fish)
+                item = NAMES[fish]
+                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
                 author_quantity = int(fish_info.get("quantity"))
                 author_quantity += 1
-                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(fish, "quantity", value=author_quantity)
+                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)
             except KeyError:
+                item = NAMES[fish]
                 price = 2000
                 author_quantity = 1           
                 description = "Oooo shiny!"
                 await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(
-                    fish,
+                    item,
                     value={
                         "price": price,
                         "quantity": author_quantity,
@@ -162,16 +182,18 @@ class Fish(commands.Cog):
             fish = uncommon[u]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
-                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(fish)
+                item = NAMES[fish]
+                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
                 author_quantity = int(fish_info.get("quantity"))
                 author_quantity += 1
-                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(fish, "quantity", value=author_quantity)
+                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)
             except KeyError:
+                item = NAMES[fish]
                 price = 50
                 author_quantity = 1 
                 description = "Don't see these too often!"
                 await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(
-                    fish,
+                    item,
                     value={
                         "price": price,
                         "quantity": author_quantity,
@@ -194,16 +216,18 @@ class Fish(commands.Cog):
             fish = common[c]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
-                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(fish)
+                item = NAMES[fish]
+                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
                 author_quantity = int(fish_info.get("quantity"))
                 author_quantity += 1
-                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(fish, "quantity", value=author_quantity)
+                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)
             except KeyError:
+                item = NAMES[fish]
                 price = 10
                 author_quantity = 1 
                 description = "Another one of these? Ok!"
                 await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(
-                    fish,
+                    item,
                     value={
                         "price": price,
                         "quantity": author_quantity,
@@ -225,17 +249,19 @@ class Fish(commands.Cog):
             t = randint(0, mn - 1)
             fish = trash[t]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
-            try:              
-                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(fish)
+            try:     
+                item = NAMES[fish]
+                fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
                 author_quantity = int(fish_info.get("quantity"))
                 author_quantity += 1
-                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(fish, "quantity", value=author_quantity)
+                await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)
             except KeyError:
+                item = NAMES[fish]
                 price = 5
                 author_quantity = 1 
                 description = "Ugh, trash"
                 await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(
-                    fish,
+                    item,
                     value={
                         "price": price,
                         "quantity": author_quantity,
