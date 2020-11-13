@@ -79,7 +79,7 @@ class Fish(commands.Cog):
 
         default_user = {
             "turtle": 0,
-            "blow whale": 0,
+            "blow_whale": 0,
             "whale": 0,
             "crocodile": 0,
             "penguin": 0,
