@@ -112,9 +112,9 @@ class Fish(commands.Cog):
         now = datetime.datetime.now(datetime.timezone.utc)
         now = now.replace(tzinfo=None)
         secs = int((now - last_time).total_seconds())
-        if int((now - last_time).total_seconds()) < await self.config.guild(message.guild).cooldown():
+        if int((now - last_time).total_seconds()) < await self.config.guild(ctx.guild).cooldown():
             return await ctx.send(f":fishing_pole_and_fish: **| {author.name} you can fish again in {secs} seconds.**")
-        await self.config.user(message.author).last_fish.set(str(now))            
+        await self.config.user(ctx.author).last_fish.set(str(now))            
 
         chance = uniform(1, 100)
         rarechance = 0.15
