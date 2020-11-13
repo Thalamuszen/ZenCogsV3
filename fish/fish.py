@@ -107,7 +107,7 @@ class Fish(commands.Cog):
             return await ctx.send("Uh oh, the lake is closed. Come back later!")
         
         author = ctx.message.author
-        userdata = await self.config.user(message.author).all()
+        userdata = await self.config.user(ctx.author).all()
         last_time = datetime.datetime.strptime(str(userdata["last_fish"]), "%Y-%m-%d %H:%M:%S.%f")
         now = datetime.datetime.now(datetime.timezone.utc)
         now = now.replace(tzinfo=None)
