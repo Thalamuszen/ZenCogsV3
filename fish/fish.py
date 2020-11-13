@@ -14,14 +14,14 @@ from redbot.core.bot import Red
 log = logging.getLogger("red.zen.fish")
 
 NAMES = {
-    "\ud83d\udd27": "wrench",
-    "\ud83d\udd0b": "battery",
-    "\ud83d\uded2": "shopping cart",
-    "\ud83d\udc20": "tropical fish",
-    "\ud83d\udc21": "blow fish",
-    "\ud83d\udc1f": "fish",
-    "\ud83e\udd80": "crab",
-    "\ud83e\udd90": "shrimp",
+    "\ud83d\udd27": "trash",
+    "\ud83d\udd0b": "trash",
+    "\ud83d\uded2": "trash",
+    "\ud83d\udc20": "uncommon",
+    "\ud83d\udc21": "uncommon",
+    "\ud83d\udc1f": "common",
+    "\ud83e\udd80": "common",
+    "\ud83e\udd90": "common",
     "\ud83d\udc22": "turtle",
     "\ud83d\udc33": "blow whale",
     "\ud83d\udc0b": "whale",
