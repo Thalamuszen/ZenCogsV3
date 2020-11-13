@@ -1199,12 +1199,12 @@ class Shop(commands.Cog):
     async def removeinventory(self, ctx: commands.Context, quantity: int, *, item: str):
         """Remove an item from your inventory."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
-        info = await self.config.member(ctx.author).inventory.get_raw(item)
+        if item not in inventory:
+            return await ctx.send("You don't own this item.")
+        info = await self.config.member(ctx.author).inventory.get_raw(item)	
         inv_quantity = int(info.get("quantity"))
         if quantity <= 0:
             return await ctx.send("Uh oh, quantity has to be more than 0.")
-        if item not in inventory:
-            return await ctx.send("You don't own this item.")
         if quantity > inv_quantity:
             return await ctx.send("You don't have that many {item}(s).")
         inv_quantity -= quantity
