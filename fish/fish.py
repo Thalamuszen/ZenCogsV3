@@ -28,21 +28,21 @@ class Fish(commands.Cog):
         self.config = Config.get_conf(self, 4119811374891, force_registration=True)
 
         default_global = {
-            trash = [
+            "trash": [
                 "wrench": "\ud83d\udd27",
                 "battery": "\ud83d\udd0b",
                 "shopping_cart": "\ud83d\uded2",
             ],
-            uncommon = [
+            "uncommon": [
                 "tropical_fish": "\ud83d\udc20",
                 "blowfish": "\ud83d\udc21", 
             ],
-            common = [
+            "common": [
                 "fish": "\ud83d\udc1f",
                 "crab": "\ud83e\udd80",
                 "shrimp": "\ud83e\udd90",
             ],
-            rarefish = [
+            "rarefish": [
                 "turtle": "\ud83d\udc22",
                 "whale": "\ud83d\udc33",
                 "whale2": "\ud83d\udc0b",
