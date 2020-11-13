@@ -1,0 +1,13 @@
+{
+	"author": [
+		"ThalamusZen"
+	],
+	"description": "A simple fishing simulator for earning credits.",
+    "install_msg": "Thanks for installing!\nNote: You **need** ZenCogsV3 Shop cog installed, loaded and working.",
+	"short": "Fish for fish.",
+	"tags": [
+		"fish"
+	],
+	"type": "COG",
+	"end_user_data_statement": "This cog does not persistently store data or metadata about users."
+}
