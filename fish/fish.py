@@ -152,7 +152,7 @@ class Fish(commands.Cog):
                 _(
                     ":fishing_pole_and_fish: **| {author.name} caught a rare fish!!! {fish} !**"
                     "*Type `!fish rarefish` to see your trophy room"
-                .format(
+                ).format(
                     author=author,
                     fish=fish,
                 )
