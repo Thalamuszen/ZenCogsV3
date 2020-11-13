@@ -97,7 +97,7 @@ class Fish(commands.Cog):
             await ctx.send("Fishing is now disabled.")
 
 
-    @commands.group()
+    @commands.group(autohelp=False)
     @commands.guild_only()
     async def fish(self, ctx):
         """Base fishing command."""
