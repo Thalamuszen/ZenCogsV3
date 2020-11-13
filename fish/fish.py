@@ -249,8 +249,8 @@ class Fish(commands.Cog):
     @fish.command(name="rarefish")
     async def fish_rarefish(self, ctx: commands.Context):
         """Shows which rare fish you have caught and how many"""
-        Need to do something within this cog regarding rare fish and how many you have caught.
-        Set default for each individual rare fish to 0 and then if it IS 0, don't show it, otherwise show emoji next to qty caught.
+#        Need to do something within this cog regarding rare fish and how many you have caught.
+#        Set default for each individual rare fish to 0 and then if it IS 0, don't show it, otherwise show emoji next to qty caught.
 
         userdata = await self.config.user(ctx.author).all()
         msg = f"{ctx.author.name}'s Rare Fish Troph Wall"
