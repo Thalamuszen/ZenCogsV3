@@ -124,7 +124,7 @@ class Fish(commands.Cog):
         if chance <= rarechance:
             rarefish = await self.config.rarefish()
             mn = len(rarefish)
-            r = randint(0, mn)
+            r = randint(0, mn - 1)
             fish = rarefish[r]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
@@ -158,7 +158,7 @@ class Fish(commands.Cog):
         elif chance > rarechance <= uncommonchance:
             uncommon = await self.config.uncommon()
             mn = len(uncommon)
-            u = randint(0, mn)
+            u = randint(0, mn - 1)
             fish = uncommon[u]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
@@ -192,7 +192,7 @@ class Fish(commands.Cog):
         elif chance > uncommonchance <= commonchance:
             common = await self.config.common()
             mn = len(common)
-            c = randint(0, mn)
+            c = randint(0, mn - 1)
             fish = common[c]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:
@@ -226,7 +226,7 @@ class Fish(commands.Cog):
         elif chance > commonchance:
             trash = await self.config.trash()
             mn = len(trash)
-            t = randint(0, mn)
+            t = randint(0, mn - 1)
             fish = trash[t]
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
             try:              
