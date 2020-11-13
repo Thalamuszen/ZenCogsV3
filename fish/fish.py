@@ -329,11 +329,9 @@ class Fish(commands.Cog):
             fish_quantity = int(fish_info.get("quantity"))
             fish_price = int(fish_info.get("price"))
             credits_name = await bank.get_currency_name(ctx.guild)
-            balance = int(await bank.get_balance(ctx.author))
-            refund = fish_quantity * fish_price
+            refund = int(fish_quantity * fish_price)
             refund_nice = humanize_number(refund)
-            balance_refund = balance += refund
-            await bank.deposit_credits(ctx.author, balance_refund)
+            await bank.deposit_credits(ctx.author, refund)
             await self.bot.get_cog("Shop").config.member(ctx.author).inventory.clear_raw(group_item)
             await ctx.send(
                 f"You have received {return_nice} {credits_name}."
