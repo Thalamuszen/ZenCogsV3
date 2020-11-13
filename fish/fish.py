@@ -111,7 +111,7 @@ class Fish(commands.Cog):
         last_time = datetime.datetime.strptime(str(userdata["last_fish"]), "%Y-%m-%d %H:%M:%S.%f")
         now = datetime.datetime.now(datetime.timezone.utc)
         now = now.replace(tzinfo=None)
-        secs = int((now - last_time).total_seconds())
+        secs = int((last_time - now).total_seconds())
         if int((now - last_time).total_seconds()) < await self.config.guild(ctx.guild).cooldown():
             return await ctx.send(f":fishing_pole_and_fish: **| {author.name} you can fish again in {secs} seconds.**")
         await self.config.user(ctx.author).last_fish.set(str(now))            
