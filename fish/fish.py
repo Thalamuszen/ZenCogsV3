@@ -22,6 +22,8 @@ NAMES = {
     "\ud83d\udc1f": "common",
     "\ud83e\udd80": "common",
     "\ud83e\udd90": "common",
+}
+RARES = {
     "\ud83d\udc22": "turtle",
     "\ud83d\udc33": "blow whale",
     "\ud83d\udc0b": "whale",
@@ -77,8 +79,8 @@ class Fish(commands.Cog):
 
         default_user = {
             "turtle": 0,
+            "blow whale": 0,
             "whale": 0,
-            "whale2": 0,
             "crocodile": 0,
             "penguin": 0,
             "octopus": 0,
@@ -146,15 +148,23 @@ class Fish(commands.Cog):
             mn = len(rarefish)
             r = randint(0, mn - 1)
             fish = rarefish[r]
-            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
+            await ctx.send(
+                _(
+                    ":fishing_pole_and_fish: **| {author.name} caught a rare fish!!! {fish} !**"
+                    "*Type `!fish rarefish` to see your trophy room"
+                .format(
+                    author=author,
+                    fish=fish,
+                )
+            )
             try:
-                item = NAMES[fish]
+                item = RARES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
                 author_quantity = int(fish_info.get("quantity"))
                 author_quantity += 1
                 await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)
             except KeyError:
-                item = NAMES[fish]
+                item = RARES[fish]
                 price = 2000
                 author_quantity = 1           
                 description = "Oooo shiny!"
@@ -180,7 +190,7 @@ class Fish(commands.Cog):
             mn = len(uncommon)
             u = randint(0, mn - 1)
             fish = uncommon[u]
-            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
+            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught an uncommon fish! {fish} !**")
             try:
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
@@ -214,7 +224,7 @@ class Fish(commands.Cog):
             mn = len(common)
             c = randint(0, mn - 1)
             fish = common[c]
-            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
+            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught a common fish {fish} !**")
             try:
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
@@ -248,7 +258,7 @@ class Fish(commands.Cog):
             mn = len(trash)
             t = randint(0, mn - 1)
             fish = trash[t]
-            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught: {fish} !**")
+            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught a piece of trash.. {fish} !**")
             try:     
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
@@ -283,9 +293,8 @@ class Fish(commands.Cog):
         """Shows which rare fish you have caught and how many"""
 #        Need to do something within this cog regarding rare fish and how many you have caught.
 #        Set default for each individual rare fish to 0 and then if it IS 0, don't show it, otherwise show emoji next to qty caught.
-
         userdata = await self.config.user(ctx.author).all()
-        msg = f"{ctx.author.name}'s Rare Fish Troph Wall"
+        msg = f"{ctx.author.name}'s Rare Fish Trophy Wall"
         em = discord.Embed(color=await ctx.embed_color())
         em.description = f"{userdata['candies']} \N{CANDY}"
         if userdata["chocolate"]:
@@ -298,18 +307,34 @@ class Fish(commands.Cog):
             em.description += f"\n\n**Sickness is over 40/100**\n*You don't feel so good...*"
         elif sickness in range(56, 71):
             em.description += f"\n\n**Sickness is over 55/100**\n*You don't feel so good...*"
-        elif sickness in range(71, 86):
-            em.description += f"\n\n**Sickness is over 70/100**\n*You really don't feel so good...*"
-        elif sickness in range(86, 101):
-            em.description += f"\n\n**Sickness is over 85/100**\n*The thought of more sugar makes you feel awful...*"
-        elif sickness > 100:
-            em.description += f"\n\n**Sickness is over 100/100**\n*Better wait a while for more candy...*"
         await ctx.send(msg, embed=em)
 
     @fish.command(name="sell")
     async def fish_sell(self, ctx: commands.Context, group: str = ""):
-        """Sell your trash/uncommon/common/rare fish"""
+        """Sell your trash or uncommon/common fish"""
 
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the fishing shop is closed. Come back later!")
+        group_item = group.lower()
+        fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(group_item)
+        try:
+            is_fish = fish_info.get("is_fish")
+            return await ctx.send("Nice try...")
+        except KeyError:
+            inventory = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw()
+            if group_item not in inventory:
+                return await ctx.send("You don't have any of these types of fish to sell.")
+            fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(group_item)
+            fish_quantity = int(fish_info.get("quantity"))
+            fish_price = int(fish_info.get("price"))
+            credits_name = await bank.get_currency_name(ctx.guild)
+            balance = int(await bank.get_balance(ctx.author))
+            refund = fish_quantity * fish_price
+            refund_nice = humanize_number(refund)
+            balance_refund = balance += refund
+            await bank.deposit_credits(ctx.author, balance_refund)
+            await self.bot.get_cog("Shop").config.member(ctx.author).inventory.clear_raw(group_item)
+            await ctx.send(
+                f"You have received {return_nice} {credits_name}."
+            )            
