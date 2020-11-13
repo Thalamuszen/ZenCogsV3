@@ -214,7 +214,7 @@ class Fish(commands.Cog):
                         "gifted": False,                         
                     },
                 )                
-        elif chance > commonchance
+        elif chance > commonchance:
             trash = await self.config.trash()
             mn = len(trash)
             t = randint(0, mn)
