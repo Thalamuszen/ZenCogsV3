@@ -158,8 +158,12 @@ class Fish(commands.Cog):
 
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
-            return await ctx.send("Uh oh, the lake is closed. Come back later!")
+            return await ctx.send("Uh oh, the lake is closed. Come back later!")        
         casting_price = 5
+        balance = int(await bank.get_balance(ctx.author))
+        credits_name = await bank.get_currency_name(ctx.guild)        
+        if casting_price > balance:
+            return await ctx.send(f"It cost's {casting_price} {credits_name} to buy bait. You don't have enough!")
         await bank.withdraw_credits(ctx.author, casting_price)
         author = ctx.message.author
         userdata = await self.config.user(ctx.author).all()
