@@ -949,8 +949,6 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have received {return_price} {credits_name}."
                 )
-            else:
-
 
     @commands.command()
     @commands.guild_only()
