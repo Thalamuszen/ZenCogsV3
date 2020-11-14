@@ -395,7 +395,7 @@ class Fish(commands.Cog):
             em.description += f"\n**{userdata['squid']}** \N{SQUID}"              
         if userdata["dolphin"]:
             number = userdata['dolphin']
-            em.description += f"\n{number} {userdata['dolphin']} \N{DOLPHIN}"              
+            em.description += f"\n**{userdata['dolphin']}** \N{DOLPHIN}"              
         await ctx.send(embed=em)  
 
     @commands.command()
