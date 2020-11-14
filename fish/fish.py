@@ -332,7 +332,7 @@ class Fish(commands.Cog):
         if sorted_lst == []:
             output = "Nothing to see here, go fishing with `!fish`"
         else:
-            headers = ("Type", "Qty", "Worth") 
+            headers = ("Type", "Worth", "Qty") 
             output = box(tabulate(sorted_lst, headers=headers), lang="md")
         embed = discord.Embed(
             colour=await ctx.embed_colour(),
