@@ -925,7 +925,7 @@ class Shop(commands.Cog):
             inv_quantity = info.get("quantity")
             if quantity > inv_quantity:
                 return await ctx.send(f"You don't have that many to sell! Leave quantity blank to sell all of them")
-            if quantity == 1
+            if quantity == 1:
                 price = int(info.get("price"))
                 return_priceint = int(price * inv_quantity)
                 return_price = humanize_number(return_priceint)
