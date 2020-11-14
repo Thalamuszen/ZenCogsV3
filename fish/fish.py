@@ -191,7 +191,11 @@ class Fish(commands.Cog):
                         "giftable": False,
                         "gifted": False,                         
                     },
-                )            
+                )     
+                if item is "turtle":
+                    await self.config.user(ctx.author).turtle.set(userdata["turtle"] + 1)
+                elif item is "blow_whale":
+                    await self.config.user(ctx.author).blow_whale.set(userdata["blow_whale"] + 1)                
         elif rarechance < chance <= uncommonchance:
             uncommon = await self.config.uncommon()
             mn = len(uncommon)
