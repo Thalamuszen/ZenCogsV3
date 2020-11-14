@@ -366,8 +366,8 @@ class Fish(commands.Cog):
         if not enabled:
             return await ctx.send("Uh oh, the lake is closed. Come back later!")
         userdata = await self.config.user(ctx.author).all()
-        msg = f"{ctx.author.name}'s Rare Fish Trophy Wall"
         em = discord.Embed(color=await ctx.embed_color())
+        em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall" 
         em.description = f"Here you can see all of the rare fish you have and how many!\nGotta catch them all"
         if userdata["turtle"]:
             number = userdata['turtle']
@@ -396,7 +396,7 @@ class Fish(commands.Cog):
         if userdata["dolphin"]:
             number = userdata['dolphin']
             em.description += f"\n{number} {userdata['dolphin']} \N{TURTLE}"              
-        await ctx.send(msg, embed=em)  
+        await ctx.send(embed=em)  
 
     @commands.command()
     @commands.guild_only()
