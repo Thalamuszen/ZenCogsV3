@@ -195,7 +195,21 @@ class Fish(commands.Cog):
                 if item is "turtle":
                     await self.config.user(ctx.author).turtle.set(userdata["turtle"] + 1)
                 elif item is "blow_whale":
-                    await self.config.user(ctx.author).blow_whale.set(userdata["blow_whale"] + 1)                
+                    await self.config.user(ctx.author).blow_whale.set(userdata["blow_whale"] + 1)   
+                elif item is "whale":
+                    await self.config.user(ctx.author).whale.set(userdata["whale"] + 1)  
+                elif item is "crocodile":
+                    await self.config.user(ctx.author).crocodile.set(userdata["crocodile"] + 1)
+                elif item is "penguin":
+                    await self.config.user(ctx.author).penguin.set(userdata["penguin"] + 1)
+                elif item is "octopus":
+                    await self.config.user(ctx.author).octopus.set(userdata["octopus"] + 1)   
+                elif item is "shark":
+                    await self.config.user(ctx.author).shark.set(userdata["shark"] + 1)  
+                elif item is "squid":
+                    await self.config.user(ctx.author).squid.set(userdata["squid"] + 1) 
+                elif item is "dolphin":
+                    await self.config.user(ctx.author).dolphin.set(userdata["dolphin"] + 1)                     
         elif rarechance < chance <= uncommonchance:
             uncommon = await self.config.uncommon()
             mn = len(uncommon)
