@@ -117,10 +117,10 @@ class Fish(commands.Cog):
             await ctx.send("Fishing is now disabled.")
 
 
-    @commands.group(autohelp=False)
+    @commands.command()
     @commands.guild_only()
     async def fish(self, ctx):
-        """Base fishing command."""
+        """Go Fishing!"""
 
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
@@ -286,10 +286,11 @@ class Fish(commands.Cog):
                         "giftable": False,
                         "gifted": False,                         
                     },
-                )              
-
-    @fish.command(name="rarefish")
-    async def fish_rarefish(self, ctx: commands.Context):
+                )
+                
+    @commands.command()
+    @commands.guild_only()
+    async def rarefish(self, ctx: commands.Context):
         """Shows which rare fish you have caught and how many"""
 #        Need to do something within this cog regarding rare fish and how many you have caught.
 #        Set default for each individual rare fish to 0 and then if it IS 0, don't show it, otherwise show emoji next to qty caught.
@@ -309,7 +310,8 @@ class Fish(commands.Cog):
             em.description += f"\n\n**Sickness is over 55/100**\n*You don't feel so good...*"
         await ctx.send(msg, embed=em)
 
-    @fish.command(name="sell")
+    @commands.command()
+    @commands.guild_only()        
     async def fish_sell(self, ctx: commands.Context, group: str = ""):
         """Sell your trash or uncommon/common fish"""
 
