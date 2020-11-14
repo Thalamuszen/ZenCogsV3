@@ -373,7 +373,12 @@ class Fish(commands.Cog):
             name=f"\N{CROCODILE}",
             value=f"**{userdata['crocodile']}**",
             inline=True,
-        )        
+        )   
+        em.add_field(
+            name=f"**{userdata['crocodile']}**",
+            value=f"\N{CROCODILE}",
+            inline=True,
+        )            
         if userdata["turtle"]:
             number = userdata['turtle']
             em.description += f"**{userdata['turtle']}** \N{TURTLE}"
