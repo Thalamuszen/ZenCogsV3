@@ -543,7 +543,7 @@ class Shop(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def buy(self, ctx: commands.Context, quantity: int, *, item: str = ""):      
+    async def buy(self, ctx: commands.Context, quantity: Optional[int] = 1, *, item: str = ""):      
         """Buy an item from the shop."""
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
@@ -835,7 +835,7 @@ class Shop(commands.Cog):
 
     @commands.command(name="return", aliases=["sell", "refund"])
     @commands.guild_only()
-    async def store_return(self, ctx: commands.Context, quantity: int, *, item: str = ""):          
+    async def store_return(self, ctx: commands.Context, quantity: Optional[int] = 1, *, item: str = ""):          
         """Return an item, you will only receive 10% of the price you paid."""
         enabled = await self.config.guild(ctx.guild).enabled()
         credits_name = await bank.get_currency_name(ctx.guild)
