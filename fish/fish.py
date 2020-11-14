@@ -146,7 +146,7 @@ class Fish(commands.Cog):
         uncommonchance = 10.15
         commonchance = 51
 
-        if chance <= rarechance:
+        if chance >= rarechance:
             rarefish = await self.config.rarefish()
             mn = len(rarefish)
             r = randint(0, mn - 1)
@@ -154,7 +154,7 @@ class Fish(commands.Cog):
             await ctx.send(
                 _(
                     ":fishing_pole_and_fish: **| {author.name} caught a rare fish!!! {fish} !**"
-                    "*Type `!fish rarefish` to see your trophy room"
+                    "*Type `!rarefish` to see your trophy room"
                 ).format(
                     author=author,
                     fish=fish,
