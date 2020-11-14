@@ -380,7 +380,7 @@ class Fish(commands.Cog):
             em.description += f" **{userdata['whale']}** \N{WHALE} "
         if userdata["crocodile"]:
             number = userdata['crocodile']
-            em.description += f" **{userdata['crocodile']}** \N{CROCODILE} "          
+            em.description += f" **{userdata['crocodile']}** \N{CROCODILE} _            _"          
         if userdata["penguin"]:
             number = userdata['penguin']
             em.description += f" **{userdata['penguin']}** \N{PENGUIN} "            
