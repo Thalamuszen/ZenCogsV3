@@ -152,7 +152,7 @@ class Fish(commands.Cog):
             r = randint(0, mn - 1)
             fish = rarefish[r]
             await ctx.send(
-                _(
+                (
                     ":fishing_pole_and_fish: **| {author.name} caught a rare fish!!! {fish} !**"
                     "*Type `!rarefish` to see your trophy room"
                 ).format(
