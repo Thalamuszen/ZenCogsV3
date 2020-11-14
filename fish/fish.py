@@ -371,7 +371,7 @@ class Fish(commands.Cog):
         if not enabled:
             return await ctx.send("Uh oh, the lake is closed. Come back later!")
         userdata = await self.config.user(ctx.author).all()
-        em = discord.Embed(color=await ctx.embed_color())
+        em = discord.Embed(color=await ctx.embed_color(), timestamp=datetime.now())
         em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall"      
         em.set_thumbnail(url="https://cdn.discordapp.com/attachments/777176220378071050/777218030501363752/fishingsquare.gif") 
         em.description = f"Here you can see all of the rare fish you have caught.\nThere are nine types of rare fish to find in the lake.\n**Happy Fishing!**\n\n"     
@@ -401,7 +401,8 @@ class Fish(commands.Cog):
             em.description += f"\N{SQUID} x**{userdata['squid']}** - Squid\n"            
         if userdata["dolphin"]:
             number = userdata['dolphin']
-            em.description += f"\N{DOLPHIN} x**{userdata['dolphin']}** - Dolphin\n"                         
+            em.description += f"\N{DOLPHIN} x**{userdata['dolphin']}** - Dolphin\n"
+        em.set_footer(text="Fishy™")            
         await ctx.send(embed=em)  
 
     @commands.command()
