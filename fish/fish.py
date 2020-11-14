@@ -330,7 +330,7 @@ class Fish(commands.Cog):
                     sorted_lst = sorted(lst, key=itemgetter(1), reverse=True)
             except KeyError:
                 pass
-        if sorted_lst == []:
+        if lst == []:
             output = "Nothing to see here, go fishing with `!fish`"
         else:
             headers = ("Type", "Worth", "Qty") 
