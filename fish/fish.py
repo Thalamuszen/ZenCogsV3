@@ -323,15 +323,15 @@ class Fish(commands.Cog):
                 is_fish = info.get("is_fish")
                 if is_fish:
                     quantity = info.get("quantity")
-                    cat = "Fish"
-                    table = [cat, i, quantity]
+                    price = info.get("price")
+                    table = [i, quantity, price]
                     lst.append(table)
             except KeyError:
                 pass
         if lst == []:
             output = "Nothing to see here, go fishing with `!fish`"
         else:
-            headers = ("", "Type", "Item", "Qty") 
+            headers = ("Type", "Qty", "Worth") 
             output = box(tabulate(lst, headers=headers), lang="md")
         embed = discord.Embed(
             colour=await ctx.embed_colour(),
