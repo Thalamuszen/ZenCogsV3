@@ -367,7 +367,8 @@ class Fish(commands.Cog):
             return await ctx.send("Uh oh, the lake is closed. Come back later!")
         userdata = await self.config.user(ctx.author).all()
         em = discord.Embed(color=await ctx.embed_color())
-        em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall" 
+        em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall"      
+        em.set_thumbnail(url="https://cdn.discordapp.com/attachments/777176220378071050/777216273956077588/fishing.gif") 
         em.description = f"Here you can see all of the rare fish you have caught.\nThere are nine rare fish to find out in the lake.\n**Happy Fishing!**\n\n"     
         if userdata["turtle"]:
             number = userdata['turtle']
