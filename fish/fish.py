@@ -176,7 +176,6 @@ class Fish(commands.Cog):
         credits_name = await bank.get_currency_name(ctx.guild)        
         if casting_price > balance:
             return await ctx.send(f"It cost's {casting_price} {credits_name} to buy bait. You don't have enough!")
-        await bank.withdraw_credits(ctx.author, casting_price)
         author = ctx.message.author
         userdata = await self.config.user(ctx.author).all()
         last_time = datetime.strptime(str(userdata["last_fish"]), "%Y-%m-%d %H:%M:%S.%f")
@@ -188,7 +187,8 @@ class Fish(commands.Cog):
         if int((now - last_time).total_seconds()) < await self.config.guild(ctx.guild).cooldown():
             return await ctx.send(f":fishing_pole_and_fish: **| {author.name} you can fish again in {secs} seconds.**")
         await self.config.user(ctx.author).last_fish.set(str(now))            
-
+        await bank.withdraw_credits(ctx.author, casting_price)
+        
         chance = uniform(1, 100)
         rarechance = 0.15
         uncommonchance = 10.15
