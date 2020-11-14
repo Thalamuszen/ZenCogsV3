@@ -118,7 +118,29 @@ class Fish(commands.Cog):
             await ctx.send("Fishing is now enabled.")
         else:
             await ctx.send("Fishing is now disabled.")
-
+    
+    @fishy.command(name="rarereset")
+    async def rare_reset(self, ctx: commands.Context, user: discord.Member):
+        """Reset someones Trophy room"""
+        userdata = await self.config.user(ctx.author).all()        
+        if userdata["turtle"]:
+            await self.config.user(user).turtle.set(userdata["turtle"] = 0)  
+        if userdata["blow_whale"]:            
+            await self.config.user(user).blow_whale.set(userdata["blow_whale"] = 0)
+        if userdata["whale"]:            
+            await self.config.user(user).whale.set(userdata["whale"] = 0)
+        if userdata["crocodile"]:            
+            await self.config.user(user).crocodile.set(userdata["crocodile"] = 0)
+        if userdata["penguin"]:            
+            await self.config.user(user).penguin.set(userdata["penguin"] = 0)        
+        if userdata["octopus"]:            
+            await self.config.user(user).octopus.set(userdata["octopus"] = 0)           
+        if userdata["shark"]:            
+            await self.config.user(user).shark.set(userdata["shark"] = 0)          
+        if userdata["squid"]:            
+            await self.config.user(user).squid.set(userdata["squid"] = 0)        
+        if userdata["dolphin"]:            
+            await self.config.user(user).dolphin.set(userdata["dolphin"] = 0)          
 
     @commands.command()
     @commands.guild_only()
@@ -315,10 +337,14 @@ class Fish(commands.Cog):
                 
     @commands.command()
     @commands.guild_only()
-    async def rarefish(self, ctx: commands.Context):
+    async def rarefish(self, ctx: commands.Context):        
         """Shows which rare fish you have caught and how many"""
 #        Need to do something within this cog regarding rare fish and how many you have caught.
 #        Set default for each individual rare fish to 0 and then if it IS 0, don't show it, otherwise show emoji next to qty caught.
+        enabled = await self.config.guild(ctx.guild).enabled()
+        if not enabled:
+            return await ctx.send("Uh oh, the lake is closed. Come back later!")
+        
         userdata = await self.config.user(ctx.author).all()
         msg = f"{ctx.author.name}'s Rare Fish Trophy Wall"
         em = discord.Embed(color=await ctx.embed_color())
@@ -338,6 +364,9 @@ class Fish(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def net(self, ctx: commands.Context):
+        enabled = await self.config.guild(ctx.guild).enabled()
+        if not enabled:
+            return await ctx.send("Uh oh, the lake is closed. Come back later!")        
         inventory = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw()
         lst = []
         for i in inventory:
