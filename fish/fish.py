@@ -371,28 +371,28 @@ class Fish(commands.Cog):
         em.description = f"Here you can see all of the rare fish you have caught\n**Happy Fishing!**\n\n"
         if userdata["turtle"]:
             number = userdata['turtle']
-            em.description += f"**{userdata['turtle']}** \N{TURTLE}   "
+            em.description += f"**{userdata['turtle']}** \N{TURTLE} \u200b"
         if userdata["blow_whale"]:
             number = userdata['blow_whale']
-            em.description += f"**{userdata['blow_whale']}** \N{SPOUTING WHALE}   "
+            em.description += f"**{userdata['blow_whale']}** \N{SPOUTING WHALE} \u200b"
         if userdata["whale"]:
             number = userdata['whale']
-            em.description += f"**{userdata['whale']}** \N{WHALE}   "
+            em.description += f"**{userdata['whale']}** \N{WHALE} \u200b"
         if userdata["crocodile"]:
             number = userdata['crocodile']
-            em.description += f"**{userdata['crocodile']}** \N{CROCODILE}   "            
+            em.description += f"**{userdata['crocodile']}** \N{CROCODILE} \u200b"            
         if userdata["penguin"]:
             number = userdata['penguin']
-            em.description += f"**{userdata['penguin']}** \N{PENGUIN}   "            
+            em.description += f"**{userdata['penguin']}** \N{PENGUIN} \u200b"            
         if userdata["octopus"]:
             number = userdata['octopus']
-            em.description += f"**{userdata['octopus']}** \N{OCTOPUS}   "   
+            em.description += f"**{userdata['octopus']}** \N{OCTOPUS} \u200b"   
         if userdata["shark"]:
             number = userdata['shark']
-            em.description += f"**{userdata['shark']}** \N{SHARK}   "  
+            em.description += f"**{userdata['shark']}** \N{SHARK} \u200b"  
         if userdata["squid"]:
             number = userdata['squid']
-            em.description += f"**{userdata['squid']}** \N{SQUID}   "              
+            em.description += f"**{userdata['squid']}** \N{SQUID} '\u200b'"              
         if userdata["dolphin"]:
             number = userdata['dolphin']
             em.description += f"**{userdata['dolphin']}** \N{DOLPHIN}   "              
