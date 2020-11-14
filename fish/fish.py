@@ -402,6 +402,7 @@ class Fish(commands.Cog):
         if userdata["dolphin"]:
             number = userdata['dolphin']
             em.description += f"\N{DOLPHIN} x**{userdata['dolphin']}** - Dolphin\n"
+        em.description += "\n"            
         em.set_footer(text="Fishy™")            
         await ctx.send(embed=em)  
 
