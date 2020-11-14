@@ -5,7 +5,7 @@ import logging
 
 from random import uniform, randint
 from discord.utils import get
-from datetime import datetime
+from datetime import datetime, timezone
 from tabulate import tabulate
 
 from redbot.core import commands, checks, Config, bank
@@ -131,7 +131,7 @@ class Fish(commands.Cog):
         author = ctx.message.author
         userdata = await self.config.user(ctx.author).all()
         last_time = datetime.strptime(str(userdata["last_fish"]), "%Y-%m-%d %H:%M:%S.%f")
-        now = datetime.now(datetime.timezone.utc)
+        now = datetime.now(timezone.utc)
         now = now.replace(tzinfo=None)
         seconds = int((now - last_time).total_seconds())
         cd = await self.config.guild(ctx.guild).cooldown()
