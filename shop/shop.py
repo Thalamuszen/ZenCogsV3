@@ -1007,7 +1007,7 @@ class Shop(commands.Cog):
         
     @commands.command()
     @commands.guild_only()
-    async def gift(self, ctx: commands.Context, user: discord.Member, quantity: int, *, item: str = ""):
+    async def gift(self, ctx: commands.Context, user: discord.Member, quantity: Optional[int] = 1, *, item: str = ""):
         """Gift another user a Christmas Present!
         
         Examples
@@ -1224,7 +1224,7 @@ class Shop(commands.Cog):
 
     @commands.command(aliases=["reminv", "drop"])
     @commands.guild_only()
-    async def removeinventory(self, ctx: commands.Context, quantity: int, *, item: str):
+    async def removeinventory(self, ctx: commands.Context, quantity: Optional[int] = 1, *, item: str):
         """Remove an item from your inventory."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         if item not in inventory:
