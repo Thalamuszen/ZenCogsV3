@@ -368,17 +368,7 @@ class Fish(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         em = discord.Embed(color=await ctx.embed_color())
         em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall" 
-        em.description = f"Here you can see all of the rare fish you have caught\n**Happy Fishing!**\n\n"
-        em.add_field(
-            name=f"\N{CROCODILE}",
-            value=f"**{userdata['crocodile']}**",
-            inline=True,
-        )   
-        em.add_field(
-            name=f"**{userdata['crocodile']}**",
-            value=f"\N{CROCODILE}",
-            inline=True,
-        )            
+        em.description = f"Here you can see all of the rare fish you have caught\n**Happy Fishing!**\n\n"     
         if userdata["turtle"]:
             number = userdata['turtle']
             em.description += f"**{userdata['turtle']}** \N{TURTLE}"
@@ -390,7 +380,8 @@ class Fish(commands.Cog):
             em.description += f"**{userdata['whale']}** \N{WHALE}"
         if userdata["crocodile"]:
             number = userdata['crocodile']
-            em.description += f"**{userdata['crocodile']}** \N{CROCODILE}"            
+            em.description += f"**{userdata['crocodile']}** \N{CROCODILE}"
+            em.description += "\u200b"            
         if userdata["penguin"]:
             number = userdata['penguin']
             em.description += f"**{userdata['penguin']}** \N{PENGUIN}"            
@@ -402,10 +393,12 @@ class Fish(commands.Cog):
             em.description += f"**{userdata['shark']}** \N{SHARK}"  
         if userdata["squid"]:
             number = userdata['squid']
-            em.description += f"**{userdata['squid']}** \N{SQUID}"              
+            em.description += f"**{userdata['squid']}** \N{SQUID}" 
+            em.description += "\u200b"             
         if userdata["dolphin"]:
             number = userdata['dolphin']
             em.description += f"**{userdata['dolphin']}** \N{DOLPHIN}"              
+            em.description += "\u200b"             
         await ctx.send(embed=em)  
 
     @commands.command()
