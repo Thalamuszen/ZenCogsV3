@@ -130,8 +130,8 @@ class Fish(commands.Cog):
         
         author = ctx.message.author
         userdata = await self.config.user(ctx.author).all()
-        last_time = datetime.datetime.strptime(str(userdata["last_fish"]), "%Y-%m-%d %H:%M:%S.%f")
-        now = datetime.datetime.now(datetime.timezone.utc)
+        last_time = datetime.strptime(str(userdata["last_fish"]), "%Y-%m-%d %H:%M:%S.%f")
+        now = datetime.now(datetime.timezone.utc)
         now = now.replace(tzinfo=None)
         seconds = int((now - last_time).total_seconds())
         cd = await self.config.guild(ctx.guild).cooldown()
