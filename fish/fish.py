@@ -124,23 +124,23 @@ class Fish(commands.Cog):
         """Reset someones Trophy room"""
         userdata = await self.config.user(ctx.author).all()        
         if userdata["turtle"]:
-            await self.config.user(user).turtle.set(userdata["turtle"] = 0)  
+            await self.config.user(user).turtle.set(userdata["turtle"] == 0)  
         if userdata["blow_whale"]:            
-            await self.config.user(user).blow_whale.set(userdata["blow_whale"] = 0)
+            await self.config.user(user).blow_whale.set(userdata["blow_whale"] == 0)
         if userdata["whale"]:            
-            await self.config.user(user).whale.set(userdata["whale"] = 0)
+            await self.config.user(user).whale.set(userdata["whale"] == 0)
         if userdata["crocodile"]:            
-            await self.config.user(user).crocodile.set(userdata["crocodile"] = 0)
+            await self.config.user(user).crocodile.set(userdata["crocodile"] == 0)
         if userdata["penguin"]:            
-            await self.config.user(user).penguin.set(userdata["penguin"] = 0)        
+            await self.config.user(user).penguin.set(userdata["penguin"] == 0)        
         if userdata["octopus"]:            
-            await self.config.user(user).octopus.set(userdata["octopus"] = 0)           
+            await self.config.user(user).octopus.set(userdata["octopus"] == 0)           
         if userdata["shark"]:            
-            await self.config.user(user).shark.set(userdata["shark"] = 0)          
+            await self.config.user(user).shark.set(userdata["shark"] == 0)          
         if userdata["squid"]:            
-            await self.config.user(user).squid.set(userdata["squid"] = 0)        
+            await self.config.user(user).squid.set(userdata["squid"] == 0)        
         if userdata["dolphin"]:            
-            await self.config.user(user).dolphin.set(userdata["dolphin"] = 0)          
+            await self.config.user(user).dolphin.set(userdata["dolphin"] == 0)          
 
     @commands.command()
     @commands.guild_only()
