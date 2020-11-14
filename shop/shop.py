@@ -921,6 +921,18 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have returned {item} and got {return_price} {credits_name} back."
                 )
+        is_fish = info.get("is_fish")
+        if is_fish:
+            redeemed = info.get("redeemed")
+            price = int(info.get("price"))
+            return_priceint = int(price * quantity)
+            return_price = humanize_number(return_priceint)
+            balance += return_priceint      
+            await self.config.member(ctx.author).inventory.clear_raw(item)
+            await bank.deposit_credits(ctx.author, return_priceint)
+            await ctx.send(
+                f"You have returned {item} and got {return_price} {credits_name} back."
+            )
 
     @commands.command()
     @commands.guild_only()
