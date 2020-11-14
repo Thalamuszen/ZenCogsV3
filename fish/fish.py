@@ -159,7 +159,8 @@ class Fish(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the lake is closed. Come back later!")
-        
+        casting_price = 5
+        await bank.withdraw_credits(ctx.author, casting_price)
         author = ctx.message.author
         userdata = await self.config.user(ctx.author).all()
         last_time = datetime.strptime(str(userdata["last_fish"]), "%Y-%m-%d %H:%M:%S.%f")
@@ -369,7 +370,7 @@ class Fish(commands.Cog):
         em = discord.Embed(color=await ctx.embed_color())
         em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall"      
         em.set_thumbnail(url="https://cdn.discordapp.com/attachments/777176220378071050/777218030501363752/fishingsquare.gif") 
-        em.description = f"Here you can see all of the rare fish you have caught.\nThere are nine rare fish to find out in the lake.\n**Happy Fishing!**\n\n"     
+        em.description = f"Here you can see all of the rare fish you have caught.\nThere are nine types of rare fish to find in the lake.\n**Happy Fishing!**\n\n"     
         if userdata["turtle"]:
             number = userdata['turtle']
             em.description += f" **{userdata['turtle']}** \N{TURTLE} "
