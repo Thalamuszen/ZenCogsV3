@@ -936,7 +936,7 @@ class Shop(commands.Cog):
                     f"You have received {return_price} {credits_name}."
                 )
             one = 1
-            elif one < quantity < inv_quantity:
+            if one < quantity < inv_quantity:
                 price = int(info.get("price"))
                 return_priceint = int(price * quantity)
                 return_price = humanize_number(return_priceint)
