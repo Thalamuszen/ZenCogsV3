@@ -369,33 +369,38 @@ class Fish(commands.Cog):
         em = discord.Embed(color=await ctx.embed_color())
         em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall" 
         em.description = f"Here you can see all of the rare fish you have caught\n**Happy Fishing!**\n\n"
+        em.add_field(
+            name=f"\N{CROCODILE}",
+            value=f"**{userdata['crocodile']}**",
+            inline=True,
+        )        
         if userdata["turtle"]:
             number = userdata['turtle']
-            em.description += f"**{userdata['turtle']}** \N{TURTLE} \u200b"
+            em.description += f"**{userdata['turtle']}** \N{TURTLE}"
         if userdata["blow_whale"]:
             number = userdata['blow_whale']
-            em.description += f"**{userdata['blow_whale']}** \N{SPOUTING WHALE} \u200b"
+            em.description += f"**{userdata['blow_whale']}** \N{SPOUTING WHALE}"
         if userdata["whale"]:
             number = userdata['whale']
-            em.description += f"**{userdata['whale']}** \N{WHALE} \u200b"
+            em.description += f"**{userdata['whale']}** \N{WHALE}"
         if userdata["crocodile"]:
             number = userdata['crocodile']
-            em.description += f"**{userdata['crocodile']}** \N{CROCODILE} \u200b"            
+            em.description += f"**{userdata['crocodile']}** \N{CROCODILE}"            
         if userdata["penguin"]:
             number = userdata['penguin']
-            em.description += f"**{userdata['penguin']}** \N{PENGUIN} \u200b"            
+            em.description += f"**{userdata['penguin']}** \N{PENGUIN}"            
         if userdata["octopus"]:
             number = userdata['octopus']
-            em.description += f"**{userdata['octopus']}** \N{OCTOPUS} \u200b"   
+            em.description += f"**{userdata['octopus']}** \N{OCTOPUS}"   
         if userdata["shark"]:
             number = userdata['shark']
-            em.description += f"**{userdata['shark']}** \N{SHARK} \u200b"  
+            em.description += f"**{userdata['shark']}** \N{SHARK}"  
         if userdata["squid"]:
             number = userdata['squid']
-            em.description += f"**{userdata['squid']}** \N{SQUID} '\u200b'"              
+            em.description += f"**{userdata['squid']}** \N{SQUID}"              
         if userdata["dolphin"]:
             number = userdata['dolphin']
-            em.description += f"**{userdata['dolphin']}** \N{DOLPHIN}   "              
+            em.description += f"**{userdata['dolphin']}** \N{DOLPHIN}"              
         await ctx.send(embed=em)  
 
     @commands.command()
