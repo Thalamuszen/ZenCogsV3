@@ -380,8 +380,7 @@ class Fish(commands.Cog):
             em.description += f"**{userdata['whale']}** \N{WHALE} "
         if userdata["crocodile"]:
             number = userdata['crocodile']
-            em.description += f"**{userdata['crocodile']}** \N{CROCODILE} "
-            em.description += "   "            
+            em.description += f"**{userdata['crocodile']}** \N{CROCODILE} "          
         if userdata["penguin"]:
             number = userdata['penguin']
             em.description += f"**{userdata['penguin']}** \N{PENGUIN} "            
@@ -393,12 +392,10 @@ class Fish(commands.Cog):
             em.description += f"**{userdata['shark']}** \N{SHARK} "  
         if userdata["squid"]:
             number = userdata['squid']
-            em.description += f"**{userdata['squid']}** \N{SQUID} " 
-            em.description += "   "             
+            em.description += f"**{userdata['squid']}** \N{SQUID} "            
         if userdata["dolphin"]:
             number = userdata['dolphin']
-            em.description += f"**{userdata['dolphin']}** \N{DOLPHIN} "              
-            em.description += "   "             
+            em.description += f"**{userdata['dolphin']}** \N{DOLPHIN} "                         
         await ctx.send(embed=em)  
 
     @commands.command()
