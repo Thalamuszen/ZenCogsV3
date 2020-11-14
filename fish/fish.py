@@ -308,36 +308,37 @@ class Fish(commands.Cog):
             em.description += f"\n\n**Sickness is over 40/100**\n*You don't feel so good...*"
         elif sickness in range(56, 71):
             em.description += f"\n\n**Sickness is over 55/100**\n*You don't feel so good...*"
-        await ctx.send(msg, embed=em)
+        await ctx.send(msg, embed=em)  
 
     @commands.command()
-    @commands.guild_only()        
-    async def fish_sell(self, ctx: commands.Context, group: str = ""):
-        """Sell your trash or uncommon/common fish"""
-
-        enabled = await self.config.guild(ctx.guild).enabled()
-        if not enabled:
-            return await ctx.send("Uh oh, the fishing shop is closed. Come back later!")
-        group_item = group.lower()
+    @commands.guild_only()
+    async def net(self, ctx: commands.Context):
         inventory = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw()
-        if group not in inventory:
-            return await ctx.send("Nope, nah, that's not a thing you have to sell.")
-        fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(group_item)
-        try:
-            is_fish = fish_info.get("is_fish")
-            return await ctx.send("Nice try...")
-        except KeyError:
-            inventory = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw()
-            if group_item not in inventory:
-                return await ctx.send("You don't have any of these types of fish to sell.")
-            fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(group_item)
-            fish_quantity = int(fish_info.get("quantity"))
-            fish_price = int(fish_info.get("price"))
-            credits_name = await bank.get_currency_name(ctx.guild)
-            refund = int(fish_quantity * fish_price)
-            refund_nice = humanize_number(refund)
-            await bank.deposit_credits(ctx.author, refund)
-            await self.bot.get_cog("Shop").config.member(ctx.author).inventory.clear_raw(group_item)
-            await ctx.send(
-                f"You have received {return_nice} {credits_name}."
-            )            
+        lst = []
+        for i in inventory:
+            try:
+                info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(i)
+                is_fish = info.get("is_fish")
+                if is_fish:
+                    quantity = info.get("quantity")
+                    cat = "Fish"
+                    table = [cat, i, quantity]
+                    lst.append(table)
+            except KeyError:
+                pass
+        if lst == []:
+            output = "Nothing to see here, go fishing with `!fish`"
+        else:
+            headers = ("", "Type", "Item", "Qty") 
+            output = box(tabulate(lst, headers=headers), lang="md")
+        embed = discord.Embed(
+            colour=await ctx.embed_colour(),
+            description=f"{output}",
+            timestamp=datetime.now(),
+        )
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/768197304158257234/777119363115384862/Net.png")
+        embed.set_author(
+            name=f"{ctx.author.display_name}'s fishing net", icon_url=ctx.author.avatar_url,
+        )            
+        embed.set_footer(text="Inventory™")
+        await ctx.send(embed=embed)    
