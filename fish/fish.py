@@ -177,7 +177,7 @@ class Fish(commands.Cog):
         uncommonchance = 10.15
         commonchance = 51
 
-        if chance >= rarechance:
+        if chance <= rarechance:
             rarefish = await self.config.rarefish()
             mn = len(rarefish)
             r = randint(0, mn - 1)
@@ -362,26 +362,40 @@ class Fish(commands.Cog):
     @commands.guild_only()
     async def rarefish(self, ctx: commands.Context):        
         """Shows which rare fish you have caught and how many"""
-#        Need to do something within this cog regarding rare fish and how many you have caught.
-#        Set default for each individual rare fish to 0 and then if it IS 0, don't show it, otherwise show emoji next to qty caught.
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the lake is closed. Come back later!")
-        
         userdata = await self.config.user(ctx.author).all()
         msg = f"{ctx.author.name}'s Rare Fish Trophy Wall"
         em = discord.Embed(color=await ctx.embed_color())
-        em.description = f"{userdata['candies']} \N{CANDY}"
-        if userdata["chocolate"]:
-            em.description += f"\n{userdata['chocolate']} \N{CHOCOLATE BAR}"
-        if userdata["lollipops"]:
-            em.description += f"\n{userdata['lollipops']} \N{LOLLIPOP}"
-        if userdata["stars"]:
-            em.description += f"\n{userdata['stars']} \N{WHITE MEDIUM STAR}"
-        if sickness in range(41, 56):
-            em.description += f"\n\n**Sickness is over 40/100**\n*You don't feel so good...*"
-        elif sickness in range(56, 71):
-            em.description += f"\n\n**Sickness is over 55/100**\n*You don't feel so good...*"
+        em.description = f"Here you can see all of the rare fish you have and how many!\nGotta catch them all"
+        if userdata["turtle"]:
+            number = userdata['turtle']
+            em.description += f"\n{number} {userdata['turtle']} \N{TURTLE}"
+        if userdata["blow_whale"]:
+            number = userdata['blow_whale']
+            em.description += f"\n{number} {userdata['blow_whale']} \N{TURTLE}"
+        if userdata["whale"]:
+            number = userdata['whale']
+            em.description += f"\n{number} {userdata['whale']} \N{TURTLE}"
+        if userdata["crocodile"]:
+            number = userdata['crocodile']
+            em.description += f"\n{number} {userdata['crocodile']} \N{TURTLE}"            
+        if userdata["penguin"]:
+            number = userdata['penguin']
+            em.description += f"\n{number} {userdata['penguin']} \N{TURTLE}"            
+        if userdata["octopus"]:
+            number = userdata['octopus']
+            em.description += f"\n{number} {userdata['octopus']} \N{TURTLE}"   
+        if userdata["shark"]:
+            number = userdata['shark']
+            em.description += f"\n{number} {userdata['shark']} \N{TURTLE}"  
+        if userdata["squid"]:
+            number = userdata['squid']
+            em.description += f"\n{number} {userdata['squid']} \N{TURTLE}"              
+        if userdata["dolphin"]:
+            number = userdata['dolphin']
+            em.description += f"\n{number} {userdata['dolphin']} \N{TURTLE}"              
         await ctx.send(msg, embed=em)  
 
     @commands.command()
