@@ -368,7 +368,7 @@ class Fish(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         em = discord.Embed(color=await ctx.embed_color())
         em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall" 
-        em.description = f"Here you can see all of the rare fish you have caught!\nHappy Fishing"
+        em.description = f"Here you can see all of the rare fish you have caught!\nHappy Fishing\n\n"
         if userdata["turtle"]:
             number = userdata['turtle']
             em.description += f"\n**{userdata['turtle']}** \N{TURTLE}"
