@@ -166,6 +166,10 @@ class Fish(commands.Cog):
                 author_quantity = int(fish_info.get("quantity"))
                 author_quantity += 1
                 await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)
+                if item is "turtle":
+                    await self.config.user(ctx.author).turtle.set(userdata["turtle"] + 1)
+                elif item is "blow_whale":
+                    await self.config.user(ctx.author).blow_whale.set(userdata["blow_whale"] + 1)
             except KeyError:
                 item = RARES[fish]
                 price = 2000
