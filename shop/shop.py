@@ -845,7 +845,6 @@ class Shop(commands.Cog):
             await bank.get_balance(ctx.author)
         )
         inventory = await self.config.member(ctx.author).inventory.get_raw()
-
         if item in inventory:
             pass
         else:
@@ -926,7 +925,18 @@ class Shop(commands.Cog):
             inv_quantity = info.get("quantity")
             if quantity > inv_quantity:
                 return await ctx.send(f"You don't have that many to sell! Leave quantity blank to sell all of them")
-            if quantity < inv_quantity:
+            if quantity == 1
+                price = int(info.get("price"))
+                return_priceint = int(price * inv_quantity)
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint      
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+                await bank.deposit_credits(ctx.author, return_priceint)
+                await ctx.send(
+                    f"You have received {return_price} {credits_name}."
+                )
+            one = 1
+            elif one < quantity < inv_quantity:
                 price = int(info.get("price"))
                 return_priceint = int(price * quantity)
                 return_price = humanize_number(return_priceint)
@@ -940,15 +950,7 @@ class Shop(commands.Cog):
                     f"You have received {return_price} {credits_name}."
                 )
             else:
-                price = int(info.get("price"))
-                return_priceint = int(price * inv_quantity)
-                return_price = humanize_number(return_priceint)
-                balance += return_priceint      
-                await self.config.member(ctx.author).inventory.clear_raw(item)
-                await bank.deposit_credits(ctx.author, return_priceint)
-                await ctx.send(
-                    f"You have received {return_price} {credits_name}."
-                )
+
 
     @commands.command()
     @commands.guild_only()
