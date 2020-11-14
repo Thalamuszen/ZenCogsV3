@@ -402,6 +402,7 @@ class Fish(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def net(self, ctx: commands.Context):
+        """Shows which fish you have caught and how many"""        
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the lake is closed. Come back later!")        
