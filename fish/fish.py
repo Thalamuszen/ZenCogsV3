@@ -121,7 +121,7 @@ class Fish(commands.Cog):
     
     @fishy.command(name="rarereset")
     async def rare_reset(self, ctx: commands.Context, user: discord.Member):
-        """Reset someones Trophy room"""
+        """Reset someones Trophy room."""
         userdata = await self.config.user(ctx.author).all()        
         if userdata["turtle"]:
             number = userdata['turtle']
@@ -366,7 +366,7 @@ class Fish(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def rarefish(self, ctx: commands.Context):        
-        """Shows which rare fish you have caught and how many"""
+        """Shows which rare fish you have caught and how many."""
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the lake is closed. Come back later!")
@@ -408,7 +408,7 @@ class Fish(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def net(self, ctx: commands.Context):
-        """Shows which fish you have caught and how many"""        
+        """Shows which fish you have caught and how many."""        
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the lake is closed. Come back later!")        
