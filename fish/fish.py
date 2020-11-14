@@ -377,32 +377,32 @@ class Fish(commands.Cog):
         em.description = f"Here you can see all of the rare fish you have caught.\nThere are nine types of rare fish to find in the lake.\n**Happy Fishing!**\n\n"     
         if userdata["turtle"]:
             number = userdata['turtle']
-            em.description += f" **{userdata['turtle']}** \N{TURTLE} "
+            em.description += f"\N{TURTLE} x**{userdata['turtle']}** - Turtle"
         if userdata["blow_whale"]:
             number = userdata['blow_whale']
-            em.description += f" **{userdata['blow_whale']}** \N{SPOUTING WHALE} "
+            em.description += f"\N{SPOUTING WHALE} x**{userdata['blow_whale']}** - Blow Whale "
         if userdata["whale"]:
             number = userdata['whale']
-            em.description += f" **{userdata['whale']}** \N{WHALE} "
+            em.description += f"\N{WHALE} x**{userdata['whale']}** - Whale "
         if userdata["crocodile"]:
             number = userdata['crocodile']
             em.description += f"\N{CROCODILE} x**{userdata['crocodile']}** - Crocodile\n"          
         if userdata["penguin"]:
             number = userdata['penguin']
-            em.description += f" **{userdata['penguin']}** \N{PENGUIN} "            
+            em.description += f"\N{PENGUIN} x**{userdata['penguin']}** - Penguin"            
         if userdata["octopus"]:
             number = userdata['octopus']
-            em.description += f" **{userdata['octopus']}** \N{OCTOPUS} "   
+            em.description += f"\N{OCTOPUS} x**{userdata['octopus']}** - Octopus"   
         if userdata["shark"]:
             number = userdata['shark']
-            em.description += f" **{userdata['shark']}** \N{SHARK} "  
+            em.description += f"\N{SHARK} x**{userdata['shark']}** - Shark  "  
         if userdata["squid"]:
             number = userdata['squid']
             em.description += f"\N{SQUID} x**{userdata['squid']}** - Squid\n"            
         if userdata["dolphin"]:
             number = userdata['dolphin']
             em.description += f"\N{DOLPHIN} x**{userdata['dolphin']}** - Dolphin\n"
-        em.description += "\n"            
+        em.description += "\n\n"            
         em.set_footer(text="Fishy™")            
         await ctx.send(embed=em)  
 
