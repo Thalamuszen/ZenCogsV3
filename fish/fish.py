@@ -177,7 +177,7 @@ class Fish(commands.Cog):
         uncommonchance = 10.15
         commonchance = 51
 
-        if chance <= rarechance:
+        if chance >= rarechance:
             rarefish = await self.config.rarefish()
             mn = len(rarefish)
             r = randint(0, mn - 1)
@@ -368,7 +368,7 @@ class Fish(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         em = discord.Embed(color=await ctx.embed_color())
         em.title = f"{ctx.author.name}'s Rare Fish Trophy Wall" 
-        em.description = f"Here you can see all of the rare fish you have and how many!\nGotta catch them all"
+        em.description = f"Here you can see all of the rare fish you have caught!\nHappy Fishing"
         if userdata["turtle"]:
             number = userdata['turtle']
             em.description += f"\n{number} {userdata['turtle']} \N{TURTLE}"
