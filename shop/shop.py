@@ -2,7 +2,7 @@ import asyncio
 import discord
 import random
 
-from typing import Union
+from typing import Union, Optional
 from discord.utils import get
 from datetime import datetime
 from tabulate import tabulate
