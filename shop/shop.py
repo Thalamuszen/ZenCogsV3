@@ -852,131 +852,130 @@ class Shop(commands.Cog):
             pass
         else:
             return await ctx.send("You don't own this item.")
-        try:
-            info = await self.config.member(ctx.author).inventory.get_raw(item)
-        except KeyError:            
-            redeemed = info.get("redeemed")
-            if redeemed:
-                return await ctx.send("You cannot return an item you have redeemed.")
-            inv_quantity = info.get("quantity")
-            is_item = info.get("is_item")
-            if is_item:
-                if quantity > inv_quantity:
-                    return await ctx.send(f"You don't have that many {item}(s).")
-                items = await self.config.guild(ctx.guild).items.get_raw(item)
-                quantityinstock = int(items.get("quantity"))
-                quantityinstock += quantity 
-                await self.config.guild(ctx.guild).items.set_raw(
+        if item == item_all:
+            total_price = 0
+            for i in inventory:
+                info = await self.config.member(ctx.author).inventory.get_raw(i)
+                is_fish = info.get("is_fish")
+                if is_fish:
+                    price = int(info.get("price"))
+                    total_price += price 
+                    await self.config.member(ctx.author).inventory.clear_raw(i)
+            return_price = humanize_number(total_price)
+            await bank.deposit_credits(ctx.author, total_price) 
+            return await ctx.send(
+                f"You have received {return_price} {credits_name}."
+            )    
+        info = await self.config.member(ctx.author).inventory.get_raw(item)
+        redeemed = info.get("redeemed")
+        if redeemed:
+            return await ctx.send("You cannot return an item you have redeemed.")
+        inv_quantity = info.get("quantity")
+        is_item = info.get("is_item")
+        if is_item:
+            if quantity > inv_quantity:
+                return await ctx.send(f"You don't have that many {item}(s).")
+            items = await self.config.guild(ctx.guild).items.get_raw(item)
+            quantityinstock = int(items.get("quantity"))
+            quantityinstock += quantity 
+            await self.config.guild(ctx.guild).items.set_raw(
+                item, "quantity", value=quantityinstock
+            )
+            inv_quantity -= quantity
+            if inv_quantity == 0:
+                redeemed = info.get("redeemed")
+                price = int(info.get("price"))
+                return_priceint = int(round(price * 0.1)) * quantity
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint      
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+                await bank.deposit_credits(ctx.author, return_priceint)
+                return await ctx.send(
+                    f"You have returned {item} and got {return_price} {credits_name} back."
+                )                
+            else:
+                await self.config.member(ctx.author).inventory.set_raw(
+                    item, "quantity", value=inv_quantity
+                )
+                price = int(info.get("price"))
+                return_priceint = int(round(price * 0.1)) * quantity
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint    
+                await bank.deposit_credits(ctx.author, return_priceint)                
+                return await ctx.send(
+                    f"You have returned {item} and got {return_price} {credits_name} back."
+                )
+                  
+        is_game = info.get("is_game")
+        if is_game:
+            return await ctx.send("Games are not returnable.")
+        is_xmas = info.get("is_xmas")
+        if is_xmas:
+            return await ctx.send("Christmas Gift's are not returnable.")
+        is_role = info.get("is_role")
+        if is_role:
+            info = await self.config.guild(ctx.guild).roles.get_raw(item)
+            role_name = info.get("role_name")
+            role_obj = get(ctx.guild.roles, name=role_name)
+            if role_obj:
+                if quantity > 1:
+                    return await ctx.send("You only have one of these to give back!")                   
+                role = await self.config.guild(ctx.guild).roles.get_raw(item)
+                quantityinstock = int(role.get("quantity"))
+                quantityinstock += 1
+                await self.config.guild(ctx.guild).roles.set_raw(
                     item, "quantity", value=quantityinstock
                 )
-                inv_quantity -= quantity
-                if inv_quantity == 0:
-                    redeemed = info.get("redeemed")
-                    price = int(info.get("price"))
-                    return_priceint = int(round(price * 0.1)) * quantity
-                    return_price = humanize_number(return_priceint)
-                    balance += return_priceint      
-                    await self.config.member(ctx.author).inventory.clear_raw(item)
-                    await bank.deposit_credits(ctx.author, return_priceint)
-                    await ctx.send(
-                        f"You have returned {item} and got {return_price} {credits_name} back."
-                    )                
-                else:
-                    await self.config.member(ctx.author).inventory.set_raw(
-                        item, "quantity", value=inv_quantity
-                    )
-                    price = int(info.get("price"))
-                    return_priceint = int(round(price * 0.1)) * quantity
-                    return_price = humanize_number(return_priceint)
-                    balance += return_priceint    
-                    await bank.deposit_credits(ctx.author, return_priceint)                
-                    await ctx.send(
-                        f"You have returned {item} and got {return_price} {credits_name} back."
-                    )         
-            is_game = info.get("is_game")
-            if is_game:
-                return await ctx.send("Games are not returnable.")
-            is_xmas = info.get("is_xmas")
-            if is_xmas:
-                return await ctx.send("Christmas Gift's are not returnable.")
-            is_role = info.get("is_role")
-            if is_role:
-                info = await self.config.guild(ctx.guild).roles.get_raw(item)
-                role_name = info.get("role_name")
-                role_obj = get(ctx.guild.roles, name=role_name)
-                if role_obj:
-                    if quantity > 1:
-                        return await ctx.send("You only have one of these to give back!")                   
-                    role = await self.config.guild(ctx.guild).roles.get_raw(item)
-                    quantityinstock = int(role.get("quantity"))
-                    quantityinstock += 1
-                    await self.config.guild(ctx.guild).roles.set_raw(
-                        item, "quantity", value=quantityinstock
-                    )
-                    await ctx.author.remove_roles(role_obj)                
-                    redeemed = info.get("redeemed")
-                    price = int(info.get("price"))
-                    return_priceint = int(round(price * 0.1)) * quantity
-                    return_price = humanize_number(return_priceint)
-                    balance += return_priceint      
-                    await self.config.member(ctx.author).inventory.clear_raw(item)
-                    await bank.deposit_credits(ctx.author, return_priceint)
-                    await ctx.send(
-                        f"You have returned {item} and got {return_price} {credits_name} back."
-                    )
-            is_fish = info.get("is_fish")
-            if is_fish:
-                inv_quantity = info.get("quantity")
-                if quantity > inv_quantity:
-                    return await ctx.send(f"You don't have that many to sell! Leave quantity blank to sell all of them")
-                if quantity == 1:
-                    price = int(info.get("price"))
-                    return_priceint = int(price * inv_quantity)
-                    return_price = humanize_number(return_priceint)
-                    balance += return_priceint      
-                    await self.config.member(ctx.author).inventory.clear_raw(item)
-                    await bank.deposit_credits(ctx.author, return_priceint)
-                    await ctx.send(
-                        f"You have received {return_price} {credits_name}."
-                    )
-                one = 1
-                if one < quantity < inv_quantity:
-                    price = int(info.get("price"))
-                    return_priceint = int(price * quantity)
-                    return_price = humanize_number(return_priceint)
-                    balance += return_priceint
-                    inv_quantity -= quantity
-                    await self.config.member(ctx.author).inventory.set_raw(
-                        item, "quantity", value=inv_quantity
-                    )                
-                    await bank.deposit_credits(ctx.author, return_priceint) 
-                    await ctx.send(
-                        f"You have received {return_price} {credits_name}."
-                    )
-                if quantity == inv_quantity:
-                    price = int(info.get("price"))
-                    return_priceint = int(price * quantity)
-                    return_price = humanize_number(return_priceint)
-                    balance += return_priceint
-                    await self.config.member(ctx.author).inventory.clear_raw(item)            
-                    await bank.deposit_credits(ctx.author, return_priceint) 
-                    await ctx.send(
-                        f"You have received {return_price} {credits_name}."
-                    )                               
-            if item == item_all:
-                total_price = 0
-                for i in inventory:
-                    info = await self.config.member(ctx.author).inventory.get_raw(i)
-                    is_fish = info.get("is_fish")
-                    if is_fish:
-                        price = int(info.get("price"))
-                        total_price += price 
-                        await self.config.member(ctx.author).inventory.clear_raw(i)
-                return_price = humanize_number(total_price)
-                await bank.deposit_credits(ctx.author, total_price) 
-                await ctx.send(
+                await ctx.author.remove_roles(role_obj)                
+                redeemed = info.get("redeemed")
+                price = int(info.get("price"))
+                return_priceint = int(round(price * 0.1)) * quantity
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint      
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+                await bank.deposit_credits(ctx.author, return_priceint)
+                return await ctx.send(
+                    f"You have returned {item} and got {return_price} {credits_name} back."
+                )
+        is_fish = info.get("is_fish")
+        if is_fish:
+            inv_quantity = info.get("quantity")
+            if quantity > inv_quantity:
+                return await ctx.send(f"You don't have that many to sell! Leave quantity blank to sell all of them")
+            if quantity == 1:
+                price = int(info.get("price"))
+                return_priceint = int(price * inv_quantity)
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint      
+                await self.config.member(ctx.author).inventory.clear_raw(item)
+                await bank.deposit_credits(ctx.author, return_priceint)
+                return await ctx.send(
                     f"You have received {return_price} {credits_name}."
-                )              
+                )
+            one = 1
+            if one < quantity < inv_quantity:
+                price = int(info.get("price"))
+                return_priceint = int(price * quantity)
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint
+                inv_quantity -= quantity
+                await self.config.member(ctx.author).inventory.set_raw(
+                    item, "quantity", value=inv_quantity
+                )                
+                await bank.deposit_credits(ctx.author, return_priceint) 
+                return await ctx.send(
+                    f"You have received {return_price} {credits_name}."
+                )
+            if quantity == inv_quantity:
+                price = int(info.get("price"))
+                return_priceint = int(price * quantity)
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint
+                await self.config.member(ctx.author).inventory.clear_raw(item)            
+                await bank.deposit_credits(ctx.author, return_priceint) 
+                return await ctx.send(
+                    f"You have received {return_price} {credits_name}."
+                )                                         
 
     @commands.command()
     @commands.guild_only()
