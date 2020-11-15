@@ -846,7 +846,7 @@ class Shop(commands.Cog):
         )
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         is_all = "all"
-        if item in is_all:
+        if item == is_all:
             await self.config.member(ctx.author).inventory.set_raw(
                 item,
                 value={ 
@@ -861,7 +861,8 @@ class Shop(commands.Cog):
                     "giftable": False,
                     "gifted": False,                         
                     },
-                )            
+                )
+            await asyncio.sleep(1)
         if item in inventory:
             pass
         else:
