@@ -848,7 +848,7 @@ class Shop(commands.Cog):
         is_all = "all"
         if item == is_all:
             await self.config.member(ctx.author).inventory.set_raw(
-                is_all,
+                item,
                 value={ 
                     "is_item": False,
                     "is_role": False,
@@ -966,6 +966,31 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have received {return_price} {credits_name}."
                 )
+            if quantity == inv_quantity:
+                price = int(info.get("price"))
+                return_priceint = int(price * quantity)
+                return_price = humanize_number(return_priceint)
+                balance += return_priceint
+                await self.config.member(ctx.author).inventory.clear_raw(item)            
+                await bank.deposit_credits(ctx.author, return_priceint) 
+                await ctx.send(
+                    f"You have received {return_price} {credits_name}."
+                )                               
+        is_all = info.get("is_all")
+        if is_all:
+            await self.config.member(ctx.author).inventory.clear_raw(item)             
+            for i in inventory:
+                info = await self.config.member(ctx.author).inventory.get_raw(i)
+                is_fish = info.get("is_fish")
+                if is_fish:
+                    price = int(info.get("price"))
+                    total_price += price 
+                    await self.config.member(ctx.author).inventory.clear_raw(i)
+            return_price = humanize_number(total_price)
+            await bank.deposit_credits(ctx.author, total_price) 
+            await ctx.send(
+                f"You have received {return_price} {credits_name}."
+            )              
 
     @commands.command()
     @commands.guild_only()
