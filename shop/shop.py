@@ -858,9 +858,9 @@ class Shop(commands.Cog):
                 info = await self.config.member(ctx.author).inventory.get_raw(i)
                 is_fish = info.get("is_fish")
                 if is_fish:
-                    price = int(info.get("price"))
-                    total_price += price 
+                    price = int(info.get("price"))                    
                     await self.config.member(ctx.author).inventory.clear_raw(i)
+                total_price += price 
             return_price = humanize_number(total_price)
             await bank.deposit_credits(ctx.author, total_price) 
             return await ctx.send(
