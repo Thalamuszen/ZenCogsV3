@@ -845,6 +845,23 @@ class Shop(commands.Cog):
             await bank.get_balance(ctx.author)
         )
         inventory = await self.config.member(ctx.author).inventory.get_raw()
+        is_all = "all"
+        if item is is_all
+            await self.config.member(ctx.author).inventory.set_raw(
+                is_all,
+                value={ 
+                    "is_item": False,
+                    "is_role": False,
+                    "is_game": False,
+                    "is_xmas": False,
+                    "is_fish": False,
+                    "is_all": True,
+                    "redeemable": False,
+                    "redeemed": False,
+                    "giftable": False,
+                    "gifted": False,                         
+                    },
+                )            
         if item in inventory:
             pass
         else:
