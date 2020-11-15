@@ -982,6 +982,7 @@ class Shop(commands.Cog):
             for i in inventory:
                 info = await self.config.member(ctx.author).inventory.get_raw(i)
                 is_fish = info.get("is_fish")
+		total_price = 0
                 if is_fish:
                     price = int(info.get("price"))
                     total_price += price 
