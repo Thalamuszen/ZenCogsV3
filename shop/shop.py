@@ -845,25 +845,10 @@ class Shop(commands.Cog):
             await bank.get_balance(ctx.author)
         )
         inventory = await self.config.member(ctx.author).inventory.get_raw()
-        is_all = "all"
-        if item == is_all:
-            await self.config.member(ctx.author).inventory.set_raw(
-                item,
-                value={ 
-                    "is_item": False,
-                    "is_role": False,
-                    "is_game": False,
-                    "is_xmas": False,
-                    "is_fish": False,
-                    "is_all": True,
-                    "redeemable": False,
-                    "redeemed": False,
-                    "giftable": False,
-                    "gifted": False,                         
-                    },
-                )
-            await asyncio.sleep(1)
+        item_all = "all"
         if item in inventory:
+            pass
+        elif item == item_all:
             pass
         else:
             return await ctx.send("You don't own this item.")
@@ -977,9 +962,7 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have received {return_price} {credits_name}."
                 )                               
-        is_all = info.get("is_all")
-        if is_all:
-            await self.config.member(ctx.author).inventory.clear_raw(item)             
+        if item == item_all:                         
             for i in inventory:
                 info = await self.config.member(ctx.author).inventory.get_raw(i)
                 is_fish = info.get("is_fish")
