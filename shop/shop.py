@@ -962,11 +962,11 @@ class Shop(commands.Cog):
                 await ctx.send(
                     f"You have received {return_price} {credits_name}."
                 )                               
-        if item == item_all:                         
+        if item == item_all:
+            total_price = 0
             for i in inventory:
                 info = await self.config.member(ctx.author).inventory.get_raw(i)
                 is_fish = info.get("is_fish")
-                total_price = 0
                 if is_fish:
                     price = int(info.get("price"))
                     total_price += price 
