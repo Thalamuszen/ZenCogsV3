@@ -1,6 +1,6 @@
 {
-    "author" : ["Yukirin (Yukirin#0048)"],
-    "install_msg" : "Thank you for installing my Avatar module. Type `[p]help Avatar` for more information.",
+    "author" : ["ThalamusZen"],
+    "install_msg" : "Thanks for installing!\nType `[p]help Avatar` for more information.",
     "name" : "Avatar",
     "short" : "Get user's Avatar URL",
     "description" : "Simply return user's avatar url",
