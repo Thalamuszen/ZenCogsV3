@@ -194,7 +194,7 @@ class Fish(commands.Cog):
         uncommonchance = 10.15
         commonchance = 51
 
-        if chance >= rarechance:
+        if chance <= rarechance:
             rarefish = await self.config.rarefish()
             mn = len(rarefish)
             r = randint(0, mn - 1)
