@@ -185,7 +185,7 @@ class Fish(commands.Cog):
         cd = await self.config.guild(ctx.guild).cooldown()
         secs = cd - seconds
         if int((now - last_time).total_seconds()) < await self.config.guild(ctx.guild).cooldown():
-            return await ctx.send(f":fishing_pole_and_fish: **| {author.name} you can fish again in {secs} seconds.**", delete_after=seconds)
+            return await ctx.send(f":fishing_pole_and_fish: **| {author.name} you can fish again in {secs} seconds.**", delete_after=secs)
         await self.config.user(ctx.author).last_fish.set(str(now))            
         await bank.withdraw_credits(ctx.author, casting_price)
         
