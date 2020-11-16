@@ -1,16 +1,8 @@
-# Simple avatar URL fetch by Yukirin#0048
-
-# Discord
 import discord
 
-# Red
 from redbot.core import commands
 
-# Libs
-
-
 BaseCog = getattr(commands, "Cog", object)
-
 
 class Avatar(BaseCog):
     """Get user's avatar URL."""
