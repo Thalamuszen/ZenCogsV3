@@ -189,7 +189,7 @@ class Fish(commands.Cog):
         await self.config.user(ctx.author).last_fish.set(str(now))            
         await bank.withdraw_credits(ctx.author, casting_price)
         
-        chance = uniform(1, 100)
+        chance = uniform(0, 100)
         rarechance = 0.15
         uncommonchance = 10.15
         commonchance = 51
