@@ -23,5 +23,15 @@ class Avatar(BaseCog):
             url = user.avatar_url_as(format="gif")
         if not user.is_avatar_animated():
             url = user.avatar_url_as(static_format="png")
-
-        await ctx.send("{}'s Avatar URL : {}".format(user.name, url))
+            
+        embed = discord.Embed(
+            colour=await ctx.embed_colour(),
+            description=f"Avatar [URL]({url})",
+            timestamp=datetime.now(),
+        )
+        embed.set_image(url=url)
+        embed.set_author(
+            name=f"{user.name}'s Avatar",
+        )            
+        embed.set_footer(text="Avatary™")
+        await ctx.send(embed=embed)            
