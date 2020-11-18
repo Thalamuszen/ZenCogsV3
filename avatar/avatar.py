@@ -31,7 +31,7 @@ class Avatar(BaseCog):
             description=f"Avatar [URL]({url})",
             timestamp=datetime.now(),
         )
-        embed.set_image(url={url})
+        embed.set_image(url=f"{url}")
         embed.set_author(
             name=f"{user.name}'s Avatar",
         )            
