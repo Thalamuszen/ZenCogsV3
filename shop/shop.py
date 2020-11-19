@@ -1041,11 +1041,11 @@ class Shop(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def gift(self, ctx: commands.Context, user: discord.Member, quantity: Optional[int] = 1, *, item: str = ""):
-        """Gift another user a Christmas Present!
+        """Gift another user a Christmas Present\Card!
         
         Examples
         --------
-        `!gift @ThalamusZen 2 Small gift`
+        `!gift @ThalamusZen 2 stocking filler`
         """
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
@@ -1127,7 +1127,7 @@ class Shop(commands.Cog):
         
         Examples
         --------
-        `!open Small gift from Thalamus Zen`
+        `!open christmas present from thalamus zen`
         """
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
@@ -1136,7 +1136,7 @@ class Shop(commands.Cog):
         xmas_date = datetime(2020, 12, 24)
         over_xmas = datetime(2021, 1, 1)
         if date < xmas_date:
-            return await ctx.send("It's not Christmas yet! Wait until after the 24th of December 2020.")
+            return await ctx.send("It's not Christmas yet! Wait until after the 24th of December.")
         if date > over_xmas:
             return await ctx.send("Christmas is over, see you again next year!")        
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
@@ -1164,33 +1164,42 @@ class Shop(commands.Cog):
         gifter = get(ctx.guild.members, id=gifter_id)
         size = info.get("size")
         if size == 'card':
-            await ctx.send(f"{ctx.author.mention} is opening your Christmas card, {gifter.mention}")
-            placing_messages = [
-                "*You excitedly place the gift upon your lap and smile...*",
-                "*You slide out the present from beneath the Christmas tree...*",
-            ]
-            bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(3)
             opening_messages = [
-                "*You are quick to rip the red and white wrapping paper from the present...*",
-                "*You delicately tear the wrapping paper from around the present...*",
-            ]            
-            await bot_talking.edit(content=random.choice(opening_messages))
+                "*You slide your finger into the crease of the envelope and tear it open...*",
+                "*You *",
+            ]
+            bot_talking = await ctx.send(random.choice(opening_messages))
             await asyncio.sleep(3)
             card_messages = [
-                f"To {ctx.author.mention},\nMerry Christmas!\nCard second line\nFrom {gifter.mention}",
-                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}", 
-                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",
-                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",
-                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",		
-                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",		
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nWarmest thoughts and best wishes for a wonderful Holiday and a Happy New Year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nTo a joyful present and a well remembered past. Best wishes for a Happy Holidays and a magnificent New Year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nWhatever is beautiful. Whatever is meaningful. Whatever brings you happiness. May it be yours these Holidays and throughout the coming year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nWishing you and your loved ones peace, health, happiness, and prosperity in the coming New Year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nBest wishes for the Holidays and for health and happiness throughout the coming year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nWith all best wishes for a healthy, happy, and peaceful New Year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nMay you have a peaceful Holiday season, and much joy and prosperity in the New Year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nBest wishes for a happy and prosperous New Year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nI hope your Holiday Season is fun and festive, and full of sparkles!\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nWishing you a joyous Holiday Season and a most prosperous and healthy New Year.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nMay this Holiday Season bring only happiness and joy to you and your loved ones.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nMay the closeness of friends and the comfort of home, renew your spirits this Holiday Season.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nLet the spirit of love gently fill our hearts and homes. In this loveliest of seasons may you find many reasons for happiness.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nMay this Christmas end the present year on a cheerful note and make way for a fresh and bright New Year. Have a very Merry Christmas and a Happy New Year!\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nMay your Christmas sparkle with moments of love, laughter and goodwill, And may the year ahead be full of contentment and joy.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nThat warm feeling isn’t just the Christmas spirit. I think you left the oven on.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nThis holiday season let us treasure what is truly important in all our lives, the reason for the season: Cookies.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nI might not believe in Santa, but I still believe in a good Christmas card!\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nAnother Christmas already? Seriously, what the Elf?\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nGood tidings to you and happy Christmas for today and all the Christmases to come.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nChristmas isn’t about what you receive – it’s about the love that you give.\nFrom {gifter.mention}",
+                f"\nTo {ctx.author.mention},\nMerry Christmas!\nThere is nothing quite like Christmas – the celebration, the decoration, and the pure excitement. Follow your joy this holiday season and in the new year.\nFrom {gifter.mention}",
             ]
             return await bot_talking.edit(content=random.choice(card_messages))
         if size == 'sf':
             await ctx.send(f"{ctx.author.mention} is opening your Stocking filler, {gifter.mention}")
             placing_messages = [
-                "*You excitedly place the gift upon your lap and smile...*",
-                "*You slide out the present from beneath the Christmas tree...*",
+                "*You excitedly take the gift out of your stoking and smile...*",
+                "*You ...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
             await asyncio.sleep(3)
@@ -1227,7 +1236,7 @@ class Shop(commands.Cog):
         if size == 'ch': 
             await ctx.send(f"{ctx.author.mention} is opening your Christmas hamper, {gifter.mention}")
             placing_messages = [
-                "*You excitedly place the gift upon your lap and smile...*",
+                "*You excitedly place the gift on the floor between your feet and smile...*",
                 "*You slide out the present from beneath the Christmas tree...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
