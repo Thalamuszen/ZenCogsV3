@@ -197,9 +197,10 @@ class Fish(commands.Cog):
 
         if chance <= rarechance:
             rarefish = await self.config.rarefish()
-            mn = len(rarefish)
-            r = randint(0, mn - 1)
-            fish = rarefish[r]
+#            mn = len(rarefish)
+#            r = randint(0, mn - 1)
+#            fish = rarefish[r]
+            fish = (random.choice(rarefish))            
             item = RARES[fish]
             await ctx.send(
                 (
@@ -277,9 +278,10 @@ class Fish(commands.Cog):
                     await self.config.user(ctx.author).dolphin.set(userdata["dolphin"] + 1)                     
         elif rarechance < chance <= uncommonchance:
             uncommon = await self.config.uncommon()
-            mn = len(uncommon)
-            u = randint(0, mn - 1)
-            fish = uncommon[u]
+#            mn = len(uncommon)
+#            u = randint(0, mn - 1)
+#            fish = uncommon[u]
+            fish = (random.choice(uncommon))            
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught an uncommon fish! {fish} !**")
             try:
                 item = NAMES[fish]
@@ -311,9 +313,10 @@ class Fish(commands.Cog):
                 )              
         elif uncommonchance < chance <= commonchance:
             common = await self.config.common()
-            mn = len(common)
-            c = randint(0, mn - 1)
-            fish = common[c]
+#            mn = len(common)
+#            c = randint(0, mn - 1)
+#            fish = common[c]
+            fish = (random.choice(common))            
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught a common fish {fish} !**")
             try:
                 item = NAMES[fish]
