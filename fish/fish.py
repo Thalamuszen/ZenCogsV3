@@ -202,7 +202,7 @@ class Fish(commands.Cog):
             item = RARES[fish]
             await ctx.send(
                 (
-                    ":fishing_pole_and_fish: **| {author.name} caught a **{item}**!!! {fish} !**\n"
+                    ":fishing_pole_and_fish: **| {author.name} caught a {item}, it's rare!!! {fish} !**\n"
                     "Type `!rarefish` to see your trophy room"
                 ).format(
                     author=author,
