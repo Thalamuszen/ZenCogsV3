@@ -1162,59 +1162,106 @@ class Shop(commands.Cog):
             )
         gifter_id = info.get("gifter")
         gifter = get(ctx.guild.members, id=gifter_id)
-        await ctx.send(f"{ctx.author.mention} is opening your gift, {gifter.mention}")
-        placing_messages = [
-            "*You excitedly place the gift upon your lap and smile...*",
-            "*You slide out the present from beneath the Christmas tree...*",
-        ]
-        bot_talking = await ctx.send(random.choice(placing_messages))
-        await asyncio.sleep(random.randint(5, 8))
-        opening_messages = [
-            "*You are quick to rip the red and white wrapping paper from the present...*",
-            "*You delicately tear the wrapping paper from around the present...*",
-        ]
-        await bot_talking.edit(content=random.choice(opening_messages))
-        await asyncio.sleep(random.randint(5, 8))
-        card_messages = [
-            f"{ctx.author.mention} You received: A pair of socks",
-            f"{ctx.author.mention} You received: Deodorant", 
-            f"{ctx.author.mention} You received: :blue_heart:",
-            f"{ctx.author.mention} You received: :blue_heart:",
-            f"{ctx.author.mention} You received: :blue_heart:",		
-            f"{ctx.author.mention} You received: :blue_heart:",		
-        ]
-        sf_messages = [
-            f"{ctx.author.mention} You received: Overwatch 2",
-            f"{ctx.author.mention} You received: A £10 Steam gift card",
-        ]
-        cp_messages = [
-            f"{ctx.author.mention} You received: Overwatch 2",
-            f"{ctx.author.mention} You received: A £10 Steam gift card",
-        ]
-        ch_messages = [
-            f"{ctx.author.mention} You received: Overwatch 2",
-            f"{ctx.author.mention} You received: A £10 Steam gift card",
-        ]
-        lp_messages = [
-            f"{ctx.author.mention} You received: Overwatch 2",
-            f"{ctx.author.mention} You received: A £10 Steam gift card",
-        ]
         size = info.get("size")
         if size == 'card':
-            await asyncio.sleep(2)
-            await ctx.send(content=random.choice(card_messages))
+            await ctx.send(f"{ctx.author.mention} is opening your Christmas card, {gifter.mention}")
+            placing_messages = [
+                "*You excitedly place the gift upon your lap and smile...*",
+                "*You slide out the present from beneath the Christmas tree...*",
+            ]
+            bot_talking = await ctx.send(random.choice(placing_messages))
+            await asyncio.sleep(3)
+            opening_messages = [
+                "*You are quick to rip the red and white wrapping paper from the present...*",
+                "*You delicately tear the wrapping paper from around the present...*",
+            ]            
+            await bot_talking.edit(content=random.choice(opening_messages))
+            await asyncio.sleep(3)
+            card_messages = [
+                f"To {ctx.author.mention},\nMerry Christmas!\nCard second line\nFrom {gifter.mention}",
+                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}", 
+                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",
+                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",
+                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",		
+                f"To {ctx.author.mention},\nCard first line\nCard second line\nFrom {gifter.mention}",		
+            ]
+            return await bot_talking.edit(content=random.choice(card_messages))
         if size == 'sf':
-            await asyncio.sleep(2)
-            await ctx.send(content=random.choice(sf_messages))
+            await ctx.send(f"{ctx.author.mention} is opening your Stocking filler, {gifter.mention}")
+            placing_messages = [
+                "*You excitedly place the gift upon your lap and smile...*",
+                "*You slide out the present from beneath the Christmas tree...*",
+            ]
+            bot_talking = await ctx.send(random.choice(placing_messages))
+            await asyncio.sleep(3)
+            opening_messages = [
+                "*You are quick to rip the red and white wrapping paper from the present...*",
+                "*You delicately tear the wrapping paper from around the present...*",
+            ]
+            await bot_talking.edit(content=random.choice(opening_messages))
+            await asyncio.sleep(3)            
+            sf_messages = [
+                f"{ctx.author.mention} You received: Overwatch 2",
+                f"{ctx.author.mention} You received: A £10 Steam gift card",
+            ] 
+            return await bot_talking.edit(content=random.choice(sf_messages))            
         if size == 'cp':
-            await asyncio.sleep(2)
-            await ctx.send(content=random.choice(cp_messages))
-        if size == 'ch':
-            await asyncio.sleep(2)
-            await ctx.send(content=random.choice(ch_messages))
-        if size == 'lp':
-            await asyncio.sleep(2)
-            await ctx.send(content=random.choice(lp_messages))
+            await ctx.send(f"{ctx.author.mention} is opening your Christmas present, {gifter.mention}")
+            placing_messages = [
+                "*You excitedly place the gift upon your lap and smile...*",
+                "*You slide out the present from beneath the Christmas tree...*",
+            ]
+            bot_talking = await ctx.send(random.choice(placing_messages))
+            await asyncio.sleep(3)
+            opening_messages = [
+                "*You are quick to rip the red and white wrapping paper from the present...*",
+                "*You delicately tear the wrapping paper from around the present...*",
+            ]
+            await bot_talking.edit(content=random.choice(opening_messages))
+            await asyncio.sleep(3)            
+            cp_messages = [
+                f"{ctx.author.mention} You received: Overwatch 2",
+                f"{ctx.author.mention} You received: A £10 Steam gift card",
+            ] 
+            return await bot_talking.edit(content=random.choice(cp_messages))
+        if size == 'ch': 
+            await ctx.send(f"{ctx.author.mention} is opening your Christmas hamper, {gifter.mention}")
+            placing_messages = [
+                "*You excitedly place the gift upon your lap and smile...*",
+                "*You slide out the present from beneath the Christmas tree...*",
+            ]
+            bot_talking = await ctx.send(random.choice(placing_messages))
+            await asyncio.sleep(3)
+            opening_messages = [
+                "*You are quick to rip the red and white wrapping paper from the present...*",
+                "*You delicately tear the wrapping paper from around the present...*",
+            ]
+            await bot_talking.edit(content=random.choice(opening_messages))
+            await asyncio.sleep(3)            
+            ch_messages = [
+                f"{ctx.author.mention} You received: Overwatch 2",
+                f"{ctx.author.mention} You received: A £10 Steam gift card",
+            ] 
+            return await bot_talking.edit(content=random.choice(ch_messages))
+        if size == 'lp': 
+            await ctx.send(f"{ctx.author.mention} is opening your Luxury Christmas present, {gifter.mention}")
+            placing_messages = [
+                "*You excitedly place the gift upon your lap and smile...*",
+                "*You slide out the present from beneath the Christmas tree...*",
+            ]
+            bot_talking = await ctx.send(random.choice(placing_messages))
+            await asyncio.sleep(3)
+            opening_messages = [
+                "*You are quick to rip the red and white wrapping paper from the present...*",
+                "*You delicately tear the wrapping paper from around the present...*",
+            ]
+            await bot_talking.edit(content=random.choice(opening_messages))
+            await asyncio.sleep(3)            
+            lp_messages = [
+                f"{ctx.author.mention} You received: Overwatch 2",
+                f"{ctx.author.mention} You received: A £10 Steam gift card",
+            ] 
+            return await bot_talking.edit(content=random.choice(lp_messages))            
 
     @commands.command()
     @commands.guild_only()
