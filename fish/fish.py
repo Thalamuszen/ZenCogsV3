@@ -393,7 +393,7 @@ class Fish(commands.Cog):
         em = discord.Embed(color=await ctx.embed_color(), timestamp=datetime.now())
         em.title = f"{ctx.author.name}'s Rare Trophy Wall"      
         em.set_thumbnail(url="https://cdn.discordapp.com/attachments/777176220378071050/777218030501363752/fishingsquare.gif") 
-        em.description = f"Here you can see all of the rares you have caught.\nThere are **nine** rares to find in the lake, can you catch them all?\n**Happy Fishing!**\n\n"     
+        em.description = f"Here you can see all of the rares you have caught.\nThere are **nine** rares to find in the lake, can you\n catch them all?\n**Happy Fishing!**\n\n"     
         if userdata["turtle"]:
             number = userdata['turtle']
             em.description += f"\N{TURTLE} x**{userdata['turtle']}** - Turtle\n"
