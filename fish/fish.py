@@ -2,6 +2,7 @@ import asyncio
 import datetime
 import discord
 import logging
+import random
 
 from random import uniform, randint
 from discord.utils import get
