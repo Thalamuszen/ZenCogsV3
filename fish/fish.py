@@ -344,9 +344,10 @@ class Fish(commands.Cog):
                 )                
         elif chance > commonchance:
             trash = await self.config.trash()
-            mn = len(trash)
-            t = randint(0, mn - 1)
-            fish = trash[t]
+#            mn = len(trash)
+#            t = randint(0, mn - 1)
+#            fish = trash[t]
+            fish = (random.choice(trash))
             await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught a piece of trash.. {fish} !**")
             try:     
                 item = NAMES[fish]
