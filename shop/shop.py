@@ -556,6 +556,7 @@ class Shop(commands.Cog):
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
 
+        item = item.lower()
         item = item.strip("@")
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         if item in roles:
