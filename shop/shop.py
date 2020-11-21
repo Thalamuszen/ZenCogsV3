@@ -847,6 +847,7 @@ class Shop(commands.Cog):
         )
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         item_all = "all"
+        item = item.lower()
         if item in inventory:
             pass
         elif item == item_all:
@@ -1058,6 +1059,7 @@ class Shop(commands.Cog):
         if user == ctx.bot.user:
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
+        item = item.lower()
         if item in author_inv:
             pass
         else:
@@ -1123,7 +1125,7 @@ class Shop(commands.Cog):
         
     @commands.command()
     @commands.guild_only()
-    async def open(self, ctx: commands.Context, *, item: str):
+    async def open(self, ctx: commands.Context, *, item: str = ""):
         """Open a Christmas Present given to you by another user!
         
         Examples
@@ -1141,6 +1143,7 @@ class Shop(commands.Cog):
         if date > over_xmas:
             return await ctx.send("Christmas is over, see you again next year!")        
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
+        item = item.lower()
         if item in author_inv:
             pass
         else:
@@ -1278,6 +1281,7 @@ class Shop(commands.Cog):
     async def show(self, ctx: commands.Context, *, item: str):
         """Show more information about an item in the shop."""
         item = item.strip("@")
+        item = item.lower()
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
@@ -1317,6 +1321,7 @@ class Shop(commands.Cog):
     async def removeinventory(self, ctx: commands.Context, quantity: Optional[int] = 1, *, item: str):
         """Remove an item from your inventory."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
+        item = item.lower()
         if item not in inventory:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)	
@@ -1339,6 +1344,7 @@ class Shop(commands.Cog):
     async def redeem(self, ctx: commands.Context, *, item: str):
         """Redeem an item from your inventory."""
         inventory = await self.config.member(ctx.author).inventory.get_raw()
+        item = item.lower()
         if item not in inventory:
             return await ctx.send("You don't own this item.")
         info = await self.config.member(ctx.author).inventory.get_raw(item)
