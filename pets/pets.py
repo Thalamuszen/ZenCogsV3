@@ -762,7 +762,7 @@ class Pets(commands.Cog):
                 def check(m):
                     return m.author == ctx.author and m.channel == ctx.channel
                 await ctx.send(
-                    "What is the description of the ability."
+                    "What is the description of the ability?"
                 )
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
