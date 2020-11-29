@@ -342,7 +342,6 @@ class Pets(commands.Cog):
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 description = answer.content
-                description = description.strip("@") 
 #Set mount if flying.
                 await ctx.send("Can this mount fly?")
                 try:
@@ -768,7 +767,8 @@ class Pets(commands.Cog):
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
-                    return await ctx.send("You took too long. Try again, please.")                
+                    return await ctx.send("You took too long. Try again, please.")
+                description = answer.content
                 await self.config.guild(ctx.guild).abilities.set_raw(
                     ability_lower, value={"name": ability, "description": description}
                 )                
