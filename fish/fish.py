@@ -208,7 +208,7 @@ class Fish(commands.Cog):
             item = RARES[fish]
             await ctx.send(
                 (
-                    ":fishing_pole_and_fish: **| {author.name} caught a {item}, it's rare!!! | {fish}**\n"
+                    "<:Fishing:782681118674780200> **| {author.name} caught a {item}, it's rare!!! | {fish}**\n"
                     "Type `!rarefish` to see your trophy room"
                 ).format(
                     author=author,
@@ -286,7 +286,7 @@ class Fish(commands.Cog):
 #            u = randint(0, mn - 1)
 #            fish = uncommon[u]
             fish = (random.choice(uncommon))            
-            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught an uncommon fish! |** {fish}")
+            await ctx.send(f"<:Fishing:782681118674780200> **| {author.name} caught an uncommon fish! |** {fish}")
             try:
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
@@ -356,7 +356,7 @@ class Fish(commands.Cog):
 #            t = randint(0, mn - 1)
 #            fish = trash[t]
             fish = (random.choice(trash))
-            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught a piece of trash.. again |** {fish}")
+            await ctx.send(f"<:Fishing:782681118674780200> **| {author.name} caught a piece of trash.. again |** {fish}")
             try:     
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
