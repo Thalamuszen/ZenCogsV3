@@ -772,4 +772,4 @@ class Pets(commands.Cog):
                 await self.config.guild(ctx.guild).abilities.set_raw(
                     ability_lower, value={"name": ability, "description": description}
                 )                
-                await ctx.send(f"{ability_lower} has been added succesfully.\nRun `!pets abilities to see the full list.")
+                await ctx.send(f"The **{ability_lower}** ability has been added succesfully.\nRun `!pets abilities1 to see the full list.")
