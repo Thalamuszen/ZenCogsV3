@@ -321,7 +321,7 @@ class Fish(commands.Cog):
 #            c = randint(0, mn - 1)
 #            fish = common[c]
             fish = (random.choice(common))            
-            await ctx.send(f":fishing_pole_and_fish: **| {author.name} caught a common fish |** {fish}")
+            await ctx.send(f"<:Fishing:782681118674780200> **| {author.name} caught a common fish |** {fish}")
             try:
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
