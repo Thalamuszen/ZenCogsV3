@@ -712,7 +712,7 @@ class Pets(commands.Cog):
             await self.config.member(member).rare.set(userdata["rare"] - number)
         await ctx.send(f"{member.name}'s pets data has been wiped.")
 
-    @pets.command(name="abilites")
+    @pets.command(name="abilities")
     async def pets_abilities(self, ctx: commands.Context):
         """Shows a list of abilities that have been created"""
         ablist = []
