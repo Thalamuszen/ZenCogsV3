@@ -30,6 +30,7 @@ NAMES = {
     "\ud83d\udc20": "uncommon",
     "\ud83d\udc21": "uncommon",
     "<:FactorioFish:782613249476395019>": "uncommon",
+    "<:Narwhal:782618975170986034>": "uncommon",
     "\ud83d\udc1f": "common",
     "\ud83e\udd80": "common",
     "\ud83e\udd90": "common",
@@ -74,6 +75,7 @@ class Fish(commands.Cog):
                 "\ud83d\udc20",
                 "\ud83d\udc21",
                 "<:FactorioFish:782613249476395019>",
+                "<:Narwhal:782618975170986034>",
             ],
             "common": [
                 "\ud83d\udc1f",
