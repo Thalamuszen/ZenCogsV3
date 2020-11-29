@@ -783,7 +783,7 @@ class Pets(commands.Cog):
             check_ability = await self.config.guild(ctx.guild).abilities.get_raw(ability_lower)
             if check_ability:
                 await self.config.guild(ctx.guild).abilities.clear_raw(ability_lower)                                                   
-                await ctx.send(f"The **{ability_lower}** has successfully been removed.")
+                await ctx.send(f"The **{ability_lower}** ability has successfully been removed.")
         except KeyError:
                 ablist = []
                 for a in abilities:
