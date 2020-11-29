@@ -767,4 +767,4 @@ class Pets(commands.Cog):
                     sorted_ablist = sorted(ablist, key=itemgetter(0))
                 headers = ("Name", "Name", "Description")
                 output = box(tabulate(sorted_ablist, headers=headers), lang="md")                                 
-                await ctx.send(f"{ability_lower} already exists.\n{output}")       
+                await ctx.send(f"{ability_lower} already exists.\n{output}")
