@@ -743,6 +743,18 @@ class Pets(commands.Cog):
         try:
             check_ability = await self.config.guild(ctx.guild).abilities.get_raw(ability_lower)
             if check_ability:
+                ablist = []
+                for a in abilites:
+                    abilites = await self.config.guild(ctx.guild).abilites.get_raw(a)
+                    name = abilities.get("name")  
+                    description = abilties.get("description")                   
+                    table = [a, name, description]
+                    ablist.append(table)
+                    sorted_ablist = sorted(ablist, key=itemgetter(0))
+                headers = ("Name", "Name", "Description")
+                output = box(tabulate(sorted_ablist, headers=headers), lang="md")                                 
+                await ctx.send(f"{ability_lower} already exists.\n{output}")
+        except KeyError:                
                 def check(m):
                     return m.author == ctx.author and m.channel == ctx.channel
                 await ctx.send(
@@ -756,15 +768,3 @@ class Pets(commands.Cog):
                     ability_lower, value={"name": ability, "description": description}
                 )                
                 await ctx.send(f"{ability_lower} has been added succesfully.\nRun `!pets abilities to see the full list.")
-            else:
-                ablist = []
-                for a in abilites:
-                    abilites = await self.config.guild(ctx.guild).abilites.get_raw(a)
-                    name = abilities.get("name")  
-                    description = abilties.get("description")                   
-                    table = [a, name, description]
-                    ablist.append(table)
-                    sorted_ablist = sorted(ablist, key=itemgetter(0))
-                headers = ("Name", "Name", "Description")
-                output = box(tabulate(sorted_ablist, headers=headers), lang="md")                                 
-                await ctx.send(f"{ability_lower} already exists.\n{output}")
