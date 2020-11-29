@@ -193,7 +193,7 @@ class Fish(commands.Cog):
         chance = uniform(0, 99)
         rarechance = 0.15
         uncommonchance = 10.15
-        commonchance = 60
+        commonchance = 75
 
         if chance <= rarechance:
             rarefish = await self.config.rarefish()
