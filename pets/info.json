@@ -3,7 +3,7 @@
 		"ThalamusZen"
 	],
 	"description": "A Pets module for use within other cogs.",
-    "install_msg": "Thanks for installing!",
+    	"install_msg": "Thanks for installing!",
 	"short": "Pets module",
 	"tags": [
 		"pets"
