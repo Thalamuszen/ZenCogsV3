@@ -436,11 +436,12 @@ class Pets(commands.Cog):
                     return await ctx.send("You took too long. Try again, please.")
                 attitude = answer.content
 #Ability section process for rare.
+                abilities = await self.config.guild(ctx.guild).abilities.get_raw(a)                
                 ablist = []
-                for a in abilites:
-                    abilites = await self.config.guild(ctx.guild).abilites.get_raw(a)
-                    name = abilities.get("name")  
-                    description = abilties.get("description")                   
+                for a in abilities:
+                    ability = await self.config.guild(ctx.guild).abilities.get_raw(a)
+                    name = ability.get("name")  
+                    description = abilty.get("description")                   
                     table = [a, name, description]
                     ablist.append(table)
                     sorted_ablist = sorted(ablist, key=itemgetter(0))
@@ -715,11 +716,12 @@ class Pets(commands.Cog):
     @pets.command(name="abilities")
     async def pets_abilities(self, ctx: commands.Context):
         """Shows a list of abilities that have been created"""
+        abilities = await self.config.guild(ctx.guild).abilities.get_raw()        
         ablist = []
-        for a in abilites:
-            abilites = await self.config.guild(ctx.guild).abilites.get_raw(a)
-            name = abilities.get("name")  
-            description = abilties.get("description")                   
+        for a in abilities:
+            ability = await self.config.guild(ctx.guild).abilities.get_raw(a)
+            name = ability.get("name")  
+            description = ability.get("description")                   
             table = [a, name, description]
             ablist.append(table)
             sorted_ablist = sorted(ablist, key=itemgetter(0))
@@ -738,16 +740,17 @@ class Pets(commands.Cog):
 
     @pets.command(name="ability")
     async def pets_ability(self, ctx: commands.Context, *, ability: str):
-        """Creates a new ability which can be given to your animals during the `!pets add` process."""        
+        """Creates a new ability which can be given to your animals during the `!pets add` process."""       
         ability_lower = ability.lower()
+        abilities = await self.config.guild(ctx.guild).abilities.get_raw() 
         try:
             check_ability = await self.config.guild(ctx.guild).abilities.get_raw(ability_lower)
             if check_ability:
                 ablist = []
-                for a in abilites:
-                    abilites = await self.config.guild(ctx.guild).abilites.get_raw(a)
-                    name = abilities.get("name")  
-                    description = abilties.get("description")                   
+                for a in abilities:
+                    ability = await self.config.guild(ctx.guild).abilites.get_raw(a)
+                    name = ability.get("name")  
+                    description = ability.get("description")                   
                     table = [a, name, description]
                     ablist.append(table)
                     sorted_ablist = sorted(ablist, key=itemgetter(0))
