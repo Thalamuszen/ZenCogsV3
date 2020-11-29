@@ -749,6 +749,41 @@ class Pets(commands.Cog):
             if check_ability:
                 ablist = []
                 for a in abilities:
+                    ability = await self.config.guild(ctx.guild).abilities.get_raw(a)
+                    name = ability.get("name")  
+                    description = ability.get("description")                   
+                    table = [a, name, description]
+                    ablist.append(table)
+                    sorted_ablist = sorted(ablist, key=itemgetter(0))
+                headers = ("Name", "Name", "Description")
+                output = box(tabulate(sorted_ablist, headers=headers), lang="md")                                 
+                await ctx.send(f"{ability_lower} already exists.\n{output}")
+        except KeyError:                
+                def check(m):
+                    return m.author == ctx.author and m.channel == ctx.channel
+                await ctx.send(
+                    "What is the description of the ability."
+                )
+                try:
+                    answer = await self.bot.wait_for("message", timeout=600, check=check)
+                except asyncio.TimeoutError:
+                    return await ctx.send("You took too long. Try again, please.")
+                description = answer.content
+                await self.config.guild(ctx.guild).abilities.set_raw(
+                    ability_lower, value={"name": ability, "description": description}
+                )                
+                await ctx.send(f"The **{ability_lower}** ability has been added succesfully.\nRun `!pets abilities` to see the full list.")
+
+    @pets.command(name="removeability")
+    async def pets_remove_ability(self, ctx: commands.Context, *, ability: str):
+        """Creates a new ability which can be given to your animals during the `!pets add` process."""       
+        ability_lower = ability.lower()
+        abilities = await self.config.guild(ctx.guild).abilities.get_raw() 
+        try:
+            check_ability = await self.config.guild(ctx.guild).abilities.get_raw(ability_lower)
+            if check_ability:
+                ablist = []
+                for a in abilities:
                     ability = await self.config.guild(ctx.guild).abilites.get_raw(a)
                     name = ability.get("name")  
                     description = ability.get("description")                   
