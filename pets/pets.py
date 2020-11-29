@@ -447,7 +447,8 @@ class Pets(commands.Cog):
                     sorted_ablist = sorted(ablist, key=itemgetter(0))
                 if ablist == []:
                     table = ["", "", "No abilities have been added. Run !pets ability <ability_name> to get started."]
-                    ablist.append(table)                    
+                    ablist.append(table)
+                    sorted_ablist = sorted(ablist, key=itemgetter(0))                    
                 headers = ("Name", "Name", "Description")
                 output = box(tabulate(sorted_ablist, headers=headers), lang="md")
                 await ctx.send(
@@ -728,6 +729,7 @@ class Pets(commands.Cog):
         if ablist == []:
             table = ["", "No abilities have been added. Run !pets ability <ability_name> to get started."]
             ablist.append(table)
+            sorted_ablist = sorted(ablist, key=itemgetter(0))
         headers = ("Name", "Name", "Description")
         output = box(tabulate(sorted_ablist, headers=headers), lang="md")            
         await ctx.send(
