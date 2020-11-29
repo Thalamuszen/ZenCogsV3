@@ -123,7 +123,8 @@ class Pets(commands.Cog):
             await self.bot.wait_for("message", timeout=30, check=pred_type)
         except asyncio.TimeoutError:
             return await ctx.send("You took too long. Try again, please.")
-        animal_cat = answer.content            
+        animal_cat = answer.content      
+#Add pet.        
         if pred.result == 0:
             await ctx.send(
                 "What is the name of the pet?"
@@ -149,16 +150,14 @@ class Pets(commands.Cog):
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 pet_type = answer.content
-
-
+#Set breed for the pet.
                 await ctx.send(f"What breed of {pet_type} is this?")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 breed = answer.content       
-
-
+#Set price for the pet. Shop.
                 await ctx.send("How much should this pet cost?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -167,8 +166,7 @@ class Pets(commands.Cog):
                 price = pred_int.result
                 if price <= 0:
                     return await ctx.send("Uh oh, price has to be more than 0.")
-
-
+#Set quantity for the pet. Shop.
                 await ctx.send("What quantity of this pet should be available?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -177,31 +175,29 @@ class Pets(commands.Cog):
                 quantity = pred_int.result
                 if quantity <= 0:
                     return await ctx.send("Uh oh, quantity has to be more than 0.")
-
-
+#Set Tuhumbnail URL for the pet.
                 await ctx.send("Thumbnail URL (preferably a Discord URL) Try to use a square image.")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 thumbnail_url = answer.content
-
-
+#Set Image URL for the pet.
                 await ctx.send("Image URL (preferably a Discord URL) Try to use a square image.")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 image_url = answer.content
-
-
+#Set the pets description.
                 await ctx.send("Give the pet a description")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 description = answer.content
-                description = description.strip("@")                
+                description = description.strip("@")
+#Add pet to the DB.                
                 await self.config.guild(ctx.guild).items.set_raw(
                     lower_pet_name,
                     value={
@@ -225,6 +221,7 @@ class Pets(commands.Cog):
                     },
                 )
                 await ctx.send(f"{pet_name} added.")
+#Add Beast.                
         if pred.result == 1:
             await ctx.send(
                 "What is the name of the beast? Warg, unicorn? Etc."
@@ -244,6 +241,7 @@ class Pets(commands.Cog):
                         "This beast already exists. Please, remove it first or try again."
                     )
             except KeyError:
+#PRICE REMOVE.                
                 await ctx.send("How much should this item cost?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -252,6 +250,7 @@ class Pets(commands.Cog):
                 price = pred_int.result
                 if price <= 0:
                     return await ctx.send("Uh oh, price has to be more than 0.")
+#QUANTITY REMOVE.                
                 await ctx.send("What quantity of this item should be available?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -260,19 +259,22 @@ class Pets(commands.Cog):
                 quantity = pred_int.result
                 if quantity <= 0:
                     return await ctx.send("Uh oh, quantity has to be more than 0.")
+#REDEEMABLE REMOVE.                
                 await ctx.send("Is the item redeemable?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_yn)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 redeemable = pred_yn.result
-                await ctx.send("Give the pet a description")
+#Set description for the beast.                
+                await ctx.send("Give the beast a description")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 description = answer.content
-                description = description.strip("@")                
+                description = description.strip("@")
+#Add beast to DB.                
                 await self.config.guild(ctx.guild).items.set_raw(
                     lower_beast_name,
                     value={
@@ -295,6 +297,7 @@ class Pets(commands.Cog):
                     },
                 )
                 await ctx.send(f"{beast_name} added.")
+#Add mount.                
         if pred.result == 2:
             await ctx.send(
                 "What is the name of the mount?"
@@ -314,8 +317,7 @@ class Pets(commands.Cog):
                         "This mount already exists. Please, remove it first or try again."
                     )
             except KeyError:
-
-
+#COST/PRICE REMOVE.
                 await ctx.send("How much should this item cost?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -323,9 +325,8 @@ class Pets(commands.Cog):
                     return await ctx.send("You took too long. Try again, please.")
                 price = pred_int.result
                 if price <= 0:
-                    return await ctx.send("Uh oh, price has to be more than 0.")
-                
-
+                    return await ctx.send("Uh oh, price has to be more than 0.")               
+#QUANTITY REMOVE
                 await ctx.send("What quantity of this item should be available?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -334,17 +335,15 @@ class Pets(commands.Cog):
                 quantity = pred_int.result
                 if quantity <= 0:
                     return await ctx.send("Uh oh, quantity has to be more than 0.")
-
-
-                await ctx.send("Give the pet a description")
+#Set mount description.
+                await ctx.send("Give the mount a description")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 description = answer.content
                 description = description.strip("@") 
-
-
+#Set mount if flying.
                 await ctx.send("Can this mount fly?")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_yn)
@@ -393,7 +392,8 @@ class Pets(commands.Cog):
                             "description": description,             
                         },
                     )
-                    await ctx.send(f"{mount_name} added.")            
+                    await ctx.send(f"{mount_name} added.")
+#Add rare.        
         if pred.result == 3:                        
             await ctx.send(
                 "What is the name of the rare?"
@@ -418,9 +418,8 @@ class Pets(commands.Cog):
                     answer = await self.bot.wait_for("message", timeout=120, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
-                rare_type = answer.content                
-                
-
+                rare_type = answer.content                               
+#Set affection for rare.
                 await ctx.send("Starting affection? Number only.")
                 try:
                     await self.bot.wait_for("message", timeout=120, check=pred_int)
@@ -429,15 +428,14 @@ class Pets(commands.Cog):
                 affection = pred_int.result
                 if affection < 0:
                     return await ctx.send("The affection level has to be 0 or more than 0.")
-
-
+#Set attitude for rare.
                 await ctx.send("What is the consistant attitude of the rare? Happy|Sad|Angry whatever you like.")
                 try:
                     answer = await self.bot.wait_for("message", timeout=120, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 attitude = answer.content
-
+#Ability section process for rare.
                 ablist = []
                 for a in abilites:
                     abilites = await self.config.guild(ctx.guild).abilites.get_raw(a)
@@ -473,31 +471,28 @@ class Pets(commands.Cog):
                         )
                     else:
                         ability = check_ability.get("name")
-
+#Set Thumbnail URL for rare.
                 await ctx.send("Thumbnail URL (preferably a Discord URL) Try to use a square image.")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 thumbnail_url = answer.content
-
-
+#Set Image URL for Rare.
                 await ctx.send("Image URL (preferably a Discord URL) Try to use a square image.")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 image_url = answer.content
-
-
+#Set the description for the rare.
                 await ctx.send("Give the rare a description")
                 try:
                     answer = await self.bot.wait_for("message", timeout=600, check=check)
                 except asyncio.TimeoutError:
                     return await ctx.send("You took too long. Try again, please.")
                 description = answer.content
-
-
+#Adds the rare animal to the DB.
                 await self.config.guild(ctx.guild).rares.set_raw(
                     lower_rare_name,
                     value={
@@ -521,7 +516,7 @@ class Pets(commands.Cog):
     @pets.command(name="remove")
     async def pets_remove(self, ctx: commands.Context, *, animal: str):
         """Remove a pet/beast/mount/rare animal from the guild database."""
-        animal = animal.strip("@")
+        animal = animal.lower()
         try:
             is_already_pet = await self.config.guild(ctx.guild).pets.get_raw(animal)
             if is_already_pet:
@@ -772,46 +767,4 @@ class Pets(commands.Cog):
                     sorted_ablist = sorted(ablist, key=itemgetter(0))
                 headers = ("Name", "Name", "Description")
                 output = box(tabulate(sorted_ablist, headers=headers), lang="md")                                 
-                await ctx.send(f"{ability_lower} already exists.\n{output}")
-
-
-
-
-
-
-
-
-
-
-
-                ablist = []
-                for a in abilites:
-                    abilites = await self.config.guild(ctx.guild).abilites.get_raw(a)  
-                    description = abilties.get("description")                   
-                    table = [a, description]
-                    ablist.append(table)
-                    sorted_ablist = sorted(ablist, key=itemgetter(0))
-                headers = ("Name", "Description")
-                output = box(tabulate(sorted_ablist, headers=headers), lang="md")
-                await ctx.send(
-                    (
-                        "Choose an ability to give the rare.\n" 
-                        "{output}\n"
-                        "Can't see an ability you want? Add it yourself using `!pets abilities`"
-                    ).format(
-                        output=output,
-                    )
-                )
-                try:
-                    answer = await self.bot.wait_for("message", timeout=120, check=check)
-                except asyncio.TimeoutError:
-                    return await ctx.send("You took too long. Try again, please.")                
-                lower_ability_name = answer.content.lower()
-                try:
-                    check_ability = await self.config.guild(ctx.guild).abilities.get_raw(lower_ability_name)
-                    if check_ability:
-                        return await ctx.send(
-                            "This ability doesn't exist. Please create one using `!pets abilities`"
-                        )
-                    else:
-                        ability = check_ability.get("name")        
+                await ctx.send(f"{ability_lower} already exists.\n{output}")       
