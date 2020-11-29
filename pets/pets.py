@@ -465,12 +465,12 @@ class Pets(commands.Cog):
                 lower_ability_name = answer.content.lower()
                 try:
                     check_ability = await self.config.guild(ctx.guild).abilities.get_raw(lower_ability_name)
-                    if check_ability:
-                        return await ctx.send(
-                            "This ability doesn't exist. Please create one using `!pets abilities`"
-                        )
-                    else:
+                    if check_ability:                        
                         ability = check_ability.get("name")
+                except KeyError:
+                    return await ctx.send(
+                        "This ability doesn't exist. Please create one using `!pets abilities` or type it in correctly."
+                    )                        
 #Set Thumbnail URL for rare.
                 await ctx.send("Thumbnail URL (preferably a Discord URL) Try to use a square image.")
                 try:
