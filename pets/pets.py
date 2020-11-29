@@ -727,7 +727,7 @@ class Pets(commands.Cog):
             ablist.append(table)
             sorted_ablist = sorted(ablist, key=itemgetter(0))
         if ablist == []:
-            table = ["", "No abilities have been added. Run !pets ability <ability_name> to get started."]
+            table = ["", "", "No abilities have been added. Run !pets ability <ability_name> to get started."]
             ablist.append(table)
             sorted_ablist = sorted(ablist, key=itemgetter(0))
         headers = ("Name", "Name", "Description")
