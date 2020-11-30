@@ -468,7 +468,7 @@ class Pets(commands.Cog):
                     (
                         "Choose an ability to give the rare:\n" 
                         "{output}\n"
-                        "Can't see an ability you want? Add it yourself using `!pets abilities`"
+                        "Can't see an ability you want? Add it yourself using `!pets addability <ability_name>`"
                     ).format(
                         output=output,
                     )
@@ -484,7 +484,7 @@ class Pets(commands.Cog):
                         ability = check_ability.get("name")
                 except KeyError:
                     return await ctx.send(
-                        "This ability doesn't exist. Please create one using `!pets abilities` or type it in correctly."
+                        "This ability doesn't exist. Please create one using `!pets addability <ability_name>` or type it in correctly."
                     )                        
 #Set Thumbnail URL for rare.
                 await ctx.send("Thumbnail URL (preferably a Discord URL) Try to use a square image.")
