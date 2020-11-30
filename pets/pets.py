@@ -683,6 +683,7 @@ class Pets(commands.Cog):
             return await ctx.send(f"{animal} isn't in the guild database.")
         name = info.get("name")
         category = info.get("category")
+        animal_type = info.get("type")
         starting_affection = info.get("affection")
         attitude = info.get("attitude")
         ability1 = info.get("ability")
