@@ -618,8 +618,9 @@ class Pets(commands.Cog):
         elif type == "rares":
             for r in rares:
                 rare = await self.config.guild(ctx.guild).rares.get_raw(r)
-                description = int(rare.get("description"))
-                table = [r, description]
+                animal_type = rare.get("type")
+                description = rare.get("description")
+                table = [r, animal_type, description]
                 rares_table.append(table)
                 sorted_rares = sorted(rares_table, key=itemgetter(0))
             if sorted_rares == []:
@@ -632,25 +633,25 @@ class Pets(commands.Cog):
             for p in pets:
                 pet = await self.config.guild(ctx.guild).pets.get_raw(p)
                 animal_type = pet.get("type")
-                description = int(pet.get("description"))
+                description = pet.get("description")
                 table = [p, animal_type, description]
                 all_table.append(table)
             for b in beast:
                 beast = await self.config.guild(ctx.guild).beasts.get_raw(p)
                 animal_type = beast.get("type")
-                description = int(beast.get("description"))
+                description = beast.get("description")
                 table = [p, animal_type, description]
                 all_table.append(table)
             for m in mounts:
                 mount = await self.config.guild(ctx.guild).mounts.get_raw(p)
                 animal_type = mount.get("type")
-                description = int(mount.get("description"))
+                description = mount.get("description")
                 table = [p, animal_type, description]
                 all_table.append(table)
             for r in rares:
                 rare = await self.config.guild(ctx.guild).rares.get_raw(p)                
                 animal_type = rare.get("type") 
-                description = int(rare.get("description"))
+                description = rare.get("description")
                 table = [p, animal_type, description]
                 all_table.append(table)                
             sorted_all = sorted(all_table, key=itemgetter(0))
