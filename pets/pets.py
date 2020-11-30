@@ -686,7 +686,7 @@ class Pets(commands.Cog):
         starting_affection = info.get("affection")
         attitude = info.get("attitude")
         ability1 = info.get("ability")
-        ability = await self.config.guild(ctx.guild).abilities.get_raw(ability1)
+        ability = await self.config.guild(ctx.guild).abilities.get_raw(ability1.lower())
         ability1_description = ability.get("description")
         thumbnail = info.get("thumbnail")
         image = info.get("image")
