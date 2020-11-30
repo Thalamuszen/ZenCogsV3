@@ -699,7 +699,7 @@ class Pets(commands.Cog):
         if not redeemable:
             redeemable = False
         await ctx.send(
-            f"**__{name}:__**\n**Category:** {category}\n**Type:** {animal_type}\n**Starting affection:** {starting_affection}\n**Attitude:** {attitude}\n**Ability:** {ability1}\n**Ability Description:** {ability1_description}\n**Price:** {price}\n**Quantity:** {quantity}\n**Description:** {description}"
+            f"**__{name}:__**\n**Category:** {category}\n**Type:** {animal_type}\n**Starting affection:** {starting_affection}\n**Attitude:** {attitude}\n**Ability:** {ability1}\n**Ability Description:** {ability1_description}\n**Thumbnail:** {thumbnail}\n**Image:** {image}\n**Price:** {price}\n**Quantity:** {quantity}\n**Description:** {description}"
         )
 
     @pets.command(name="reset")
