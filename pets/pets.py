@@ -444,7 +444,7 @@ class Pets(commands.Cog):
                 for a in abilities:
                     ability = await self.config.guild(ctx.guild).abilities.get_raw(a)
                     name = ability.get("name")  
-                    description = abilty.get("description")                   
+                    description = ability.get("description")                   
                     table = [a, name, description]
                     ablist.append(table)
                     sorted_ablist = sorted(ablist, key=itemgetter(0))
