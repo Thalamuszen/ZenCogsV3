@@ -37,7 +37,7 @@ NAMES = {
 }
 RARES = {
     "\ud83d\udc22": "turtle",
-    "\ud83d\udc33": "blow whale",
+    "\ud83d\udc33": "blow_whale",
     "\ud83d\udc0b": "whale",
     "\ud83d\udc0a": "crocodile",
     "\ud83d\udc27": "penguin",
