@@ -626,7 +626,7 @@ class Pets(commands.Cog):
             if sorted_rares == []:
                 await ctx.send ("Nothing to see here!")
             else:                
-                headers = ("Name", "Type")
+                headers = ("Name", "Type", "Description")
                 output = box(tabulate(sorted_rares, headers=headers), lang="md")
                 return await ctx.send (f"{output}")                                    
         elif type == "all":
