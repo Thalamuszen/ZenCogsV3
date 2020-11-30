@@ -12,6 +12,7 @@ from operator import itemgetter
 
 from redbot.core import commands, checks, Config, bank
 from redbot.core.utils.chat_formatting import box, humanize_list, pagify
+from redbot.core.utils.predicates import MessagePredicate
 
 from redbot.core.bot import Red
 
