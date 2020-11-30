@@ -549,7 +549,7 @@ class Pets(commands.Cog):
     async def pets_list(self, ctx:commands.Context, *, type: str):
         """Show a list of pets/beasts/mounts/rares or all from the guild Database."""
         pets = await self.config.guild(ctx.guild).pets.get_raw()
-        beasts = await self.config.guild(ctx.guild).beatss.get_raw()
+        beasts = await self.config.guild(ctx.guild).beasts.get_raw()
         mounts = await self.config.guild(ctx.guild).mounts.get_raw()
         rares = await self.config.guild(ctx.guild).rares.get_raw()
         pets_table = []
