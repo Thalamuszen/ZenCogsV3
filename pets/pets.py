@@ -106,7 +106,7 @@ class Pets(commands.Cog):
         def check(m):
             return m.author == ctx.author and m.channel == ctx.channel
 
-        types = ["pet", "beast", "mount", "rares"]
+        types = ["pet", "beast", "mount", "rare"]
         pred_type = MessagePredicate.lower_contained_in(types)
         pred_int = MessagePredicate.valid_int(ctx)
         pred_yn = MessagePredicate.yes_or_no(ctx)
@@ -123,10 +123,10 @@ class Pets(commands.Cog):
         try:
             await self.bot.wait_for("message", timeout=30, check=pred_type)
         except asyncio.TimeoutError:
-            return await ctx.send("You took too long. Try again, please.")
-        animal_cat = answer.content.lower()      
+            return await ctx.send("You took too long. Try again, please.")             
 #Add pet.        
         if pred_type.result == 0:
+            animal_cat = "pet" 
             await ctx.send(
                 "What is the name of the pet?"
             )
@@ -224,6 +224,7 @@ class Pets(commands.Cog):
                 await ctx.send(f"{pet_name} added.")
 #Add Beast.                
         if pred_type.result == 1:
+            animal_cat = "beast" 
             await ctx.send(
                 "What is the name of the beast? Warg, unicorn? Etc."
             )
@@ -300,6 +301,7 @@ class Pets(commands.Cog):
                 await ctx.send(f"{beast_name} added.")
 #Add mount.                
         if pred_type.result == 2:
+            animal_cat = "mount" 
             await ctx.send(
                 "What is the name of the mount?"
             )
@@ -394,7 +396,8 @@ class Pets(commands.Cog):
                     )
                     await ctx.send(f"{mount_name} added.")
 #Add rare.        
-        if pred_type.result == 3:                        
+        if pred_type.result == 3:
+            animal_cat = "rare" 
             await ctx.send(
                 "What is the name of the rare?"
             )
