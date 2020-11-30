@@ -665,7 +665,7 @@ class Pets(commands.Cog):
     @pets.command(name="show")
     async def pets_show(self, ctx: commands.Context, *, animal: str):
         """Show information about a pet/beast/mount/rare from the guild database."""
-        animal = animal.strip("@")
+        animal = animal.lower()
         pets = await self.config.guild(ctx.guild).pets.get_raw()
         beasts = await self.config.guild(ctx.guild).beasts.get_raw()
         mounts = await self.config.guild(ctx.guild).mounts.get_raw()
@@ -673,18 +673,23 @@ class Pets(commands.Cog):
 
         if animal in pets:
             info = await self.config.guild(ctx.guild).pets.get_raw(animal)
-            animal_type = "Pet"
         elif animal in beasts:
             info = await self.config.guild(ctx.guild).beasts.get_raw(animal)
-            animal_type = "Beast"
         elif animal in mounts:
             info = await self.config.guild(ctx.guild).mounts.get_raw(animal)
-            animal_type = "Mount"
         elif animal in rares:
-            info = await self.config.guild(ctx.guild).rares.get_raw(animal)
-            animal_type = "Rare"            
+            info = await self.config.guild(ctx.guild).rares.get_raw(animal)          
         else:
             return await ctx.send(f"{animal} isn't in the guild database.")
+        name = info.get("name")
+        category = info.get("category")
+        starting_affection = info.get("affection")
+        attitude = info.get("attitude")
+        ability1 = info.get("ability")
+        ability = await self.config.guild(ctx.guild).abilities.get_raw(ability1)
+        ability1_description = ability.get("description")
+        thumbnail = info.get("thumbnail")
+        image = info.get("image")
         price = info.get("price")
         quantity = info.get("quantity")
         redeemable = info.get("redeemable")
@@ -693,7 +698,7 @@ class Pets(commands.Cog):
         if not redeemable:
             redeemable = False
         await ctx.send(
-            f"**__{animal}:__**\n**Type:** {animal_type}\n**Price:** {price}\n**Quantity:** {quantity}\n**Redeemable:** {redeemable}\n**Description:** {description}\n**Xmas gift size:** {size}"
+            f"**__{name}:__**\n**Category:** {category}\n**Type:** {animal_type}\n**Starting affection:** {starting_affection}\n**Attitude:** {attitude}\n**Ability:** {ability1}\n**Ability Description:** {ability1_description}\n**Price:** {price}\n**Quantity:** {quantity}\n**Description:** {description}"
         )
 
     @pets.command(name="reset")
