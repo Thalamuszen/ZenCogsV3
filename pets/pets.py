@@ -567,7 +567,7 @@ class Pets(commands.Cog):
             for p in pets:
                 pet = await self.config.guild(ctx.guild).pets.get_raw(p)
                 quantity = int(pet.get("quantity"))
-                table = [r, quantity, role_name]
+                table = [p, quantity, role_name]
                 pets_table.append(table)
                 sorted_pets = sorted(pets_table, key=itemgetter(0))
             if sorted_pets == []:
@@ -616,8 +616,6 @@ class Pets(commands.Cog):
                 output = box(tabulate(sorted_rares, headers=headers), lang="md")
                 return await ctx.send (f"{output}")                                    
         elif type == "all":
-            allofthem = []
-            allofthem.extend((pets, beasts, mounts, rares))
             for a in allofthem:
                 pet = await self.config.guild(ctx.guild).pets.get_raw(a)
                 animal_type = pet.get("type")                
@@ -743,7 +741,7 @@ class Pets(commands.Cog):
             )
         )        
 
-    @pets.command(name="ability")
+    @pets.command(name="addability")
     async def pets_ability(self, ctx: commands.Context, *, ability: str):
         """Creates a new ability which can be given to your animals during the `!pets add` process."""       
         ability_lower = ability.lower()
