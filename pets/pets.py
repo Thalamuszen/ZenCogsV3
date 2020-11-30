@@ -439,7 +439,7 @@ class Pets(commands.Cog):
                     return await ctx.send("You took too long. Try again, please.")
                 attitude = answer.content
 #Ability section process for rare.
-                abilities = await self.config.guild(ctx.guild).abilities.get_raw(a)                
+                abilities = await self.config.guild(ctx.guild).abilities.get_raw()                
                 ablist = []
                 for a in abilities:
                     ability = await self.config.guild(ctx.guild).abilities.get_raw(a)
