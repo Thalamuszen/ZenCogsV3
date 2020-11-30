@@ -617,9 +617,9 @@ class Pets(commands.Cog):
                 return await ctx.send (f"{output}")   
         elif type == "rares":
             for r in rares:
-                rare = await self.config.guild(ctx.guild).mounts.get_raw(r)
-                quantity = int(rare.get("quantity"))
-                table = [r, quantity, role_name]
+                rare = await self.config.guild(ctx.guild).rares.get_raw(r)
+                description = int(rare.get("description"))
+                table = [r, description]
                 rares_table.append(table)
                 sorted_rares = sorted(rares_table, key=itemgetter(0))
             if sorted_rares == []:
@@ -629,22 +629,35 @@ class Pets(commands.Cog):
                 output = box(tabulate(sorted_rares, headers=headers), lang="md")
                 return await ctx.send (f"{output}")                                    
         elif type == "all":
-            for a in allofthem:
-                pet = await self.config.guild(ctx.guild).pets.get_raw(a)
-                animal_type = pet.get("type")                
-                beast = await self.config.guild(ctx.guild).beasts.get_raw(a)
-                animal_type = beast.get("type")  
-                mount = await self.config.guild(ctx.guild).mounts.get_raw(a)
-                animal_type = mount.get("type")  
-                rare = await self.config.guild(ctx.guild).mounts.get_raw(a)
-                animal_type = rare.get("type")  
-                table = [a, animal_type]
+            for p in pets:
+                pet = await self.config.guild(ctx.guild).pets.get_raw(p)
+                animal_type = pet.get("type")
+                description = int(pet.get("description"))
+                table = [p, animal_type, description]
                 all_table.append(table)
-                sorted_all = sorted(all_table, key=itemgetter(0))
+            for b in beast:
+                beast = await self.config.guild(ctx.guild).beasts.get_raw(p)
+                animal_type = beast.get("type")
+                description = int(beast.get("description"))
+                table = [p, animal_type, description]
+                all_table.append(table)
+            for m in mounts:
+                mount = await self.config.guild(ctx.guild).mounts.get_raw(p)
+                animal_type = mount.get("type")
+                description = int(mount.get("description"))
+                table = [p, animal_type, description]
+                all_table.append(table)
+            for r in rares:
+                rare = await self.config.guild(ctx.guild).rares.get_raw(p)                
+                animal_type = rare.get("type") 
+                description = int(rare.get("description"))
+                table = [p, animal_type, description]
+                all_table.append(table)                
+            sorted_all = sorted(all_table, key=itemgetter(0))
             if sorted_all == []:
                 await ctx.send ("Nothing to see here!")
             else:                
-                headers = ("Name", "Type")
+                headers = ("Name", "Type", "Description")
                 output = box(tabulate(sorted_all, headers=headers), lang="md")
                 await ctx.send (f"{output}") 
 
