@@ -636,7 +636,7 @@ class Pets(commands.Cog):
                 description = pet.get("description")
                 table = [p, animal_type, description]
                 all_table.append(table)
-            for b in beast:
+            for b in beasts:
                 beast = await self.config.guild(ctx.guild).beasts.get_raw(p)
                 animal_type = beast.get("type")
                 description = beast.get("description")
