@@ -124,9 +124,9 @@ class Pets(commands.Cog):
             await self.bot.wait_for("message", timeout=30, check=pred_type)
         except asyncio.TimeoutError:
             return await ctx.send("You took too long. Try again, please.")
-        animal_cat = answer.content      
+        animal_cat = answer.content.lower()      
 #Add pet.        
-        if pred.result == 0:
+        if pred_type.result == 0:
             await ctx.send(
                 "What is the name of the pet?"
             )
@@ -223,7 +223,7 @@ class Pets(commands.Cog):
                 )
                 await ctx.send(f"{pet_name} added.")
 #Add Beast.                
-        if pred.result == 1:
+        if pred_type.result == 1:
             await ctx.send(
                 "What is the name of the beast? Warg, unicorn? Etc."
             )
@@ -299,7 +299,7 @@ class Pets(commands.Cog):
                 )
                 await ctx.send(f"{beast_name} added.")
 #Add mount.                
-        if pred.result == 2:
+        if pred_type.result == 2:
             await ctx.send(
                 "What is the name of the mount?"
             )
@@ -394,7 +394,7 @@ class Pets(commands.Cog):
                     )
                     await ctx.send(f"{mount_name} added.")
 #Add rare.        
-        if pred.result == 3:                        
+        if pred_type.result == 3:                        
             await ctx.send(
                 "What is the name of the rare?"
             )
