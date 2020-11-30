@@ -823,11 +823,10 @@ class Pets(commands.Cog):
                     name = rare.get("name")
                     ability_get = rare.get("ability")
                     ability = ability_get.lower()
-                if ability == ability_lower:
-                    return await ctx.send(f"The **{ability_lower}** ability has been assigned to **{name}** and cannot be removed.\nEither change their ability or remove them first.")              
-                else:
-                    await self.config.guild(ctx.guild).abilities.clear_raw(ability_lower)                                                   
-                    await ctx.send(f"The **{ability_lower}** ability has successfully been removed.")
+                    if ability == ability_lower:
+                        return await ctx.send(f"The **{ability_lower}** ability has been assigned to **{name}** and cannot be removed.\nEither change their ability or remove them first.")              
+                await self.config.guild(ctx.guild).abilities.clear_raw(ability_lower)                                                   
+                await ctx.send(f"The **{ability_lower}** ability has successfully been removed.")
         except KeyError:
                 ablist = []
                 for a in abilities:
