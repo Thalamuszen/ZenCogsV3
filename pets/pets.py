@@ -680,7 +680,7 @@ class Pets(commands.Cog):
         elif animal in rares:
             info = await self.config.guild(ctx.guild).rares.get_raw(animal)          
         else:
-            return await ctx.send(f"{animal} isn't in the guild database.")
+            return await ctx.send(f"**{animal}** doesn't exist in the guild database.")
         name = info.get("name")
         category = info.get("category")
         animal_type = info.get("type")
