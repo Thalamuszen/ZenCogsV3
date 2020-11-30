@@ -820,8 +820,8 @@ class Pets(commands.Cog):
                 rares = await self.config.guild(ctx.guild).rares.get_raw()
                 for r in rares:
                     rare = await self.config.guild(ctx.guild).rares.get_raw(r)
-                    ability = rare.get("ability")
-                if ability == ability_lower:
+                    ability_get = rare.get("ability")
+                if ability_get == ability_lower:
                     return await ctx.send(f"The **{ability_lower} ability has been assigned to {r} and cannot be removed.\nEither change their ability or remove them first.")              
                 else:
                     await self.config.guild(ctx.guild).abilities.clear_raw(ability_lower)                                                   
