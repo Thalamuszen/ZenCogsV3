@@ -454,10 +454,19 @@ class Pets(commands.Cog):
                     ablist.append(table)
                     sorted_ablist = sorted(ablist, key=itemgetter(0))                    
                     headers = ("ATTENTION!",)
+                    output = box(tabulate(sorted_ablist, headers=headers), lang="md")
+                    return await ctx.send(
+                        (                             
+                            "{output}\n"
+                            "Come back later when you have added an ability."
+                        ).format(
+                            output=output,
+                        )
+                    )                    
                 output = box(tabulate(sorted_ablist, headers=headers), lang="md")
                 await ctx.send(
                     (
-                        "Choose an ability to give the rare.\n" 
+                        "Choose an ability to give the rare:\n" 
                         "{output}\n"
                         "Can't see an ability you want? Add it yourself using `!pets abilities`"
                     ).format(
