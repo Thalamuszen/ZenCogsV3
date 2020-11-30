@@ -640,19 +640,19 @@ class Pets(commands.Cog):
                 beast = await self.config.guild(ctx.guild).beasts.get_raw(b)
                 animal_type = beast.get("type")
                 description = beast.get("description")
-                table = [p, animal_type, description]
+                table = [b, animal_type, description]
                 all_table.append(table)
             for m in mounts:
                 mount = await self.config.guild(ctx.guild).mounts.get_raw(m)
                 animal_type = mount.get("type")
                 description = mount.get("description")
-                table = [p, animal_type, description]
+                table = [m, animal_type, description]
                 all_table.append(table)
             for r in rares:
                 rare = await self.config.guild(ctx.guild).rares.get_raw(r)                
                 animal_type = rare.get("type") 
                 description = rare.get("description")
-                table = [p, animal_type, description]
+                table = [r, animal_type, description]
                 all_table.append(table)                
             sorted_all = sorted(all_table, key=itemgetter(0))
             if sorted_all == []:
