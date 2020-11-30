@@ -117,7 +117,7 @@ class Pets(commands.Cog):
             "__**Beasts**__: An animal that fights along side the user. Adventure module coming soon™\n"
             "__**Mounts**__: An animal used to travel faster within the aforemention Adventure module.\n"
             "__**Rares**__: A rare animal that is considered a lucky charm. Requires no maintenance.\n"
-            "**NOTE** Rare animals have abilities that are hardcoded into other modules.\n"
+            "**NOTE:** Rare animals have abilities that are hardcoded into other modules.\n"
             "**Members of your guild can only have one of each at any given time.**\n"
         )
         try:
@@ -432,7 +432,7 @@ class Pets(commands.Cog):
                 if affection < 0:
                     return await ctx.send("The affection level has to be 0 or more than 0.")
 #Set attitude for rare.
-                await ctx.send("What is the consistant attitude of the rare? Happy|Sad|Angry whatever you like.")
+                await ctx.send("What is the consistant attitude of the rare? Happy|Sad|Angry whatever you like. This will not change.")
                 try:
                     answer = await self.bot.wait_for("message", timeout=120, check=check)
                 except asyncio.TimeoutError:
