@@ -161,7 +161,7 @@ class Daily(commands.Cog):
             remaining_hour = remaining_hour.lstrip("0")
             if remaining_hour == 0:
                 hour = ""
-            elif remaing_hour == 1:
+            elif remaining_hour == 1:
                 hour = "hour"
             else:
                 hour = "hours"
