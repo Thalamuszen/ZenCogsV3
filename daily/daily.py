@@ -186,7 +186,7 @@ class Daily(commands.Cog):
             elif remaining_min == "" and remaining_sec == "1":
                 minute = ""
                 second = "second"
-            elif remaining_min == "" and remaining_sec >= "1":
+            elif remaining_min == "" and remaining_sec > "1":
                 minute = ""
                 second = "seconds"                
             elif remaining_sec == "":
