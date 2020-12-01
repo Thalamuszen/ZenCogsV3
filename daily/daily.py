@@ -8,6 +8,20 @@ from redbot.core.utils.chat_formatting import humanize_number, humanize_timedelt
 
 from redbot.core.bot import Red
 
+#Daily bar emojis.
+BARDAILY = {
+    "left_daily": "<:Daily_left:783314575730147380>",
+    "mid_daily": "<:Daily_mid:783314575609036819>",
+    "right_daily": "<:Daily_right:783314575784804373>",
+}
+
+#Empty bar emojis.
+BAREMPTY = {
+    "left_empty": "<:Empty_left:781138077354819584>",
+    "mid_empty": "<:Empty_mid:781138077380771860>",
+    "right_empty": "<:Empty_right:781138077380902932>",
+}
+
 class Daily(commands.Cog):
     async def red_delete_data_for_user(self, **kwargs):
         """ Nothing to delete """
@@ -20,17 +34,7 @@ class Daily(commands.Cog):
         self.bot = bot
         self.config = Config.get_conf(self, 4119811374899, force_registration=True)
 
-        default_global = {
-            "daily_bar": [
-                "<:Daily_left:783314575730147380>",
-                "<:Daily_mid:783314575609036819>",
-                "<:Daily_right:783314575784804373>",
-            ],
-            "empty_bar": [
-                "left_empty": "<:Empty_left:781138077354819584>",
-                "mid_empty": "<:Empty_mid:781138077380771860>",
-                "right_empty": "<:Empty_right:781138077380902932>",
-            ],            
+        default_global = {           
             "midnight_today": "2020-01-01 00:00:00",
             "midnight_tomorrow": "2020-01-01 00:00:00",
         }
