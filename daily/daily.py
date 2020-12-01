@@ -75,7 +75,7 @@ class Daily(commands.Cog):
 #        await self.config.midnight_today.set(midnight_check)
 
         memberdata = await self.config.member(ctx.author).all()
-        last_daily = datetime.strptime(str(userdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
+        last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
             await ctx.send(f"Midnight_today: {midnight_check}\nRun daily.\nLast daily: {last_daily}")
