@@ -122,7 +122,7 @@ class Daily(commands.Cog):
             credits = await self.config.guild(ctx.guild).credits()            
             currency_name = await bank.get_currency_name(ctx.guild)
             balance = humanize_number(int(await bank.get_balance(ctx.author)))
-            remaining_time = str(now - midnight_tomorrow)
+            remaining_time = str(now - midnight_tom_check)
             await bank.deposit_credits(ctx.author, credits)
             embed.description=f"You have earned {credits} {currency_name}.\nYou currently have {balance} {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in: {remaining_time}."
             await ctx.send(embed=embed)                        
