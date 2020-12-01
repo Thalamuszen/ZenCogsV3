@@ -144,7 +144,7 @@ class Daily(commands.Cog):
             now = now.replace(tzinfo=None)
             remaining = int((midnight_tomorrow - now).total_seconds())
             remaining_time = time.strftime("%H hours %M minutes and %S seconds", time.gmtime(remaining))
-            remaining_time.lstrip("0")
+            remaining_time = remaining_time.lstrip("0")
             embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {remaining_time}"
             await ctx.send(embed=embed)
                 
