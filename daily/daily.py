@@ -1,4 +1,5 @@
 import discord
+import time
 
 from datetime import date, datetime, timedelta, timezone
 
@@ -132,9 +133,10 @@ class Daily(commands.Cog):
 
             #now = now.strftime("%Y-%m-%d %H:%M:%S")
             remaining = int((midnight_tomorrow - now).total_seconds())
-            remaining_time = timedelta(seconds=remaining)
-            nice_remaining_time = datetime.strftime(remaining_time, "%H:%M:%S")
-            embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {nice_remaining_time}."
+            remaining_time = time.strftime("%H:%M:%S", time.gmtime(remaining))
+            #remaining_time = str(timedelta(seconds=remaining))
+            #nice_remaining_time = datetime.strftime(remaining_time, "%H:%M:%S")
+            embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {remaining_time}."
             await ctx.send(embed=embed)
                 
     @commands.command()
