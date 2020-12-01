@@ -169,9 +169,12 @@ class Daily(commands.Cog):
             remaining_min = remaining_min.lstrip("0")
             if hour == "" and remaining_min == "":
                 minute = ""
-            elif remaining_hour >= "1" and remaining_min == "":
+            elif remaining_hour == "1" and remaining_min == "":
                 hour = "hour"
                 minute = "and"
+            elif remaining_hour > "1" and remaining_min == "":
+                hour = "hours"
+                minute = "and"                
             elif remaining_min == "":
                 minute = "and"      
             elif remaining_min == "1":
