@@ -129,15 +129,19 @@ class Daily(commands.Cog):
             now = datetime.now(timezone.utc)
             now = now.strftime("%Y-%m-%d %H:%M:%S")
             remaining = int((midnight_tomorrow - now).total_seconds())
-            remaining_time = time.strftime("%H hours %M minutes and %S seconds", time.gmtime(remaining))
+            remaining_hour = time.strftime("%H", time.gmtime(remaining))
+            remaining_hour = remaining_hour.lstrip("0")
+            remaining_min = time.strftime("%M", time.gmtime(remaining))
+            remaining_min = remaining_min.lstrip("0")
+            remaining_sec = time.strftime("%S", time.gmtime(remaining))
+            remaining_sec = remaining_sec.lstrip("0")
             await self.config.member(ctx.author).credits.set(True)
             await self.config.member(ctx.author).last_daily.set(now)
             credits = await self.config.guild(ctx.guild).credits()            
             currency_name = await bank.get_currency_name(ctx.guild)
-            balance = humanize_number(int(await bank.get_balance(ctx.author)))
-            remaining_time = str(now - midnight_tom_check)
+            balance = humanize_number(int(await bank.get_balance(ctx.author)))            
             await bank.deposit_credits(ctx.author, credits)
-            embed.description=f"You have earned {credits} {currency_name}.\nYou currently have {balance} {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in: {remaining_time}."
+            embed.description=f"You have earned {credits} {currency_name}.\nYou currently have {balance} {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
             await ctx.send(embed=embed)                        
         else:
             now = datetime.now(timezone.utc)
