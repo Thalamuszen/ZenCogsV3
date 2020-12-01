@@ -162,9 +162,9 @@ class Daily(commands.Cog):
             if remaining_hour == "0":
                 hour = ""
             elif remaining_hour == "1":
-                hour = "hour"
+                hour = "hour,"
             else:
-                hour = "hours"
+                hour = "hours,"
             remaining_min = time.strftime("%M", time.gmtime(remaining))
             remaining_min = remaining_min.lstrip("0")
             if remaining_min == "0":
