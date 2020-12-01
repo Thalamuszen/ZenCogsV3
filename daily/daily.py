@@ -159,12 +159,30 @@ class Daily(commands.Cog):
             remaining = int((midnight_tomorrow - now).total_seconds())
             remaining_hour = time.strftime("%H", time.gmtime(remaining))
             remaining_hour = remaining_hour.lstrip("0")
+            if remaining_hour == 0:
+                hour = ""
+            elif remaing_hour == 1:
+                hour = "hour"
+            else:
+                hour = "hours"
             remaining_min = time.strftime("%M", time.gmtime(remaining))
             remaining_min = remaining_min.lstrip("0")
+            if remaining_min == 0:
+                minute = ""
+            elif remaing_min == 1:
+                minute = "minute"
+            else:
+                minute = "minutess"            
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
+            if remaining_sec == 0:
+                second = ""
+            elif remaing_hour == 1:
+                second = "second"
+            else:
+                second = "seconds"
             embed.title="__**Daily Already Claimed!**__"
-            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} hour(s) {remaining_min} minute(s) and {remaining_sec} second(s)**"
+            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} {hour} {remaining_min} {minute} and {remaining_sec} {second}**"
             await ctx.send(embed=embed)
                 
     @commands.command()
