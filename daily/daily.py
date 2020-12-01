@@ -227,6 +227,12 @@ class Daily(commands.Cog):
             if remaining_min == "" and remaining_sec == "":
                 minute = ""
                 second = ""
+            elif remaining_min == "1" and remaining_sec == "":
+                minute = "minute"
+                second = ""
+            elif remaining_min > "1" and remaining_sec == "":
+                minute = "minutes"
+                second = ""                   
             elif remaining_min == "" and remaining_sec == "1":
                 minute = ""
                 second = "second"
