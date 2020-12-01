@@ -118,6 +118,8 @@ class Daily(commands.Cog):
         if last_daily < midnight_check:
             now = datetime.now(timezone.utc)
             now = now.strftime("%Y-%m-%d %H:%M:%S")
+            remaining = int((midnight_tomorrow - now).total_seconds())
+            remaining_time = time.strftime("%H hours %M minutes and %S seconds", time.gmtime(remaining))
             await self.config.member(ctx.author).credits.set(True)
             await self.config.member(ctx.author).last_daily.set(now)
             credits = await self.config.guild(ctx.guild).credits()            
@@ -130,12 +132,8 @@ class Daily(commands.Cog):
         else:
             now = datetime.now(timezone.utc)
             now = now.replace(tzinfo=None)
-
-            #now = now.strftime("%Y-%m-%d %H:%M:%S")
             remaining = int((midnight_tomorrow - now).total_seconds())
-            remaining_time = time.strftime("%H Hrs %M Mins %S Secs", time.gmtime(remaining))
-            #remaining_time = str(timedelta(seconds=remaining))
-            #nice_remaining_time = datetime.strftime(remaining_time, "%H%M:%S")
+            remaining_time = time.strftime("%H hours %M minutes and %S seconds", time.gmtime(remaining))
             embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {remaining_time}"
             await ctx.send(embed=embed)
                 
