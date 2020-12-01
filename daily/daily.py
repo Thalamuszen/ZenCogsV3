@@ -27,7 +27,7 @@ class Daily(commands.Cog):
             "midnight_today": "2020-01-01 00:00:00",
         }
 
-        default_guild = {"enabled": False, "cooldown": 30}
+        default_guild = {"enabled": False, "credits": 100}
 
         default_member = {
             "credits": False,
@@ -51,7 +51,7 @@ class Daily(commands.Cog):
 
     @dailies.command(name="toggle")
     async def dailies_toggle(self, ctx: commands.Context, on_off: bool = None):
-        """Toggle store for current server.
+        """Toggle dailies for current server.
         If `on_off` is not provided, the state will be flipped."""
         target_state = (
             on_off
@@ -62,12 +62,22 @@ class Daily(commands.Cog):
         if target_state:
             await ctx.send("Dailies is now enabled.")
         else:
-            await ctx.send("Dailies is now disabled.")        
+            await ctx.send("Dailies is now disabled.")
+
+    @dailies.command(name="credits")
+    async def dailies_credits(self, ctx: commands.Context, credits: int):
+        """Change the amount of daily credits people will recieve."""
+        credits_name = await bank.get_currency_name(ctx.guild)
+        if credits <= 0:
+            return await ctx.send("The amount of credits has to be more than 0.")
+        else:
+            await self.config.guild(ctx.guild).enabled.set(credits)
+            await ctx.send("The daily amount of {credits_name} has been changed to {credits} per day.")
 
     @commands.command()
     @commands.guild_only()
     async def daily1(self, ctx: commands.Context):
-        """Runs the daily command."""
+        """Runs the daily command for the user."""
 
         today = date.today()
         midnight_today = datetime.combine(today, datetime.min.time())        
@@ -77,7 +87,16 @@ class Daily(commands.Cog):
         memberdata = await self.config.member(ctx.author).all()
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         
+        credits = memberdata["credits"]
+        
         if last_daily < midnight_check:
-            await ctx.send(f"Midnight_today: {midnight_check}\nRun daily.\nLast daily: {last_daily}")
-        else:
-            await ctx.send(f"Midnight_today: {midnight_check}\nCan't run daily.\nLast daily: {last_daily}")
+            if credits == False:
+                await ctx.send(f"Midnight_today: {midnight_check}\nRun daily.\nLast daily: {last_daily}")
+            else:
+                await ctx.send(f"Midnight_today: {midnight_check}\nCan run daily, but can't get credits.\nLast daily: {last_daily}")
+                
+    @commands.command()
+    @commands.guild_only()
+    async def quests(self, ctx: commands.Context):
+        """Shows the user their daily quests."""
+               
