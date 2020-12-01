@@ -130,7 +130,7 @@ class Daily(commands.Cog):
             now = datetime.now(timezone.utc)
             now = now.replace(tzinfo=None)
             #now = now.strftime("%Y-%m-%d %H:%M:%S")
-            remaining_time = now - midnight_tom_check
+            remaining_time = now - midnight_tomorrow
             remaining_time_str = remaining_time.strftime("%H:%M:%S")
             embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {remaining_time}."
             await ctx.send(embed=embed)
