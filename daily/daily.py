@@ -128,6 +128,7 @@ class Daily(commands.Cog):
             await ctx.send(embed=embed)                        
         else:
             now = datetime.now(timezone.utc)
+            now = now.replace(tzinfo=None)
             #now = now.strftime("%Y-%m-%d %H:%M:%S")
             remaining_time = now - midnight_tom_check
             remaining_time_str = remaining_time.strftime("%H:%M:%S")
