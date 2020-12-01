@@ -143,9 +143,13 @@ class Daily(commands.Cog):
             now = datetime.now(timezone.utc)
             now = now.replace(tzinfo=None)
             remaining = int((midnight_tomorrow - now).total_seconds())
-            remaining_time = time.strftime("%H hours %M minutes and %S seconds", time.gmtime(remaining))
-            remaining_time = remaining_time.lstrip("0")
-            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_time}**"
+            remaining_hour = time.strftime("%H", time.gmtime(remaining))
+            remaining_hour = remaining_hour.lstrip("0")
+            remaining_min = time.strftime("%M", time.gmtime(remaining))
+            remaining_min = remaining_min.lstrip("0")
+            remaining_sec = time.strftime("%S", time.gmtime(remaining))
+            remaining_sec = remaining_sec.lstrip("0")
+            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
             await ctx.send(embed=embed)
                 
     @commands.command()
