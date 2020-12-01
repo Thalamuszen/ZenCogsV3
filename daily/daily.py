@@ -78,7 +78,7 @@ class Daily(commands.Cog):
 
     @dailies.command(name="settings")
     async def dailies_settings(self, ctx: commands.Context):
-        """Change the amount of daily credits people will recieve."""
+        """Show all of the current settings."""
         enabled = await self.config.guild(ctx.guild).enabled()
         credits = await self.config.guild(ctx.guild).credits()
         await ctx.send(f"**Enabled:** {enabled}\n**Credits:** {credits}")          
