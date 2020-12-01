@@ -159,9 +159,9 @@ class Daily(commands.Cog):
             remaining = int((midnight_tomorrow - now).total_seconds())
             remaining_hour = time.strftime("%H", time.gmtime(remaining))
             remaining_hour = remaining_hour.lstrip("0")
-            if remaining_hour == 0:
+            if remaining_hour == "0":
                 hour = ""
-            elif remaining_hour == 1:
+            elif remaining_hour == "1":
                 hour = "hour"
             else:
                 hour = "hours"
