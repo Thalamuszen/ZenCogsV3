@@ -145,7 +145,7 @@ class Daily(commands.Cog):
             embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
             await ctx.send(embed=embed)                        
         else:
-            pos = await bank.get_leaderboard_position(author)
+            pos = await bank.get_leaderboard_position(ctx.author)
             now = datetime.now(timezone.utc)
             now = now.replace(tzinfo=None)
             remaining = int((midnight_tomorrow - now).total_seconds())
