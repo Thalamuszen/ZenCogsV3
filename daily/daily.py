@@ -139,13 +139,13 @@ class Daily(commands.Cog):
             await self.config.member(ctx.author).last_daily.set(now_str)
             credits = await self.config.guild(ctx.guild).credits()            
             currency_name = await bank.get_currency_name(ctx.guild)
-            balance = humanize_number(int(await bank.get_balance(ctx.author)))            
+            balance = humanize_number(int(await bank.get_balance(ctx.author)))
+            pos = await bank.get_leaderboard_position(ctx.author)
             await bank.deposit_credits(ctx.author, credits)
             embed.title="__**Claimed Daily!**__"
-            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
+            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nYou are currently #{pos} on the global leaderboard!\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
             await ctx.send(embed=embed)                        
         else:
-            pos = await bank.get_leaderboard_position(ctx.author)
             now = datetime.now(timezone.utc)
             now = now.replace(tzinfo=None)
             remaining = int((midnight_tomorrow - now).total_seconds())
@@ -156,7 +156,7 @@ class Daily(commands.Cog):
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
             embed.title="__**Daily Already Claimed!**__"
-            embed.description=f"You are currently #{pos} on the global leaderboard!\nYou have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
+            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
             await ctx.send(embed=embed)
                 
     @commands.command()
