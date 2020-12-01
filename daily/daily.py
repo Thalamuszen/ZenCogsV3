@@ -169,7 +169,7 @@ class Daily(commands.Cog):
             remaining_min = remaining_min.lstrip("0")
             if remaining_min == 0:
                 minute = ""
-            elif remaing_min == 1:
+            elif remaining_min == 1:
                 minute = "minute"
             else:
                 minute = "minutess"            
@@ -177,7 +177,7 @@ class Daily(commands.Cog):
             remaining_sec = remaining_sec.lstrip("0")
             if remaining_sec == 0:
                 second = ""
-            elif remaing_hour == 1:
+            elif remaining_hour == 1:
                 second = "second"
             else:
                 second = "seconds"
