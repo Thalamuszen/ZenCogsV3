@@ -148,6 +148,7 @@ class Daily(commands.Cog):
         midnight_check = datetime.strptime(str(await self.config.midnight_today()), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
+            #SET CREDITS TO FALSE BECAUSE THEY HAVEN'T RUN THEIR DAILY YET.
             if credits == False:
                 embed.description += f"WRITE STUFF"
             else:
