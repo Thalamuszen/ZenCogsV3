@@ -177,7 +177,7 @@ class Daily(commands.Cog):
             remaining_sec = remaining_sec.lstrip("0")
             if remaining_sec == "0":
                 second = ""
-            elif remaining_hour == "1":
+            elif remaining_sec == "1":
                 second = "second"
             else:
                 second = "seconds"
