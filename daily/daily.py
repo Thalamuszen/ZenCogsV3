@@ -4,6 +4,8 @@ from datetime import date, datetime, timedelta
 
 from redbot.core import Config, checks, commands, bank
 
+from redbot.core.bot import Red
+
 class Daily(commands.Cog):
     async def red_delete_data_for_user(self, **kwargs):
         """ Nothing to delete """
