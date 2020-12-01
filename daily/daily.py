@@ -146,6 +146,6 @@ class Daily(commands.Cog):
         if last_daily < midnight_check:
             if credits == False:
                 embed.description += f"WRITE STUFF"
-            else
+            else:
                 embed.description += f"WRITE DIFFERENT STUFF"
                
