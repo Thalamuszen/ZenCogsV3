@@ -141,9 +141,9 @@ class Daily(commands.Cog):
         credits = memberdata["credits"]
         
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
-        midnight_check = datetime.strptime(str(await self.config.midnight_today), "%Y-%m-%d %H:%M:%S")
+        midnight_check = datetime.strptime(str(await self.config.midnight_today()), "%Y-%m-%d %H:%M:%S")
+        
         if last_daily < midnight_check:
-            
             if credits == False:
                 embed.description += f"WRITE STUFF"
             else
