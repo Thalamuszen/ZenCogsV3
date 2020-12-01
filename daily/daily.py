@@ -39,6 +39,7 @@ class Daily(commands.Cog):
             "mining": False,
             "gambling": False,      
             "last_daily": "2020-01-01 00:00:00",
+            "last_quest": "2020-01-01 00:00:00",
         }
 
         self.config.register_global(**default_global)
