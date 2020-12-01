@@ -119,7 +119,7 @@ class Daily(commands.Cog):
         )
         embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
         embed.set_author(
-            name="{ctx.author.display_name}'s Daily Reward", icon_url=ctx.author.avatar_url,
+            name=f"{ctx.author.display_name}'s Daily Reward", icon_url=ctx.author.avatar_url,
         )
         embed.set_footer(text="Daily™ - Daily resets at 00:00 UTC")
         
@@ -145,7 +145,7 @@ class Daily(commands.Cog):
             remaining = int((midnight_tomorrow - now).total_seconds())
             remaining_time = time.strftime("%H hours %M minutes and %S seconds", time.gmtime(remaining))
             remaining_time = remaining_time.lstrip("0")
-            embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {remaining_time}"
+            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_time}**"
             await ctx.send(embed=embed)
                 
     @commands.command()
