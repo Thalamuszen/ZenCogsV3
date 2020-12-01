@@ -159,7 +159,7 @@ class Daily(commands.Cog):
             remaining = int((midnight_tomorrow - now).total_seconds())
             remaining_hour = time.strftime("%H", time.gmtime(remaining))
             remaining_hour = remaining_hour.lstrip("0")
-            if remaining_hour == "0":
+            if remaining_hour == "":
                 hour = ""
             elif remaining_hour == "1":
                 hour = "hour,"
@@ -167,7 +167,7 @@ class Daily(commands.Cog):
                 hour = "hours,"
             remaining_min = time.strftime("%M", time.gmtime(remaining))
             remaining_min = remaining_min.lstrip("0")
-            if remaining_min == "0":
+            if remaining_min == "":
                 minute = ""
             elif remaining_min == "1":
                 minute = "minute"
@@ -175,7 +175,7 @@ class Daily(commands.Cog):
                 minute = "minutes"            
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
-            if remaining_sec == "0":
+            if remaining_sec == "":
                 second = ""
             elif remaining_sec == "1":
                 second = "second"
