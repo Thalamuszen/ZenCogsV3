@@ -3,6 +3,7 @@ import discord
 from datetime import date, datetime, timedelta
 
 from redbot.core import Config, checks, commands, bank
+from redbot.core.utils.chat_formatting import humanize_number
 
 from redbot.core.bot import Red
 
@@ -25,6 +26,7 @@ class Daily(commands.Cog):
                 "<:Daily_right:783314575784804373>",
             ],
             "midnight_today": "2020-01-01 00:00:00",
+            "midnight_tomorrow": "2020-01-01 00:00:00",
         }
 
         default_guild = {"enabled": False, "credits": 100}
@@ -67,12 +69,19 @@ class Daily(commands.Cog):
     @dailies.command(name="credits")
     async def dailies_credits(self, ctx: commands.Context, credits: int):
         """Change the amount of daily credits people will recieve."""
-        credits_name = await bank.get_currency_name(ctx.guild)
+        currency_name = await bank.get_currency_name(ctx.guild)
         if credits <= 0:
             return await ctx.send("The amount of credits has to be more than 0.")
         else:
             await self.config.guild(ctx.guild).enabled.set(credits)
-            await ctx.send("The daily amount of {credits_name} has been changed to {credits} per day.")
+            await ctx.send("The daily amount of {currency_name} has been changed to {credits} per day.")
+
+    @dailies.command(name="settings")
+    async def dailies_settings(self, ctx: commands.Context):
+        """Change the amount of daily credits people will recieve."""
+        enabled = await self.config.guild(ctx.guild).enabled()
+        credits = await self.config.guild(ctx.guild).credits()
+        await ctx.send(f"**Enabled:** {enabled}\n**Credits:** {credits}")          
 
     @commands.command()
     @commands.guild_only()
@@ -83,20 +92,60 @@ class Daily(commands.Cog):
         midnight_today = datetime.combine(today, datetime.min.time())        
         midnight_check = datetime.strptime(str(midnight_today), "%Y-%m-%d %H:%M:%S")
         await self.config.midnight_today.set(str(midnight_check))
-
+        
+        tomorrow = date.today() + timedelta(days=1)
+        midnight_tomorrow = datetime.combine(tomorrow, datetime.min.time())
+        midnight_tom_check = datetime.strptime(str(midnight_tomorrow), "%Y-%m-%d %H:%M:%S")
+        await self.config.midnight_tomorrow.set(str(midnight_tom_check))
+        
         memberdata = await self.config.member(ctx.author).all()
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         
-        credits = memberdata["credits"]
+        embed = discord.Embed(
+            title="__**WORD**__",
+            colour=await ctx.embed_colour(),
+            timestamp=datetime.now(),
+        )
+        embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
+        embed.set_author(
+            name="AUTHOR NAME", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
+        )
+        embed.set_footer(text="Daily™ - Daily resets at 00:00 UTC")
         
+        credits = memberdata["credits"]
+        #Checks if last daily was yesterday.
         if last_daily < midnight_check:
-            if credits == False:
-                await ctx.send(f"Midnight_today: {midnight_check}\nRun daily.\nLast daily: {last_daily}")
-            else:
-                await ctx.send(f"Midnight_today: {midnight_check}\nCan run daily, but can't get credits.\nLast daily: {last_daily}")
+            now = datetime.now(timezone.utc)
+            now = now.strftime("%Y-%m-%d %H:%M:%S")
+            await self.config.member(ctx.author).credits.set(True)
+            await self.config.member(ctx.author).last_daily.set(now)
+            credits = await self.config.guild(ctx.guild).credits()            
+            currency_name = await bank.get_currency_name(ctx.guild)
+            balance = humanize_number(int(await bank.get_balance(ctx.author)))
+            remaining_time = str(now - midnight_tomorrow)
+            await bank.deposit_credits(ctx.author, credits)
+            embed.description=f"You have earned {credits} {currency_name}.\nYou currently have {balance} {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in: {remaining_time}."
+            await ctx.send(embed=embed)                        
+        else:
+            now = datetime.now(timezone.utc)
+            now = now.strftime("%Y-%m-%d %H:%M:%S")            
+            remaining_time = str(now - midnight_tomorrow)
+            embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {remaining_time}."
+            await ctx.send(embed=embed)
                 
     @commands.command()
     @commands.guild_only()
     async def quests(self, ctx: commands.Context):
         """Shows the user their daily quests."""
+        memberdata = await self.config.member(ctx.author).all()
+        credits = memberdata["credits"]
+        
+        last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
+        midnight_check = datetime.strptime(str(await self.config.midnight_today), "%Y-%m-%d %H:%M:%S")
+        if last_daily < midnight_check:
+            
+            if credits == False:
+                embed.description += f"WRITE STUFF"
+            else
+                embed.description += f"WRITE DIFFERENT STUFF"
                
