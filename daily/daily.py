@@ -3,7 +3,7 @@ import discord
 from datetime import date, datetime, timedelta, timezone
 
 from redbot.core import Config, checks, commands, bank
-from redbot.core.utils.chat_formatting import humanize_number
+from redbot.core.utils.chat_formatting import humanize_number, humanize_timedelta
 
 from redbot.core.bot import Red
 
@@ -131,7 +131,7 @@ class Daily(commands.Cog):
             now = now.replace(tzinfo=None)
 
             #now = now.strftime("%Y-%m-%d %H:%M:%S")
-            remaining = midnight_tomorrow - now
+            remaining = humanize_timedelta(midnight_tomorrow - now)
             #remaining_time = datetime.strftime(remaining, "%H:%M:%S")
             embed.description=f"You have already claimed your daily.\nYour next daily will be available in: {remaining}."
             await ctx.send(embed=embed)
