@@ -180,7 +180,16 @@ class Daily(commands.Cog):
                 minute = "minutes and"            
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
-            if remaining_sec == "":
+            if remaining_min == "" and remaining_sec == "":
+                minute = ""
+                second = ""
+            elif remaining_min == "" and remaining_sec == "1":
+                minute = ""
+                second = "second"
+            elif remaining_min == "" and remaining_sec >= "1":
+                minute = ""
+                second = "seconds"                
+            elif remaining_sec == "":
                 second = ""
             elif remaining_sec == "1":
                 second = "second"
