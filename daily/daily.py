@@ -139,10 +139,45 @@ class Daily(commands.Cog):
             remaining = int((midnight_tomorrow - now).total_seconds())
             remaining_hour = time.strftime("%H", time.gmtime(remaining))
             remaining_hour = remaining_hour.lstrip("0")
+            if remaining_hour == "":
+                hour = ""
+            elif remaining_hour == "1":
+                hour = "hour,"
+            else:
+                hour = "hours,"            
             remaining_min = time.strftime("%M", time.gmtime(remaining))
             remaining_min = remaining_min.lstrip("0")
+            if hour == "" and remaining_min == "":
+                minute = ""
+            elif remaining_hour == "1" and remaining_min == "":
+                hour = "hour"
+                minute = "and"
+            elif remaining_hour > "1" and remaining_min == "":
+                hour = "hours"
+                minute = "and"                
+            elif remaining_min == "":
+                minute = "and"      
+            elif remaining_min == "1":
+                minute = "minute and"
+            else:
+                minute = "minutes and"                 
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
+            if remaining_min == "" and remaining_sec == "":
+                minute = ""
+                second = ""
+            elif remaining_min == "" and remaining_sec == "1":
+                minute = ""
+                second = "second"
+            elif remaining_min == "" and remaining_sec > "1":
+                minute = ""
+                second = "seconds"                
+            elif remaining_sec == "":
+                second = ""
+            elif remaining_sec == "1":
+                second = "second"
+            else:
+                second = "seconds"            
             await self.config.member(ctx.author).credits.set(True)
             await self.config.member(ctx.author).last_daily.set(now_str)
             credits = await self.config.guild(ctx.guild).credits()            
@@ -151,7 +186,7 @@ class Daily(commands.Cog):
             pos = await bank.get_leaderboard_position(ctx.author)
             await bank.deposit_credits(ctx.author, credits)
             embed.title="__**Claimed Daily!**__"
-            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nYou are currently #{pos} on the global leaderboard!\nYour next daily will be available in:\n**{remaining_hour} {hour} {remaining_min} {minute} and {remaining_sec} {second}**"
+            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nYou are currently #{pos} on the global leaderboard!\nYour next daily will be available in:\n**{remaining_hour} {hour} {remaining_min} {minute} {remaining_sec} {second}**"
             await ctx.send(embed=embed)                        
         else:
             now = datetime.now(timezone.utc)
