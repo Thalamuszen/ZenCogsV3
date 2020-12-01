@@ -72,7 +72,7 @@ class Daily(commands.Cog):
         today = date.today()
         midnight_today = datetime.combine(today, datetime.min.time())        
         midnight_check = datetime.strptime(str(midnight_today), "%Y-%m-%d %H:%M:%S")
-        await self.config.midnight_today.set(midnight_check)
+#        await self.config.midnight_today.set(midnight_check)
 
         memberdata = await self.config.member(ctx.author).all()
         last_daily = datetime.strptime(str(userdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
