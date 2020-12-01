@@ -113,11 +113,10 @@ class Daily(commands.Cog):
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         
         embed = discord.Embed(
-            title="__**WORD**__",
             colour=await ctx.embed_colour(),
             timestamp=datetime.now(),
         )
-        embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/emojis/783453482262331393.png")
         embed.set_author(
             name=f"{ctx.author.display_name}'s Daily Reward", icon_url=ctx.author.avatar_url,
         )
@@ -142,7 +141,8 @@ class Daily(commands.Cog):
             currency_name = await bank.get_currency_name(ctx.guild)
             balance = humanize_number(int(await bank.get_balance(ctx.author)))            
             await bank.deposit_credits(ctx.author, credits)
-            embed.description=f"You have earned {credits} {currency_name}.\nYou currently have {balance} {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
+            embed.title="__**Claimed Daily!**__"
+            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nLEADERBOARD POSITION.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
             await ctx.send(embed=embed)                        
         else:
             now = datetime.now(timezone.utc)
@@ -154,6 +154,7 @@ class Daily(commands.Cog):
             remaining_min = remaining_min.lstrip("0")
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
+            embed.title="__**Daily Already Claimed!**__"
             embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
             await ctx.send(embed=embed)
                 
