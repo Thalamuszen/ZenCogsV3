@@ -143,7 +143,7 @@ class Daily(commands.Cog):
             pos = await bank.get_leaderboard_position(ctx.author)
             await bank.deposit_credits(ctx.author, credits)
             embed.title="__**Claimed Daily!**__"
-            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nYou are currently #{pos} on the global leaderboard!\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
+            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nYou are currently #{pos} on the global leaderboard!\nYour next daily will be available in:\n**{remaining_hour} hour(s) {remaining_min} minute(s) and {remaining_sec} second(s)**"
             await ctx.send(embed=embed)                        
         else:
             now = datetime.now(timezone.utc)
@@ -156,7 +156,7 @@ class Daily(commands.Cog):
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
             embed.title="__**Daily Already Claimed!**__"
-            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} hours {remaining_min} minutes and {remaining_sec} seconds**"
+            embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} hour(s) {remaining_min} minute(s) and {remaining_sec} second(s)**"
             await ctx.send(embed=embed)
                 
     @commands.command()
