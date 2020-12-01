@@ -26,6 +26,11 @@ class Daily(commands.Cog):
                 "<:Daily_mid:783314575609036819>",
                 "<:Daily_right:783314575784804373>",
             ],
+            "empty_bar": [
+                "left_empty": "<:Empty_left:781138077354819584>",
+                "mid_empty": "<:Empty_mid:781138077380771860>",
+                "right_empty": "<:Empty_right:781138077380902932>",
+            ]            
             "midnight_today": "2020-01-01 00:00:00",
             "midnight_tomorrow": "2020-01-01 00:00:00",
         }
