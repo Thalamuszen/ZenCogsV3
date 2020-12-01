@@ -127,7 +127,8 @@ class Daily(commands.Cog):
         #Checks if last daily was yesterday.
         if last_daily < midnight_check:
             now = datetime.now(timezone.utc)
-            now = now.strftime("%Y-%m-%d %H:%M:%S")
+            now_str = now.strftime("%Y-%m-%d %H:%M:%S")
+            now = now.replace(tzinfo=None)
             remaining = int((midnight_tomorrow - now).total_seconds())
             remaining_hour = time.strftime("%H", time.gmtime(remaining))
             remaining_hour = remaining_hour.lstrip("0")
@@ -136,7 +137,7 @@ class Daily(commands.Cog):
             remaining_sec = time.strftime("%S", time.gmtime(remaining))
             remaining_sec = remaining_sec.lstrip("0")
             await self.config.member(ctx.author).credits.set(True)
-            await self.config.member(ctx.author).last_daily.set(now)
+            await self.config.member(ctx.author).last_daily.set(now_str)
             credits = await self.config.guild(ctx.guild).credits()            
             currency_name = await bank.get_currency_name(ctx.guild)
             balance = humanize_number(int(await bank.get_balance(ctx.author)))            
