@@ -30,7 +30,7 @@ class Daily(commands.Cog):
                 "left_empty": "<:Empty_left:781138077354819584>",
                 "mid_empty": "<:Empty_mid:781138077380771860>",
                 "right_empty": "<:Empty_right:781138077380902932>",
-            ]            
+            ],            
             "midnight_today": "2020-01-01 00:00:00",
             "midnight_tomorrow": "2020-01-01 00:00:00",
         }
