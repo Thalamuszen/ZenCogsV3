@@ -78,6 +78,6 @@ class Daily(commands.Cog):
         last_daily = datetime.strptime(str(userdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
-            await ctx.send(f"Midnight_today: {midnight_today}\nRun daily.")
+            await ctx.send(f"Midnight_today: {midnight_check}\nRun daily.\nLast daily: {last_daily}")
         else:
-            await ctx.send(f"Midnight_today: {midnight_today}\nCan't run daily.")
+            await ctx.send(f"Midnight_today: {midnight_check}\nCan't run daily.\nLast daily: {last_daily}")
