@@ -356,7 +356,7 @@ class Daily(commands.Cog):
         per_bar = float(fishing_quest_total / 10)
                                       
         fishing_count = memberdata["fishing_count"]                                      
-        if fishing_count == "0":
+        if fishing_count == 0:
             embed.description += f"{bar_empty}"                                      
                                       
                                       
