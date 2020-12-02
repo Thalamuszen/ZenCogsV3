@@ -60,7 +60,7 @@ class Daily(commands.Cog):
             "gambling_count": 0,
             "gambling_credits": 0,
             "last_daily": "2020-01-01 00:00:00",
-            "last_quest": "2020-01-01 00:00:00",
+            "quest_completed": "2020-01-01 00:00:00",
         }
 
         self.config.register_global(**default_global)
@@ -110,9 +110,13 @@ class Daily(commands.Cog):
     @commands.guild_only()
     async def daily(self, ctx: commands.Context):
         """Runs the daily command for the user."""
+        
+        #Checks if module enabled/disabled.
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
-            return await ctx.send("This module is currently being worked on. Come back later!")  
+            return await ctx.send("This module is currently being worked on. Come back later!") 
+        
+        #Update midnight values
         today = date.today()
         midnight_today = datetime.combine(today, datetime.min.time())        
         midnight_check = datetime.strptime(str(midnight_today), "%Y-%m-%d %H:%M:%S")
@@ -123,6 +127,7 @@ class Daily(commands.Cog):
         midnight_tom_check = datetime.strptime(str(midnight_tomorrow), "%Y-%m-%d %H:%M:%S")
         await self.config.midnight_tomorrow.set(str(midnight_tom_check))
         
+        #Data pull
         memberdata = await self.config.member(ctx.author).all()
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         
@@ -260,6 +265,24 @@ class Daily(commands.Cog):
     @commands.guild_only()
     async def quests(self, ctx: commands.Context):
         """Shows the user their daily quests."""
+        
+        #Checks if module enabled/disabled.
+        enabled = await self.config.guild(ctx.guild).enabled()
+        if not enabled:
+            return await ctx.send("This module is currently being worked on. Come back later!") 
+        
+        #Update midnight values
+        today = date.today()
+        midnight_today = datetime.combine(today, datetime.min.time())        
+        midnight_check = datetime.strptime(str(midnight_today), "%Y-%m-%d %H:%M:%S")
+        await self.config.midnight_today.set(str(midnight_check))
+        
+        tomorrow = date.today() + timedelta(days=1)
+        midnight_tomorrow = datetime.combine(tomorrow, datetime.min.time())
+        midnight_tom_check = datetime.strptime(str(midnight_tomorrow), "%Y-%m-%d %H:%M:%S")
+        await self.config.midnight_tomorrow.set(str(midnight_tom_check))
+        
+        #Data pull
         memberdata = await self.config.member(ctx.author).all()
         credits = memberdata["credits"]
         messages = memberdata["messages"]
@@ -272,13 +295,42 @@ class Daily(commands.Cog):
         fishing_credits = memberdata["fishing_credits"]
                         
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
-        last_quest = datetime.strptime(str(memberdata["last_quest"]), "%Y-%m-%d %H:%M:%S")
+        quest_completed = datetime.strptime(str(memberdata["quest_completed"]), "%Y-%m-%d %H:%M:%S")
         midnight_check = datetime.strptime(str(await self.config.midnight_today()), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
             await self.config.member(ctx.author).credits.set(False)
-
+        
+        #Bar pull
+        left_empty = BAREMPTY[left_empty]
+        mid_emtpy = BAREMPTY[mid_empty]
+        right_empty = BAREMPTY[right_empty]
+        left_full = BARDAILY[left_daily]
+        mid_full = BARDAILY[mid_daily]
+        right_full = BARDAILY[right_daily]
+        
+        #Bar builder
+        bar_empty = left_empty
+        bar_empty.extend([mid_empty] * 8)
+        bar_empty.extend(right_empty)
+        
+        #Quest builder. If Quest was completeted or not. Build new quest. Overwrite values on new day.
+        if quest_completed < midnight_check:
+            await self.config.member(ctx.author).messages.set(False)
+            messages_quest_total = int(randint(10, 25)
+            await self.config.member(ctx.author).messages_quest.set(messages_quest_total)
+            await self.config.member(ctx.author).messages_count.set(0)
+            messages_quest_credits = fishing_quest_total * 10
+            await self.config.member(ctx.author).messages_credits.set(messages_quest_credits)
             
+            await self.config.member(ctx.author).fishing.set(False)
+            fishing_quest_total = int(randint(10, 25)
+            await self.config.member(ctx.author).fishing_quest.set(fishing_quest_total)
+            await self.config.member(ctx.author).fishing_count.set(0)
+            fishing_quest_credits = fishing_quest_total * 10
+            await self.config.member(ctx.author).fishing_credits.set(fishing_quest_credits)
+
+        #Embed builder            
         embed = discord.Embed(
             colour=await ctx.embed_colour(),
             timestamp=datetime.now(),
@@ -290,12 +342,25 @@ class Daily(commands.Cog):
         embed.description = "**Completion Status**\n\n"
         embed.set_footer(text="Questy™ - Quests reset at 00:00 UTC")
         
-        
+        #Embed daily
         credits = memberdata["credits"]                      
         if credits == False:
             embed.description += "**Daily** You haven't claimed your daily yet."
         else:
             embed.description += "**Daily** Daily Claimed."
-            
+        #Embed messages
+        
+        #Embed fishing
+        per_bar = float(fishing_quest_total / 10)
+                                      
+        fishing_count = memberdata["fishing_count"]                                      
+        if fishing_count == "0":
+            embed.description += f"{bar_empty}"                                      
+                                      
+                                      
+                                      
+        fishing_quest = memberdata["fishing_quest"]                                      
+        
+        #Embed send                              
         await ctx.send(embed=embed)
                
