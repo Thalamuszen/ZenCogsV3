@@ -303,12 +303,12 @@ class Daily(commands.Cog):
             await self.config.member(ctx.author).credits.set(False)
         
         #Bar pull
-        left_empty = BAREMPTY[left_empty]
-        mid_emtpy = BAREMPTY[mid_empty]
-        right_empty = BAREMPTY[right_empty]
-        left_full = BARDAILY[left_daily]
-        mid_full = BARDAILY[mid_daily]
-        right_full = BARDAILY[right_daily]
+        left_empty = BAREMPTY["left_empty"]
+        mid_emtpy = BAREMPTY["mid_empty"]
+        right_empty = BAREMPTY["right_empty"]
+        left_full = BARDAILY["left_daily"]
+        mid_full = BARDAILY["mid_daily"]
+        right_full = BARDAILY["right_daily"]
         
         #Bar builder
         bar_empty = left_empty
