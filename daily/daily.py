@@ -277,9 +277,23 @@ class Daily(commands.Cog):
         
         if last_daily < midnight_check:
             await self.config.member(ctx.author).credits.set(False)
-          
+
+            
+        embed = discord.Embed(
+            colour=await ctx.embed_colour(),
+            timestamp=datetime.now(),
+        )
+        embed.set_thumbnail(url="https://cdn.discordapp.com/emojis/783453482262331393.png")
+        embed.set_author(
+            name=f"{ctx.author.display_name}'s Daily Quests", icon_url=ctx.author.avatar_url,
+        )
+        embed.description = "**Completion Status**\n\n"
+        embed.set_footer(text="Questy™ - Quests reset at 00:00 UTC")
+        
+        
+        credits = memberdata["credits"]                      
         if credits == False:
-            embed.description += f"You haven't claimed your daily yet."
+            embed.description += "**Daily** You haven't claimed your daily yet."
         else:
-            embed.description += f"TICK Daily Claimed"
+            embed.description += "**Daily** Daily Claimed."
                
