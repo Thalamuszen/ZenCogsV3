@@ -459,7 +459,9 @@ class Daily(commands.Cog):
         elif tier_seven < fishing_count <= tier_eight:
             fishing_bar = bar_eight
         elif tier_eight < fishing_count <= tier_nine:
-            fishing_bar = bar_nine             
+            fishing_bar = bar_nine 
+        elif tier_nine < fishing_count < tier_ten:
+            fishing_bar = bar_nine
         elif fishing_count >= tier_ten:
             fishing_bar = bar_full
         
