@@ -477,8 +477,8 @@ class Daily(commands.Cog):
             embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
             
         #All quests complete bonus
-        if messages = memberdata["messages"]
-            if fishing = memberdata["fishing"]
+        #if messages = memberdata["messages"]
+            #if fishing = memberdata["fishing"]
         #Above all of the above pulls true, give reward.
         
         #Embed send                              
