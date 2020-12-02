@@ -411,6 +411,7 @@ class Daily(commands.Cog):
             await self.config.member(ctx.author).quests_built.set(now_str)
         #Grabs the values from the quest builder as there is a delay between writing and reading.
         try:
+            fishing = False
             fishing_quest = fishing_quest_total
             fishing_count = 0
             fishing_credits = fishing_quest_credits
