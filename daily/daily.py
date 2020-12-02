@@ -389,14 +389,14 @@ class Daily(commands.Cog):
         
         #Quest builder. If Quest was completeted or not. Build new quest. Overwrite values on new day.
         if quests_built < midnight_check:
-            await self.config.member(ctx.author).messages.set(false)
+            await self.config.member(ctx.author).messages.set("false")
             messages_quest_total = int(randint(10, 25))
             await self.config.member(ctx.author).messages_quest.set(messages_quest_total)
             await self.config.member(ctx.author).messages_count.set(0)
             messages_quest_credits = messages_quest_total * 10
             await self.config.member(ctx.author).messages_credits.set(messages_quest_credits)
             
-            await self.config.member(ctx.author).fishing.set(false)
+            await self.config.member(ctx.author).fishing.set("false")
             fishing_quest_total = int(randint(10, 25))
             await self.config.member(ctx.author).fishing_quest.set(fishing_quest_total)
             await self.config.member(ctx.author).fishing_count.set(0)
