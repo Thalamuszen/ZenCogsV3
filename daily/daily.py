@@ -61,7 +61,8 @@ class Daily(commands.Cog):
             "gambling_count": 0,
             "gambling_credits": 0,
             "last_daily": "2020-01-01 00:00:00",
-            "quest_completed": "2020-01-01 00:00:00",
+            "quests_completed": "2020-01-01 00:00:00",
+            "quests_built": "2020-01-01 00:00:00",
         }
 
         self.config.register_global(**default_global)
@@ -386,7 +387,7 @@ class Daily(commands.Cog):
         bar_full = ''.join(bar_full)         
         
         #Quest builder. If Quest was completeted or not. Build new quest. Overwrite values on new day.
-        if quest_completed < midnight_check:
+        if quests_built < midnight_check:
             await self.config.member(ctx.author).messages.set(False)
             messages_quest_total = int(randint(10, 25))
             await self.config.member(ctx.author).messages_quest.set(messages_quest_total)
@@ -400,6 +401,10 @@ class Daily(commands.Cog):
             await self.config.member(ctx.author).fishing_count.set(0)
             fishing_quest_credits = fishing_quest_total * 10
             await self.config.member(ctx.author).fishing_credits.set(fishing_quest_credits)
+            
+            now = datetime.now(timezone.utc)
+            now_str = now.strftime("%Y-%m-%d %H:%M:%S")
+            await self.config.member(ctx.author).quests_built.set(now_str)
 
         #Embed builder            
         embed = discord.Embed(
