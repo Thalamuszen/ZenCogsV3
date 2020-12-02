@@ -426,7 +426,7 @@ class Daily(commands.Cog):
                                       
         fishing_count = memberdata["fishing_count"]                                      
         if fishing_count == 0:
-            embed.description += f"{bar_empty} {fishing_count}/{fishing_quest}\n**Reward:**{fishing_Credits} {currency_name}"
+            embed.description += f"{bar_empty} {fishing_count}/{fishing_quest}\n**Reward:**{fishing_credits} {currency_name}"
             
         #Bar test    
         #embed.description += f"{bar_one}\n"            
