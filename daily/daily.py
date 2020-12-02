@@ -262,15 +262,24 @@ class Daily(commands.Cog):
         """Shows the user their daily quests."""
         memberdata = await self.config.member(ctx.author).all()
         credits = memberdata["credits"]
-        
+        messages = memberdata["messages"]
+        messages_quest = memberdata["messages_quest"]
+        messages_count = memberdata["messages_count"]
+        messages_credits = memberdata["messages_credits"]
+        fishing = memberdata["fishing"]
+        fishing_quest = memberdata["fishing_quest"]
+        fishing_count = memberdata["fishing_count"]
+        fishing_credits = memberdata["fishing_credits"]
+                        
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
+        last_quest = datetime.strptime(str(memberdata["last_quest"]), "%Y-%m-%d %H:%M:%S")
         midnight_check = datetime.strptime(str(await self.config.midnight_today()), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
             await self.config.member(ctx.author).credits.set(False)
-                        
+          
         if credits == False:
-            embed.description += f"WRITE STUFF"
+            embed.description += f"You haven't claimed your daily yet."
         else:
-            embed.description += f"WRITE DIFFERENT STUFF"
+            embed.description += f"TICK Daily Claimed"
                
