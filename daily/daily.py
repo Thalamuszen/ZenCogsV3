@@ -195,7 +195,7 @@ class Daily(commands.Cog):
             await bank.deposit_credits(ctx.author, credits)
             balance = humanize_number(int(await bank.get_balance(ctx.author)))
             embed.title="__**Claimed Daily!**__"
-            embed.description=f"You have earned **{credits}** {currency_name}.\nYou currently have **{balance}** {currency_name}.\nYou are currently #{pos} on the global leaderboard!\nYour next daily will be available in:\n**{remaining_hour} {hour} {remaining_min} {minute} {remaining_sec} {second}**"
+            embed.description=f"You have earned **{credits}** {currency_name}.\nYou now have **{balance}** {currency_name}.\nYou are currently #{pos} on the global leaderboard!\nYour next daily will be available in:\n**{remaining_hour} {hour} {remaining_min} {minute} {remaining_sec} {second}**"
             await ctx.send(embed=embed)                        
         else:
             now = datetime.now(timezone.utc)
