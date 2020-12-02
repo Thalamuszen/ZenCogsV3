@@ -406,6 +406,7 @@ class Daily(commands.Cog):
             now = datetime.now(timezone.utc)
             now_str = now.strftime("%Y-%m-%d %H:%M:%S")
             await self.config.member(ctx.author).quests_built.set(now_str)
+            time.sleep(1)
 
         #Embed builder            
         embed = discord.Embed(
