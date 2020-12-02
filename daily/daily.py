@@ -406,7 +406,6 @@ class Daily(commands.Cog):
             now = datetime.now(timezone.utc)
             now_str = now.strftime("%Y-%m-%d %H:%M:%S")
             await self.config.member(ctx.author).quests_built.set(now_str)
-            time.sleep(1)
 
         #Embed builder            
         embed = discord.Embed(
@@ -474,7 +473,14 @@ class Daily(commands.Cog):
         #Stops the fishing count going over the quest amount.
         if fishing_count > fishing_quest:
             fishing_count = fishing_quest
-                        
+        #Grabs the values from the quest builder as there is a delay betweem writing and reading
+        try:
+            fishing_quest = fishing_quest_total
+            fishing_count = 0
+            fishing_credits = fishing_quest_credits
+        except:
+            pass
+        #Works out which description to send use
         if fishing_count == fishing_quest:
             if fishing == False:
                 await bank.deposit_credits(ctx.author, credits)
