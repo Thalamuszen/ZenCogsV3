@@ -433,11 +433,11 @@ class Daily(commands.Cog):
         embed.description += f"{bar_three}\n"                                      
         embed.description += f"{bar_four}\n"
         embed.description += f"{bar_five}\n"
-        embed.description += f"{bar_six}\n"        
-        embed.description += f"{bar_seven}\n"
-        embed.description += f"{bar_eight}\n"
-        embed.description += f"{bar_nine}\n"
-        embed.description += f"{bar_full}\n"        
+        #embed.description += f"{bar_six}\n"        
+        #embed.description += f"{bar_seven}\n"
+        #embed.description += f"{bar_eight}\n"
+        #embed.description += f"{bar_nine}\n"
+        #embed.description += f"{bar_full}\n"        
         
             
         fishing_quest = memberdata["fishing_quest"]                                      
