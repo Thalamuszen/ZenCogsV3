@@ -312,7 +312,7 @@ class Daily(commands.Cog):
         
         #Bar builder
         bar_empty = []
-        bar_empty = left_empty
+        bar_empty.append(left_empty)
         bar_empty.extend([mid_empty] * 8)
         bar_empty.extend(right_empty)
         
