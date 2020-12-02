@@ -477,11 +477,6 @@ class Daily(commands.Cog):
         elif fishing_count >= tier_ten:
             fishing_bar = bar_full
         
-        #Embed fishing
-        fishing = memberdata["fishing"]
-        fishing_quest = memberdata["fishing_quest"]
-        fishing_count = memberdata["fishing_count"]
-        fishing_credits = memberdata["fishing_credits"]
         #Stops the fishing count going over the quest amount.
         if fishing_count > fishing_quest:
             fishing_count = fishing_quest
