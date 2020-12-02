@@ -104,9 +104,11 @@ class Daily(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def daily1(self, ctx: commands.Context):
+    async def daily(self, ctx: commands.Context):
         """Runs the daily command for the user."""
-
+        enabled = await self.config.guild(ctx.guild).enabled()
+        if not enabled:
+            return await ctx.send("This module is currently being worked on. Come back later!")  
         today = date.today()
         midnight_today = datetime.combine(today, datetime.min.time())        
         midnight_check = datetime.strptime(str(midnight_today), "%Y-%m-%d %H:%M:%S")
