@@ -330,6 +330,60 @@ class Daily(commands.Cog):
         bar_two.append(right_empty)
         bar_two = ''.join(bar_two)
         
+        bar_three = []
+        bar_three.append(left_full)
+        bar_three.extend([mid_full] * 2)
+        bar_three.extend([mid_empty] * 6)
+        bar_three.append(right_empty)
+        bar_three = ''.join(bar_three)
+        
+        bar_four = []
+        bar_four.append(left_full)
+        bar_four.extend([mid_full] * 3)
+        bar_four.extend([mid_empty] * 5)
+        bar_four.append(right_empty)
+        bar_four = ''.join(bar_four) 
+        
+        bar_five = []
+        bar_five.append(left_full)
+        bar_five.extend([mid_full] * 4)
+        bar_five.extend([mid_empty] * 4)
+        bar_five.append(right_empty)
+        bar_five = ''.join(bar_five) 
+        
+        bar_six = []
+        bar_six.append(left_full)
+        bar_six.extend([mid_full] * 5)
+        bar_six.extend([mid_empty] * 3)
+        bar_six.append(right_empty)
+        bar_six = ''.join(bar_six)
+        
+        bar_seven = []
+        bar_seven.append(left_full)
+        bar_seven.extend([mid_full] * 6)
+        bar_seven.extend([mid_empty] * 2)
+        bar_seven.append(right_empty)
+        bar_seven = ''.join(bar_seven)
+        
+        bar_eight = []
+        bar_eight.append(left_full)
+        bar_eight.extend([mid_full] * 7)
+        bar_eight.extend([mid_empty] * 1)
+        bar_eight.append(right_empty)
+        bar_eight = ''.join(bar_eight)
+        
+        bar_nine = []
+        bar_nine.append(left_full)
+        bar_nine.extend([mid_full] * 8)
+        bar_nine.append(right_empty)
+        bar_nine = ''.join(bar_nine)
+        
+        bar_full = []
+        bar_full.append(left_full)
+        bar_full.extend([mid_full] * 8)
+        bar_full.append(right_full)
+        bar_full = ''.join(bar_full)         
+        
         #Quest builder. If Quest was completeted or not. Build new quest. Overwrite values on new day.
         if quest_completed < midnight_check:
             await self.config.member(ctx.author).messages.set(False)
@@ -376,8 +430,16 @@ class Daily(commands.Cog):
         #Bar test    
         embed.description += f"{bar_one}\n"            
         embed.description += f"{bar_two}\n"                              
-                                      
-                                      
+        embed.description += f"{bar_three}\n"                                      
+        embed.description += f"{bar_four}\n"
+        embed.description += f"{bar_five}\n"
+        embed.description += f"{bar_six}\n"        
+        embed.description += f"{bar_seven}\n"
+        embed.description += f"{bar_eight}\n"
+        embed.description += f"{bar_nine}\n"
+        embed.description += f"{bar_full}\n"        
+        
+            
         fishing_quest = memberdata["fishing_quest"]                                      
         
         #Embed send                              
