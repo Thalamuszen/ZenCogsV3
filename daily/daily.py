@@ -471,8 +471,11 @@ class Daily(commands.Cog):
         #Stops the fishing count going over the quest amount.
         if fishing_count > fishing_quest:
             fishing_count = fishing_quest
+                        
         if fishing_count == fishing_quest:
-            await self.config.member(ctx.author).fishing.set(True)
+            if fishing == False:
+                await bank.deposit_credits(ctx.author, credits)
+            await self.config.member(ctx.author).fishing.set(True)    
             embed.description += f"**Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
         else:
             embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
