@@ -419,32 +419,62 @@ class Daily(commands.Cog):
             embed.description += "**Daily** You haven't claimed your daily yet.\n\n"
         else:
             embed.description += "**Daily** Daily Claimed.\n\n"
-        #Embed messages
         
-        #Embed fishing
+        #Embed fishing calculator
         per_bar = float(fishing_quest_total / 10)
-                                      
+        tier_one = per_bar
+        tier_two = per_bar * 2
+        tier_three = per_bar * 3
+        tier_four = per_bar * 4
+        tier_five = per_bar * 5
+        tier_six = per_bar * 6
+        tier_seven = per_bar * 7
+        tier_eight = per_bar * 8
+        tier_nine = per_bar * 9
+        tier_ten = per_bar * 10
+        
         fishing_count = memberdata["fishing_count"]                                      
         if fishing_count == 0:
             fishing_bar = bar_empty
-        elif fishing_count >=     
+        elif 0 < fishing_count <= tier_one:
+            fishing_bar = bar_one
+        elif tier_one < fishing_count <= tier_two:
+            fishing_bar = bar_two
+        elif tier_two < fishing_count <= tier_three:
+            fishing_bar = bar_three
+        elif tier_three < fishing_count <= tier_four:
+            fishing_bar = bar_four
+        elif tier_four < fishing_count <= tier_five:
+            fishing_bar = bar_five
+        elif tier_five < fishing_count <= tier_six:
+            fishing_bar = bar_six
+        elif tier_six < fishing_count <= tier_seven:
+            fishing_bar = bar_seven
+        elif tier_seven < fishing_count <= tier_eight:
+            fishing_bar = bar_eight
+        elif tier_eight < fishing_count <= tier_nine:
+            fishing_bar = bar_nine             
+        elif fishing_count >= tier_ten:
+            fishing_bar = bar_full
         
-        embed.description += f"**Catch {fishing_quest} fish.\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
+        #Embed fishing
+        fishing = memberdata["fishing"]
+        fishing_quest = memberdata["fishing_quest"]
+        fishing_count = memberdata["fishing_count"]
+        fishing_credits = memberdata["fishing_credits"]
+        #Stops the fishing count going over the quest amount.
+        if fishing_count > fishing_quest:
+            fishing_count = fishing_quest
+        if fishing_count == fishing_quest:
+            await self.config.member(ctx.author).fishing.set(True)
+            embed.description += f"**Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
+        else:
+            embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
             
-        #Bar test    
-        #embed.description += f"{bar_one}\n"            
-        #embed.description += f"{bar_two}\n"                              
-        #embed.description += f"{bar_three}\n"                                      
-        #embed.description += f"{bar_four}\n"
-        #embed.description += f"{bar_five}\n"
-        #embed.description += f"{bar_six}\n"        
-        #embed.description += f"{bar_seven}\n"
-        #embed.description += f"{bar_eight}\n"
-        #embed.description += f"{bar_nine}\n"
-        #embed.description += f"{bar_full}\n"        
-        
-            
-        fishing_quest = memberdata["fishing_quest"]                                      
+        #All quests complete bonus
+        if messages = memberdata["messages"]
+            if fishing = memberdata["fishing"]
+        #Above all of the above pulls true, give reward.
         
         #Embed send                              
         await ctx.send(embed=embed)
