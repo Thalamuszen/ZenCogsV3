@@ -317,6 +317,19 @@ class Daily(commands.Cog):
         bar_empty.append(right_empty)
         bar_empty = ''.join(bar_empty)
         
+        bar_one = []
+        bar_one.append(left_full)
+        bar_one.extend([mid_empty] * 8)
+        bar_one.append(right_empty)
+        bar_one = ''.join(bar_one)
+        
+        bar_two = []
+        bar_two.append(left_full)
+        bar_two.extend([mid_full] * 1)
+        bar_two.extend([mid_empty] * 7)
+        bar_two.append(right_empty)
+        bar_two = ''.join(bar_two)
+        
         #Quest builder. If Quest was completeted or not. Build new quest. Overwrite values on new day.
         if quest_completed < midnight_check:
             await self.config.member(ctx.author).messages.set(False)
@@ -348,9 +361,9 @@ class Daily(commands.Cog):
         #Embed daily
         credits = memberdata["credits"]                      
         if credits == False:
-            embed.description += "**Daily** You haven't claimed your daily yet."
+            embed.description += "**Daily** You haven't claimed your daily yet.\n\n"
         else:
-            embed.description += "**Daily** Daily Claimed."
+            embed.description += "**Daily** Daily Claimed.\n\n"
         #Embed messages
         
         #Embed fishing
@@ -358,8 +371,11 @@ class Daily(commands.Cog):
                                       
         fishing_count = memberdata["fishing_count"]                                      
         if fishing_count == 0:
-            embed.description += f"{bar_empty}"                                      
-                                      
+            embed.description += f"{bar_empty}\n"
+            
+        #Bar test    
+        embed.description += f"{bar_one}\n"            
+        embed.description += f"{bar_two}\n"                              
                                       
                                       
         fishing_quest = memberdata["fishing_quest"]                                      
