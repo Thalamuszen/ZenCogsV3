@@ -304,7 +304,7 @@ class Daily(commands.Cog):
         
         #Bar pull
         left_empty = BAREMPTY["left_empty"]
-        mid_emtpy = BAREMPTY["mid_empty"]
+        mid_empty = BAREMPTY["mid_empty"]
         right_empty = BAREMPTY["right_empty"]
         left_full = BARDAILY["left_daily"]
         mid_full = BARDAILY["mid_daily"]
