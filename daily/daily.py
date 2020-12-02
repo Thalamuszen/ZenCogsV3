@@ -299,6 +299,7 @@ class Daily(commands.Cog):
                         
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         quest_completed = datetime.strptime(str(memberdata["quest_completed"]), "%Y-%m-%d %H:%M:%S")
+        quests_built = datetime.strptime(str(memberdata["quests_built"]), "%Y-%m-%d %H:%M:%S")
         midnight_check = datetime.strptime(str(await self.config.midnight_today()), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
