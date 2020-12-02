@@ -284,6 +284,7 @@ class Daily(commands.Cog):
         await self.config.midnight_tomorrow.set(str(midnight_tom_check))
         
         #Data pull
+        currency_name = await bank.get_currency_name(ctx.guild)        
         memberdata = await self.config.member(ctx.author).all()
         credits = memberdata["credits"]
         messages = memberdata["messages"]
@@ -425,7 +426,7 @@ class Daily(commands.Cog):
                                       
         fishing_count = memberdata["fishing_count"]                                      
         if fishing_count == 0:
-            embed.description += f"{bar_empty}\n"
+            embed.description += f"{bar_empty} {fishing_count}/{fishing_quest}\n**Reward:**{fishing_Credits} {currency_name}"
             
         #Bar test    
         #embed.description += f"{bar_one}\n"            
@@ -433,11 +434,11 @@ class Daily(commands.Cog):
         #embed.description += f"{bar_three}\n"                                      
         #embed.description += f"{bar_four}\n"
         #embed.description += f"{bar_five}\n"
-        embed.description += f"{bar_six}\n"        
-        embed.description += f"{bar_seven}\n"
-        embed.description += f"{bar_eight}\n"
-        embed.description += f"{bar_nine}\n"
-        embed.description += f"{bar_full}\n"        
+        #embed.description += f"{bar_six}\n"        
+        #embed.description += f"{bar_seven}\n"
+        #embed.description += f"{bar_eight}\n"
+        #embed.description += f"{bar_nine}\n"
+        #embed.description += f"{bar_full}\n"        
         
             
         fishing_quest = memberdata["fishing_quest"]                                      
