@@ -421,7 +421,7 @@ class Daily(commands.Cog):
         
         #Embed daily
         credits = memberdata["credits"]                      
-        if credits == "false":
+        if credits == False:
             embed.description += "**Daily** You haven't claimed your daily yet.\n\n"
         else:
             embed.description += "**Daily** Daily Claimed.\n\n"
