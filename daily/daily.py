@@ -303,7 +303,7 @@ class Daily(commands.Cog):
         midnight_check = datetime.strptime(str(await self.config.midnight_today()), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
-            await self.config.member(ctx.author).credits.set(false)
+            await self.config.member(ctx.author).credits.set(0)
         
         #Bar pull
         left_empty = BAREMPTY["left_empty"]
