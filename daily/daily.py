@@ -255,8 +255,8 @@ class Daily(commands.Cog):
             embed.title="__**Daily Already Claimed!**__"
             embed.description=f"You have already claimed your daily.\nYour next daily will be available in:\n**{remaining_hour} {hour} {remaining_min} {minute} {remaining_sec} {second}**"
             await ctx.send(embed=embed)
-                
-    @commands.command()
+               
+    @commands.command(aliases=["quest"])
     @commands.guild_only()
     async def quests(self, ctx: commands.Context):
         """Shows the user their daily quests."""
