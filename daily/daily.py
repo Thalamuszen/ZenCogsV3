@@ -1,6 +1,7 @@
 import discord
 import time
 
+from random import uniform, randint
 from datetime import date, datetime, timedelta, timezone
 
 from redbot.core import Config, checks, commands, bank
