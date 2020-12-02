@@ -193,6 +193,8 @@ class Fish(commands.Cog):
             return await ctx.send(f"<:Fishing:782681118674780200> **| {author.name} you can fish again in {secs} seconds.**", delete_after=secs)
         await self.config.user(ctx.author).last_fish.set(str(now))            
         await bank.withdraw_credits(ctx.author, casting_price)
+        #Daily cog input.
+        await self.bot.get_cog("Daily").config.member(ctx.author).fishing_count.set(+ 1)
         
         chance = uniform(0, 99)
         rarechance = 0.15
