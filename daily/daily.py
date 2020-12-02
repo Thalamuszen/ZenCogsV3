@@ -482,6 +482,7 @@ class Daily(commands.Cog):
         #Works out which description to send use
         if fishing_count == fishing_quest:
             if fishing == False:
+                credits = int(fishing_credits)
                 await bank.deposit_credits(ctx.author, credits)
             await self.config.member(ctx.author).fishing.set(1)    
             embed.description += f"**Catch {fishing_quest} fish** - **Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
