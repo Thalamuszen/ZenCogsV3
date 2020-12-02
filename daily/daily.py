@@ -197,7 +197,7 @@ class Daily(commands.Cog):
                 second = "second"
             else:
                 second = "seconds"            
-            await self.config.member(ctx.author).credits.set(true)
+            await self.config.member(ctx.author).credits.set(1)
             await self.config.member(ctx.author).last_daily.set(now_str)
             credits = await self.config.guild(ctx.guild).credits()            
             currency_name = await bank.get_currency_name(ctx.guild)
