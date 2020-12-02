@@ -296,4 +296,6 @@ class Daily(commands.Cog):
             embed.description += "**Daily** You haven't claimed your daily yet."
         else:
             embed.description += "**Daily** Daily Claimed."
+            
+        await ctx.send(embed=embed)
                
