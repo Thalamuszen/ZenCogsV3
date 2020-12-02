@@ -476,7 +476,7 @@ class Daily(commands.Cog):
             if fishing == False:
                 await bank.deposit_credits(ctx.author, credits)
             await self.config.member(ctx.author).fishing.set(True)    
-            embed.description += f"**Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
+            embed.description += f"**Catch {fishing_quest} fish** - **Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
         else:
             embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
             
