@@ -427,7 +427,7 @@ class Daily(commands.Cog):
             embed.description += "**Daily** Daily Claimed.\n\n"
         
         #Embed fishing calculator
-        per_bar = float(fishing_quest_total / 10)
+        per_bar = float(fishing_quest / 10)
         tier_one = per_bar
         tier_two = per_bar * 2
         tier_three = per_bar * 3
