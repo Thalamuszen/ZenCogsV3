@@ -314,7 +314,8 @@ class Daily(commands.Cog):
         bar_empty = []
         bar_empty.append(left_empty)
         bar_empty.extend([mid_empty] * 8)
-        bar_empty.extend(right_empty)
+        bar_empty.append(right_empty)
+        bar_empty = ''.join(bar_empty)
         
         #Quest builder. If Quest was completeted or not. Build new quest. Overwrite values on new day.
         if quest_completed < midnight_check:
