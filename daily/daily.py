@@ -305,6 +305,8 @@ class Daily(commands.Cog):
         if last_daily < midnight_check:
             await self.config.member(ctx.author).credits.set(0)
             credits == False
+        else:
+            credits = memberdata["credits"]    
         
         #Bar pull
         left_empty = BAREMPTY["left_empty"]
@@ -430,8 +432,7 @@ class Daily(commands.Cog):
         embed.description = "**Completion Status**\n\n"
         embed.set_footer(text="Questy™ - Quests reset at 00:00 UTC")
         
-        #Embed daily
-        credits = memberdata["credits"]                      
+        #Embed daily                  
         if credits == False:
             embed.description += "**Daily** You haven't claimed your daily yet.\n\n"
         else:
