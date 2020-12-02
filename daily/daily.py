@@ -412,6 +412,10 @@ class Daily(commands.Cog):
             fishing_count = 0
             fishing_credits = fishing_quest_credits
         except:
+            fishing = memberdata["fishing"]
+            fishing_quest = memberdata["fishing_quest"]
+            fishing_count = memberdata["fishing_count"]
+            fishing_credits = memberdata["fishing_credits"]
             pass
         #Embed builder            
         embed = discord.Embed(
