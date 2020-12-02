@@ -985,7 +985,7 @@ class Shop(commands.Cog):
                     f"You have received {return_price} {credits_name}."
                 )                                         
 
-    @commands.command(aliases=["inv"])
+    @commands.command(aliases=["inv", "backpack"])
     @commands.guild_only()
     async def inventory(self, ctx: commands.Context):
         """See all items you own."""
