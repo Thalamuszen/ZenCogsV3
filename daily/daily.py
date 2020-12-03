@@ -450,8 +450,7 @@ class Daily(commands.Cog):
         tier_eight = per_bar * 8
         tier_nine = per_bar * 9
         tier_ten = per_bar * 10
-        
-        fishing_count = memberdata["fishing_count"]                                      
+                                            
         if fishing_count == 0:
             fishing_bar = bar_empty
         elif 0 < fishing_count <= tier_one:
