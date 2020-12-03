@@ -482,11 +482,7 @@ class Daily(commands.Cog):
             fishing_count = fishing_quest
         #Works out which description to send use
         #DO I WANT TO GIVE THEM THE CREDITS WHEN THEY RUN THE QUEST COMMAND? OR DO I WANT TO ADD IT TO THE MODULES WHEN THE QUEST IS COMPLETE?
-        if fishing_count == fishing_quest:
-            if fishing == False:
-                credits = int(fishing_credits)
-                await bank.deposit_credits(ctx.author, credits)
-            await self.config.member(ctx.author).fishing.set(1)    
+        if fishing_count == fishing_quest:  
             embed.description += f"**Catch {fishing_quest} fish** - **Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Rewarded:** {fishing_credits} {currency_name}"
         else:
             embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
