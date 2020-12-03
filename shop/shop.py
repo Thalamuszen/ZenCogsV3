@@ -1043,7 +1043,9 @@ class Shop(commands.Cog):
     @commands.command()
     @commands.guild_only()
     async def gift(self, ctx: commands.Context, user: discord.Member, quantity: Optional[int] = 1, *, item: str = ""):
-        """Gift another user a Christmas Present\Card!
+        """
+	Gift another user a Christmas Present\Card!
+	
         Example
         -----------
         `!gift @ThalamusZen 2 stocking filler`
