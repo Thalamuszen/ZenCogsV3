@@ -490,9 +490,9 @@ class Daily(commands.Cog):
             messages_count = messages_quest
         #Works out which description to use. The credits are awarded within the relevant cog.
         if fishing_count == fishing_quest:  
-            embed.description += f"**Send {messages_quest} messages** - **Completed!**\n{messages_bar} {messages_count}/{messages_quest}\n**Rewarded:** {messages_credits} {currency_name}"
+            embed.description += f"**Send {messages_quest} messages** - **Completed!**\n{messages_bar} {messages_count}/{messages_quest}\n**Rewarded:** {messages_credits} {currency_name}\n\n"
         else:
-            embed.description += f"**Send {messages_quest} messages**\n{messages_bar} {messages_count}/{messages_quest}\n**Reward:** {messages_credits} {currency_name}"            
+            embed.description += f"**Send {messages_quest} messages**\n{messages_bar} {messages_count}/{messages_quest}\n**Reward:** {messages_credits} {currency_name}\n\n"            
         
         #Embed fishing calculator
         per_bar = float(fishing_quest / 10)
@@ -537,9 +537,9 @@ class Daily(commands.Cog):
             fishing_count = fishing_quest
         #Works out which description to use. The credits are awarded within the relevant cog.        
         if fishing_count == fishing_quest:  
-            embed.description += f"**Catch {fishing_quest} fish** - **Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Rewarded:** {fishing_credits} {currency_name}"
+            embed.description += f"**Catch {fishing_quest} fish** - **Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Rewarded:** {fishing_credits} {currency_name}\n\n"
         else:
-            embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}"
+            embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}\n\n"
             
         #All quests complete bonus
         #if messages = memberdata["messages"]
