@@ -434,9 +434,9 @@ class Daily(commands.Cog):
         
         #Embed daily                  
         if credits == False:
-            embed.description += "**Daily** You haven't claimed your daily yet.\n\n"
+            embed.description += "**Daily**\nYou haven't claimed your daily yet.\n**Reward:** 100 \n\n"
         else:
-            embed.description += "**Daily** Daily Claimed.\n\n"
+            embed.description += "**Daily**\nDaily Claimed.\n**Rewarded:** 100 \n\n"
         
         #Embed fishing calculator
         per_bar = float(fishing_quest / 10)
