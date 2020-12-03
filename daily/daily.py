@@ -463,7 +463,7 @@ class Daily(commands.Cog):
         if messages_count == 0:
             messages_bar = bar_empty
         elif 0 < messages_count <= tier_one:
-            messages = bar_one
+            messages-bar = bar_one
         elif tier_one < messages_count <= tier_two:
             messages_bar = bar_two
         elif tier_two < messages_count <= tier_three:
