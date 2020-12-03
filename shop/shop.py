@@ -1044,9 +1044,8 @@ class Shop(commands.Cog):
     @commands.guild_only()
     async def gift(self, ctx: commands.Context, user: discord.Member, quantity: Optional[int] = 1, *, item: str = ""):
         """Gift another user a Christmas Present\Card!
-        
-        Examples
-        --------
+        Example
+        -----------
         `!gift @ThalamusZen 2 stocking filler`
         """
         enabled = await self.config.guild(ctx.guild).enabled()
