@@ -489,7 +489,7 @@ class Daily(commands.Cog):
         if messages_count > messages_quest:
             messages_count = messages_quest
         #Works out which description to use. The credits are awarded within the relevant cog.
-        if fishing_count == fishing_quest:  
+        if messages_count == messages_quest:  
             embed.description += f"**Send {messages_quest} messages** - **Completed!**\n{messages_bar} {messages_count}/{messages_quest}\n**Rewarded:** {messages_credits} {currency_name}\n\n"
         else:
             embed.description += f"**Send {messages_quest} messages**\n{messages_bar} {messages_count}/{messages_quest}\n**Reward:** {messages_credits} {currency_name}\n\n"            
