@@ -98,7 +98,7 @@ class Daily(commands.Cog):
         if credits <= 0:
             return await ctx.send("The amount of credits has to be more than 0.")
         else:
-            await self.config.guild(ctx.guild).enabled.set(credits)
+            await self.config.guild(ctx.guild).credits.set(credits)
             await ctx.send("The daily amount of {currency_name} has been changed to {credits} per day.")
 
     @dailies.command(name="settings")
@@ -285,7 +285,8 @@ class Daily(commands.Cog):
         await self.config.midnight_tomorrow.set(str(midnight_tom_check))
         
         #Data pull
-        currency_name = await bank.get_currency_name(ctx.guild)        
+        currency_name = await bank.get_currency_name(ctx.guild)
+        guild_credits = await self.config.guild(ctx.guild).credits()
         memberdata = await self.config.member(ctx.author).all()
         credits = memberdata["credits"]
         messages = memberdata["messages"]
@@ -434,9 +435,9 @@ class Daily(commands.Cog):
         
         #Embed daily                  
         if credits == False:
-            embed.description += "**Daily**\nYou haven't claimed your daily yet.\n**Reward:** 100 \n\n"
+            embed.description += f"**Daily**\nYou haven't claimed your Daily yet.\n**Reward:** {guild_credits} {currency_name}\n\n"
         else:
-            embed.description += "**Daily**\nDaily Claimed.\n**Rewarded:** 100 \n\n"
+            embed.description += f"**Daily**\nYou have claimed your Daily.\n**Rewarded:** {guild_credits} {currency_name}\n\n"
         
         #Embed fishing calculator
         per_bar = float(fishing_quest / 10)
