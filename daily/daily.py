@@ -480,6 +480,7 @@ class Daily(commands.Cog):
         if fishing_count > fishing_quest:
             fishing_count = fishing_quest
         #Works out which description to send use
+        #DO I WANT TO GIVE THEM THE CREDITS WHEN THEY RUN THE QUEST COMMAND? OR DO I WANT TO ADD IT TO THE MODULES WHEN THE QUEST IS COMPLETE?
         if fishing_count == fishing_quest:
             if fishing == False:
                 credits = int(fishing_credits)
