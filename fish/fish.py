@@ -231,7 +231,7 @@ class Fish(commands.Cog):
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Fishing:782681118674780200> **| Fishing quest complete! Reward: {fishing_credits} {credits_name}**\n")
-                await self.config.member(ctx.author).fishing.set(1)             
+                await self.bot.get_cog("Daily").config.member(ctx.author).fishing.set(1)              
             try:
                 item = RARES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
@@ -311,7 +311,7 @@ class Fish(commands.Cog):
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Fishing:782681118674780200> **| Fishing quest complete! Reward: {fishing_credits} {credits_name}**\n")
-                await self.config.member(ctx.author).fishing.set(1)          
+                await self.bot.get_cog("Daily").config.member(ctx.author).fishing.set(1)           
             try:
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
@@ -355,7 +355,7 @@ class Fish(commands.Cog):
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Fishing:782681118674780200> **| Fishing quest complete! Reward: {fishing_credits} {credits_name}**\n")
-                await self.config.member(ctx.author).fishing.set(1)          
+                await self.bot.get_cog("Daily").config.member(ctx.author).fishing.set(1)          
             try:
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
@@ -399,7 +399,7 @@ class Fish(commands.Cog):
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Fishing:782681118674780200> **| Fishing quest complete! Reward: {fishing_credits} {credits_name}**\n")
-                await self.config.member(ctx.author).fishing.set(1)          
+                await self.bot.get_cog("Daily").config.member(ctx.author).fishing.set(1)           
             try:     
                 item = NAMES[fish]
                 fish_info = await self.bot.get_cog("Shop").config.member(ctx.author).inventory.get_raw(item)
