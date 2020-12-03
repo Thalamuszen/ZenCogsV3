@@ -411,11 +411,19 @@ class Daily(commands.Cog):
             await self.config.member(ctx.author).quests_built.set(now_str)
         #Grabs the values from the quest builder as there is a delay between writing and reading.
         try:
+            messages = False
+            messages_quest = messages_quest_total
+            messages_count = 0
+            messages_credits = messages_quest_credits
             fishing = False
             fishing_quest = fishing_quest_total
             fishing_count = 0
             fishing_credits = fishing_quest_credits
         except:
+            messages = memberdata["messages"]
+            messages_quest = memberdata["messages_quest"]
+            messages_count = memberdata["messages_count"]
+            messages_credits = memberdata["messages_credits"]
             fishing = memberdata["fishing"]
             fishing_quest = memberdata["fishing_quest"]
             fishing_count = memberdata["fishing_count"]
@@ -438,6 +446,53 @@ class Daily(commands.Cog):
             embed.description += f"**Daily**\nYou haven't claimed your Daily yet.\n**Reward:** {guild_credits} {currency_name}\n\n"
         else:
             embed.description += f"**Daily**\nYou have claimed your Daily.\n**Rewarded:** {guild_credits} {currency_name}\n\n"
+        
+        #Embed Messages calculator
+        per_bar = float(messages_quest / 10)
+        tier_one = per_bar
+        tier_two = per_bar * 2
+        tier_three = per_bar * 3
+        tier_four = per_bar * 4
+        tier_five = per_bar * 5
+        tier_six = per_bar * 6
+        tier_seven = per_bar * 7
+        tier_eight = per_bar * 8
+        tier_nine = per_bar * 9
+        tier_ten = per_bar * 10
+                                            
+        if messages_count == 0:
+            messages_bar = bar_empty
+        elif 0 < messages_count <= tier_one:
+            messages = bar_one
+        elif tier_one < messages_count <= tier_two:
+            messages_bar = bar_two
+        elif tier_two < messages_count <= tier_three:
+            messages_bar = bar_three
+        elif tier_three < messages_count <= tier_four:
+            messages_bar = bar_four
+        elif tier_four < messages_count <= tier_five:
+            messages_bar = bar_five
+        elif tier_five < messages_count <= tier_six:
+            messages_bar = bar_six
+        elif tier_six < messages_count <= tier_seven:
+            messages_bar = bar_seven
+        elif tier_seven < messages_count <= tier_eight:
+            messages_bar = bar_eight
+        elif tier_eight < messages_count <= tier_nine:
+            messages_bar = bar_nine 
+        elif tier_nine < messages_count < tier_ten:
+            messages_bar = bar_nine
+        elif messages_count >= tier_ten:
+            messages_bar = bar_full
+            
+        #Stops the messages count going over the quest amount.
+        if messages_count > messages_quest:
+            messages_count = messages_quest
+        #Works out which description to use. The credits are awarded within the relevant cog.
+        if fishing_count == fishing_quest:  
+            embed.description += f"**Send {messages_quest} messages** - **Completed!**\n{messages_bar} {messages_count}/{messages_quest}\n**Rewarded:** {messages_credits} {currency_name}"
+        else:
+            embed.description += f"**Send {messages_quest} messages**\n{messages_bar} {messages_count}/{messages_quest}\n**Reward:** {messages_credits} {currency_name}"            
         
         #Embed fishing calculator
         per_bar = float(fishing_quest / 10)
@@ -480,8 +535,7 @@ class Daily(commands.Cog):
         #Stops the fishing count going over the quest amount.
         if fishing_count > fishing_quest:
             fishing_count = fishing_quest
-        #Works out which description to send use
-        #DO I WANT TO GIVE THEM THE CREDITS WHEN THEY RUN THE QUEST COMMAND? OR DO I WANT TO ADD IT TO THE MODULES WHEN THE QUEST IS COMPLETE?
+        #Works out which description to use. The credits are awarded within the relevant cog.        
         if fishing_count == fishing_quest:  
             embed.description += f"**Catch {fishing_quest} fish** - **Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Rewarded:** {fishing_credits} {currency_name}"
         else:
