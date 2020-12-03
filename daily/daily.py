@@ -303,7 +303,7 @@ class Daily(commands.Cog):
         
         if last_daily < midnight_check:
             await self.config.member(ctx.author).credits.set(0)
-            credits == False
+            credits = False
         else:
             credits = memberdata["credits"]    
         
