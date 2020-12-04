@@ -303,7 +303,7 @@ class Daily(commands.Cog):
         gambling_credits = memberdata["gambling_credits"]
         
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
-        quest_completed = datetime.strptime(str(memberdata["quest_completed"]), "%Y-%m-%d %H:%M:%S")
+        quests_completed = datetime.strptime(str(memberdata["quests_completed"]), "%Y-%m-%d %H:%M:%S")
         quests_built = datetime.strptime(str(memberdata["quests_built"]), "%Y-%m-%d %H:%M:%S")
         
         if last_daily < midnight_check:
