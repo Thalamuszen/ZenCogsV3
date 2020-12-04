@@ -989,8 +989,8 @@ class Shop(commands.Cog):
     @commands.guild_only()
     async def inventory(self, ctx: commands.Context):
         """See all items you own."""
-	balance = int(await bank.get_balance(ctx.author))
-	credits_name = await bank.get_currency_name(ctx.guild)
+        balance = int(await bank.get_balance(ctx.author))
+        credits_name = await bank.get_currency_name(ctx.guild)
         inventory = await self.config.member(ctx.author).inventory.get_raw()
         lst = []
         for i in inventory:
