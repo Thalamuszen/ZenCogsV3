@@ -433,7 +433,7 @@ class Daily(commands.Cog):
             gambling = False
             gambling_quest = gambling_quest_total
             gambling_count = 0
-            gambling_credits = gambling_quest_total
+            gambling_credits = gambling_quest_credits
         except:
             messages = memberdata["messages"]
             messages_quest = memberdata["messages_quest"]
