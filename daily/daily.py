@@ -297,7 +297,11 @@ class Daily(commands.Cog):
         fishing_quest = memberdata["fishing_quest"]
         fishing_count = memberdata["fishing_count"]
         fishing_credits = memberdata["fishing_credits"]
-                        
+        gambling = memberdata["gambling"]
+        gambling_quest = memberdata["gambling_quest"]
+        gambling_count = memberdata["gambling_count"]
+        gambling_credits = memberdata["gambling_credits"]
+        
         last_daily = datetime.strptime(str(memberdata["last_daily"]), "%Y-%m-%d %H:%M:%S")
         quest_completed = datetime.strptime(str(memberdata["quest_completed"]), "%Y-%m-%d %H:%M:%S")
         quests_built = datetime.strptime(str(memberdata["quests_built"]), "%Y-%m-%d %H:%M:%S")
@@ -406,6 +410,13 @@ class Daily(commands.Cog):
             fishing_quest_credits = fishing_quest_total * 10
             await self.config.member(ctx.author).fishing_credits.set(fishing_quest_credits)
             
+            await self.config.member(ctx.author).gambling.set(0)
+            gambling_quest_total = int(randint(10, 25))
+            await self.config.member(ctx.author).gambling_quest.set(gambling_quest_total)
+            await self.config.member(ctx.author).gambling_count.set(0)
+            gambling_quest_credits = gambling_quest_total * 10
+            await self.config.member(ctx.author).gambling_credits.set(gambling_quest_credits)            
+            
             now = datetime.now(timezone.utc)
             now_str = now.strftime("%Y-%m-%d %H:%M:%S")
             await self.config.member(ctx.author).quests_built.set(now_str)
@@ -419,6 +430,10 @@ class Daily(commands.Cog):
             fishing_quest = fishing_quest_total
             fishing_count = 0
             fishing_credits = fishing_quest_credits
+            gambling = False
+            gambling_quest = gambling_quest_total
+            gambling_count = 0
+            gambling_credits = gambling_quest_total
         except:
             messages = memberdata["messages"]
             messages_quest = memberdata["messages_quest"]
@@ -428,6 +443,10 @@ class Daily(commands.Cog):
             fishing_quest = memberdata["fishing_quest"]
             fishing_count = memberdata["fishing_count"]
             fishing_credits = memberdata["fishing_credits"]
+            gambling = memberdata["gambling"]
+            gambling_quest = memberdata["gambling_quest"]
+            gambling_count = memberdata["gambling_count"]
+            gambling_credits = memberdata["gambling_credits"]
             pass
         #Embed builder            
         embed = discord.Embed(
@@ -540,6 +559,53 @@ class Daily(commands.Cog):
             embed.description += f"**Catch {fishing_quest} fish** - **Completed!**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Rewarded:** {fishing_credits} {currency_name}\n\n"
         else:
             embed.description += f"**Catch {fishing_quest} fish**\n{fishing_bar} {fishing_count}/{fishing_quest}\n**Reward:** {fishing_credits} {currency_name}\n\n"
+            
+        #Embed Gambling calculator
+        per_bar = float(gambling_quest / 10)
+        tier_one = per_bar
+        tier_two = per_bar * 2
+        tier_three = per_bar * 3
+        tier_four = per_bar * 4
+        tier_five = per_bar * 5
+        tier_six = per_bar * 6
+        tier_seven = per_bar * 7
+        tier_eight = per_bar * 8
+        tier_nine = per_bar * 9
+        tier_ten = per_bar * 10
+                                            
+        if gambling_count == 0:
+            gambling_bar = bar_empty
+        elif 0 < gambling_count <= tier_one:
+            gambling_bar = bar_one
+        elif tier_one < gambling_count <= tier_two:
+            gambling_bar = bar_two
+        elif tier_two < gambling_count <= tier_three:
+            gambling_bar = bar_three
+        elif tier_three < gambling_count <= tier_four:
+            gambling_bar = bar_four
+        elif tier_four < gambling_count <= tier_five:
+            gambling_bar = bar_five
+        elif tier_five < gambling_count <= tier_six:
+            gambling_bar = bar_six
+        elif tier_six < gambling_count <= tier_seven:
+            gambling_bar = bar_seven
+        elif tier_seven < gambling_count <= tier_eight:
+            gambling_bar = bar_eight
+        elif tier_eight < gambling_count <= tier_nine:
+            gambling_bar = bar_nine 
+        elif tier_nine < gambling_count < tier_ten:
+            gambling_bar = bar_nine
+        elif gambling_count >= tier_ten:
+            gambling_bar = bar_full   
+            
+        #Stops the gambling count going over the quest amount.
+        if gambling_count > gambling_quest:
+            gambling_count = gambling_quest
+        #Works out which description to use. The credits are awarded within the relevant cog.        
+        if gambling_count == gambling_quest:  
+            embed.description += f"**Gamble {gambling_quest} times** - **Completed!**\n{gambling_bar} {gambling_count}/{gambling_quest}\n**Rewarded:** {gambling_credits} {currency_name}\n\n"
+        else:
+            embed.description += f"**Gamble {gambling_quest} times**\n{gambling_bar} {gambling_count}/{gambling_quest}\n**Reward:** {gambling_credits} {currency_name}\n\n"            
             
         #All quests complete bonus
         #if messages = memberdata["messages"]
