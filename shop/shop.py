@@ -1032,7 +1032,7 @@ class Shop(commands.Cog):
             output = box(tabulate(lst, headers=headers), lang="md")
         embed = discord.Embed(
             colour=await ctx.embed_colour(),
-            description=f"{output}<:Coins:783453482262331393> {balance} {credits_name}",
+            description=f"{output}",
             timestamp=datetime.now(),
         )
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/752524729470025788/776788124755034112/backpack.png")
