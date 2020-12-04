@@ -1403,47 +1403,44 @@ class Shop(commands.Cog):
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
+        balance = int(await bank.get_balance(ctx.author))
         embeds = []
         embed_r = discord.Embed(
            title="__**Role Shop**__",
            colour=await ctx.embed_colour(),
-           timestamp=datetime.now(),
         )
         embed_r.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
         embed_r.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_r.set_footer(text="Shoppy™ - Use the arrows below to change shops")
+        embed_r.set_footer(text=f"Shoppy™ • Use the arrows below to change shops • <:Coins:783453482262331393> {balance} {credits_name}")
         embed_i = discord.Embed(
            title="__**Item Shop**__",		
            colour=await ctx.embed_colour(),
-           timestamp=datetime.now(),
         )
         embed_i.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
         embed_i.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_i.set_footer(text="Shoppy™ - Use the arrows below to change shops")
+        embed_i.set_footer(text=f"Shoppy™ • Use the arrows below to change shops • <:Coins:783453482262331393> {balance} {credits_name}")
         embed_g = discord.Embed(
            title="__**Game Shop**__",		
            colour=await ctx.embed_colour(),
-           timestamp=datetime.now(),
         )
         embed_g.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
         embed_g.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_g.set_footer(text="Shoppy™ - Use the arrows below to change shops")
+        embed_g.set_footer(text=f"Shoppy™ • Use the arrows below to change shops • <:Coins:783453482262331393> {balance} {credits_name}")
         embed_x = discord.Embed(
            title="__**Christmas Shop**__",		
            colour=await ctx.embed_colour(),
-           timestamp=datetime.now(),
         )
         embed_x.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
         embed_x.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
-        embed_x.set_footer(text="Shoppy™ - Use the arrows below to change shops")	
+        embed_x.set_footer(text=f"Shoppy™ • Use the arrows below to change shops • <:Coins:783453482262331393> {balance} {credits_name}")	
         role_embed = []
         item_embed = []
         game_embed = []
