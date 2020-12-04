@@ -1030,7 +1030,7 @@ class Shop(commands.Cog):
             output = box(tabulate(lst, headers=headers), lang="md")
         embed = discord.Embed(
             colour=await ctx.embed_colour(),
-            description=f"{output}",
+            description=f"<:Coins:783453482262331393>\n{output}",
             timestamp=datetime.now(),
         )
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/752524729470025788/776788124755034112/backpack.png")
@@ -1403,7 +1403,6 @@ class Shop(commands.Cog):
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
         credits_name = await bank.get_currency_name(ctx.guild)
-        balance = int(await bank.get_balance(ctx.author))
         embeds = []
         embed_r = discord.Embed(
            title="__**Role Shop**__",
