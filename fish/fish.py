@@ -36,15 +36,15 @@ NAMES = {
     "\ud83e\udd90": "common",
 }
 RARES = {
-    "\ud83d\udc22": "turtle",
-    "\ud83d\udc33": "blow_whale",
-    "\ud83d\udc0b": "whale",
-    "\ud83d\udc0a": "crocodile",
-    "\ud83d\udc27": "penguin",
-    "\ud83d\udc19": "octopus",
-    "\ud83e\udd88": "shark",      
-    "\ud83e\udd91": "squid",  
-    "\ud83d\udc2c": "dolphin",
+    "\ud83d\udc22": "Turtle",
+    "\ud83d\udc33": "Blow whale",
+    "\ud83d\udc0b": "Whale",
+    "\ud83d\udc0a": "Crocodile",
+    "\ud83d\udc27": "Penguin",
+    "\ud83d\udc19": "Octopus",
+    "\ud83e\udd88": "Shark",      
+    "\ud83e\udd91": "Squid",  
+    "\ud83d\udc2c": "Dolphin",
 }
 
 class Fish(commands.Cog):
@@ -215,7 +215,7 @@ class Fish(commands.Cog):
             item = RARES[fish]
             await ctx.send(
                 (
-                    "<:Fishing:782681118674780200> **| {author.name}** caught a {item}, it's **rare!!! |** {fish}\n"
+                    "<:Fishing:782681118674780200> **| {author.name}** caught a **{item}**, it's **rare!!! |** {fish}\n"
                     "Type `!rarefish` to see your trophy room"
                 ).format(
                     author=author,
@@ -238,23 +238,23 @@ class Fish(commands.Cog):
                 author_quantity = int(fish_info.get("quantity"))
                 author_quantity += 1
                 await self.bot.get_cog("Shop").config.member(ctx.author).inventory.set_raw(item, "quantity", value=author_quantity)
-                if item == "turtle":
+                if item == "Turtle":
                     await self.config.user(ctx.author).turtle.set(userdata["turtle"] + 1)
-                elif item == "blow_whale":
+                elif item == "Blow whale":
                     await self.config.user(ctx.author).blow_whale.set(userdata["blow_whale"] + 1)
-                elif item == "whale":
+                elif item == "Whale":
                     await self.config.user(ctx.author).whale.set(userdata["whale"] + 1)  
-                elif item == "crocodile":
+                elif item == "Crocodile":
                     await self.config.user(ctx.author).crocodile.set(userdata["crocodile"] + 1)
-                elif item == "penguin":
+                elif item == "Penguin":
                     await self.config.user(ctx.author).penguin.set(userdata["penguin"] + 1)
-                elif item == "octopus":
+                elif item == "Octopus":
                     await self.config.user(ctx.author).octopus.set(userdata["octopus"] + 1)   
-                elif item == "shark":
+                elif item == "Shark":
                     await self.config.user(ctx.author).shark.set(userdata["shark"] + 1)  
-                elif item == "squid":
+                elif item == "Squid":
                     await self.config.user(ctx.author).squid.set(userdata["squid"] + 1) 
-                elif item == "dolphin":
+                elif item == "Dolphin":
                     await self.config.user(ctx.author).dolphin.set(userdata["dolphin"] + 1)                       
             except KeyError:
                 item = RARES[fish]
@@ -278,23 +278,23 @@ class Fish(commands.Cog):
                         "gifted": False,                         
                     },
                 )     
-                if item == "turtle":
+                if item == "Turtle":
                     await self.config.user(ctx.author).turtle.set(userdata["turtle"] + 1)
-                elif item == "blow_whale":
+                elif item == "Blow whale":
                     await self.config.user(ctx.author).blow_whale.set(userdata["blow_whale"] + 1)   
-                elif item == "whale":
+                elif item == "Whale":
                     await self.config.user(ctx.author).whale.set(userdata["whale"] + 1)  
-                elif item == "crocodile":
+                elif item == "Crocodile":
                     await self.config.user(ctx.author).crocodile.set(userdata["crocodile"] + 1)
-                elif item == "penguin":
+                elif item == "Penguin":
                     await self.config.user(ctx.author).penguin.set(userdata["penguin"] + 1)
-                elif item == "octopus":
+                elif item == "Octopus":
                     await self.config.user(ctx.author).octopus.set(userdata["octopus"] + 1)   
-                elif item == "shark":
+                elif item == "Shark":
                     await self.config.user(ctx.author).shark.set(userdata["shark"] + 1)  
-                elif item == "squid":
+                elif item == "Squid":
                     await self.config.user(ctx.author).squid.set(userdata["squid"] + 1) 
-                elif item == "dolphin":
+                elif item == "Dolphin":
                     await self.config.user(ctx.author).dolphin.set(userdata["dolphin"] + 1)                     
         elif rarechance < chance <= uncommonchance:
             uncommon = await self.config.uncommon()
