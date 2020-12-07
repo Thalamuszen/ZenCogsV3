@@ -400,11 +400,11 @@ class Daily(commands.Cog):
             messages_quest_total = int(randint(5, 15))
             await self.config.member(ctx.author).messages_quest.set(messages_quest_total)
             await self.config.member(ctx.author).messages_count.set(0)
-            messages_quest_credits = messages_quest_total * 10
+            messages_quest_credits = messages_quest_total * 20
             await self.config.member(ctx.author).messages_credits.set(messages_quest_credits)
             
             await self.config.member(ctx.author).fishing.set(0)
-            fishing_quest_total = int(randint(10, 25))
+            fishing_quest_total = int(randint(10, 30))
             await self.config.member(ctx.author).fishing_quest.set(fishing_quest_total)
             await self.config.member(ctx.author).fishing_count.set(0)
             fishing_quest_credits = fishing_quest_total * 10
@@ -414,7 +414,7 @@ class Daily(commands.Cog):
             gambling_quest_total = int(randint(5, 15))
             await self.config.member(ctx.author).gambling_quest.set(gambling_quest_total)
             await self.config.member(ctx.author).gambling_count.set(0)
-            gambling_quest_credits = gambling_quest_total * 10
+            gambling_quest_credits = gambling_quest_total * 20
             await self.config.member(ctx.author).gambling_credits.set(gambling_quest_credits)            
             
             now = datetime.now(timezone.utc)
