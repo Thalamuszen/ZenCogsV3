@@ -6,7 +6,7 @@ import random
 
 from random import uniform, randint
 from discord.utils import get
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from tabulate import tabulate
 from operator import itemgetter
 
