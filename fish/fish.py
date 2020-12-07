@@ -199,7 +199,14 @@ class Fish(commands.Cog):
         fishing = memberdata["fishing"]
         fishing_count = memberdata["fishing_count"]
         fishing_quest = memberdata["fishing_quest"]
-        fishing_credits = memberdata["fishing_credits"]   
+        fishing_credits = memberdata["fishing_credits"]
+        #Update midnight values
+        today = date.today()
+        midnight_today = datetime.combine(today, datetime.min.time())        
+        midnight_check = datetime.strptime(str(midnight_today), "%Y-%m-%d %H:%M:%S")
+        await self.config.midnight_today.set(str(midnight_check))
+        #Pull when their last quest was built
+        quests_built = datetime.strptime(str(memberdata["quests_built"]), "%Y-%m-%d %H:%M:%S")   
         
         chance = uniform(0, 99)
         rarechance = 0.15
@@ -225,9 +232,11 @@ class Fish(commands.Cog):
             )
             #Fishing module quest check/completion
             await self.bot.get_cog("Daily").config.member(ctx.author).fishing_count.set(fishing_count + 1)
-            fishing_count = fishing_count + 1
+            fishing_count = fishing_count + 1            
             if fishing_count == fishing_quest:
-                if fishing == False:
+                if quest_built < midnight_check:
+                    pass
+                elif fishing == False:
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Coins:783453482262331393> **| Fishing quest complete!**\n<:Coins:783453482262331393> **| Reward:** {fishing_credits} {credits_name}")
