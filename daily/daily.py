@@ -404,7 +404,7 @@ class Daily(commands.Cog):
             await self.config.member(ctx.author).messages_credits.set(messages_quest_credits)
             
             await self.config.member(ctx.author).fishing.set(0)
-            fishing_quest_total = int(randint(10, 30))
+            fishing_quest_total = int(randint(15, 30))
             await self.config.member(ctx.author).fishing_quest.set(fishing_quest_total)
             await self.config.member(ctx.author).fishing_count.set(0)
             fishing_quest_credits = fishing_quest_total * 10
