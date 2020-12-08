@@ -234,7 +234,7 @@ class Fish(commands.Cog):
             await self.bot.get_cog("Daily").config.member(ctx.author).fishing_count.set(fishing_count + 1)
             fishing_count = fishing_count + 1            
             if fishing_count == fishing_quest:
-                if quest_built < midnight_check:
+                if quests_built < midnight_check:
                     pass
                 elif fishing == False:
                     credits = int(fishing_credits)
@@ -316,7 +316,9 @@ class Fish(commands.Cog):
             await self.bot.get_cog("Daily").config.member(ctx.author).fishing_count.set(fishing_count + 1)
             fishing_count = fishing_count + 1
             if fishing_count == fishing_quest:
-                if fishing == False:
+                if quests_built < midnight_check:
+                    pass                
+                elif fishing == False:                    
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Coins:783453482262331393> **| Fishing quest complete!**\n<:Coins:783453482262331393> **| Reward:** {fishing_credits} {credits_name}")
@@ -360,7 +362,9 @@ class Fish(commands.Cog):
             await self.bot.get_cog("Daily").config.member(ctx.author).fishing_count.set(fishing_count + 1)
             fishing_count = fishing_count + 1
             if fishing_count == fishing_quest:
-                if fishing == False:
+                if quests_built < midnight_check:
+                    pass                  
+                elif fishing == False:
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Coins:783453482262331393> **| Fishing quest complete!**\n<:Coins:783453482262331393> **| Reward:** {fishing_credits} {credits_name}")
@@ -404,7 +408,9 @@ class Fish(commands.Cog):
             await self.bot.get_cog("Daily").config.member(ctx.author).fishing_count.set(fishing_count + 1)
             fishing_count = fishing_count + 1
             if fishing_count == fishing_quest:
-                if fishing == False:
+                if quests_built < midnight_check:
+                    pass                
+                elif fishing == False:
                     credits = int(fishing_credits)
                     await bank.deposit_credits(ctx.author, credits)
                     await ctx.send(f"<:Coins:783453482262331393> **| Fishing quest complete!**\n<:Coins:783453482262331393> **| Reward:** {fishing_credits} {credits_name}")
