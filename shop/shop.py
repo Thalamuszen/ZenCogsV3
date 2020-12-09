@@ -30,7 +30,7 @@ class Shop(commands.Cog):
             self, identifier=16548964843212315, force_registration=True
         )
         self.config.register_guild(
-            enabled=False, items={}, roles={}, games={}, xmas={}, ping=None
+            enabled=False, xmasshop=False, items={}, roles={}, games={}, xmas={}, ping=None
         )
         self.config.register_member(inventory={})
 
@@ -55,6 +55,21 @@ class Shop(commands.Cog):
             await ctx.send("Store is now enabled.")
         else:
             await ctx.send("Store is now disabled.")
+	
+    @store.command(name="xmastoggle")
+    async def xmas_toggle(self, ctx: commands.Context, on_off: bool = None):
+        """Toggle the Xmas shop for current server.
+        If `on_off` is not provided, the state will be flipped."""
+        target_state = (
+            on_off
+            if on_off
+            else not (await self.config.guild(ctx.guild).xmasshop())
+        )
+        await self.config.guild(ctx.guild).xmasshop.set(target_state)
+        if target_state:
+            await ctx.send("The Xmas shop is now enabled.")
+        else:
+            await ctx.send("The Xmas shop is now disabled.")	
 
     @store.command(name="add")
     async def store_add(self, ctx: commands.Context):
