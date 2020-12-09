@@ -534,7 +534,7 @@ class Shop(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def shop(self, ctx: commands.Context):
+    async def shop(self, ctx: commands.Context, page: Optional[str] = "roles"):
         """Display the shop."""
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
@@ -1399,7 +1399,20 @@ class Shop(commands.Cog):
                     item, "quantity", value=author_quantity
                 )
 
-    async def _show_store(self, ctx):
+    async def _show_store(self, ctx, page):
+	    page = page.lower()
+	    if page == "role":
+	        page_choice = 0
+        elif page == "roles":
+            page_choice = 0
+        elif page == "item":
+            page_choice = 1
+        elif page == "items":
+            page_choice = 1
+        elif page == "xmas":
+            page_choice = 2
+        else:
+            page = 0
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
@@ -1528,4 +1541,4 @@ class Shop(commands.Cog):
             embed_closed.description="Come back soon!"	
             embed_closed.set_footer(text="Shoppy™")
             embeds.append(embed_closed)
-        await menu(ctx, pages=embeds, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=120)
+        await menu(ctx, pages=embeds, controls=DEFAULT_CONTROLS, message=None, page=page_choice, timeout=120)
