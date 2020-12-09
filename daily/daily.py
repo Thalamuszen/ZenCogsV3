@@ -457,7 +457,7 @@ class Daily(commands.Cog):
         embed.set_author(
             name=f"{ctx.author.display_name}'s Daily Quests", icon_url=ctx.author.avatar_url,
         )
-        embed.description = "*\"Here are your daily quests..\"* - Tavern keeper\n\n**Completion Status**\n\n"
+        embed.description = "*\"Here are your daily quests..\"*\nTavern keeper\n\n__**Completion Status**__\n\n"
         embed.set_footer(text="Questy™ - Quests reset at 00:00 UTC")
         
         #Embed daily                  
