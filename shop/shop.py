@@ -1421,6 +1421,7 @@ class Shop(commands.Cog):
                 )
 
     async def _show_store(self, ctx, page):
+        xmasshop = await self.config.guild(ctx.guild).xmasshop()
         page = page.lower()
         if page == "role":
             page_choice = 0
