@@ -764,6 +764,9 @@ class Shop(commands.Cog):
                     f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                 )
         elif item in xmas:
+            xmasshop = await self.config.guild(ctx.guild).xmasshop()
+            if not xmasshop:
+                return await ctx.send("The Christmas shop is closed. Come back later!")            
             xmas_info = await self.config.guild(ctx.guild).xmas.get_raw(item)
             price = int(xmas_info.get("price"))
             totalcost = price * quantity
@@ -1069,7 +1072,10 @@ class Shop(commands.Cog):
         """
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
-            return await ctx.send("Uh oh, the shop is closed. Come back later!")        
+            return await ctx.send("Uh oh, the shop is closed. Come back later!")
+        xmasshop = await self.config.guild(ctx.guild).xmasshop()
+        if not xmasshop:
+            return await ctx.send("The Chistmas event is over!")        
         if quantity < 1:
             return await ctx.send("Think you're smart huh?")
         if user == ctx.author:
@@ -1425,7 +1431,12 @@ class Shop(commands.Cog):
         elif page == "items":
             page_choice = 1
         elif page == "xmas":
-            page_choice = 2
+            xmasshop = await self.config.guild(ctx.guild).xmasshop()
+            if not xmasshop:
+                await ctx.send("The Christmas shop is closed. Take a look at the role shop instead")
+                page_choice = 0
+            else:
+                page_choice = 2
         else:
             page = 0
         items = await self.config.guild(ctx.guild).items.get_raw()
@@ -1464,24 +1475,27 @@ class Shop(commands.Cog):
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
         embed_g.set_footer(text=f"Shoppy™ • Use the arrows below to change shops")
-        embed_x = discord.Embed(
-           title="__**Christmas Shop**__",		
-           colour=await ctx.embed_colour(),
-           timestamp=datetime.now(),            
-        )
-        embed_x.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
-        embed_x.set_author(
-           name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
-        )
-        embed_x.set_footer(text=f"Shoppy™ • Use the arrows below to change shops")	
+        if not xmasshop:
+            pass
+        else:
+            embed_x = discord.Embed(
+                title="__**Christmas Shop**__",		
+                colour=await ctx.embed_colour(),
+                timestamp=datetime.now(),            
+            )            
+            embed_x.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
+            embed_x.set_author(
+                name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
+            )
+            embed_x.set_footer(text=f"Shoppy™ • Use the arrows below to change shops")
+            xmas_embed = []
+            sorted_xmas = []
         role_embed = []
         item_embed = []
         game_embed = []
-        xmas_embed = []
         sorted_role = []
         sorted_item = []
         sorted_game = []
-        sorted_xmas = []
         for r in roles:
             role = await self.config.guild(ctx.guild).roles.get_raw(r)
             priceint = int(role.get("price"))
@@ -1506,15 +1520,18 @@ class Shop(commands.Cog):
             quantity = int(game.get("quantity"))
             table = [g, priceint, quantity]		
             game_embed.append(table)
-            sorted_game = sorted(game_embed, key=itemgetter(1), reverse=True)		
-        for x in xmas:
-            xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
-            priceint = int(xmas.get("price"))
-            price = humanize_number(priceint)
-            quantity = int(xmas.get("quantity"))
-            table = ["\ud83c\udf81", x, priceint, quantity]
-            xmas_embed.append(table)
-            sorted_xmas = sorted(xmas_embed, key=itemgetter(2), reverse=True)
+            sorted_game = sorted(game_embed, key=itemgetter(1), reverse=True)
+        if not xmasshop:
+            pass
+        else:            
+            for x in xmas:
+                xmas = await self.config.guild(ctx.guild).xmas.get_raw(x)
+                priceint = int(xmas.get("price"))
+                price = humanize_number(priceint)
+                quantity = int(xmas.get("quantity"))
+                table = ["\ud83c\udf81", x, priceint, quantity]
+                xmas_embed.append(table)
+                sorted_xmas = sorted(xmas_embed, key=itemgetter(2), reverse=True)
         if sorted_role == []:
             embed_r.description="Nothing to see here."
         else:
@@ -1536,13 +1553,16 @@ class Shop(commands.Cog):
             output = box(tabulate(sorted_game, headers=headers, colalign=("left", "right", "right",)), lang="md")		
             embed_g.description=f"Welcome to Elune's Game shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
             embeds.append(embed_g)
-        if sorted_xmas == []:
-            embed_x.description="Nothing to see here."
-        else:
-            headers = ("", "Item", "Price", "Qty")
-            output = box(tabulate(sorted_xmas, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
-            embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send to your friends for the festive period!\n\nAfter your purchase, use the `!gift` command to gift the item to a friend.\nAfter the **24th of December** you will be able to open gifted presents using the `!open` command.\nChristmas items **cannot** be refunded using the `!return` command.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"	
-            embeds.append(embed_x)
+        if not xmasshop:
+            pass
+        else:            
+            if sorted_xmas == []:
+                embed_x.description="Nothing to see here."
+            else:
+                headers = ("", "Item", "Price", "Qty")
+                output = box(tabulate(sorted_xmas, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
+                embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send to your friends for the festive period!\n\nAfter your purchase, use the `!gift` command to gift the item to a friend.\nAfter the **24th of December** you will be able to open gifted presents using the `!open` command.\nChristmas items **cannot** be refunded using the `!return` command.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"	
+                embeds.append(embed_x)
         if embeds == []:
             embed_closed = discord.Embed(
                title="__**All shops are closed**__",
