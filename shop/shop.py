@@ -1400,9 +1400,9 @@ class Shop(commands.Cog):
                 )
 
     async def _show_store(self, ctx, page):
-	    page = page.lower()
-	    if page == "role":
-	        page_choice = 0
+        page = page.lower()
+        if page == "role":
+            page_choice = 0
         elif page == "roles":
             page_choice = 0
         elif page == "item":
