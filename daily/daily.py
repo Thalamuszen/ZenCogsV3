@@ -453,7 +453,7 @@ class Daily(commands.Cog):
             colour=await ctx.embed_colour(),
             timestamp=datetime.now(),
         )
-        embed.set_thumbnail(url="https://cdn.discordapp.com/emojis/783453482262331393.png")
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/768197304158257234/786209599355092992/TavernKeeper2.gif")
         embed.set_author(
             name=f"{ctx.author.display_name}'s Daily Quests", icon_url=ctx.author.avatar_url,
         )
