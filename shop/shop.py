@@ -539,7 +539,7 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop is closed. Come back later!")
-        await self._show_store(ctx)
+        await self._show_store(ctx, page)
 
     @commands.command()
     @commands.guild_only()
