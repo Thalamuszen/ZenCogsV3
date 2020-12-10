@@ -1298,7 +1298,25 @@ class Shop(commands.Cog):
                 f"{ctx.author.mention} You received: Overwatch 2",
                 f"{ctx.author.mention} You received: A £10 Steam gift card",
             ] 
-            return await bot_talking.edit(content=random.choice(lp_messages))            
+            return await bot_talking.edit(content=random.choice(lp_messages))
+        elif size == 'gtx': 
+            await ctx.send(f"{ctx.author.mention} is opening your Geforce RTX 3080, {gifter.mention}")
+            placing_messages = [
+                "*You excitedly place the gift upon your lap and smile...*",
+                "*You slide out the present from beneath the Christmas tree...*",
+            ]
+            bot_talking = await ctx.send(random.choice(placing_messages))
+            await asyncio.sleep(3)
+            opening_messages = [
+                "*You are quick to rip the red and white wrapping paper from the present...*",
+                "*You delicately tear the wrapping paper from around the present...*",
+            ]
+            await bot_talking.edit(content=random.choice(opening_messages))
+            await asyncio.sleep(3)            
+            gtx_messages = [
+                f"{ctx.author.mention} You received: Geforce RTX 3080",
+            ] 
+            return await bot_talking.edit(content=random.choice(gtx_messages))
 
     @commands.command()
     @commands.guild_only()
