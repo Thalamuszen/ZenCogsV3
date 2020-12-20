@@ -861,7 +861,7 @@ class Shop(commands.Cog):
                         f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                     )
         else:
-            await ctx.send(":x: This item doesn't exist. Items are case sensitive. Try again:")
+            await ctx.send(":x: This item doesn't exist in any of the shops. Try again:")
             page = "roles"
             await self._show_store(ctx, page)
 
