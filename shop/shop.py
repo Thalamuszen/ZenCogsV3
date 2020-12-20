@@ -582,7 +582,7 @@ class Shop(commands.Cog):
         elif item in xmas:
             pass
         else:
-            item.removesuffix('s')
+            item = item[:-1]
         #end
         inventory = await self.config.member(ctx.author).inventory.get_raw()            
         if item in roles:
