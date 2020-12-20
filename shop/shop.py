@@ -570,10 +570,21 @@ class Shop(commands.Cog):
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
         xmas = await self.config.guild(ctx.guild).xmas.get_raw()
-
+        # Catch all. Including the removal of s at the end of multiples.
         item = item.lower()
         item = item.strip("@")
-        inventory = await self.config.member(ctx.author).inventory.get_raw()
+        if item in items:
+            pass
+        elif item in roles:
+            pass
+        elif item in games:
+            pass
+        elif item in xmas:
+            pass
+        else:
+            item.removesuffix("s")
+        #end
+        inventory = await self.config.member(ctx.author).inventory.get_raw()            
         if item in roles:
             if item in inventory:
                 return await ctx.send("You already own this role.")
@@ -850,6 +861,7 @@ class Shop(commands.Cog):
                         f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                     )
         else:
+            await ctx.send(":x: This item doesn't exist. Items are case sensitive. Try again:")
             page = "roles"
             await self._show_store(ctx, page)
 
