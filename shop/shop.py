@@ -1583,7 +1583,7 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty")
             output = box(tabulate(sorted_game, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_g.description=f"Welcome to Elune's Game shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"
+            embed_g.description=f"Welcome to Elune's Game shop, here you will find gifts to send your friends during the festive period!\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_g)
         if not xmasshop:
             pass
