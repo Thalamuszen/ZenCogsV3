@@ -850,7 +850,8 @@ class Shop(commands.Cog):
                         f"You have bought {quantity} {item}(s). You may now redeem it with `{ctx.clean_prefix}redeem {item}`"
                     )
         else:
-            await self._show_store(ctx)
+            page = "roles"
+            await self._show_store(ctx, page)
 
     @commands.command(name="return", aliases=["sell", "refund"])
     @commands.guild_only()
