@@ -549,11 +549,12 @@ class Shop(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def shop(self, ctx: commands.Context, page: Optional[str] = "roles"):
+    async def shop(self, ctx: commands.Context, page: Optional[str] = ""):
         """Display the shop."""
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop is closed. Come back later!")
+        page = "roles"
         await self._show_store(ctx, page)
 
     @commands.command()
