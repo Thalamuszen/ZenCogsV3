@@ -1569,21 +1569,21 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
             output = box(tabulate(sorted_role, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_r.description=f"Welcome to Elune's Role shop!\n\nAfter purchasing your role, it will automatically be applied to you.\nIf you wish remove a role from yourself, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
+            embed_r.description=f"Welcome to Elune's Role shop!\n\nAfter purchasing your role, it will automatically be applied to you.\nIf you wish remove a role from yourself, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_r)	
         if sorted_item == []:
             embed_i.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty")
             output = box(tabulate(sorted_item, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nItems can be returned using the `!return` command, as long as they haven't been redeemed.\nTo see more info on an item, use the `!show` command.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
+            embed_i.description=f"Welcome to Elune's Item shop!\n\nThe below items can be redeemed with the `!redeem` command.\nItems can be returned using the `!return` command, as long as they haven't been redeemed.\nTo see more info on an item, use the `!show` command.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_i)
         if sorted_game == []:
             embed_g.description="Nothing to see here."
         else:
             headers = ("Item", "Price", "Qty")
             output = box(tabulate(sorted_game, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_g.description=f"Welcome to Elune's Game shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"
+            embed_g.description=f"Welcome to Elune's Game shop, here you will find gifts to send your friends during the festive period!\nWhen using `!buy` command, keep in mind that items are **case sensitive**.\nAfter purchasing your gift, use the `!gift` command to send them to your friends.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_g)
         if not xmasshop:
             pass
@@ -1593,7 +1593,7 @@ class Shop(commands.Cog):
             else:
                 headers = ("", "Item", "Price", "Qty")
                 output = box(tabulate(sorted_xmas, headers=headers, colalign=("left", "left", "right", "right",)), lang="md")		
-                embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send to your friends for the festive period!\n\nAfter your purchase, use the `!gift` command to gift the item to a friend.\nAfter the **24th of December** you will be able to open gifted presents using the `!open` command.\nChristmas items **cannot** be refunded using the `!return` command.\n\n`!buy <quantity> <item_name>` - Item names are case sensitive.\n{output}"	
+                embed_x.description=f"Welcome to Elune's Christmas shop, here you will find gifts to send to your friends for the festive period!\n\nAfter your purchase, use the `!gift` command to gift the item to a friend.\nAfter the **24th of December** you will be able to open gifted presents using the `!open` command.\nChristmas items **cannot** be refunded using the `!return` command.\n\n`!buy <quantity> <item_name>`\n{output}"	
                 embeds.append(embed_x)
         if embeds == []:
             embed_closed = discord.Embed(
