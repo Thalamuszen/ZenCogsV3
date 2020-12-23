@@ -1162,6 +1162,7 @@ class Shop(commands.Cog):
         )      
         
     @commands.command()
+    @checks.admin_or_permissions(manage_guild=True)
     @commands.guild_only()
     async def open(self, ctx: commands.Context, *, item: str = ""):
         """Open a Christmas Present given to you by another user!
@@ -1173,13 +1174,13 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop module is disabled. Come back later!")
-        date = datetime.now()
-        xmas_date = datetime(2020, 12, 24)
-        over_xmas = datetime(2021, 1, 1)
-        if date < xmas_date:
-            return await ctx.send("It's not Christmas yet! Wait until after the 24th of December.")
-        if date > over_xmas:
-            return await ctx.send("Christmas is over, see you again next year!")        
+        #date = datetime.now()
+        #xmas_date = datetime(2020, 12, 24)
+        #over_xmas = datetime(2021, 1, 1)
+        #if date < xmas_date:
+        #    return await ctx.send("It's not Christmas yet! Wait until after the 24th of December.")
+        #if date > over_xmas:
+        #    return await ctx.send("Christmas is over, see you again next year!")        
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
         item = item.lower()
         if item in author_inv:
@@ -1237,10 +1238,10 @@ class Shop(commands.Cog):
                 f"\nTo {ctx.author.mention},\nMerry Christmas!\nThere is nothing quite like Christmas – the celebration, the decoration, and the pure excitement. Follow your joy this holiday season and in the new year.\nFrom {gifter.mention}",
             ]
             return await bot_talking.edit(content=random.choice(card_messages))
-        if size == 'sf':
+        elif size == 'sf':
             await ctx.send(f"{ctx.author.mention} is opening your Stocking filler, {gifter.mention}")
             placing_messages = [
-                "*You excitedly take the gift out of your stoking and smile...*",
+                "*You excitedly take the gift out of your stocking and smile...*",
                 "*You ...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
@@ -1252,11 +1253,24 @@ class Shop(commands.Cog):
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
             sf_messages = [
-                f"{ctx.author.mention} You received: Overwatch 2",
-                f"{ctx.author.mention} You received: A £10 Steam gift card",
+                f"{ctx.author.mention} | You've received: **A £10 Steam gift card**",
+                f"{ctx.author.mention} | You've received: **A pair of cute Gloves**",
+                f"{ctx.author.mention} | You've received: **A mini Rubix cube**",
+                f"{ctx.author.mention} | You've received: **A bag of assorted sweeties**",
+                f"{ctx.author.mention} | You've received: **A tub of Nutella**",
+                f"{ctx.author.mention} | You've received: **Scented candles**",
+                f"{ctx.author.mention} | You've received: **A pack of small wooden picture frames**",
+                f"{ctx.author.mention} | You've received: **A set of Chibi Overwatch stickers**",
+                f"{ctx.author.mention} | You've received: **A couple of Whiskey stones**",
+                f"{ctx.author.mention} | You've received: **A set of silk pyjamas**",
+                f"{ctx.author.mention} | You've received: **Discord Nitro for the next... oh it's already expired**",
+                f"{ctx.author.mention} | You've received: **400-in-1 Retro Handheld game**",
+                f"{ctx.author.mention} | You've received: **DND/I'm Gaming Socks**",
+                f"{ctx.author.mention} | You've received: **Bastion Funko Pop**",
+                f"{ctx.author.mention} | You've received: **Torbjorn's Hammer Replica**",
             ] 
             return await bot_talking.edit(content=random.choice(sf_messages))            
-        if size == 'cp':
+        elif size == 'cp':
             await ctx.send(f"{ctx.author.mention} is opening your Christmas present, {gifter.mention}")
             placing_messages = [
                 "*You excitedly place the gift upon your lap and smile...*",
@@ -1271,11 +1285,21 @@ class Shop(commands.Cog):
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
             cp_messages = [
-                f"{ctx.author.mention} You received: Overwatch 2",
-                f"{ctx.author.mention} You received: A £10 Steam gift card",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",                
+                f"{ctx.author.mention} | You've received: **A red Among Us Plush doll**",
+                f"{ctx.author.mention} | You've received: **A blue Among Us Plush doll**",
+                f"{ctx.author.mention} | You've received: **A yellow Among Us Plush doll**",
+                f"{ctx.author.mention} | You've received: **A pink Among Us Plush doll**",
+                f"{ctx.author.mention} | You've received: **Bluetooth Headphones beanie**",
+                f"{ctx.author.mention} | You've received: **Google Stadia Permiere Edition**",
+                f"{ctx.author.mention} | You've received: **A custom Playstation/XBox controller**",
+                f"{ctx.author.mention} | You've received: **A Pikachu onesie**",
+                f"{ctx.author.mention} | You've received: **A Mancro Laptop Backpack**",
+                f"{ctx.author.mention} | You've received: **Monopoly Gamer: Overwatch Edition**",
+                f"{ctx.author.mention} | You've received: **Lego D.Va and Reinhardt**",
             ] 
             return await bot_talking.edit(content=random.choice(cp_messages))
-        if size == 'ch': 
+        elif size == 'ch': 
             await ctx.send(f"{ctx.author.mention} is opening your Christmas hamper, {gifter.mention}")
             placing_messages = [
                 "*You excitedly place the gift on the floor between your feet and smile...*",
@@ -1290,11 +1314,12 @@ class Shop(commands.Cog):
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
             ch_messages = [
-                f"{ctx.author.mention} You received: Overwatch 2",
-                f"{ctx.author.mention} You received: A £10 Steam gift card",
+                f"{ctx.author.mention} | You've received: **The Ultimate Candy and Snacks Variety Christmas Hamper**",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",
+                f"{ctx.author.mention} | You've received: **A £10 Steam gift card**",
             ] 
             return await bot_talking.edit(content=random.choice(ch_messages))
-        if size == 'lp': 
+        elif size == 'lp': 
             await ctx.send(f"{ctx.author.mention} is opening your Luxury Christmas present, {gifter.mention}")
             placing_messages = [
                 "*You excitedly place the gift upon your lap and smile...*",
@@ -1309,26 +1334,31 @@ class Shop(commands.Cog):
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
             lp_messages = [
-                f"{ctx.author.mention} You received: Overwatch 2",
-                f"{ctx.author.mention} You received: A £10 Steam gift card",
+                f"{ctx.author.mention} | You've received: **Acer Predator Thronos Gaming Cockpit**",
+                f"{ctx.author.mention} | You've received: **X Rocker Pro Series Gaming Chair**",
+                f"{ctx.author.mention} | You've received: **Nintendo Switch with Green and Blue Joy-Con - Animal Crossing: New Horizons Edition**",
+                f"{ctx.author.mention} | You've received: **A custom made Arcade Machine coffee table**",
+                f"{ctx.author.mention} | You've received: **Oculus Quest All-in-one VR Gaming Headset**",
+                f"{ctx.author.mention} | You've received: **Samsung 49-Inch Curved Gaming Monitor**",
+                f"{ctx.author.mention} | You've received: **SteelSeries Arctics Pro wireless gaming headset**",
+                f"{ctx.author.mention} | You've received: **A Yellow Nintendo Switch Lite with SanDisk 256GB MicroSDXC Memory Card**",
+                f"{ctx.author.mention} | You've received: **Razer Blade 15 Gaming laptop**",
             ] 
             return await bot_talking.edit(content=random.choice(lp_messages))
         elif size == 'gtx': 
             await ctx.send(f"{ctx.author.mention} is opening your Geforce RTX 3080, {gifter.mention}")
             placing_messages = [
-                "*You excitedly place the gift upon your lap and smile...*",
                 "*You slide out the present from beneath the Christmas tree...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
             await asyncio.sleep(3)
             opening_messages = [
-                "*You are quick to rip the red and white wrapping paper from the present...*",
-                "*You delicately tear the wrapping paper from around the present...*",
+                "*You are quick to rip the bright pink and white wrapping paper from the present...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
             gtx_messages = [
-                f"{ctx.author.mention} You received: Geforce RTX 3080",
+                f"{ctx.author.mention} | You've received: An MSI Geforce RTX 3080, 10GB of GDDR6X RAM, Gaming X Trio Ampere graphics card.",
             ] 
             return await bot_talking.edit(content=random.choice(gtx_messages))
 
