@@ -1341,6 +1341,36 @@ class Shop(commands.Cog):
                 f"{ctx.author.mention} | You've received: **Monopoly Gamer: Overwatch Edition**",
                 f"{ctx.author.mention} | You've received: **Lego D.Va and Reinhardt**",
                 f"{ctx.author.mention} | You've received: **The Art of Overwatch Book**",
+                f"{ctx.author.mention} | You've received: **One Night Escape For Two With Dinner**",
+                f"{ctx.author.mention} | You've received: **A pair of Blade Runner whiskey glasses**",
+                f"{ctx.author.mention} | You've received: **Pierre the Penis pillow**",
+                f"{ctx.author.mention} | You've received: **Pierre the Penis slippers**",
+                f"{ctx.author.mention} | You've received: **Jumbo Pierre the Penis body pillow**",
+                f"{ctx.author.mention} | You've received: **A fur Unicorn blanket**",
+                f"{ctx.author.mention} | You've received: **The Foam Master 2000 coffee machine**",
+                f"{ctx.author.mention} | You've received: **Apple AirPods Pro with Wireless Charging Case**",
+                f"{ctx.author.mention} | You've received: **Cold brew iced coffee maker**",
+                f"{ctx.author.mention} | You've received: **A black water resistant Bluetooth speaker**",
+                f"{ctx.author.mention} | You've received: **A pair of Tartan Check Pyjamas in Medium**",
+                f"{ctx.author.mention} | You've received: **Bean bag chair and stool set**",
+                f"{ctx.author.mention} | You've received: **Party Popping Popcorn maker**",
+                f"{ctx.author.mention} | You've received: **A vintage Popcorn maker**",
+                f"{ctx.author.mention} | You've received: **LED Projector Alarm clock**",
+                f"{ctx.author.mention} | You've received: **A pair of cream cross strap Faux Fur Slippers**",
+                f"{ctx.author.mention} | You've received: **Hair Straighteners with Styling Set**",
+                f"{ctx.author.mention} | You've received: **Lego Overwatch Hanzo vs Genji**",
+                f"{ctx.author.mention} | You've received: **18-in-1 Ulitmate Multi Grooming Kit**",
+                f"{ctx.author.mention} | You've received: **Maxi Micro Eco Deluxe Scooter**",
+                f"{ctx.author.mention} | You've received: **Monopoly: Overwurst Edition**",
+                f"{ctx.author.mention} | You've received: **Yoga Mat Towel in Vivid blue**",
+                f"{ctx.author.mention} | You've received: **LED Projector Alarm clock**",
+                f"{ctx.author.mention} | You've received: **Hitachi Magic Wand Massager**",
+                f"{ctx.author.mention} | You've received: **STEELSERIES Apex Pro TKL Mechanical Gaming Keyboard**",
+                f"{ctx.author.mention} | You've received: **RAZER Cynosa V2 Chroma Gaming Keyboard**",
+                f"{ctx.author.mention} | You've received: **LOGITECH G502 Hero Optical Gaming Mouse**"
+                f"{ctx.author.mention} | You've received: **RAZER Basilisk Ultimate Wireless Optical Gaming Mouse**"
+                f"{ctx.author.mention} | You've received: **STEELSERIES Arctis 7 Wireless 7.1 Gaming Headset**"
+                f"{ctx.author.mention} | You've received: **MSI Optix G241 Full HD 24\" IPS LCD Gaming Monitor - Black**"
             ] 
             return await bot_talking.edit(content=random.choice(cp_messages))
         elif size == 'ch': 
@@ -1348,12 +1378,24 @@ class Shop(commands.Cog):
             placing_messages = [
                 "*You excitedly place the hamper on the floor between your feet and smile...*",
                 "*You slide out the hamper from beneath the Christmas tree...*",
+                "*You excitedly slide out the hamper from under the tree and place it in front of you...*",
+                "*After excitedly placing the hamper in front of you, you admire it's wrapping for a moment...*",
+                "*You kneel in front of the Christmas tree and slide out your hamper...*",
+                f"*After pulling your hamper out from beneath the tree, you look at {gifter.mention} with an excited smile...*",
+                f"*Reaching under the tree, you pull out your hamper and place it between your feet, before looking at {gifter.mention} with a warm smile...*",                
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
             await asyncio.sleep(3)
             opening_messages = [
                 "*You are quick to tear away the long red ribbon from the basket and look inside...*",
                 "*You delicately tear the ribbon from around the basket and look inside...*",
+                "*Excited to see what's inside, you quickly pull away the pink ribbon from around the hamper...*",
+                "*Excited to see what's inside, you quickly pull away the blue ribbon from around the hamper...*",
+                "*Excited to see what's inside, you quickly pull away the red ribbon from around the hamper...*",
+                "*Excited to see what's inside, you quickly pull away the white ribbon from around the hamper...*",
+                f"*You look at {gifter.mention} with a warm smile and delicately begin to unwrap the hamper...*",
+                "*With an excited smile, you look down at the hamper in front of you and pull away the ribbon before opening the lid...*",
+                "*You are quick to flip open the lid of the hamper backet to see what is inside...*",               
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
