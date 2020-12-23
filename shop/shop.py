@@ -1087,6 +1087,10 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop is closed. Come back later!")
+        date = datetime.now()
+        over_xmas = datetime(2021, 1, 1)
+        if date > over_xmas:
+            return await ctx.send("Christmas is over, see you again next year!")   
         xmasshop = await self.config.guild(ctx.guild).xmasshop()
         if not xmasshop:
             return await ctx.send("The Chistmas event is over!")        
