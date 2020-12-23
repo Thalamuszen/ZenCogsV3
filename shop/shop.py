@@ -1425,14 +1425,26 @@ class Shop(commands.Cog):
         elif size == 'lp': 
             await ctx.send(f"{ctx.author.mention} is opening your Luxury Christmas present, {gifter.mention}")
             placing_messages = [
-                "*You excitedly place the gift upon your lap and smile...*",
+                "*You delicately place the gift upon your lap and smile...*",
                 "*You slide out the present from beneath the Christmas tree...*",
+                "*You excitedly slide out a present from under the tree and place it in front of you...*",
+                "*After excitedly placing the present in front of you, you pick it up and place it onto your lap...*",
+                "*You kneel in front of the Christmas tree and pick out a present to slide out and unwrap...*",
+                f"*After pulling your present out from beneath the tree, you look at {gifter.mention} with an excited smile...*",
+                f"*Reaching under the tree, you pull out a present and place it onto your lap, looking at {gifter.mention} with a warm smile...*",		    
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
             await asyncio.sleep(4)
             opening_messages = [
+                "*You delicately tear the silver and white wrapping paper from the present...*",
+                "*You delicately tear the gold and white wrapping paper from around the present...*",
+                "*Excited to see what's inside, you quickly rip away the expensive looking Overwatch themed wrapping paper...*",
+                "*Excited to see what's inside, you quickly rip away the expensive looking Christmas Tree printed wrapping paper...*",
+                "*Excited to see what's inside, you quickly rip away the expensive looking candy cane printed wrapping paper...*",
+                f"*You look at {gifter.mention} with a warm smile and delicately begin to unwrap their present...*",
+                "*With an excited smile, you look down at the present in front of you and tear open the wrapping paper...*",
                 "*You are quick to rip the red and white wrapping paper from the present...*",
-                "*You delicately tear the wrapping paper from around the present...*",
+                "*You delicately tear the wrapping paper from around the present...*",		    
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(4)            
@@ -1446,6 +1458,17 @@ class Shop(commands.Cog):
                 f"{ctx.author.mention} | You've received: **SteelSeries Arctics Pro wireless gaming headset**",
                 f"{ctx.author.mention} | You've received: **A Yellow Nintendo Switch Lite with SanDisk 256GB MicroSDXC Memory Card**",
                 f"{ctx.author.mention} | You've received: **Razer Blade 15 Gaming laptop**",
+                f"{ctx.author.mention} | You've received: **VanMoof Electrified X2 E-Bike**",
+                f"{ctx.author.mention} | You've received: **Canon EOS R DLSR Camera**",
+                f"{ctx.author.mention} | You've received: **Roomba 675 Robot Vacuum**",
+                f"{ctx.author.mention} | You've received: **Oral-B GENIUS X Electric Toothbrush**",
+                f"{ctx.author.mention} | You've received: **iPhone 12 Pro Max**",
+                f"{ctx.author.mention} | You've received: **Portable Full HD LED Smart Home Theater Projector**",
+                f"{ctx.author.mention} | You've received: **Kindle Paperwhite**",
+                f"{ctx.author.mention} | You've received: **Fitbit Sense, Health and Fitness Watch with Heart Rate Monitor**",
+                f"{ctx.author.mention} | You've received: **Samsung 49-Inch CRG9 QLED Curved Gaming Monitor**",
+                f"{ctx.author.mention} | You've received: **Breville Barista Touch Espresso Maker**",
+                f"{ctx.author.mention} | You've received: **Apple MacBook Pro (16-inch, 16GB RAM, 512GB Storage, 2.6GHz Intel Core i7) - Space Grey**",
             ] 
             return await bot_talking.edit(content=random.choice(lp_messages))
         elif size == 'gtx': 
