@@ -1092,8 +1092,8 @@ class Shop(commands.Cog):
             return await ctx.send("The Chistmas event is over!")        
         if quantity < 1:
             return await ctx.send("Think you're smart huh?")
-        if user == ctx.author:
-            return await ctx.send("Maybe you should send this to a friend instead...")
+        #if user == ctx.author:
+        #    return await ctx.send("Maybe you should send this to a friend instead...")
         if user == ctx.bot.user:
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
