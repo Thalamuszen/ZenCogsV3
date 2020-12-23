@@ -1216,7 +1216,7 @@ class Shop(commands.Cog):
                 "*Excited to read what is written in the card, you lift up the flap of the envelope and pull the card out...*",
             ]
             bot_talking = await ctx.send(random.choice(opening_messages))
-            await asyncio.sleep(3)
+            await asyncio.sleep(4)
             card_messages = [
                 f"\nTo {ctx.author.mention},\nMerry Christmas!\nWarmest thoughts and best wishes for a wonderful Holiday and a Happy New Year.\nFrom {gifter.mention}",
                 f"\nTo {ctx.author.mention},\nMerry Christmas!\nTo a joyful present and a well remembered past. Best wishes for a Happy Holidays and a magnificent New Year.\nFrom {gifter.mention}",
@@ -1255,7 +1255,7 @@ class Shop(commands.Cog):
                 f"*Reaching into your stocking, you pull out a gift and place it onto your lap, looking at {gifter.mention} with a warm smile...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(3)
+            await asyncio.sleep(4)
             opening_messages = [
                 "*You are quick to rip the red and white wrapping paper from around the present...*",
                 "*Excited to see what's inside, you quickly rip open the Christmas Tree printed wrapping paper...*",
@@ -1265,7 +1265,7 @@ class Shop(commands.Cog):
                 "*With an excited smile, you look down at the present in front of you and tear open the wrapping paper...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(3)            
+            await asyncio.sleep(4)            
             sf_messages = [
                 f"{ctx.author.mention} | You've received: **A £10 Steam gift card**",
                 f"{ctx.author.mention} | You've received: **A pair of cute Gloves**",
@@ -1315,7 +1315,7 @@ class Shop(commands.Cog):
                 f"*Reaching under the tree, you pull out a present and place it onto your lap, looking at {gifter.mention} with a warm smile...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(3)
+            await asyncio.sleep(4)
             opening_messages = [
                 "*Excited to see what's inside, you quickly rip open the Overwatch themed wrapping paper...*",
                 "*Excited to see what's inside, you quickly rip open the Christmas Tree printed wrapping paper...*",
@@ -1326,7 +1326,7 @@ class Shop(commands.Cog):
                 "*You delicately tear the wrapping paper from around the present...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(3)            
+            await asyncio.sleep(4)            
             cp_messages = [
                 f"{ctx.author.mention} | You've received: **Overwatch 2**",                
                 f"{ctx.author.mention} | You've received: **A red Among Us Plush doll**",
@@ -1385,7 +1385,7 @@ class Shop(commands.Cog):
                 f"*Reaching under the tree, you pull out your hamper and place it between your feet, before looking at {gifter.mention} with a warm smile...*",                
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(3)
+            await asyncio.sleep(4)
             opening_messages = [
                 "*You are quick to tear away the long red ribbon from the basket and look inside...*",
                 "*You delicately tear the ribbon from around the basket and look inside...*",
@@ -1398,7 +1398,7 @@ class Shop(commands.Cog):
                 "*You are quick to flip open the lid of the hamper backet to see what is inside...*",               
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(3)            
+            await asyncio.sleep(4)            
             ch_messages = [
                 f"{ctx.author.mention} | You've received: **The Ultimate Candy and Snacks Variety Christmas Hamper**",
                 f"{ctx.author.mention} | You've received: **Continental Beer Basket - The lucky recipient of this delightful beer gift won't wait long to crack open the pair of premium Continental lagers.**",
@@ -1426,13 +1426,13 @@ class Shop(commands.Cog):
                 "*You slide out the present from beneath the Christmas tree...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(3)
+            await asyncio.sleep(4)
             opening_messages = [
                 "*You are quick to rip the red and white wrapping paper from the present...*",
                 "*You delicately tear the wrapping paper from around the present...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(3)            
+            await asyncio.sleep(4)            
             lp_messages = [
                 f"{ctx.author.mention} | You've received: **Acer Predator Thronos Gaming Cockpit**",
                 f"{ctx.author.mention} | You've received: **X Rocker Pro Series Gaming Chair**",
@@ -1451,12 +1451,12 @@ class Shop(commands.Cog):
                 "*You slide out the present from beneath the Christmas tree...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(3)
+            await asyncio.sleep(4)
             opening_messages = [
                 "*You are quick to rip the bright pink and white wrapping paper from around the present...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(3)            
+            await asyncio.sleep(4)            
             gtx_messages = [
                 f"{ctx.author.mention} | You've received: An MSI Geforce RTX 3080, 10GB of GDDR6X RAM, Gaming X Trio Ampere graphics card.",
             ] 
