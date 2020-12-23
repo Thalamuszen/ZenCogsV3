@@ -1268,6 +1268,7 @@ class Shop(commands.Cog):
                 f"{ctx.author.mention} | You've received: **DND/I'm Gaming Socks**",
                 f"{ctx.author.mention} | You've received: **Bastion Funko Pop**",
                 f"{ctx.author.mention} | You've received: **Torbjorn's Hammer Replica**",
+                f"{ctx.author.mention} | You've received: **\"My Ultimate is Charging\" Overwatch themed Mug**",
             ] 
             return await bot_talking.edit(content=random.choice(sf_messages))            
         elif size == 'cp':
@@ -1297,6 +1298,7 @@ class Shop(commands.Cog):
                 f"{ctx.author.mention} | You've received: **A Mancro Laptop Backpack**",
                 f"{ctx.author.mention} | You've received: **Monopoly Gamer: Overwatch Edition**",
                 f"{ctx.author.mention} | You've received: **Lego D.Va and Reinhardt**",
+                f"{ctx.author.mention} | You've received: **The Art of Overwatch Book**",
             ] 
             return await bot_talking.edit(content=random.choice(cp_messages))
         elif size == 'ch': 
@@ -1315,8 +1317,14 @@ class Shop(commands.Cog):
             await asyncio.sleep(3)            
             ch_messages = [
                 f"{ctx.author.mention} | You've received: **The Ultimate Candy and Snacks Variety Christmas Hamper**",
-                f"{ctx.author.mention} | You've received: **Overwatch 2**",
+                f"{ctx.author.mention} | You've received: **Continental Beer Basket**",
                 f"{ctx.author.mention} | You've received: **A £10 Steam gift card**",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",
+                f"{ctx.author.mention} | You've received: **Overwatch 2**",
             ] 
             return await bot_talking.edit(content=random.choice(ch_messages))
         elif size == 'lp': 
