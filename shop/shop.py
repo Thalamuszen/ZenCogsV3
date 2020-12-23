@@ -1209,7 +1209,7 @@ class Shop(commands.Cog):
         if size == 'card':
             opening_messages = [
                 "*You slide your finger into the crease of the envelope and tear it open...*",
-                "*You *",
+                "*You smile at the gesture and rip open the envelope...*",
             ]
             bot_talking = await ctx.send(random.choice(opening_messages))
             await asyncio.sleep(3)
