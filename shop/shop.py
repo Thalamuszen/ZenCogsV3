@@ -1092,8 +1092,8 @@ class Shop(commands.Cog):
             return await ctx.send("The Chistmas event is over!")        
         if quantity < 1:
             return await ctx.send("Think you're smart huh?")
-        #if user == ctx.author:
-        #    return await ctx.send("Maybe you should send this to a friend instead...")
+        if user == ctx.author:
+            return await ctx.send("Maybe you should send this to a friend instead...")
         if user == ctx.bot.user:
             return await ctx.send("No thank you, why don't you give it to Zen instead?")
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
@@ -1162,7 +1162,6 @@ class Shop(commands.Cog):
         )      
         
     @commands.command()
-    @checks.admin_or_permissions(manage_guild=True)
     @commands.guild_only()
     async def open(self, ctx: commands.Context, *, item: str = ""):
         """Open a Christmas Present given to you by another user!
@@ -1174,13 +1173,13 @@ class Shop(commands.Cog):
         enabled = await self.config.guild(ctx.guild).enabled()
         if not enabled:
             return await ctx.send("Uh oh, the shop module is disabled. Come back later!")
-        #date = datetime.now()
-        #xmas_date = datetime(2020, 12, 24)
-        #over_xmas = datetime(2021, 1, 1)
-        #if date < xmas_date:
-        #    return await ctx.send("It's not Christmas yet! Wait until after the 24th of December.")
-        #if date > over_xmas:
-        #    return await ctx.send("Christmas is over, see you again next year!")        
+        date = datetime.now()
+        xmas_date = datetime(2020, 12, 24)
+        over_xmas = datetime(2021, 1, 1)
+        if date < xmas_date:
+            return await ctx.send("It's not Christmas yet! Wait until after the 24th of December.")
+        if date > over_xmas:
+            return await ctx.send("Christmas is over, see you again next year!")        
         author_inv = await self.config.member(ctx.author).inventory.get_raw()
         item = item.lower()
         if item in author_inv:
