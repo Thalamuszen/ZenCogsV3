@@ -1208,8 +1208,12 @@ class Shop(commands.Cog):
         size = info.get("size")
         if size == 'card':
             opening_messages = [
-                "*You slide your finger into the crease of the envelope and tear it open...*",
+                "*You slide your finger into the opening of the envelope and tear it open...*",
                 "*You smile at the gesture and rip open the envelope...*",
+                "*Excited to see the card inside, you pull open the lapel of the envelope...*",
+                "*Excited to see the card inside, you tear open the envelope and pull the card out...*",
+                "*Smiling, you carefully open the envelope and pull the card out...*",
+                "*Excited to read what is written in the card, you lift up the flap of the envelope and pull the card out...*",
             ]
             bot_talking = await ctx.send(random.choice(opening_messages))
             await asyncio.sleep(3)
@@ -1241,14 +1245,24 @@ class Shop(commands.Cog):
         elif size == 'sf':
             await ctx.send(f"{ctx.author.mention} is opening your Stocking filler, {gifter.mention}")
             placing_messages = [
-                "*You excitedly take the gift out of your stocking...*",
-                f"*You place the gift upon your lap and thank {gifter.mention} with a smile...*",
+                "*You excitedly stick your hand into your stock and pick out a random gift to open...*",
+                f"*You place the gift upon your lap and thank {gifter.mention} with a warm smile...*",
+                "*After excitedly emptying the stocking in front of you, you pick out a present and place it in front of you...*",
+                "*You Excitedly empty all the presents inside the stocking in front of you, you pick one out to unwrap...*",
+                "*After excitedly emptying the stocking in front of you, you pick out a present and place it onto your lap...*",
+                "*Once you have emptied your stocking in front of you, you excitedly pick one out to unwrap...*",
+                f"*Pulling a gift out of your stocking, you look at {gifter.mention} with an excited smile...*",
+                f"*Reaching into your stocking, you pull out a gift and place it onto your lap, looking at {gifter.mention} with a warm smile...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
             await asyncio.sleep(3)
             opening_messages = [
-                "*You are quick to rip the red and white wrapping paper from the present...*",
+                "*You are quick to rip the red and white wrapping paper from around the present...*",
+                "*Excited to see what's inside, you quickly rip open the Christmas Tree printed wrapping paper...*",
                 "*You delicately tear the wrapping paper from around the present...*",
+                "*Excited to see what's inside, you quickly rip open the candy cane printed wrapping paper...*",
+                f"*You look at {gifter.mention} with a warm smile and delicately begin to unwrap the present...*",
+                "*With an excited smile, you look down at the present in front of you and tear open the wrapping paper...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
@@ -1269,6 +1283,24 @@ class Shop(commands.Cog):
                 f"{ctx.author.mention} | You've received: **Bastion Funko Pop**",
                 f"{ctx.author.mention} | You've received: **Torbjorn's Hammer Replica**",
                 f"{ctx.author.mention} | You've received: **\"My Ultimate is Charging\" Overwatch themed Mug**",
+                f"{ctx.author.mention} | You've received: **A personalised face cushion of {gifter.mention}**",
+                f"{ctx.author.mention} | You've received: **A Smartphone projector**",
+                f"{ctx.author.mention} | You've received: **Flamingo Slippers**",
+                f"{ctx.author.mention} | You've received: **Infatable Jesus**",
+                f"{ctx.author.mention} | You've received: **A Star Wars Origami set**",
+                f"{ctx.author.mention} | You've received: **A Dual foot massager**",
+                f"{ctx.author.mention} | You've received: **Unicorn poo bath bombs**",
+                f"{ctx.author.mention} | You've received: **Personalised Chocolate Orange Christmas Pudding**",
+                f"{ctx.author.mention} | You've received: **Handmade Soap Collection**",
+                f"{ctx.author.mention} | You've received: **Personalised Christmas Santa Toblerone Bar**",
+                f"{ctx.author.mention} | You've received: **A Cactus growing kit**",
+                f"{ctx.author.mention} | You've received: **Marmite Popcorn**",
+                f"{ctx.author.mention} | You've received: **Light Up Unicorn Slippers**",
+                f"{ctx.author.mention} | You've received: **Millennium Falcon 3D Model Kit**",
+                f"{ctx.author.mention} | You've received: **\"For Fox Sake\" Mug**",
+                f"{ctx.author.mention} | You've received: **David Bowie Tea Towel**",
+                f"{ctx.author.mention} | You've received: **Freddie Mercury Tea Towel**",
+                f"{ctx.author.mention} | You've received: **52 Things to do while you poo book**",
             ] 
             return await bot_talking.edit(content=random.choice(sf_messages))            
         elif size == 'cp':
@@ -1276,10 +1308,20 @@ class Shop(commands.Cog):
             placing_messages = [
                 "*You excitedly place the gift upon your lap and smile...*",
                 "*You slide out the present from beneath the Christmas tree...*",
+                "*You excitedly slide out a present from under the tree and place it in front of you...*",
+                "*After excitedly placing the present in front of you, you pick it up and place it onto your lap...*",
+                "*You kneel in front of the Christmas tree and pick out a present to slide out and unwrap...*",
+                f"*After pulling your present out from beneath the tree, you look at {gifter.mention} with an excited smile...*",
+                f"*Reaching under the tree, you pull out a present and place it onto your lap, looking at {gifter.mention} with a warm smile...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
             await asyncio.sleep(3)
             opening_messages = [
+                "*Excited to see what's inside, you quickly rip open the Overwatch themed wrapping paper...*",
+                "*Excited to see what's inside, you quickly rip open the Christmas Tree printed wrapping paper...*",
+                "*Excited to see what's inside, you quickly rip open the candy cane printed wrapping paper...*",
+                f"*You look at {gifter.mention} with a warm smile and delicately begin to unwrap the present...*",
+                "*With an excited smile, you look down at the present in front of you and tear open the wrapping paper...*",
                 "*You are quick to rip the red and white wrapping paper from the present...*",
                 "*You delicately tear the wrapping paper from around the present...*",
             ]
@@ -1369,7 +1411,7 @@ class Shop(commands.Cog):
             bot_talking = await ctx.send(random.choice(placing_messages))
             await asyncio.sleep(3)
             opening_messages = [
-                "*You are quick to rip the bright pink and white wrapping paper from the present...*",
+                "*You are quick to rip the bright pink and white wrapping paper from around the present...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
             await asyncio.sleep(3)            
