@@ -1258,7 +1258,7 @@ class Shop(commands.Cog):
                 f"*Reaching into your stocking, you pull out a gift and place it onto your lap, looking at {gifter.mention} with a warm smile...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(4)
+            await asyncio.sleep(5)
             opening_messages = [
                 "*You are quick to rip the red and white wrapping paper from around the present...*",
                 "*Excited to see what's inside, you quickly rip open the Christmas Tree printed wrapping paper...*",
@@ -1268,42 +1268,42 @@ class Shop(commands.Cog):
                 "*With an excited smile, you look down at the present in front of you and tear open the wrapping paper...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(4)            
+            await asyncio.sleep(5)            
             sf_messages = [
-                f"{ctx.author.mention} | You've received: **A £10 Steam gift card**",
-                f"{ctx.author.mention} | You've received: **A pair of cute Gloves**",
-                f"{ctx.author.mention} | You've received: **A mini Rubix cube**",
-                f"{ctx.author.mention} | You've received: **A bag of assorted sweeties**",
-                f"{ctx.author.mention} | You've received: **A tub of Nutella**",
-                f"{ctx.author.mention} | You've received: **A pack of scented candles**",
-                f"{ctx.author.mention} | You've received: **A pack of small wooden picture frames**",
-                f"{ctx.author.mention} | You've received: **A set of Chibi Overwatch stickers**",
-                f"{ctx.author.mention} | You've received: **A set of Whiskey stones**",
-                f"{ctx.author.mention} | You've received: **A set of silk pyjamas**",
-                f"{ctx.author.mention} | You've received: **Discord Nitro for the next... oh it's already expired**",
-                f"{ctx.author.mention} | You've received: **400-in-1 Retro Handheld game**",
-                f"{ctx.author.mention} | You've received: **DND/I'm Gaming Socks**",
-                f"{ctx.author.mention} | You've received: **Bastion Funko Pop**",
-                f"{ctx.author.mention} | You've received: **Torbjorn's Hammer Replica**",
-                f"{ctx.author.mention} | You've received: **\"My Ultimate is Charging\" Overwatch themed Mug**",
-                f"{ctx.author.mention} | You've received: **A personalised face cushion of {gifter.mention}**",
-                f"{ctx.author.mention} | You've received: **A Smartphone projector**",
-                f"{ctx.author.mention} | You've received: **Flamingo Slippers**",
-                f"{ctx.author.mention} | You've received: **Infatable Jesus**",
-                f"{ctx.author.mention} | You've received: **A Star Wars Origami set**",
-                f"{ctx.author.mention} | You've received: **A Dual foot massager**",
-                f"{ctx.author.mention} | You've received: **Unicorn poo bath bombs**",
-                f"{ctx.author.mention} | You've received: **Personalised Chocolate Orange Christmas Pudding**",
-                f"{ctx.author.mention} | You've received: **Handmade Soap Collection**",
-                f"{ctx.author.mention} | You've received: **Personalised Christmas Santa Toblerone Bar**",
-                f"{ctx.author.mention} | You've received: **A Cactus growing kit**",
-                f"{ctx.author.mention} | You've received: **Marmite Popcorn**",
-                f"{ctx.author.mention} | You've received: **Light Up Unicorn Slippers**",
-                f"{ctx.author.mention} | You've received: **Millennium Falcon 3D Model Kit**",
-                f"{ctx.author.mention} | You've received: **\"For Fox Sake\" Mug**",
-                f"{ctx.author.mention} | You've received: **David Bowie Tea Towel**",
-                f"{ctx.author.mention} | You've received: **Freddie Mercury Tea Towel**",
-                f"{ctx.author.mention} | You've received: **52 Things to do while you poo book**",
+                f"{ctx.author.mention} **|** You've received: **A £10 Steam gift card**",
+                f"{ctx.author.mention} **|** You've received: **A pair of cute Gloves**",
+                f"{ctx.author.mention} **|** You've received: **A mini Rubix cube**",
+                f"{ctx.author.mention} **|** You've received: **A bag of assorted sweeties**",
+                f"{ctx.author.mention} **|** You've received: **A tub of Nutella**",
+                f"{ctx.author.mention} **|** You've received: **A pack of scented candles**",
+                f"{ctx.author.mention} **|** You've received: **A pack of small wooden picture frames**",
+                f"{ctx.author.mention} **|** You've received: **A set of Chibi Overwatch stickers**",
+                f"{ctx.author.mention} **|** You've received: **A set of Whiskey stones**",
+                f"{ctx.author.mention} **|** You've received: **A set of silk pyjamas**",
+                f"{ctx.author.mention} **|** You've received: **Discord Nitro for the next... oh it's already expired**",
+                f"{ctx.author.mention} **|** You've received: **400-in-1 Retro Handheld game**",
+                f"{ctx.author.mention} **|** You've received: **DND/I'm Gaming Socks**",
+                f"{ctx.author.mention} **|** You've received: **Bastion Funko Pop**",
+                f"{ctx.author.mention} **|** You've received: **Torbjorn's Hammer Replica**",
+                f"{ctx.author.mention} **|** You've received: **\"My Ultimate is Charging\" Overwatch themed Mug**",
+                f"{ctx.author.mention} **|** You've received: **A personalised face cushion of {gifter.mention}**",
+                f"{ctx.author.mention} **|** You've received: **A Smartphone projector**",
+                f"{ctx.author.mention} **|** You've received: **Flamingo Slippers**",
+                f"{ctx.author.mention} **|** You've received: **Infatable Jesus**",
+                f"{ctx.author.mention} **|** You've received: **A Star Wars Origami set**",
+                f"{ctx.author.mention} **|** You've received: **A Dual foot massager**",
+                f"{ctx.author.mention} **|** You've received: **Unicorn poo bath bombs**",
+                f"{ctx.author.mention} **|** You've received: **Personalised Chocolate Orange Christmas Pudding**",
+                f"{ctx.author.mention} **|** You've received: **Handmade Soap Collection**",
+                f"{ctx.author.mention} **|** You've received: **Personalised Christmas Santa Toblerone Bar**",
+                f"{ctx.author.mention} **|** You've received: **A Cactus growing kit**",
+                f"{ctx.author.mention} **|** You've received: **Marmite Popcorn**",
+                f"{ctx.author.mention} **|** You've received: **Light Up Unicorn Slippers**",
+                f"{ctx.author.mention} **|** You've received: **Millennium Falcon 3D Model Kit**",
+                f"{ctx.author.mention} **|** You've received: **\"For Fox Sake\" Mug**",
+                f"{ctx.author.mention} **|** You've received: **David Bowie Tea Towel**",
+                f"{ctx.author.mention} **|** You've received: **Freddie Mercury Tea Towel**",
+                f"{ctx.author.mention} **|** You've received: **52 Things to do while you poo book**",
             ] 
             return await bot_talking.edit(content=random.choice(sf_messages))            
         elif size == 'cp':
@@ -1318,7 +1318,7 @@ class Shop(commands.Cog):
                 f"*Reaching under the tree, you pull out a present and place it onto your lap, looking at {gifter.mention} with a warm smile...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(4)
+            await asyncio.sleep(5)
             opening_messages = [
                 "*Excited to see what's inside, you quickly rip open the Overwatch themed wrapping paper...*",
                 "*Excited to see what's inside, you quickly rip open the Christmas Tree printed wrapping paper...*",
@@ -1329,51 +1329,51 @@ class Shop(commands.Cog):
                 "*You delicately tear the wrapping paper from around the present...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(4)            
+            await asyncio.sleep(5)            
             cp_messages = [
-                f"{ctx.author.mention} | You've received: **Overwatch 2**",                
-                f"{ctx.author.mention} | You've received: **A red Among Us Plush doll**",
-                f"{ctx.author.mention} | You've received: **A blue Among Us Plush doll**",
-                f"{ctx.author.mention} | You've received: **A yellow Among Us Plush doll**",
-                f"{ctx.author.mention} | You've received: **A pink Among Us Plush doll**",
-                f"{ctx.author.mention} | You've received: **Bluetooth Headphones beanie**",
-                f"{ctx.author.mention} | You've received: **Google Stadia Permiere Edition**",
-                f"{ctx.author.mention} | You've received: **A custom Playstation/XBox controller**",
-                f"{ctx.author.mention} | You've received: **A Pikachu onesie**",
-                f"{ctx.author.mention} | You've received: **A Mancro Laptop Backpack**",
-                f"{ctx.author.mention} | You've received: **Monopoly Gamer: Overwatch Edition**",
-                f"{ctx.author.mention} | You've received: **Lego D.Va and Reinhardt**",
-                f"{ctx.author.mention} | You've received: **The Art of Overwatch Book**",
-                f"{ctx.author.mention} | You've received: **One Night Escape For Two With Dinner**",
-                f"{ctx.author.mention} | You've received: **A pair of Blade Runner whiskey glasses**",
-                f"{ctx.author.mention} | You've received: **Pierre the Penis pillow**",
-                f"{ctx.author.mention} | You've received: **Pierre the Penis slippers**",
-                f"{ctx.author.mention} | You've received: **Jumbo Pierre the Penis body pillow**",
-                f"{ctx.author.mention} | You've received: **A fur Unicorn blanket**",
-                f"{ctx.author.mention} | You've received: **The Foam Master 2000 coffee machine**",
-                f"{ctx.author.mention} | You've received: **Apple AirPods Pro with Wireless Charging Case**",
-                f"{ctx.author.mention} | You've received: **Cold brew iced coffee maker**",
-                f"{ctx.author.mention} | You've received: **A black water resistant Bluetooth speaker**",
-                f"{ctx.author.mention} | You've received: **A pair of Tartan Check Pyjamas in Medium**",
-                f"{ctx.author.mention} | You've received: **Bean bag chair and stool set**",
-                f"{ctx.author.mention} | You've received: **Party Popping Popcorn maker**",
-                f"{ctx.author.mention} | You've received: **A vintage Popcorn maker**",
-                f"{ctx.author.mention} | You've received: **LED Projector Alarm clock**",
-                f"{ctx.author.mention} | You've received: **A pair of cream cross strap Faux Fur Slippers**",
-                f"{ctx.author.mention} | You've received: **Hair Straighteners with Styling Set**",
-                f"{ctx.author.mention} | You've received: **Lego Overwatch Hanzo vs Genji**",
-                f"{ctx.author.mention} | You've received: **18-in-1 Ulitmate Multi Grooming Kit**",
-                f"{ctx.author.mention} | You've received: **Maxi Micro Eco Deluxe Scooter**",
-                f"{ctx.author.mention} | You've received: **Monopoly: Overwurst Edition**",
-                f"{ctx.author.mention} | You've received: **Yoga Mat Towel in Vivid blue**",
-                f"{ctx.author.mention} | You've received: **LED Projector Alarm clock**",
-                f"{ctx.author.mention} | You've received: **Hitachi Magic Wand Massager**",
-                f"{ctx.author.mention} | You've received: **STEELSERIES Apex Pro TKL Mechanical Gaming Keyboard**",
-                f"{ctx.author.mention} | You've received: **RAZER Cynosa V2 Chroma Gaming Keyboard**",
-                f"{ctx.author.mention} | You've received: **LOGITECH G502 Hero Optical Gaming Mouse**"
-                f"{ctx.author.mention} | You've received: **RAZER Basilisk Ultimate Wireless Optical Gaming Mouse**"
-                f"{ctx.author.mention} | You've received: **STEELSERIES Arctis 7 Wireless 7.1 Gaming Headset**"
-                f"{ctx.author.mention} | You've received: **MSI Optix G241 Full HD 24\" IPS LCD Gaming Monitor - Black**"
+                f"{ctx.author.mention} **|** You've received: **Overwatch 2**",                
+                f"{ctx.author.mention} **|** You've received: **A red Among Us Plush doll**",
+                f"{ctx.author.mention} **|** You've received: **A blue Among Us Plush doll**",
+                f"{ctx.author.mention} **|** You've received: **A yellow Among Us Plush doll**",
+                f"{ctx.author.mention} **|** You've received: **A pink Among Us Plush doll**",
+                f"{ctx.author.mention} **|** You've received: **Bluetooth Headphones beanie**",
+                f"{ctx.author.mention} **|** You've received: **Google Stadia Permiere Edition**",
+                f"{ctx.author.mention} **|** You've received: **A custom Playstation/XBox controller**",
+                f"{ctx.author.mention} **|** You've received: **A Pikachu onesie**",
+                f"{ctx.author.mention} **|** You've received: **A Mancro Laptop Backpack**",
+                f"{ctx.author.mention} **|** You've received: **Monopoly Gamer: Overwatch Edition**",
+                f"{ctx.author.mention} **|** You've received: **Lego D.Va and Reinhardt**",
+                f"{ctx.author.mention} **|** You've received: **The Art of Overwatch Book**",
+                f"{ctx.author.mention} **|** You've received: **One Night Escape For Two With Dinner**",
+                f"{ctx.author.mention} **|** You've received: **A pair of Blade Runner whiskey glasses**",
+                f"{ctx.author.mention} **|** You've received: **Pierre the Penis pillow**",
+                f"{ctx.author.mention} **|** You've received: **Pierre the Penis slippers**",
+                f"{ctx.author.mention} **|** You've received: **Jumbo Pierre the Penis body pillow**",
+                f"{ctx.author.mention} **|** You've received: **A fur Unicorn blanket**",
+                f"{ctx.author.mention} **|** You've received: **The Foam Master 2000 coffee machine**",
+                f"{ctx.author.mention} **|** You've received: **Apple AirPods Pro with Wireless Charging Case**",
+                f"{ctx.author.mention} **|** You've received: **Cold brew iced coffee maker**",
+                f"{ctx.author.mention} **|** You've received: **A black water resistant Bluetooth speaker**",
+                f"{ctx.author.mention} **|** You've received: **A pair of Tartan Check Pyjamas in Medium**",
+                f"{ctx.author.mention} **|** You've received: **Bean bag chair and stool set**",
+                f"{ctx.author.mention} **|** You've received: **Party Popping Popcorn maker**",
+                f"{ctx.author.mention} **|** You've received: **A vintage Popcorn maker**",
+                f"{ctx.author.mention} **|** You've received: **LED Projector Alarm clock**",
+                f"{ctx.author.mention} **|** You've received: **A pair of cream cross strap Faux Fur Slippers**",
+                f"{ctx.author.mention} **|** You've received: **Hair Straighteners with Styling Set**",
+                f"{ctx.author.mention} **|** You've received: **Lego Overwatch Hanzo vs Genji**",
+                f"{ctx.author.mention} **|** You've received: **18-in-1 Ulitmate Multi Grooming Kit**",
+                f"{ctx.author.mention} **|** You've received: **Maxi Micro Eco Deluxe Scooter**",
+                f"{ctx.author.mention} **|** You've received: **Monopoly: Overwurst Edition**",
+                f"{ctx.author.mention} **|** You've received: **Yoga Mat Towel in Vivid blue**",
+                f"{ctx.author.mention} **|** You've received: **LED Projector Alarm clock**",
+                f"{ctx.author.mention} **|** You've received: **Hitachi Magic Wand Massager**",
+                f"{ctx.author.mention} **|** You've received: **STEELSERIES Apex Pro TKL Mechanical Gaming Keyboard**",
+                f"{ctx.author.mention} **|** You've received: **RAZER Cynosa V2 Chroma Gaming Keyboard**",
+                f"{ctx.author.mention} **|** You've received: **LOGITECH G502 Hero Optical Gaming Mouse**"
+                f"{ctx.author.mention} **|** You've received: **RAZER Basilisk Ultimate Wireless Optical Gaming Mouse**"
+                f"{ctx.author.mention} **|** You've received: **STEELSERIES Arctis 7 Wireless 7.1 Gaming Headset**"
+                f"{ctx.author.mention} **|** You've received: **MSI Optix G241 Full HD 24\" IPS LCD Gaming Monitor - Black**"
             ] 
             return await bot_talking.edit(content=random.choice(cp_messages))
         elif size == 'ch': 
@@ -1388,7 +1388,7 @@ class Shop(commands.Cog):
                 f"*Reaching under the tree, you pull out your hamper and place it between your feet, before looking at {gifter.mention} with a warm smile...*",                
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(4)
+            await asyncio.sleep(5)
             opening_messages = [
                 "*You are quick to tear away the long red ribbon from the basket and look inside...*",
                 "*You delicately tear the ribbon from around the basket and look inside...*",
@@ -1401,25 +1401,25 @@ class Shop(commands.Cog):
                 "*You are quick to flip open the lid of the hamper backet to see what is inside...*",               
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(4)            
+            await asyncio.sleep(5)            
             ch_messages = [
-                f"{ctx.author.mention} | You've received: **The Ultimate Candy and Snacks Variety Christmas Hamper**",
-                f"{ctx.author.mention} | You've received: **Continental Beer Basket - The lucky recipient of this delightful beer gift won't wait long to crack open the pair of premium Continental lagers.**",
-                f"{ctx.author.mention} | You've received: **Italian Wine Chest - Presented in a Vintage wooden chest is a selection of some of the finest wines from Italy.**",
-                f"{ctx.author.mention} | You've received: **Luxury Pamper Gift - Something for the sweet tooth and something to soothe the skin all packed in one gorgeous gift basket.**",
-                f"{ctx.author.mention} | You've received: **The Super Deluxe Chocolate Bouquet - Packed to bursting with family favourites and Cadbury classics, this might just be the best hamper of all.**",
-                f"{ctx.author.mention} | You've received: **Super Mega Mix Hamper - An amazing mix of retro school sweets and chocolate bars**",
-                f"{ctx.author.mention} | You've received: **The Prosecco and Christmas Treats Hamper - Presented inside a festive red box, inside you will find a scrumptious bottle of Prosecco a delicious pack of Joe and Sephs Mince Pie flavour popcorn and a box of luxury Belgian Chocolates.**",
-                f"{ctx.author.mention} | You've received: **The Continental Hamper - The whitewash wicker basket also contains an award-winning Cider Chutney, Olive & Sesame Mini Breadsticks from Greece, Smoked Almonds, Fresh Ground Coffee and White Wine Vinegar of Kalamata.**",
-                f"{ctx.author.mention} | You've received: **The Great British Tower - Sealed with a flourish of red, white & blue ribbon, this best of British tower contains a host of award-winning goodies including Thin & Crispy Oatcakes from Scotland and a mouth watering Cranberry & White Chocolate Fudge from Northern Ireland. **",
-                f"{ctx.author.mention} | You've received: **The Ultimate Celebration Hamper - Indulge in a fine selection of chocolates including ones with interesting combinations of flavours such as sea salt, strawberry and Champagne and wash it down with a glass of Moet.**",
-                f"{ctx.author.mention} | You've received: **Proudly Vegan Hamper - In this basket you'll find Indie Bay Cracked Pepper Crunchy Pretzels, Franks Chocolate Orange & Cranberry Oaties, Guppy's Chocolate Orange Shards, toffee apple and cinnamon gourmet popcorn and more.**",
-                f"{ctx.author.mention} | You've received: **British Honey Company Spirits Gift Hamper - includes smoked honey bourbon, honey spiced rum and classic London dry gin with honey.**",
-                f"{ctx.author.mention} | You've received: **Baked Treats Box - Filled with award winning ginger parkin cake, shortbread, biscuits and award winning treats.**",
-                f"{ctx.author.mention} | You've received: **Speciality Craft Beers Of The World - Includes beers from craft breweries such as BrewDog, Leffe or Tiny Rebel.**",
-                f"{ctx.author.mention} | You've received: **British Letterbox Charcuterie - A hamper of award winning, artisan British charcuterie, made in Dorset, containing 5 of The Real Cure's most popular cured meats.**",
-                f"{ctx.author.mention} | You've received: **World's Hottest Rare Chilli Collection - Turn up the heat in your kitchen with these 6 Pots of 100% Pure Whole, Ground and Flakes of Chillies from around the world.**",
-                f"{ctx.author.mention} | You've received: **Cheese Lovers Letter Box Hamper - Contains Godminster's award winning cheddar from the West Country and Caws Cryf from Wales - as well as biscuits for cheese, salted nuts and red onion chutney.**",                
+                f"{ctx.author.mention} **|** You've received: **The Ultimate Candy and Snacks Variety Christmas Hamper**",
+                f"{ctx.author.mention} **|** You've received: **Continental Beer Basket** - The lucky recipient of this delightful beer gift won't wait long to crack open the pair of premium Continental lagers.",
+                f"{ctx.author.mention} **|** You've received: **Italian Wine Chest** - Presented in a Vintage wooden chest is a selection of some of the finest wines from Italy.",
+                f"{ctx.author.mention} **|** You've received: **Luxury Pamper Gift** - Something for the sweet tooth and something to soothe the skin all packed in one gorgeous gift basket.",
+                f"{ctx.author.mention} **|** You've received: **The Super Deluxe Chocolate Bouquet** - Packed to bursting with family favourites and Cadbury classics, this might just be the best hamper of all.",
+                f"{ctx.author.mention} **|** You've received: **Super Mega Mix Hamper** - An amazing mix of retro school sweets and chocolate bars",
+                f"{ctx.author.mention} **|** You've received: **The Prosecco and Christmas Treats Hamper** - Presented inside a festive red box, inside you will find a scrumptious bottle of Prosecco a delicious pack of Joe and Sephs Mince Pie flavour popcorn and a box of luxury Belgian Chocolates.",
+                f"{ctx.author.mention} **|** You've received: **The Continental Hamper** - The whitewash wicker basket also contains an award-winning Cider Chutney, Olive & Sesame Mini Breadsticks from Greece, Smoked Almonds, Fresh Ground Coffee and White Wine Vinegar of Kalamata.",
+                f"{ctx.author.mention} **|** You've received: **The Great British Tower** - Sealed with a flourish of red, white & blue ribbon, this best of British tower contains a host of award-winning goodies including Thin & Crispy Oatcakes from Scotland and a mouth watering Cranberry & White Chocolate Fudge from Northern Ireland.",
+                f"{ctx.author.mention} **|** You've received: **The Ultimate Celebration Hamper** - Indulge in a fine selection of chocolates including ones with interesting combinations of flavours such as sea salt, strawberry and Champagne and wash it down with a glass of Moet.",
+                f"{ctx.author.mention} **|** You've received: **Proudly Vegan Hamper** - In this basket you'll find Indie Bay Cracked Pepper Crunchy Pretzels, Franks Chocolate Orange & Cranberry Oaties, Guppy's Chocolate Orange Shards, toffee apple and cinnamon gourmet popcorn and more.",
+                f"{ctx.author.mention} **|** You've received: **British Honey Company Spirits Gift Hamper** - includes smoked honey bourbon, honey spiced rum and classic London dry gin with honey.",
+                f"{ctx.author.mention} **|** You've received: **Baked Treats Box** - Filled with award winning ginger parkin cake, shortbread, biscuits and award winning treats.",
+                f"{ctx.author.mention} **|** You've received: **Speciality Craft Beers Of The World** - Includes beers from craft breweries such as BrewDog, Leffe or Tiny Rebel.",
+                f"{ctx.author.mention} **|** You've received: **British Letterbox Charcuterie** - A hamper of award winning, artisan British charcuterie, made in Dorset, containing 5 of The Real Cure's most popular cured meats.",
+                f"{ctx.author.mention} **|** You've received: **World's Hottest Rare Chilli Collection** - Turn up the heat in your kitchen with these 6 Pots of 100% Pure Whole, Ground and Flakes of Chillies from around the world.",
+                f"{ctx.author.mention} **|** You've received: **Cheese Lovers Letter Box Hamper** - Contains Godminster's award winning cheddar from the West Country and Caws Cryf from Wales - as well as biscuits for cheese, salted nuts and red onion chutney.",                
             ] 
             return await bot_talking.edit(content=random.choice(ch_messages))
         elif size == 'lp': 
@@ -1434,7 +1434,7 @@ class Shop(commands.Cog):
                 f"*Reaching under the tree, you pull out a present and place it onto your lap, looking at {gifter.mention} with a warm smile...*",		    
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(4)
+            await asyncio.sleep(5)
             opening_messages = [
                 "*You delicately tear the silver and white wrapping paper from the present...*",
                 "*You delicately tear the gold and white wrapping paper from around the present...*",
@@ -1447,28 +1447,28 @@ class Shop(commands.Cog):
                 "*You delicately tear the wrapping paper from around the present...*",		    
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(4)            
+            await asyncio.sleep(5)            
             lp_messages = [
-                f"{ctx.author.mention} | You've received: **Acer Predator Thronos Gaming Cockpit**",
-                f"{ctx.author.mention} | You've received: **X Rocker Pro Series Gaming Chair**",
-                f"{ctx.author.mention} | You've received: **Nintendo Switch with Green and Blue Joy-Con - Animal Crossing: New Horizons Edition**",
-                f"{ctx.author.mention} | You've received: **A custom made Arcade Machine coffee table**",
-                f"{ctx.author.mention} | You've received: **Oculus Quest All-in-one VR Gaming Headset**",
-                f"{ctx.author.mention} | You've received: **Samsung 49-Inch Curved Gaming Monitor**",
-                f"{ctx.author.mention} | You've received: **SteelSeries Arctics Pro wireless gaming headset**",
-                f"{ctx.author.mention} | You've received: **A Yellow Nintendo Switch Lite with SanDisk 256GB MicroSDXC Memory Card**",
-                f"{ctx.author.mention} | You've received: **Razer Blade 15 Gaming laptop**",
-                f"{ctx.author.mention} | You've received: **VanMoof Electrified X2 E-Bike**",
-                f"{ctx.author.mention} | You've received: **Canon EOS R DLSR Camera**",
-                f"{ctx.author.mention} | You've received: **Roomba 675 Robot Vacuum**",
-                f"{ctx.author.mention} | You've received: **Oral-B GENIUS X Electric Toothbrush**",
-                f"{ctx.author.mention} | You've received: **iPhone 12 Pro Max**",
-                f"{ctx.author.mention} | You've received: **Portable Full HD LED Smart Home Theater Projector**",
-                f"{ctx.author.mention} | You've received: **Kindle Paperwhite**",
-                f"{ctx.author.mention} | You've received: **Fitbit Sense, Health and Fitness Watch with Heart Rate Monitor**",
-                f"{ctx.author.mention} | You've received: **Samsung 49-Inch CRG9 QLED Curved Gaming Monitor**",
-                f"{ctx.author.mention} | You've received: **Breville Barista Touch Espresso Maker**",
-                f"{ctx.author.mention} | You've received: **Apple MacBook Pro (16-inch, 16GB RAM, 512GB Storage, 2.6GHz Intel Core i7) - Space Grey**",
+                f"{ctx.author.mention} **|** You've received: **Acer Predator Thronos Gaming Cockpit**",
+                f"{ctx.author.mention} **|** You've received: **X Rocker Pro Series Gaming Chair**",
+                f"{ctx.author.mention} **|** You've received: **Nintendo Switch with Green and Blue Joy-Con - Animal Crossing: New Horizons Edition**",
+                f"{ctx.author.mention} **|** You've received: **A custom made Arcade Machine coffee table**",
+                f"{ctx.author.mention} **|** You've received: **Oculus Quest All-in-one VR Gaming Headset**",
+                f"{ctx.author.mention} **|** You've received: **Samsung 49-Inch Curved Gaming Monitor**",
+                f"{ctx.author.mention} **|** You've received: **SteelSeries Arctics Pro wireless gaming headset**",
+                f"{ctx.author.mention} **|** You've received: **A Yellow Nintendo Switch Lite with SanDisk 256GB MicroSDXC Memory Card**",
+                f"{ctx.author.mention} **|** You've received: **Razer Blade 15 Gaming laptop**",
+                f"{ctx.author.mention} **|** You've received: **VanMoof Electrified X2 E-Bike**",
+                f"{ctx.author.mention} **|** You've received: **Canon EOS R DLSR Camera**",
+                f"{ctx.author.mention} **|** You've received: **Roomba 675 Robot Vacuum**",
+                f"{ctx.author.mention} **|** You've received: **Oral-B GENIUS X Electric Toothbrush**",
+                f"{ctx.author.mention} **|** You've received: **iPhone 12 Pro Max**",
+                f"{ctx.author.mention} **|** You've received: **Portable Full HD LED Smart Home Theater Projector**",
+                f"{ctx.author.mention} **|** You've received: **Kindle Paperwhite**",
+                f"{ctx.author.mention} **|** You've received: **Fitbit Sense, Health and Fitness Watch with Heart Rate Monitor**",
+                f"{ctx.author.mention} **|** You've received: **Samsung 49-Inch CRG9 QLED Curved Gaming Monitor**",
+                f"{ctx.author.mention} **|** You've received: **Breville Barista Touch Espresso Maker**",
+                f"{ctx.author.mention} **|** You've received: **Apple MacBook Pro (16-inch, 16GB RAM, 512GB Storage, 2.6GHz Intel Core i7) - Space Grey**",
             ] 
             return await bot_talking.edit(content=random.choice(lp_messages))
         elif size == 'gtx': 
@@ -1477,14 +1477,14 @@ class Shop(commands.Cog):
                 "*You slide out the present from beneath the Christmas tree...*",
             ]
             bot_talking = await ctx.send(random.choice(placing_messages))
-            await asyncio.sleep(4)
+            await asyncio.sleep(5)
             opening_messages = [
                 "*You are quick to rip the bright pink and white wrapping paper from around the present...*",
             ]
             await bot_talking.edit(content=random.choice(opening_messages))
-            await asyncio.sleep(4)            
+            await asyncio.sleep(5)            
             gtx_messages = [
-                f"{ctx.author.mention} | You've received: An MSI Geforce RTX 3080, 10GB of GDDR6X RAM, Gaming X Trio Ampere graphics card.",
+                f"{ctx.author.mention} **|** You've received: An MSI Geforce RTX 3080, 10GB of GDDR6X RAM, Gaming X Trio Ampere graphics card.",
             ] 
             return await bot_talking.edit(content=random.choice(gtx_messages))
 
