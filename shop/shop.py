@@ -1639,7 +1639,7 @@ class Shop(commands.Cog):
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),
         )
-        embed_r.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
+        embed_r.set_thumbnail(url="https://cdn.discordapp.com/attachments/768197304158257234/792415224154161152/ofniytsssum01.png")	
         embed_r.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
@@ -1649,7 +1649,7 @@ class Shop(commands.Cog):
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),            
         )
-        embed_i.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
+        embed_i.set_thumbnail(url="https://cdn.discordapp.com/attachments/768197304158257234/792415224154161152/ofniytsssum01.png")
         embed_i.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
@@ -1659,7 +1659,7 @@ class Shop(commands.Cog):
            colour=await ctx.embed_colour(),
            timestamp=datetime.now(),            
         )
-        embed_g.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")
+        embed_g.set_thumbnail(url="https://cdn.discordapp.com/attachments/768197304158257234/792415224154161152/ofniytsssum01.png")
         embed_g.set_author(
            name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
         )
@@ -1672,7 +1672,7 @@ class Shop(commands.Cog):
                 colour=await ctx.embed_colour(),
                 timestamp=datetime.now(),            
             )            
-            embed_x.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
+            embed_x.set_thumbnail(url="https://cdn.discordapp.com/attachments/768197304158257234/792415224154161152/ofniytsssum01.png")	
             embed_x.set_author(
                 name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
             )
@@ -1758,7 +1758,7 @@ class Shop(commands.Cog):
                colour=await ctx.embed_colour(),
                timestamp=datetime.now(),
             )
-            embed_closed.set_thumbnail(url=" https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png")	
+            embed_closed.set_thumbnail(url="https://cdn.discordapp.com/attachments/768197304158257234/792415224154161152/ofniytsssum01.png")	
             embed_closed.set_author(
                name=f"Silvermoon Bazaar", icon_url="https://cdn.discordapp.com/avatars/751844552670969866/9f035363fa69e094c61c9a33e24d4382.png",
             )
