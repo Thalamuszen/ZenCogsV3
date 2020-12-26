@@ -1627,7 +1627,7 @@ class Shop(commands.Cog):
             else:
                 page_choice = 2
         else:
-            page = 0
+            page_choice = 0
         items = await self.config.guild(ctx.guild).items.get_raw()
         roles = await self.config.guild(ctx.guild).roles.get_raw()
         games = await self.config.guild(ctx.guild).games.get_raw()
