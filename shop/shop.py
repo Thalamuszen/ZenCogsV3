@@ -1078,7 +1078,7 @@ class Shop(commands.Cog):
     @commands.guild_only()
     async def gift(self, ctx: commands.Context, user: discord.Member, quantity: Optional[int] = 1, *, item: str = ""):
         """
-	Gift another user a Christmas Present\Card!
+	Gift another user a Christmas Present|Card!
 	
         Example
         -----------
@@ -1726,7 +1726,7 @@ class Shop(commands.Cog):
         else:
             headers = ("Item", "Price", "Qty", "Looks like")
             output = box(tabulate(sorted_role, headers=headers, colalign=("left", "right", "right",)), lang="md")		
-            embed_r.description=f"Welcome to Elune's Role shop!\n\nAfter purchasing your role, it will automatically be applied to you.\nIf you wish remove a role from yourself, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
+            embed_r.description=f"{page_choice}{page}Welcome to Elune's Role shop!\n\nAfter purchasing your role, it will automatically be applied to you.\nIf you wish remove a role from yourself, use the `!return` command and in doing so, you will recieve a 10% refund.\n\n`!buy <quantity> <item_name>`\n{output}"
             embeds.append(embed_r)	
         if sorted_item == []:
             embed_i.description="Nothing to see here."
